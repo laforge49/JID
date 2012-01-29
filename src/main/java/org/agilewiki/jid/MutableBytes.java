@@ -150,6 +150,25 @@ final public class MutableBytes {
     }
 
     /**
+     * Write a boolean.
+     * 
+     * @param b The boolean to be written.
+     */
+    public void writeBoolean(boolean b) {
+        if (b) writeByte((byte) 1);
+        else writeByte((byte) 0);
+    }
+
+    /**
+     * Read a boolean.
+     * 
+     * @return The boolean that was read.
+     */
+    public boolean readBoolean() {
+        return readByte() != (byte) 0;
+    }
+
+    /**
      * Write an array of bytes.
      * 
      * @param ba The bytes to be written.
@@ -251,6 +270,25 @@ final public class MutableBytes {
     }
 
     /**
+     * Write a char.
+     *
+     * @param c The char to be written.
+     */
+    public void writeChar(char c) {
+        writeByte((byte) (255 & (c >> 8)));
+        writeByte((byte) (255 & c));
+    }
+
+    /**
+     * Read a char.
+     *
+     * @return The char that was read.
+     */
+    public char readChar() {
+        return (char) ((readByte() << 8) | readByte());
+    }
+
+    /**
      * Read a long.
      *
      * @return The long that was read.
@@ -284,9 +322,7 @@ final public class MutableBytes {
         char[] ca = s.toCharArray();
         int i = 0;
         while (i < ca.length) {
-            char c = ca[i];
-            writeByte((byte) (255 & (c >> 8)));
-            writeByte((byte) (255 & c));
+            writeChar(ca[i]);
             i += 1;
         }
     }
@@ -305,7 +341,7 @@ final public class MutableBytes {
         char[] ca = new char[l];
         int i = 0;
         while (i < l) {
-            ca[l] = (char) ((readByte() << 8) | readByte());
+            ca[l] = readChar();
             i += 1;
         }
         return new String(ca);
@@ -314,7 +350,7 @@ final public class MutableBytes {
     /**
      * Read string.
      *
-     * @return The string that was read.
+     * @return The string that was read, or null.
      */
     public String readString() {
         return readString(readInt());
