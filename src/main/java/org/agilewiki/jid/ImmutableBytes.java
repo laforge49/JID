@@ -44,7 +44,7 @@ final public class ImmutableBytes {
     }
 
     /**
-     * Creates a MutableBytes object from an ImmutableBytes object.
+     * Creates a MutableBytes object from this ImmutableBytes object.
      *
      * @return The MutableBytes object.
      */

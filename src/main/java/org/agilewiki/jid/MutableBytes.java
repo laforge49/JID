@@ -73,7 +73,7 @@ final public class MutableBytes {
     }
 
     /**
-     * Creates an ImmutableBytes object from a mutableBytes object.
+     * Creates an ImmutableBytes object from this mutableBytes object.
      *
      * @return The ImmutableBytes object.
      */
