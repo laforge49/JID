@@ -23,7 +23,14 @@
  */
 
 /**
- * JID implements a number of components which support persistent data.
+ * <h2>Incremental Deserialization for JActor.</h2>
+ * <p>
+ * Fast serialization/deserialization is critical for databases. The key is to deserialize only what you need and to
+ * keep the serialized data for items that have not been changed for reserialization after an update.
+ * </p>
+ * <p>
+ * JID implements a number of components which support different types of persistent data.
  * Incremental serialization/deserialization techniques are used to achieve high-performance.
+ * </p>
  */
 package org.agilewiki.jid;
