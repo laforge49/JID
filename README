@@ -2,9 +2,10 @@ Incremental Deserialization for JActor.
 
 Downloads:     https://sourceforge.net/projects/jactor/files/
 Blog:          https://sourceforge.net/p/jactor/blog/
-VCS:           https://github.com/laforge49/JID
-Issues:        https://github.com/laforge49/JID/issues
-Google groups: http://groups.google.com/group/agilewikidevelopers
+API:           http://jactor.sourceforge.net/JID/
+VCS:           https://github.com/laforge49/JID/
+Issues:        https://github.com/laforge49/JID/issues/
+Google groups: http://groups.google.com/group/agilewikidevelopers/
 
 This project is a reimplementation of a portion of the AsyncFP Scala project:
     https://github.com/laforge49/Asynchronous-Functional-Programming/wiki
