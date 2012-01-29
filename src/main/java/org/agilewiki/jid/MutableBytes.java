@@ -23,11 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-
 /**
  * <p>
  *     A mutable wrapper for an array of bytes.
