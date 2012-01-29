@@ -32,7 +32,7 @@ package org.agilewiki.jid;
  *     while advancing an internal offset.
  * </p>
  */
-public class MutableBytes {
+final public class MutableBytes {
     /**
      * The wrapped mutable array of bytes.
      */
@@ -264,5 +264,59 @@ public class MutableBytes {
         w = (w << 8) | (long) readByte();
         w = (w << 8) | (long) readByte();
         return (w << 8) | (long) readByte();
+    }
+
+    /**
+     * Write a string as an int and a char array.
+     * (This approach uses more bytes than other approaches but is not so computationally intensive
+     * while preserving the full range of character values.)
+     * 
+     * @param s The string to be written, or null.
+     */
+    public void writeString(String s) {
+        if (s == null) {
+            writeInt(-1);
+            return;
+        }
+        writeInt(s.length());
+        if (s.length() == 0)
+            return;
+        char[] ca = s.toCharArray();
+        int i = 0;
+        while (i < ca.length) {
+            char c = ca[i];
+            writeByte((byte) (255 & (c >> 8)));
+            writeByte((byte) (255 & c));
+            i += 1;
+        }
+    }
+
+    /**
+     * Read string.
+     * 
+     * @param l The size of the char array to be read.
+     * @return The string that was read.
+     */
+    public String readString(int l) {
+        if (l == -1)
+            return null;
+        if (l == 0)
+            return "";
+        char[] ca = new char[l];
+        int i = 0;
+        while (i < l) {
+            ca[l] = (char) ((readByte() << 8) | readByte());
+            i += 1;
+        }
+        return new String(ca);
+    }
+
+    /**
+     * Read string.
+     *
+     * @return The string that was read.
+     */
+    public String readString() {
+        return readString(readInt());
     }
 }

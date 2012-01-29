@@ -3,7 +3,7 @@ package org.agilewiki.jid;
 /**
  * An immutable wrapper for an array of bytes. 
  */
-public class ImmutableBytes {
+final public class ImmutableBytes {
     /**
      * The wrapped immutable array of bytes.
      */
