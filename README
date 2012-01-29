@@ -7,6 +7,9 @@ VCS:           https://github.com/laforge49/JID/
 Issues:        https://github.com/laforge49/JID/issues/
 Google groups: http://groups.google.com/group/agilewikidevelopers/
 
+Dependencies
+    https://github.com/laforge49/JActor
+
 This project is a reimplementation of a portion of the AsyncFP Scala project:
     https://github.com/laforge49/Asynchronous-Functional-Programming/wiki
 
