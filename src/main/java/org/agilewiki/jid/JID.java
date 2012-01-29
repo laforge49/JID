@@ -23,10 +23,67 @@
  */
 package org.agilewiki.jid;
 
+import org.agilewiki.jactor.ResponseProcessor;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jid.requests.GetSerializedLength;
 
 /**
- * Base class for Incremental Deserialization.
+ * Base class for Incremental Deserialization Components.
  */
 public class JID extends Component {
+    /**
+     * The serialized form of the persistent data, or null. 
+     */
+    protected ImmutableBytes serializedData;
+
+    /**
+     * Initialize the component after all its includes have been processed.
+     * The response must always be null;
+     *
+     * @param internals The JBActor's internals.
+     * @throws Exception Any exceptions thrown during the open.
+     */
+    @Override
+    public void open(final Internals internals, final ResponseProcessor rp) throws Exception {
+        super.open(internals, new ResponseProcessor() {
+            @Override
+            public void process(Object response) throws Exception {
+                internals.bind(GetSerializedLength.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1) throws Exception {
+                        rp1.process(getSerializedLength());
+                    }
+                });
+
+                rp.process(null);
+            }
+        });
+    }
+
+    /**
+     * Returns the number of bytes needed to serialize the persistent data.
+     *
+     * @return
+     */
+    public int getSerializedLength() {
+        return 0;
+    }
+
+    /**
+     * Returns true when the persistent data is already serialized.
+     * 
+     * @return True when the persistent data is already serialized.
+     */
+    final protected boolean isSerialized() {
+        return serializedData != null;
+    }
+
+    /**
+     * Serialize the persistent data.
+     * 
+     * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
+     */
+    protected void serialize(MutableBytes mutableBytes) {}
 }
