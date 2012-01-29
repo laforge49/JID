@@ -23,8 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
-
 /**
  * Some common constants and methods.
  */
@@ -43,12 +41,30 @@ public class Util {
      * Size of a long in bytes.
      */
     public final int LONG_LENGTH = 8;
-    
+
+    /**
+     * Returns the number of bytes needed to write a string.
+     *
+     * @param length The number of characters in the string.
+     * @return The size in bytes.
+     */
     public int stringLength(int length) {
         if (length == -1)
             return INT_LENGTH;
         if (length > -1)
             return INT_LENGTH + 2 * length;
         throw new IllegalArgumentException("invalid string length: " + length);
+    }
+
+    /**
+     * Returns the number of bytes needed to write a string.
+     *
+     * @param s The string.
+     * @return The size in bytes.
+     */
+    public int stringLength(String s) {
+        if (s == null)
+            return INT_LENGTH;
+        return stringLength(s.length());
     }
 }
