@@ -21,12 +21,9 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid;
-
-import org.agilewiki.jactor.components.Component;
 
 /**
- * Base class for Incremental Deserialization.
+ * JID implements a number of components which support persistent data.
+ * Incremental serialization/deserialization techniques are used to achieve high-performance.
  */
-public class JID extends Component {
-}
+package org.agilewiki.jid;
