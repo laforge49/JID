@@ -24,7 +24,13 @@
 package org.agilewiki.jid;
 
 /**
- * A mutable wrapper for an array of bytes.
+ * <p>
+ *     A mutable wrapper for an array of bytes.
+ * </p>
+ * <p>
+ *     Reads and writes read from and write to the wrapped byte array
+ *     while advancing an internal offset.
+ * </p>
  */
 public class MutableBytes {
     /**
@@ -120,5 +126,143 @@ public class MutableBytes {
     public void writeImmutableBytes(ImmutableBytes immutableBytes, int length) {
         System.arraycopy(immutableBytes.getBytes(), immutableBytes.getOffset(), bytes, offset, length);
         offset += length;
+    }
+
+    /**
+     * Write a byte.
+     * 
+     * @param b The byte to be written.
+     */
+    public void writeByte(byte b) {
+        bytes[offset] = b;
+        offset += 1;
+    }
+
+    /**
+     * Read a byte.
+     * 
+     * @return The byte that was read.
+     */
+    public byte readByte() {
+        byte rv = bytes[offset];
+        offset += 1;
+        return rv;
+    }
+
+    /**
+     * Write an array of bytes.
+     * 
+     * @param ba The bytes to be written.
+     */
+    public void writeBytes(byte[] ba) {
+        if (ba.length == 0) return;
+        System.arraycopy(ba, 0, bytes, offset, ba.length);
+        offset += ba.length;
+    }
+
+    /**
+     * Write part of an array of bytes.
+     * 
+     * @param ba The array containing the bytes to be written.
+     * @param off The offset to the bytes to be written.
+     * @param len The number of bytes to be written.
+     */
+    public void writeBytes(byte[] ba, int off, int len) {
+        if (len == 0) return;
+        System.arraycopy(ba, off, bytes, offset, len);
+        offset += len;
+    }
+
+    /**
+     * Read an array of bytes.
+     * 
+     * @param len The number of bytes to be read.
+     * @return The array of bytes that was read.
+     */
+    public byte[] readBytes(int len) {
+        byte[] ba = new byte[len];
+        System.arraycopy(bytes, offset, ba, 0, len);
+        offset += len;
+        return ba;
+    }
+
+    /**
+     * Read into an array of bytes.
+     * 
+     * @param ba The array of bytes to be read into.
+     * @param off The offset into the array of bytes to be read into.
+     * @param len The number of bytes to be read.
+     */
+    public void readBytes(byte[] ba, int off, int len) {
+        System.arraycopy(bytes, offset, ba, off, len);
+        offset += len;
+    }
+
+    /**
+     * Write an int.
+     * 
+     * @param i  The int to be written.
+     */
+    public void writeInt(int i) {
+        bytes[offset + 3] = (byte) (i & 255);
+        int w = i >> 8;
+        bytes[offset + 2] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 1] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset] = (byte) (w & 255);
+        offset += 4;
+    }
+
+    /**
+     * Read an int.
+     *
+     * @return The it that was read.
+     */
+    public int readInt() {
+        int w = (int) readByte();
+        w = (w << 8) | (int) readByte();
+        w = (w << 8) | (int) readByte();
+        return (w << 8) | (int) readByte();
+    }
+
+    /**
+     * Write a long.
+     *
+     * @param l The long to be written.
+     */
+    public void writeLong(long l) {
+        bytes[offset + 7] = (byte) (l & 255);
+        long w = l >> 8;
+        bytes[offset + 6] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 5] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 4] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 3] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 2] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset + 1] = (byte) (w & 255);
+        w = w >> 8;
+        bytes[offset] = (byte) (w & 255);
+        offset += 8;
+    }
+
+    /**
+     * Read a long.
+     *
+     * @return The long that was read.
+     */
+    public long readLong() {
+        long w = (long) readByte();
+        w = (w << 8) | (long) readByte();
+        w = (w << 8) | (long) readByte();
+        w = (w << 8) | (long) readByte();
+        w = (w << 8) | (long) readByte();
+        w = (w << 8) | (long) readByte();
+        w = (w << 8) | (long) readByte();
+        return (w << 8) | (long) readByte();
     }
 }
