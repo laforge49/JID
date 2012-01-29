@@ -338,6 +338,8 @@ final public class MutableBytes {
             return null;
         if (l == 0)
             return "";
+        if (l < -1)
+            throw new IllegalArgumentException("invalid string length: " + l);
         char[] ca = new char[l];
         int i = 0;
         while (i < l) {
