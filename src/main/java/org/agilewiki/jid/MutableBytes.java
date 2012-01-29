@@ -23,6 +23,11 @@
  */
 package org.agilewiki.jid;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+
 /**
  * <p>
  *     A mutable wrapper for an array of bytes.
@@ -354,5 +359,41 @@ final public class MutableBytes {
      */
     public String readString() {
         return readString(readInt());
+    }
+
+    /**
+     * Write a float.
+     *
+     * @param f The float to be written.
+     */
+    public void writeFloat(float f) {
+        writeInt(Float.floatToIntBits(f));
+    }
+
+    /**
+     * Read a float.
+     *
+     * @return The float that was read.
+     */
+    public float readFloat() {
+        return Float.intBitsToFloat(readInt());
+    }
+
+    /**
+     * Write a double.
+     *
+     * @param d The double to be written.
+     */
+    public void writeDouble(double d) {
+        writeLong(Double.doubleToLongBits(d));
+    }
+
+    /**
+     * Read a double.
+     *
+     * @return The double that was read.
+     */
+    public double readDouble() {
+        return Double.longBitsToDouble(readLong());
     }
 }
