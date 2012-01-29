@@ -1,7 +1,8 @@
 Incremental Deserialization for JActor.
 
-Fast serialization/deserialization is critical for databases. The key is to deserialize only what you need and to
-keep the serialized data for items that have not been changed for reserialization after an update.
+Fast serialization/deserialization is critical for databases. The key is to deserialize only
+what you need and to keep the serialized data for items that have not been changed for
+reserialization after an update.
 
 JID implements a number of components which support different types of persistent data.
 Incremental serialization/deserialization techniques are used to achieve high-performance.
