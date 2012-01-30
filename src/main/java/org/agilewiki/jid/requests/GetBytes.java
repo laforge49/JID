@@ -21,16 +21,9 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
+package org.agilewiki.jid.requests;
 
 /**
- * <h2>Incremental Deserialization for JActor.</h2>
- * <p>
- * Fast serialization/deserialization is critical for databases. The key is to deserialize only what you need and to
- * keep the serialized data for items that have not been changed for reserialization after an update.
- * </p>
- * <p>
- * JID implements a number of components which support different types of persistent data.
- * Incremental serialization/deserialization techniques are used to achieve high-performance.
- * </p>
+ * Returns a byte array holding the serialized persistent data.
  */
-package org.agilewiki.jid;
+public class GetBytes {}

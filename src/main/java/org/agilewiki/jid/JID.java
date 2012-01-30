@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 Bill La Forge
+ * Copyright 2012 Bill La Forge
  *
  * This file is part of AgileWiki and is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,7 @@ import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.Save;
 
@@ -69,6 +70,14 @@ public class JID extends Component {
                     }
                 });
 
+                internals.bind(GetBytes.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        rp1.process(getBytes());
+                    }
+                });
+
                 rp.process(null);
             }
         });
@@ -100,7 +109,12 @@ public class JID extends Component {
     protected void serialize(MutableBytes mutableBytes) {
         serializedData = new ImmutableBytes(new byte[0], 0);
     }
-    
+
+    /**
+     * Save the persistent data in a byte array.
+     * 
+     * @param mutableBytes Holds the byte array and offset.
+     */
     final public void save(MutableBytes mutableBytes) {
         if (isSerialized()) {
             ImmutableBytes sd = mutableBytes.immutable();
@@ -115,5 +129,21 @@ public class JID extends Component {
             System.err.println("" + serializedData.getOffset() + " + " + getSerializedLength() + " != " + mutableBytes.getOffset());
             throw new IllegalStateException();
         }
+    }
+
+    /**
+     * Returns a byte array holding the serialized persistent data.
+     *
+     * @return The byte array holding the serialized persistent data.
+     */
+    final public byte[] getBytes() {
+        byte[] bs = new byte[getSerializedLength()];
+        MutableBytes mutableBytes = new MutableBytes(bs, 0);
+        save(mutableBytes);
+        return bs;
+    }
+
+    protected void load(MutableBytes mutableBytes) {
+        serializedData = mutableBytes.immutable();
     }
 }
