@@ -7,6 +7,7 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
+import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.requests.GetSerializedLength;
@@ -37,8 +38,7 @@ public class JidTest extends TestCase {
             JCActor factory = new JCActor(mailbox);
             future.send(factory, new Include(JidFactories.class));
 
-            JCActor jid = new JCActor(mailbox);
-            future.send(jid, new Include(JID.class));
+            JCActor jid = (JCActor) future.send(factory, new NewActor(JidFactories.JID_NAME));
             int l = (Integer) future.send(jid, new GetSerializedLength());
             System.err.println(l);
             assertEquals(l, 0);

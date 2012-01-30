@@ -15,7 +15,9 @@ import java.util.ArrayList;
 /**
  * Registers the JID factories.
  */
-public class JidFactories extends Component {
+final public class JidFactories extends Component {
+    public final static String JID_NAME = "JID";
+    
     /**
      * Returns a list of Includes for inclusion in the actor.
      *
@@ -41,7 +43,7 @@ public class JidFactories extends Component {
             @Override
             public void process(Object response) throws Exception {
                 SMBuilder smb = new SMBuilder(internals);
-                smb._send(internals.getThisActor(), new DefineActorType("JID", JID.class));
+                smb._send(internals.getThisActor(), new DefineActorType(JID_NAME, JID.class));
                 smb.call(rp);
             }
         });
