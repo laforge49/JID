@@ -21,52 +21,10 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid;
+package org.agilewiki.jid.requests;
 
 /**
- * <p>
- * Some common constants and methods.
- * </p>
+ * Returns the JID component.
  */
-public class Util {
-    /**
-     * Size of a boolean in bytes.
-     */
-    public final static int BOOLEAN_LENGTH = 1;
-
-    /**
-     * Size of an int in bytes.
-     */
-    public final static int INT_LENGTH = 4;
-
-    /**
-     * Size of a long in bytes.
-     */
-    public final int LONG_LENGTH = 8;
-
-    /**
-     * Returns the number of bytes needed to write a string.
-     *
-     * @param length The number of characters in the string.
-     * @return The size in bytes.
-     */
-    public final static int stringLength(int length) {
-        if (length == -1)
-            return INT_LENGTH;
-        if (length > -1)
-            return INT_LENGTH + 2 * length;
-        throw new IllegalArgumentException("invalid string length: " + length);
-    }
-
-    /**
-     * Returns the number of bytes needed to write a string.
-     *
-     * @param s The string.
-     * @return The size in bytes.
-     */
-    public final static int stringLength(String s) {
-        if (s == null)
-            return INT_LENGTH;
-        return stringLength(s.length());
-    }
+public class GetJID {
 }

@@ -27,7 +27,7 @@ import org.agilewiki.jid.MutableBytes;
 
 /**
  * <p>
- *     Save the persistent data of a JID to a MutableBytes object.
+ * Saves the persistent data of a JID to a MutableBytes object.
  * </p>
  */
 public class Save {

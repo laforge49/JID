@@ -52,7 +52,7 @@ final public class ImmutableBytes {
 
     /**
      * Returns the wrapped bytes.
-     * 
+     *
      * @return The wrapped bytes.
      */
     public byte[] getBytes() {
@@ -61,7 +61,7 @@ final public class ImmutableBytes {
 
     /**
      * Returns the offset.
-     * 
+     *
      * @return The offset.
      */
     public int getOffset() {

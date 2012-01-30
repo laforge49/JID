@@ -25,11 +25,11 @@ package org.agilewiki.jid;
 
 /**
  * <p>
- *     A mutable wrapper for an array of bytes.
+ * A mutable wrapper for an array of bytes.
  * </p>
  * <p>
- *     Reads and writes read from and write to the wrapped byte array
- *     while advancing an internal offset.
+ * Reads and writes read from and write to the wrapped byte array
+ * while advancing an internal offset.
  * </p>
  */
 final public class MutableBytes {
@@ -45,7 +45,7 @@ final public class MutableBytes {
 
     /**
      * Create MutableBytes.
-     * 
+     *
      * @param bytes  The bytes to be wrapped.
      * @param offset An offset.
      */
@@ -92,7 +92,7 @@ final public class MutableBytes {
 
     /**
      * Returns the number of bytes after the offset.
-     * 
+     *
      * @return The number of remaining bytes.
      */
     public int remaining() {
@@ -108,7 +108,7 @@ final public class MutableBytes {
 
     /**
      * Checks that there are enough bytes after the offset.
-     * 
+     *
      * @param length The minimum number of bytes needed after the offset.
      */
     public void validate(int length) {
@@ -118,8 +118,8 @@ final public class MutableBytes {
 
     /**
      * Advance the offset.
-     * 
-     * @param length The number of bytes to be skipped over. 
+     *
+     * @param length The number of bytes to be skipped over.
      */
     public void skip(int length) {
         validate(length);
@@ -139,7 +139,7 @@ final public class MutableBytes {
 
     /**
      * Write a byte.
-     * 
+     *
      * @param b The byte to be written.
      */
     public void writeByte(byte b) {
@@ -149,7 +149,7 @@ final public class MutableBytes {
 
     /**
      * Read a byte.
-     * 
+     *
      * @return The byte that was read.
      */
     public byte readByte() {
@@ -160,7 +160,7 @@ final public class MutableBytes {
 
     /**
      * Write a boolean.
-     * 
+     *
      * @param b The boolean to be written.
      */
     public void writeBoolean(boolean b) {
@@ -170,7 +170,7 @@ final public class MutableBytes {
 
     /**
      * Read a boolean.
-     * 
+     *
      * @return The boolean that was read.
      */
     public boolean readBoolean() {
@@ -179,7 +179,7 @@ final public class MutableBytes {
 
     /**
      * Write an array of bytes.
-     * 
+     *
      * @param ba The bytes to be written.
      */
     public void writeBytes(byte[] ba) {
@@ -190,8 +190,8 @@ final public class MutableBytes {
 
     /**
      * Write part of an array of bytes.
-     * 
-     * @param ba The array containing the bytes to be written.
+     *
+     * @param ba  The array containing the bytes to be written.
      * @param off The offset to the bytes to be written.
      * @param len The number of bytes to be written.
      */
@@ -203,7 +203,7 @@ final public class MutableBytes {
 
     /**
      * Read an array of bytes.
-     * 
+     *
      * @param len The number of bytes to be read.
      * @return The array of bytes that was read.
      */
@@ -216,8 +216,8 @@ final public class MutableBytes {
 
     /**
      * Read into an array of bytes.
-     * 
-     * @param ba The array of bytes to be read into.
+     *
+     * @param ba  The array of bytes to be read into.
      * @param off The offset into the array of bytes to be read into.
      * @param len The number of bytes to be read.
      */
@@ -228,8 +228,8 @@ final public class MutableBytes {
 
     /**
      * Write an int.
-     * 
-     * @param i  The int to be written.
+     *
+     * @param i The int to be written.
      */
     public void writeInt(int i) {
         bytes[offset + 3] = (byte) (i & 255);
@@ -317,7 +317,7 @@ final public class MutableBytes {
      * Write a string as an int and a char array.
      * (This approach uses more bytes than other approaches but is not so computationally intensive
      * while preserving the full range of character values.)
-     * 
+     *
      * @param s The string to be written, or null.
      */
     public void writeString(String s) {
@@ -338,7 +338,7 @@ final public class MutableBytes {
 
     /**
      * Read string.
-     * 
+     *
      * @param l The size of the char array to be read.
      * @return The string that was read.
      */

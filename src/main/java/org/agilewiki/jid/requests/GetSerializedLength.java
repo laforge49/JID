@@ -25,7 +25,8 @@ package org.agilewiki.jid.requests;
 
 /**
  * <p>
- *     The response returned is the number of bytes needed to serialize the persistent data.
+ * The response returned is the number of bytes needed to serialize the persistent data.
  * </p>
  */
-public class GetSerializedLength {}
+public class GetSerializedLength {
+}

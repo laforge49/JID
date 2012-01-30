@@ -26,8 +26,12 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.MethodBinding;
+import org.agilewiki.jactor.bind.RequestReceiver;
+import org.agilewiki.jactor.bind.SyncBinding;
 import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jactor.lpc.RequestSource;
 import org.agilewiki.jid.requests.GetBytes;
+import org.agilewiki.jid.requests.GetJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.Save;
 
@@ -36,7 +40,7 @@ import org.agilewiki.jid.requests.Save;
  */
 public class JID extends Component {
     /**
-     * The serialized form of the persistent data, or null. 
+     * The serialized form of the persistent data, or null.
      */
     protected ImmutableBytes serializedData;
 
@@ -78,6 +82,17 @@ public class JID extends Component {
                     }
                 });
 
+                internals.bind(GetJID.class.getName(), new SyncBinding() {
+                    @Override
+                    public void acceptRequest(RequestReceiver requestReceiver,
+                                              RequestSource requestSource,
+                                              Object request,
+                                              ResponseProcessor rp1)
+                            throws Exception {
+                        rp1.process(JID.this);
+                    }
+                });
+
                 rp.process(null);
             }
         });
@@ -94,7 +109,7 @@ public class JID extends Component {
 
     /**
      * Returns true when the persistent data is already serialized.
-     * 
+     *
      * @return True when the persistent data is already serialized.
      */
     final protected boolean isSerialized() {
@@ -103,7 +118,7 @@ public class JID extends Component {
 
     /**
      * Serialize the persistent data.
-     * 
+     *
      * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
     protected void serialize(MutableBytes mutableBytes) {
@@ -111,8 +126,8 @@ public class JID extends Component {
     }
 
     /**
-     * Save the persistent data in a byte array.
-     * 
+     * Saves the persistent data in a byte array.
+     *
      * @param mutableBytes Holds the byte array and offset.
      */
     final public void save(MutableBytes mutableBytes) {
@@ -143,7 +158,21 @@ public class JID extends Component {
         return bs;
     }
 
-    protected void load(MutableBytes mutableBytes) {
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param mutableBytes Holds the serialized data.
+     */
+    public void load(MutableBytes mutableBytes) {
         serializedData = mutableBytes.immutable();
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param bytes Holds the serialized data.
+     */
+    final void putBytes(byte[] bytes) {
+        load(new MutableBytes(bytes, 0));
     }
 }

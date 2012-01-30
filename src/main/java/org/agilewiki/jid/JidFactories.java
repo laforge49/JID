@@ -25,13 +25,10 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.bind.SMBuilder;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.actorName.GetActorName;
 import org.agilewiki.jactor.components.factory.DefineActorType;
-import org.agilewiki.jactor.components.factory.Factory;
 
 import java.util.ArrayList;
 
@@ -41,8 +38,11 @@ import java.util.ArrayList;
  * </p>
  */
 final public class JidFactories extends Component {
+    /**
+     * The name of the JID component.
+     */
     public final static String JID_NAME = "JID";
-    
+
     /**
      * Returns a list of Includes for inclusion in the actor.
      *
@@ -51,7 +51,7 @@ final public class JidFactories extends Component {
     @Override
     public ArrayList<Include> includes() {
         ArrayList<Include> rv = new ArrayList<Include>();
-        rv.add(new Include(Factory.class));
+        rv.add(new Include(JidFactory.class));
         return rv;
     }
 

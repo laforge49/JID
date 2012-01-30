@@ -13,6 +13,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.MutableBytes;
 import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.GetSerializedLength;
+import org.agilewiki.jid.requests.NewJID;
 import org.agilewiki.jid.requests.Save;
 
 public class JidTest extends TestCase {
@@ -32,7 +33,7 @@ public class JidTest extends TestCase {
             mailboxFactory.close();
         }
     }
-    
+
     public void test2() {
         System.err.println("\nTest 2");
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
@@ -79,6 +80,26 @@ public class JidTest extends TestCase {
             future.send(a, new Include(JID.class));
             byte[] bytes = (byte[]) future.send(a, new GetBytes());
             int l = bytes.length;
+            System.err.println(l);
+            assertEquals(l, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test5() {
+        System.err.println("\nTest 5");
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFuture future = new JAFuture();
+            JCActor jidFactory = new JCActor(mailbox);
+            future.send(jidFactory, new Include(JidFactories.class));
+
+            JCActor jid = (JCActor) future.send(jidFactory, new NewJID(JidFactories.JID_NAME, new byte[0]));
+            int l = (Integer) future.send(jid, new GetSerializedLength());
             System.err.println(l);
             assertEquals(l, 0);
         } catch (Exception e) {
