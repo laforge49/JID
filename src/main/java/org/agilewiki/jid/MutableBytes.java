@@ -55,6 +55,15 @@ final public class MutableBytes {
     }
 
     /**
+     * Create MutableBytes.
+     *
+     * @param size The size of the byte array.
+     */
+    public MutableBytes(int size) {
+        this(new byte[size], 0);
+    }
+
+    /**
      * Returns the wrapped bytes.
      *
      * @return The wrapped bytes.

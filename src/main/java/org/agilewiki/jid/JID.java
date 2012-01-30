@@ -28,6 +28,7 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jid.requests.GetSerializedLength;
+import org.agilewiki.jid.requests.Save;
 
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
@@ -52,8 +53,19 @@ public class JID extends Component {
             public void process(Object response) throws Exception {
                 internals.bind(GetSerializedLength.class.getName(), new MethodBinding() {
                     @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1) throws Exception {
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
                         rp1.process(getSerializedLength());
+                    }
+                });
+
+                internals.bind(Save.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        Save s = (Save) request;
+                        save(s.getMutableBytes());
+                        rp1.process(null);
                     }
                 });
 
@@ -87,5 +99,21 @@ public class JID extends Component {
      */
     protected void serialize(MutableBytes mutableBytes) {
         serializedData = new ImmutableBytes(new byte[0], 0);
+    }
+    
+    final public void save(MutableBytes mutableBytes) {
+        if (isSerialized()) {
+            ImmutableBytes sd = mutableBytes.immutable();
+            mutableBytes.writeImmutableBytes(serializedData, getSerializedLength());
+            serializedData = sd;
+        } else {
+            serializedData = mutableBytes.immutable();
+            serialize(mutableBytes);
+        }
+        if (serializedData.getOffset() + getSerializedLength() != mutableBytes.getOffset()) {
+            System.err.println("\n" + getClass().getName());
+            System.err.println("" + serializedData.getOffset() + " + " + getSerializedLength() + " != " + mutableBytes.getOffset());
+            throw new IllegalStateException();
+        }
     }
 }
