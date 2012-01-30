@@ -30,12 +30,12 @@ public class Util {
     /**
      * Size of a boolean in bytes.
      */
-    public final int BOOLEAN_LENGTH = 1;
+    public final static int BOOLEAN_LENGTH = 1;
 
     /**
      * Size of an int in bytes.
      */
-    public final int INT_LENGTH = 4;
+    public final static int INT_LENGTH = 4;
 
     /**
      * Size of a long in bytes.
@@ -48,7 +48,7 @@ public class Util {
      * @param length The number of characters in the string.
      * @return The size in bytes.
      */
-    public int stringLength(int length) {
+    public final static int stringLength(int length) {
         if (length == -1)
             return INT_LENGTH;
         if (length > -1)
@@ -62,7 +62,7 @@ public class Util {
      * @param s The string.
      * @return The size in bytes.
      */
-    public int stringLength(String s) {
+    public final static int stringLength(String s) {
         if (s == null)
             return INT_LENGTH;
         return stringLength(s.length());
