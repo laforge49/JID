@@ -4,6 +4,11 @@ Fast serialization/deserialization is critical for databases. The key is to dese
 what you need and to keep the serialized data for items that have not been changed for
 reserialization after an update.
 
+JID is also likely the first project built using JActor. It is of interest because
+ - Most JID components inherit from other JID components. And
+ - JID components are organized into trees. All JID components in the same tree share
+   the same mailbox and call each other directly to maximize performance.
+
 JID implements a number of components which support different types of persistent data.
 Incremental serialization/deserialization techniques are used to achieve high-performance.
 
