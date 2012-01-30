@@ -23,6 +23,6 @@
  */
 
 /**
- * Request Messages.
+ * JID Request Messages.
  */
 package org.agilewiki.jid.requests;

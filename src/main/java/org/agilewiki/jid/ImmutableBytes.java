@@ -24,7 +24,10 @@
 package org.agilewiki.jid;
 
 /**
- * An immutable wrapper for an array of bytes. 
+ * <p>
+ * An immutable wrapper for an array of bytes.
+ * </p>
+ * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/ImmutableBytes.java">Code</a></p>
  */
 final public class ImmutableBytes {
     /**

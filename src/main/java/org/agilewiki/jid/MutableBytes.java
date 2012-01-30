@@ -31,6 +31,7 @@ package org.agilewiki.jid;
  *     Reads and writes read from and write to the wrapped byte array
  *     while advancing an internal offset.
  * </p>
+ * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/MutableBytes.java">Code</a></p>
  */
 final public class MutableBytes {
     /**

@@ -30,7 +30,8 @@ import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jid.requests.GetSerializedLength;
 
 /**
- * Base class for Incremental Deserialization Components.
+ * <p>Base class for Incremental Deserialization Components.</p>
+ * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/JID.java">Code</a></p>
  */
 public class JID extends Component {
     /**
@@ -65,7 +66,7 @@ public class JID extends Component {
     /**
      * Returns the number of bytes needed to serialize the persistent data.
      *
-     * @return
+     * @return The minimum size of the byte array needed to serialize the persistent data.
      */
     public int getSerializedLength() {
         return 0;
@@ -85,5 +86,7 @@ public class JID extends Component {
      * 
      * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(MutableBytes mutableBytes) {}
+    protected void serialize(MutableBytes mutableBytes) {
+        serializedData = new ImmutableBytes(new byte[0], 0);
+    }
 }
