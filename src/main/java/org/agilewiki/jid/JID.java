@@ -31,7 +31,6 @@ import org.agilewiki.jid.requests.GetSerializedLength;
 
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
- * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/JID.java">Code</a></p>
  */
 public class JID extends Component {
     /**

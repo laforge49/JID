@@ -39,7 +39,6 @@ import java.util.ArrayList;
  * <p>
  * Registers the JID factories.
  * </p>
- * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/JidFactories.java">Code</a></p>
  */
 final public class JidFactories extends Component {
     public final static String JID_NAME = "JID";

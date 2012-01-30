@@ -27,7 +27,6 @@ package org.agilewiki.jid;
  * <p>
  *     Some common constants and methods.
  * </p>
- * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/Util.java">Code</a></p>
  */
 public class Util {
     /**

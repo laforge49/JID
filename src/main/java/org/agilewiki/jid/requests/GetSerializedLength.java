@@ -27,6 +27,5 @@ package org.agilewiki.jid.requests;
  * <p>
  *     The response returned is the number of bytes needed to serialize the persistent data.
  * </p>
- * <p><a target="_blank" href="https://raw.github.com/laforge49/JID/master/src/main/java/org/agilewiki/jid/requests/GetSerializedLength.java">Code</a></p>
  */
 public class GetSerializedLength {}
