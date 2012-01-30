@@ -11,10 +11,7 @@ import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.MutableBytes;
-import org.agilewiki.jid.requests.GetBytes;
-import org.agilewiki.jid.requests.GetSerializedLength;
-import org.agilewiki.jid.requests.NewJID;
-import org.agilewiki.jid.requests.Save;
+import org.agilewiki.jid.requests.*;
 
 public class JidTest extends TestCase {
     public void test1() {
@@ -100,6 +97,27 @@ public class JidTest extends TestCase {
 
             JCActor jid = (JCActor) future.send(jidFactory, new NewJID(JidFactories.JID_NAME, new byte[0]));
             int l = (Integer) future.send(jid, new GetSerializedLength());
+            System.err.println(l);
+            assertEquals(l, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test6() {
+        System.err.println("\nTest 6");
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFuture future = new JAFuture();
+            JCActor jidFactory = new JCActor(mailbox);
+            future.send(jidFactory, new Include(JidFactories.class));
+
+            JCActor jid1 = (JCActor) future.send(jidFactory, new NewJID(JidFactories.JID_NAME, new byte[0]));
+            JCActor jid2 = (JCActor) future.send(jid1, new CopyJID(mailbox));
+            int l = (Integer) future.send(jid2, new GetSerializedLength());
             System.err.println(l);
             assertEquals(l, 0);
         } catch (Exception e) {

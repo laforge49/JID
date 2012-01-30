@@ -23,17 +23,16 @@
  */
 package org.agilewiki.jid;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.bind.SyncBinding;
 import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.RequestSource;
-import org.agilewiki.jid.requests.GetBytes;
-import org.agilewiki.jid.requests.GetJID;
-import org.agilewiki.jid.requests.GetSerializedLength;
-import org.agilewiki.jid.requests.Save;
+import org.agilewiki.jid.requests.*;
 
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
@@ -90,6 +89,20 @@ public class JID extends Component {
                                               ResponseProcessor rp1)
                             throws Exception {
                         rp1.process(JID.this);
+                    }
+                });
+
+                internals.bind(CopyJID.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        CopyJID cj = (CopyJID) request;
+                        JCActor thisActor = (JCActor) internals.getThisActor();
+                        Actor parent = cj.getParent();
+                        if (parent == null)
+                            parent = internals.getParent();
+                        NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
+                        internals.send(thisActor, nj, rp1);
                     }
                 });
 

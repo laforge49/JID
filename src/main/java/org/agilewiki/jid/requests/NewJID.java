@@ -43,7 +43,7 @@ public class NewJID extends NewActor {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, byte[] bytes) {
-        this(actorType, null, null, null, bytes, 0, bytes.length);
+        this(actorType, null, null, bytes, 0, bytes.length);
     }
 
     /**
@@ -55,7 +55,7 @@ public class NewJID extends NewActor {
      * @param length    The length of the serialized data.
      */
     public NewJID(String actorType, byte[] bytes, int offset, int length) {
-        this(actorType, null, null, null, bytes, offset, length);
+        this(actorType, null, null, bytes, offset, length);
     }
 
     /**
@@ -66,7 +66,7 @@ public class NewJID extends NewActor {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, byte[] bytes) {
-        this(actorType, mailbox, null, null, bytes, 0, bytes.length);
+        this(actorType, mailbox, null, bytes, 0, bytes.length);
     }
 
     /**
@@ -79,7 +79,7 @@ public class NewJID extends NewActor {
      * @param length    The length of the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, byte[] bytes, int offset, int length) {
-        this(actorType, mailbox, null, null, bytes, offset, length);
+        this(actorType, mailbox, null, bytes, offset, length);
     }
 
     /**
@@ -87,38 +87,11 @@ public class NewJID extends NewActor {
      *
      * @param actorType An actor type name.
      * @param mailbox   A mailbox which may be shared with other actors, or null.
-     * @param actorName The name to be assigned to the actor, or null.
-     * @param bytes     Holds the serialized data.
-     */
-    public NewJID(String actorType, Mailbox mailbox, String actorName, byte[] bytes) {
-        this(actorType, mailbox, actorName, null, bytes, 0, bytes.length);
-    }
-
-    /**
-     * Create a NewJID request.
-     *
-     * @param actorType An actor type name.
-     * @param mailbox   A mailbox which may be shared with other actors, or null.
-     * @param actorName The name to be assigned to the actor, or null.
-     * @param bytes     Holds the serialized data.
-     * @param offset    The position of the serialized data.
-     * @param length    The length of the serialized data.
-     */
-    public NewJID(String actorType, Mailbox mailbox, String actorName, byte[] bytes, int offset, int length) {
-        this(actorType, mailbox, actorName, null, bytes, offset, length);
-    }
-
-    /**
-     * Create a NewJID request.
-     *
-     * @param actorType An actor type name.
-     * @param mailbox   A mailbox which may be shared with other actors, or null.
-     * @param actorName The name to be assigned to the actor, or null.
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      * @param bytes     Holds the serialized data.
      */
-    public NewJID(String actorType, Mailbox mailbox, String actorName, Actor parent, byte[] bytes) {
-        this(actorType, mailbox, actorName, parent, bytes, 0, bytes.length);
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes) {
+        this(actorType, mailbox, parent, bytes, 0, bytes.length);
     }
 
     /**
@@ -126,14 +99,13 @@ public class NewJID extends NewActor {
      *
      * @param actorType An actor type name.
      * @param mailbox   A mailbox which may be shared with other actors, or null.
-     * @param actorName The name to be assigned to the actor, or null.
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      * @param bytes     Holds the serialized data.
      * @param offset    The position of the serialized data.
      * @param length    The length of the serialized data.
      */
-    public NewJID(String actorType, Mailbox mailbox, String actorName, Actor parent, byte[] bytes, int offset, int length) {
-        super(actorType, mailbox, actorName, parent);
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes, int offset, int length) {
+        super(actorType, mailbox, null, parent);
         this.bytes = new byte[length];
         System.arraycopy(bytes, offset, this.bytes, 0, length);
     }
