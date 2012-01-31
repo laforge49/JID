@@ -89,13 +89,10 @@ public class JidFactory extends Component {
                                         return (Actor) sm.get("actor");
                                     }
                                 },
-                                new GetJIDComponent(),
-                                "component");
+                                new PutBytes(newJID.getBytes()));
                         smBuilder._return(new ObjectFunc() {
                             @Override
                             public Object get(StateMachine sm) {
-                                JID jid = (JID) sm.get("component");
-                                jid.putBytes(newJID.getBytes());
                                 return sm.get("actor");
                             }
                         });
@@ -106,5 +103,17 @@ public class JidFactory extends Component {
                 rp.process(null);
             }
         });
+    }
+}
+
+class PutBytes {
+    private byte[] bytes;
+
+    PutBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    byte[] getBytes() {
+        return bytes;
     }
 }

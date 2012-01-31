@@ -123,6 +123,15 @@ public class JID extends Component {
                             throws Exception {
                         JidChangeNotification jcn = (JidChangeNotification) request;
                         change(internals, jcn.getLengthChange(), rp1);
+                    }
+                });
+
+                internals.bind(PutBytes.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        PutBytes pb = (PutBytes) request;
+                        putBytes(pb.getBytes());
                         rp1.process(null);
                     }
                 });
@@ -215,7 +224,7 @@ public class JID extends Component {
      *
      * @param bytes Holds the serialized data.
      */
-    final void putBytes(byte[] bytes) {
+    final public void putBytes(byte[] bytes) {
         load(new MutableBytes(bytes, 0));
     }
 
