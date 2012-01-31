@@ -108,7 +108,7 @@ public class JID extends Component {
                     public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                             throws Exception {
                         ResolvePathname rp = (ResolvePathname) request;
-                        rp1.process(resolvePathname((JCActor) internals.getThisActor(), rp.getPathname()));
+                        rp1.process(resolvePathname(rp.getPathname()));
                     }
                 });
 
@@ -195,7 +195,7 @@ public class JID extends Component {
         load(new MutableBytes(bytes, 0));
     }
     
-    public JBActor resolvePathname(JCActor thisActor, String pathname) {
+    public JCActor resolvePathname(String pathname) {
         if (pathname != "")
             throw new IllegalArgumentException("Invalid pathname");
         return thisActor;
