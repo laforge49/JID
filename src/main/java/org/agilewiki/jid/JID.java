@@ -90,6 +90,8 @@ public class JID extends Component {
                                               Object request,
                                               ResponseProcessor rp1)
                             throws Exception {
+                        if (requestReceiver.getMailbox() != requestSource.getMailbox())
+                            throw new UnsupportedOperationException("mailboxes are not the same");
                         rp1.process(JID.this);
                     }
                 });

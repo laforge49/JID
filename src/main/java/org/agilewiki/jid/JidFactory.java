@@ -106,13 +106,29 @@ public class JidFactory extends Component {
     }
 }
 
+/**
+ * Load serialized data into a JID.
+ */
 class PutBytes {
+    /**
+     * The serialized data.
+     */
     private byte[] bytes;
 
+    /**
+     * Create a PutBytes request.
+     *
+     * @param bytes The serialized data.
+     */
     PutBytes(byte[] bytes) {
         this.bytes = bytes;
     }
 
+    /**
+     * Get the serialized data.
+     *
+     * @return The serialized data.
+     */
     byte[] getBytes() {
         return bytes;
     }
