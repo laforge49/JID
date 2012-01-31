@@ -36,6 +36,11 @@ import org.agilewiki.jid.requests.*;
  */
 public class JID extends Component {
     /**
+     * The JID actor which holds this actor.
+     */
+    public JCActor container;
+    
+    /**
      * The serialized form of the persistent data, or null.
      */
     protected ImmutableBytes serializedData;
@@ -109,6 +114,16 @@ public class JID extends Component {
                             throws Exception {
                         ResolvePathname rp = (ResolvePathname) request;
                         rp1.process(resolvePathname(rp.getPathname()));
+                    }
+                });
+
+                internals.bind(JidChangeNotification.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        JidChangeNotification jcn = (JidChangeNotification) request;
+                        change(internals, jcn.getLengthChange(), rp1);
+                        rp1.process(null);
                     }
                 });
 
@@ -194,10 +209,30 @@ public class JID extends Component {
     final void putBytes(byte[] bytes) {
         load(new MutableBytes(bytes, 0));
     }
-    
+
+    /**
+     * Resolves a JID pathname.
+     * 
+     * @param pathname A JID pathname.
+     * @return A JID actor, or null.
+     */
     public JCActor resolvePathname(String pathname) {
         if (pathname != "")
             throw new IllegalArgumentException("Invalid pathname");
         return thisActor;
+    }
+    
+    public void changed(Internals internals, int lengthChange, ResponseProcessor rp) 
+            throws Exception {
+        serializedData = null;
+        if (container == null) {
+            rp.process(null);
+        }
+        internals.send(container, new JidChangeNotification(lengthChange), rp);
+    }
+    
+    public void change(Internals internals, int lengthChange, ResponseProcessor rp)
+            throws Exception {
+        changed(internals, lengthChange, rp);
     }
 }

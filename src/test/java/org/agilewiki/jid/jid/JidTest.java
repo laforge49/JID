@@ -142,4 +142,19 @@ public class JidTest extends TestCase {
             mailboxFactory.close();
         }
     }
+
+    public void test8() {
+        System.err.println("\nTest 8");
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            JAFuture future = new JAFuture();
+            JCActor a = new JCActor(mailboxFactory.createMailbox());
+            future.send(a, new Include(JID.class));
+            future.send(a, new JidChangeNotification(0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mailboxFactory.close();
+        }
+    }
 }
