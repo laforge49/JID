@@ -26,5 +26,4 @@ package org.agilewiki.jid.requests;
 /**
  * Returns a byte array holding the serialized persistent data.
  */
-public class GetBytes {
-}
+public class GetBytes {}

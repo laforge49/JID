@@ -35,7 +35,7 @@ import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jactor.stateMachine.ActorFunc;
 import org.agilewiki.jactor.stateMachine.ObjectFunc;
 import org.agilewiki.jactor.stateMachine.StateMachine;
-import org.agilewiki.jid.requests.GetJID;
+import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.NewJID;
 
 import java.util.ArrayList;
@@ -89,7 +89,7 @@ public class JidFactory extends Component {
                                         return (Actor) sm.get("actor");
                                     }
                                 },
-                                new GetJID(),
+                                new GetJIDComponent(),
                                 "component");
                         smBuilder._return(new ObjectFunc() {
                             @Override

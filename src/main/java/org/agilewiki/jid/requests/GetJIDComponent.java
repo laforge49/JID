@@ -26,4 +26,4 @@ package org.agilewiki.jid.requests;
 /**
  * Returns the JID component.
  */
-public class GetJID {}
+public class GetJIDComponent {}

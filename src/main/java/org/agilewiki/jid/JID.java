@@ -83,7 +83,7 @@ public class JID extends Component {
                     }
                 });
 
-                internals.bind(GetJID.class.getName(), new SyncBinding() {
+                internals.bind(GetJIDComponent.class.getName(), new SyncBinding() {
                     @Override
                     public void acceptRequest(RequestReceiver requestReceiver,
                                               RequestSource requestSource,
@@ -148,6 +148,15 @@ public class JID extends Component {
      */
     final protected boolean isSerialized() {
         return serializedData != null;
+    }
+
+    /**
+     * Returns true when the JID has been deserialized.
+     *
+     * @return True when the JID has been deserialized.
+     */
+    protected boolean isDeserialized() {
+        return true;
     }
 
     /**
