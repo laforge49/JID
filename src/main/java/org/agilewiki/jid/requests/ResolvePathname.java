@@ -24,6 +24,29 @@
 package org.agilewiki.jid.requests;
 
 /**
- * Returns the JID component.
+ * Returns the JID actor identified by the pathname.
  */
-public class GetJID {}
+public class ResolvePathname {
+    /**
+     * The pathname of a JID.
+     */
+    private String pathname;
+
+    /**
+     * Create a ResplvePathname request.
+     *
+     * @param pathname The pathname of a JID.
+     */
+    public ResolvePathname(String pathname) {
+        this.pathname = pathname;
+    }
+
+    /**
+     * Returns the pathname of a JID.
+     *
+     * @return The pathname of a JID.
+     */
+    public String getPathname() {
+        return pathname;
+    }
+}

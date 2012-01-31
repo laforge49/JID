@@ -25,10 +25,7 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.MethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.bind.SyncBinding;
+import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.RequestSource;
@@ -103,6 +100,15 @@ public class JID extends Component {
                             parent = internals.getParent();
                         NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
                         internals.send(thisActor, nj, rp1);
+                    }
+                });
+
+                internals.bind(ResolvePathname.class.getName(), new MethodBinding() {
+                    @Override
+                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                            throws Exception {
+                        ResolvePathname rp = (ResolvePathname) request;
+                        rp1.process(resolvePathname((JCActor) internals.getThisActor(), rp.getPathname()));
                     }
                 });
 
@@ -187,5 +193,11 @@ public class JID extends Component {
      */
     final void putBytes(byte[] bytes) {
         load(new MutableBytes(bytes, 0));
+    }
+    
+    public JBActor resolvePathname(JCActor thisActor, String pathname) {
+        if (pathname != "")
+            throw new IllegalArgumentException("Invalid pathname");
+        return thisActor;
     }
 }
