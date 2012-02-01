@@ -38,7 +38,7 @@ public class JID extends Component {
     /**
      * The JID actor which holds this actor.
      */
-    public JCActor container;
+    public JID containerJid;
     
     /**
      * The serialized form of the persistent data, or null.
@@ -116,15 +116,6 @@ public class JID extends Component {
                             throws Exception {
                         ResolvePathname rp = (ResolvePathname) request;
                         rp1.process(resolvePathname(rp.getPathname()));
-                    }
-                });
-
-                internals.bind(JidChangeNotification.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        JidChangeNotification jcn = (JidChangeNotification) request;
-                        change(internals, jcn.getLengthChange(), rp1);
                     }
                 });
 
@@ -241,18 +232,34 @@ public class JID extends Component {
             throw new IllegalArgumentException("Invalid pathname");
         return thisActor;
     }
-    
-    public void changed(Internals internals, int lengthChange, ResponseProcessor rp) 
+
+    /**
+     * Notification that the persistent data has changed.
+     *
+     * @param receiverInternals The internals of the receiving actor.
+     * @param lengthChange      The change in the size of the serialized data.
+     * @param rp                The response processor.
+     * @throws Exception        Any uncaught exception which occurred while processing the notification.
+     */
+    public void changed(Internals receiverInternals, int lengthChange, ResponseProcessor rp)
             throws Exception {
         serializedData = null;
-        if (container == null) {
+        if (containerJid == null) {
             rp.process(null);
         }
-        internals.send(container, new JidChangeNotification(lengthChange), rp);
+        containerJid.change(receiverInternals, lengthChange, rp);
     }
-    
-    public void change(Internals internals, int lengthChange, ResponseProcessor rp)
+
+    /**
+     * Process a change in the persistent data.
+     *
+     * @param receiverInternals The internals of the receiving actor.
+     * @param lengthChange      The change in the size of the serialized data.
+     * @param rp                The response processor.
+     * @throws Exception        Any uncaught exception which occurred while processing the change.
+     */
+    public void change(Internals receiverInternals, int lengthChange, ResponseProcessor rp)
             throws Exception {
-        changed(internals, lengthChange, rp);
+        changed(receiverInternals, lengthChange, rp);
     }
 }
