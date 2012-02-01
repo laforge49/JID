@@ -166,9 +166,7 @@ public class JID extends Component {
      *
      * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(MutableBytes mutableBytes) {
-        serializedData = new ImmutableBytes(new byte[0], 0);
-    }
+    protected void serialize(MutableBytes mutableBytes) {}
 
     /**
      * Saves the persistent data in a byte array.
