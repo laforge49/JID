@@ -32,7 +32,7 @@ package org.agilewiki.jid;
  * while advancing an internal offset.
  * </p>
  */
-public class ReadableBytes {
+final public class ReadableBytes {
     /**
      * The wrapped immutable array of bytes.
      */
@@ -89,22 +89,13 @@ public class ReadableBytes {
     }
 
     /**
-     * Checks that there are enough bytes after the offset.
-     *
-     * @param length The minimum number of bytes needed after the offset.
-     */
-    public void validate(int length) {
-        if (offset + length > bytes.length)
-            throw new IllegalStateException("not enough bytes remaining");
-    }
-
-    /**
      * Advance the offset.
      *
      * @param length The number of bytes to be skipped over.
      */
     public void skip(int length) {
-        validate(length);
+        if (offset + length > bytes.length)
+            throw new IllegalStateException("not enough bytes remaining");
         offset += length;
     }
 

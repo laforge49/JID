@@ -184,7 +184,8 @@ public class JID extends Component {
         }
         if (serializedData.getOffset() + getSerializedLength() != appendableBytes.getOffset()) {
             System.err.println("\n" + getClass().getName());
-            System.err.println("" + serializedData.getOffset() + " + " + getSerializedLength() + " != " + appendableBytes.getOffset());
+            System.err.println("" + serializedData.getOffset() +
+                    " + " + getSerializedLength() + " != " + appendableBytes.getOffset());
             throw new IllegalStateException();
         }
     }

@@ -136,16 +136,20 @@ public class JidJid extends JID {
         readableBytes.skip(Util.INT_LENGTH);
     }
     
-    protected JCActor getJidValue() {
-        if (dser)
-            return jidValue.thisActor;
+    protected void getJidValue(Internals internals, ResponseProcessor rp) 
+            throws Exception {
+        if (dser) {
+            rp.process(jidValue.thisActor);
+            return;
+        }
         if (!isSerialized()) 
             throw new IllegalStateException();
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
         if (len == 0) {
             dser = true;
-            return null;
+            rp.process(null);
+            return;
         }
         String actorType = readableBytes.readString();
         NewActor nj = new NewActor(
@@ -153,8 +157,14 @@ public class JidJid extends JID {
                 thisActor.getMailbox(), 
                 null,
                 thisActor.getParent());
-        //todo
-        return null;
+        internals.send(thisActor, nj, new ResponseProcessor() {
+            @Override
+            public void process(Object response) throws Exception {
+                JCActor nja = (JCActor) response;
+                //todo
+
+            }
+        });
     }
 
     /**

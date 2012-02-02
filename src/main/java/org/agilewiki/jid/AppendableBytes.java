@@ -82,22 +82,6 @@ final public class AppendableBytes {
     }
 
     /**
-     * Sets the offset to 0.
-     */
-    public void rewind() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Advance the offset.
-     *
-     * @param length The number of bytes to be skipped over.
-     */
-    public void skip(int length) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
      * Write selected bytes.
      *
      * @param immutableBytes The source of the bytes to be written.
