@@ -25,8 +25,8 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.AsyncMethodBinding;
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.bind.SMBuilder;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
@@ -65,7 +65,7 @@ public class JidFactory extends Component {
     public void open(Internals internals) throws Exception {
         super.open(internals);
 
-        internals.bind(NewJID.class.getName(), new AsyncMethodBinding() {
+        internals.bind(NewJID.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {

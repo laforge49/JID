@@ -25,10 +25,10 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.AsyncMethodBinding;
+import org.agilewiki.jactor.bind.ConcurrentBinding;
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.bind.SyncBinding;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.RequestSource;
@@ -58,7 +58,7 @@ public class JID extends Component {
     public void open(Internals internals) throws Exception {
         super.open(internals);
 
-        internals.bind(GetSerializedLength.class.getName(), new AsyncMethodBinding() {
+        internals.bind(GetSerializedLength.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -66,7 +66,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(Save.class.getName(), new AsyncMethodBinding() {
+        internals.bind(Save.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -76,7 +76,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(GetBytes.class.getName(), new AsyncMethodBinding() {
+        internals.bind(GetBytes.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -84,7 +84,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(GetJIDComponent.class.getName(), new SyncBinding() {
+        internals.bind(GetJIDComponent.class.getName(), new ConcurrentBinding() {
             @Override
             public void acceptRequest(RequestReceiver requestReceiver,
                                       RequestSource requestSource,
@@ -97,7 +97,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(CopyJID.class.getName(), new AsyncMethodBinding() {
+        internals.bind(CopyJID.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -111,7 +111,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(ResolvePathname.class.getName(), new AsyncMethodBinding() {
+        internals.bind(ResolvePathname.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -120,7 +120,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(PutBytes.class.getName(), new AsyncMethodBinding() {
+        internals.bind(PutBytes.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
