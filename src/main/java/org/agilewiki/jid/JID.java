@@ -114,8 +114,8 @@ public class JID extends Component {
                     @Override
                     public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                             throws Exception {
-                        ResolvePathname rp = (ResolvePathname) request;
-                        rp1.process(resolvePathname(rp.getPathname()));
+                        ResolvePathname rpn = (ResolvePathname) request;
+                        resolvePathname(internals, rpn.getPathname(),rp1);
                     }
                 });
 
@@ -220,15 +220,17 @@ public class JID extends Component {
     }
 
     /**
-     * Resolves a JID pathname.
-     * 
+     * Resolves a JID pathname, returning a JID actor or null.
+     *
+     * @param internals The internals of the actor.
      * @param pathname A JID pathname.
-     * @return A JID actor, or null.
+     * @throws Exception        Any uncaught exception which occurred while processing the request.
      */
-    public JCActor resolvePathname(String pathname) {
+    public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)
+            throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("Invalid pathname");
-        return thisActor;
+        rp.process(thisActor);
     }
 
     /**

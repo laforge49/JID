@@ -3,6 +3,8 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
+import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.requests.NewJID;
 
 /**
  * A JID component that holds a JID actor.
@@ -127,18 +129,51 @@ public class JidJid extends JID {
     }
 
     /**
-     * Resolves a JID pathname.
+     * Skip over the length at the beginning of the serialized data.
+     * 
+     * @param mutableBytes Holds the serialized data.
+     */
+    protected void skipLen(MutableBytes mutableBytes) {
+        mutableBytes.skip(Util.INT_LENGTH);
+    }
+    
+    protected JCActor getJidValue() {
+        if (dser)
+            return jidValue.thisActor;
+        if (!isSerialized()) 
+            throw new IllegalStateException();
+        MutableBytes m = serializedData.mutable();
+        skipLen(m);
+        if (len == 0) {
+            dser = true;
+            return null;
+        }
+        String actorType = m.readString();
+        NewActor nj = new NewActor(
+                actorType, 
+                thisActor.getMailbox(), 
+                null,
+                thisActor.getParent());
+        //todo
+        return null;
+    }
+
+    /**
+     * Resolves a JID pathname, returning a JID actor or null.
      *
+     * @param internals The internals of the actor.
      * @param pathname A JID pathname.
-     * @return A JID actor, or null.
+     * @throws Exception        Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public JCActor resolvePathname(String pathname) {
-        if (pathname.length() == 0)
-            return thisActor;
+    public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)
+            throws Exception {
+        if (pathname.length() == 0) {
+            rp.process(null);
+            return;
+        }
         if (pathname.startsWith("/"))
             throw new IllegalArgumentException("pathname " + pathname);
-
-        return null;
+        //todo
     }
 }
