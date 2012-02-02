@@ -10,7 +10,7 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.MutableBytes;
+import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.requests.*;
 
 public class JidTest extends TestCase {
@@ -59,8 +59,8 @@ public class JidTest extends TestCase {
             JCActor a = new JCActor(mailboxFactory.createMailbox());
             future.send(a, new Include(JID.class));
             int l = (Integer) future.send(a, new GetSerializedLength());
-            MutableBytes mutableBytes = new MutableBytes(l);
-            future.send(a, new Save(mutableBytes));
+            AppendableBytes appendableBytes = new AppendableBytes(l);
+            future.send(a, new Save(appendableBytes));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

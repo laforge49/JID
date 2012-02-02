@@ -23,34 +23,34 @@
  */
 package org.agilewiki.jid.requests;
 
-import org.agilewiki.jid.MutableBytes;
+import org.agilewiki.jid.AppendableBytes;
 
 /**
  * <p>
- * Saves the persistent data of a JID to a MutableBytes object.
+ * Saves the persistent data of a JID to a AppendableBytes object.
  * </p>
  */
 public class Save {
     /**
      * Where the persistent data is to be saved.
      */
-    private MutableBytes mutableBytes;
+    private AppendableBytes appendableBytes;
 
     /**
      * Create a Save request.
      *
-     * @param mutableBytes Where the persistent data is to be saved.
+     * @param appendableBytes Where the persistent data is to be saved.
      */
-    public Save(MutableBytes mutableBytes) {
-        this.mutableBytes = mutableBytes;
+    public Save(AppendableBytes appendableBytes) {
+        this.appendableBytes = appendableBytes;
     }
 
     /**
-     * Returns the MutableBytes object where the persistent data is to be saved.
+     * Returns the AppendableBytes object where the persistent data is to be saved.
      *
-     * @return The MutableBytes object where the persistent data is to be saved.
+     * @return The AppendableBytes object where the persistent data is to be saved.
      */
-    public MutableBytes getMutableBytes() {
-        return mutableBytes;
+    public AppendableBytes getAppendableBytes() {
+        return appendableBytes;
     }
 }

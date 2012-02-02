@@ -4,7 +4,6 @@ import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.requests.NewJID;
 
 /**
  * A JID component that holds a JID actor.
@@ -65,34 +64,34 @@ public class JidJid extends JID {
     /**
      * Returns the size of the serialized data (exclusive of its length header). 
      *
-     * @param mutableBytes Holds the serialized data.
+     * @param readableBytes Holds the serialized data.
      * @return The size of the serialized data (exclusive of its length header).
      */
-    protected int loadLen(MutableBytes mutableBytes) {
-        return mutableBytes.readInt();
+    protected int loadLen(ReadableBytes readableBytes) {
+        return readableBytes.readInt();
     }
 
     /**
      * Writes the size of the serialized data (exclusive of its length header).
      * 
-     * @param mutableBytes The object written to.
+     * @param appendableBytes The object written to.
      */
-    protected void saveLen(MutableBytes mutableBytes) {
-        mutableBytes.writeInt(len);
+    protected void saveLen(AppendableBytes appendableBytes) {
+        appendableBytes.writeInt(len);
     }
 
     /**
      * Load the serialized data into the JID.
      *
-     * @param mutableBytes Holds the serialized data.
+     * @param readableBytes Holds the serialized data.
      */
     @Override
-    public void load(MutableBytes mutableBytes) {
-        super.load(mutableBytes);
-        len = loadLen(mutableBytes);
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        len = loadLen(readableBytes);
         jidValue = null;
         if (len > 0) {
-            mutableBytes.skip(len);
+            readableBytes.skip(len);
             dser = false;
         } else dser = true;
     }
@@ -114,27 +113,27 @@ public class JidJid extends JID {
     /**
      * Serialize the persistent data.
      *
-     * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
     @Override
-    protected void serialize(MutableBytes mutableBytes) {
+    protected void serialize(AppendableBytes appendableBytes) {
         if (!dser)
             throw new IllegalStateException();
-        saveLen(mutableBytes);
+        saveLen(appendableBytes);
         if (len == 0)
             return;
         String actorType = jidValue.thisActor.getActorType();
-        mutableBytes.writeString(actorType);
-        jidValue.save(mutableBytes);
+        appendableBytes.writeString(actorType);
+        jidValue.save(appendableBytes);
     }
 
     /**
      * Skip over the length at the beginning of the serialized data.
      * 
-     * @param mutableBytes Holds the serialized data.
+     * @param readableBytes Holds the serialized data.
      */
-    protected void skipLen(MutableBytes mutableBytes) {
-        mutableBytes.skip(Util.INT_LENGTH);
+    protected void skipLen(ReadableBytes readableBytes) {
+        readableBytes.skip(Util.INT_LENGTH);
     }
     
     protected JCActor getJidValue() {
@@ -142,13 +141,13 @@ public class JidJid extends JID {
             return jidValue.thisActor;
         if (!isSerialized()) 
             throw new IllegalStateException();
-        MutableBytes m = serializedData.mutable();
-        skipLen(m);
+        ReadableBytes readableBytes = serializedData.readable();
+        skipLen(readableBytes);
         if (len == 0) {
             dser = true;
             return null;
         }
-        String actorType = m.readString();
+        String actorType = readableBytes.readString();
         NewActor nj = new NewActor(
                 actorType, 
                 thisActor.getMailbox(), 

@@ -50,13 +50,16 @@ final public class ImmutableBytes {
         this.offset = offset;
     }
 
-    /**
-     * Returns the wrapped bytes.
+   /**
+     * Read into an array of bytes.
      *
-     * @return The wrapped bytes.
+     * @param ba  The array of bytes to be read into.
+     * @param off The offset into the array of bytes to be read into.
+     * @param len The number of bytes to be read.
      */
-    public byte[] getBytes() {
-        return bytes;
+    public void readBytes(byte[] ba, int off, int len) {
+        System.arraycopy(bytes, offset, ba, off, len);
+        offset += len;
     }
 
     /**
@@ -69,12 +72,12 @@ final public class ImmutableBytes {
     }
 
     /**
-     * Creates a MutableBytes object from this ImmutableBytes object.
+     * Creates a ReadableBytes object from this ImmutableBytes object.
      *
-     * @return The MutableBytes object.
+     * @return The ReadableBytes object.
      */
-    public MutableBytes mutable() {
-        return new MutableBytes(bytes, offset);
+    public ReadableBytes readable() {
+        return new ReadableBytes(bytes, offset);
     }
 
     /**

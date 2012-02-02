@@ -70,7 +70,7 @@ public class JID extends Component {
                     public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                             throws Exception {
                         Save s = (Save) request;
-                        save(s.getMutableBytes());
+                        save(s.getAppendableBytes());
                         rp1.process(null);
                     }
                 });
@@ -164,27 +164,27 @@ public class JID extends Component {
     /**
      * Serialize the persistent data.
      *
-     * @param mutableBytes The wrapped byte array into which the persistent data is to be serialized.
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(MutableBytes mutableBytes) {}
+    protected void serialize(AppendableBytes appendableBytes) {}
 
     /**
      * Saves the persistent data in a byte array.
      *
-     * @param mutableBytes Holds the byte array and offset.
+     * @param appendableBytes Holds the byte array and offset.
      */
-    final public void save(MutableBytes mutableBytes) {
+    final public void save(AppendableBytes appendableBytes) {
         if (isSerialized()) {
-            ImmutableBytes sd = mutableBytes.immutable();
-            mutableBytes.writeImmutableBytes(serializedData, getSerializedLength());
+            ImmutableBytes sd = appendableBytes.immutable();
+            appendableBytes.writeImmutableBytes(serializedData, getSerializedLength());
             serializedData = sd;
         } else {
-            serializedData = mutableBytes.immutable();
-            serialize(mutableBytes);
+            serializedData = appendableBytes.immutable();
+            serialize(appendableBytes);
         }
-        if (serializedData.getOffset() + getSerializedLength() != mutableBytes.getOffset()) {
+        if (serializedData.getOffset() + getSerializedLength() != appendableBytes.getOffset()) {
             System.err.println("\n" + getClass().getName());
-            System.err.println("" + serializedData.getOffset() + " + " + getSerializedLength() + " != " + mutableBytes.getOffset());
+            System.err.println("" + serializedData.getOffset() + " + " + getSerializedLength() + " != " + appendableBytes.getOffset());
             throw new IllegalStateException();
         }
     }
@@ -196,18 +196,18 @@ public class JID extends Component {
      */
     final public byte[] getBytes() {
         byte[] bs = new byte[getSerializedLength()];
-        MutableBytes mutableBytes = new MutableBytes(bs, 0);
-        save(mutableBytes);
+        AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
+        save(appendableBytes);
         return bs;
     }
 
     /**
      * Load the serialized data into the JID.
      *
-     * @param mutableBytes Holds the serialized data.
+     * @param readableBytes Holds the serialized data.
      */
-    public void load(MutableBytes mutableBytes) {
-        serializedData = mutableBytes.immutable();
+    public void load(ReadableBytes readableBytes) {
+        serializedData = readableBytes.immutable();
     }
 
     /**
@@ -216,7 +216,7 @@ public class JID extends Component {
      * @param bytes Holds the serialized data.
      */
     final public void putBytes(byte[] bytes) {
-        load(new MutableBytes(bytes, 0));
+        load(new ReadableBytes(bytes, 0));
     }
 
     /**

@@ -32,44 +32,35 @@ package org.agilewiki.jid;
  * while advancing an internal offset.
  * </p>
  */
-final public class MutableBytes {
+final public class AppendableBytes {
     /**
-     * The wrapped mutable array of bytes.
+     * The wrapped immutable array of bytes.
      */
-    private byte[] bytes;
+    protected byte[] bytes;
 
     /**
      * A mutable offset into the array of bytes.
      */
-    private int offset;
+    protected int offset;
 
     /**
-     * Create MutableBytes.
+     * Create AppendableBytes.
      *
      * @param bytes  The bytes to be wrapped.
      * @param offset An offset.
      */
-    public MutableBytes(byte[] bytes, int offset) {
+    public AppendableBytes(byte[] bytes, int offset) {
         this.bytes = bytes;
         this.offset = offset;
     }
 
     /**
-     * Create MutableBytes.
+     * Create AppendableBytes.
      *
      * @param size The size of the byte array.
      */
-    public MutableBytes(int size) {
+    public AppendableBytes(int size) {
         this(new byte[size], 0);
-    }
-
-    /**
-     * Returns the wrapped bytes.
-     *
-     * @return The wrapped bytes.
-     */
-    public byte[] getBytes() {
-        return bytes;
     }
 
     /**
@@ -91,29 +82,10 @@ final public class MutableBytes {
     }
 
     /**
-     * Returns the number of bytes after the offset.
-     *
-     * @return The number of remaining bytes.
-     */
-    public int remaining() {
-        return bytes.length - offset;
-    }
-
-    /**
      * Sets the offset to 0.
      */
     public void rewind() {
-        offset = 0;
-    }
-
-    /**
-     * Checks that there are enough bytes after the offset.
-     *
-     * @param length The minimum number of bytes needed after the offset.
-     */
-    public void validate(int length) {
-        if (offset + length > bytes.length)
-            throw new IllegalStateException("not enough bytes remaining");
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -122,8 +94,7 @@ final public class MutableBytes {
      * @param length The number of bytes to be skipped over.
      */
     public void skip(int length) {
-        validate(length);
-        offset += length;
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -133,7 +104,7 @@ final public class MutableBytes {
      * @param length         The number of bytes to be written.
      */
     public void writeImmutableBytes(ImmutableBytes immutableBytes, int length) {
-        System.arraycopy(immutableBytes.getBytes(), immutableBytes.getOffset(), bytes, offset, length);
+        immutableBytes.readBytes(bytes, offset, length);
         offset += length;
     }
 
@@ -148,17 +119,6 @@ final public class MutableBytes {
     }
 
     /**
-     * Read a byte.
-     *
-     * @return The byte that was read.
-     */
-    public byte readByte() {
-        byte rv = bytes[offset];
-        offset += 1;
-        return rv;
-    }
-
-    /**
      * Write a boolean.
      *
      * @param b The boolean to be written.
@@ -166,15 +126,6 @@ final public class MutableBytes {
     public void writeBoolean(boolean b) {
         if (b) writeByte((byte) 1);
         else writeByte((byte) 0);
-    }
-
-    /**
-     * Read a boolean.
-     *
-     * @return The boolean that was read.
-     */
-    public boolean readBoolean() {
-        return readByte() != (byte) 0;
     }
 
     /**
@@ -202,31 +153,6 @@ final public class MutableBytes {
     }
 
     /**
-     * Read an array of bytes.
-     *
-     * @param len The number of bytes to be read.
-     * @return The array of bytes that was read.
-     */
-    public byte[] readBytes(int len) {
-        byte[] ba = new byte[len];
-        System.arraycopy(bytes, offset, ba, 0, len);
-        offset += len;
-        return ba;
-    }
-
-    /**
-     * Read into an array of bytes.
-     *
-     * @param ba  The array of bytes to be read into.
-     * @param off The offset into the array of bytes to be read into.
-     * @param len The number of bytes to be read.
-     */
-    public void readBytes(byte[] ba, int off, int len) {
-        System.arraycopy(bytes, offset, ba, off, len);
-        offset += len;
-    }
-
-    /**
      * Write an int.
      *
      * @param i The int to be written.
@@ -240,18 +166,6 @@ final public class MutableBytes {
         w = w >> 8;
         bytes[offset] = (byte) (w & 255);
         offset += 4;
-    }
-
-    /**
-     * Read an int.
-     *
-     * @return The it that was read.
-     */
-    public int readInt() {
-        int w = (int) readByte();
-        w = (w << 8) | (int) readByte();
-        w = (w << 8) | (int) readByte();
-        return (w << 8) | (int) readByte();
     }
 
     /**
@@ -289,31 +203,6 @@ final public class MutableBytes {
     }
 
     /**
-     * Read a char.
-     *
-     * @return The char that was read.
-     */
-    public char readChar() {
-        return (char) ((readByte() << 8) | readByte());
-    }
-
-    /**
-     * Read a long.
-     *
-     * @return The long that was read.
-     */
-    public long readLong() {
-        long w = (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        return (w << 8) | (long) readByte();
-    }
-
-    /**
      * Write a string as an int and a char array.
      * (This approach uses more bytes than other approaches but is not so computationally intensive
      * while preserving the full range of character values.)
@@ -337,37 +226,6 @@ final public class MutableBytes {
     }
 
     /**
-     * Read string.
-     *
-     * @param l The size of the char array to be read.
-     * @return The string that was read.
-     */
-    public String readString(int l) {
-        if (l == -1)
-            return null;
-        if (l == 0)
-            return "";
-        if (l < -1)
-            throw new IllegalArgumentException("invalid string length: " + l);
-        char[] ca = new char[l];
-        int i = 0;
-        while (i < l) {
-            ca[l] = readChar();
-            i += 1;
-        }
-        return new String(ca);
-    }
-
-    /**
-     * Read string.
-     *
-     * @return The string that was read, or null.
-     */
-    public String readString() {
-        return readString(readInt());
-    }
-
-    /**
      * Write a float.
      *
      * @param f The float to be written.
@@ -377,29 +235,11 @@ final public class MutableBytes {
     }
 
     /**
-     * Read a float.
-     *
-     * @return The float that was read.
-     */
-    public float readFloat() {
-        return Float.intBitsToFloat(readInt());
-    }
-
-    /**
      * Write a double.
      *
      * @param d The double to be written.
      */
     public void writeDouble(double d) {
         writeLong(Double.doubleToLongBits(d));
-    }
-
-    /**
-     * Read a double.
-     *
-     * @return The double that was read.
-     */
-    public double readDouble() {
-        return Double.longBitsToDouble(readLong());
     }
 }
