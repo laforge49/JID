@@ -26,19 +26,13 @@ public class JidJid extends JID {
     
     /**
      * Initialize the component after all its includes have been processed.
-     * The response must always be null;
      *
      * @param internals The JBActor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
     @Override
-    public void open(Internals internals, final ResponseProcessor rp) throws Exception {
-        super.open(internals, new ResponseProcessor() {
-            @Override
-            public void process(Object response) throws Exception {
-                rp.process(null);
-            }
-        });
+    public void open(Internals internals) throws Exception {
+        super.open(internals);
     }
 
     /**

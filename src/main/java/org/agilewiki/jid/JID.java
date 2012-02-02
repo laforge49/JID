@@ -25,7 +25,10 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.*;
+import org.agilewiki.jactor.bind.AsyncMethodBinding;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.RequestReceiver;
+import org.agilewiki.jactor.bind.SyncBinding;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.RequestSource;
@@ -39,7 +42,7 @@ public class JID extends Component {
      * The JID actor which holds this actor.
      */
     public JID containerJid;
-    
+
     /**
      * The serialized form of the persistent data, or null.
      */
@@ -47,89 +50,83 @@ public class JID extends Component {
 
     /**
      * Initialize the component after all its includes have been processed.
-     * The response must always be null;
      *
      * @param internals The JBActor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
     @Override
-    public void open(final Internals internals, final ResponseProcessor rp) throws Exception {
-        super.open(internals, new ResponseProcessor() {
+    public void open(Internals internals) throws Exception {
+        super.open(internals);
+
+        internals.bind(GetSerializedLength.class.getName(), new AsyncMethodBinding() {
             @Override
-            public void process(Object response) throws Exception {
-                internals.bind(GetSerializedLength.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        rp1.process(getSerializedLength());
-                    }
-                });
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                rp1.process(getSerializedLength());
+            }
+        });
 
-                internals.bind(Save.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        Save s = (Save) request;
-                        save(s.getAppendableBytes());
-                        rp1.process(null);
-                    }
-                });
+        internals.bind(Save.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                Save s = (Save) request;
+                save(s.getAppendableBytes());
+                rp1.process(null);
+            }
+        });
 
-                internals.bind(GetBytes.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        rp1.process(getBytes());
-                    }
-                });
+        internals.bind(GetBytes.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                rp1.process(getBytes());
+            }
+        });
 
-                internals.bind(GetJIDComponent.class.getName(), new SyncBinding() {
-                    @Override
-                    public void acceptRequest(RequestReceiver requestReceiver,
-                                              RequestSource requestSource,
-                                              Object request,
-                                              ResponseProcessor rp1)
-                            throws Exception {
-                        if (requestReceiver.getMailbox() != requestSource.getMailbox())
-                            throw new UnsupportedOperationException("mailboxes are not the same");
-                        rp1.process(JID.this);
-                    }
-                });
+        internals.bind(GetJIDComponent.class.getName(), new SyncBinding() {
+            @Override
+            public void acceptRequest(RequestReceiver requestReceiver,
+                                      RequestSource requestSource,
+                                      Object request,
+                                      ResponseProcessor rp1)
+                    throws Exception {
+                if (requestReceiver.getMailbox() != requestSource.getMailbox())
+                    throw new UnsupportedOperationException("mailboxes are not the same");
+                rp1.process(JID.this);
+            }
+        });
 
-                internals.bind(CopyJID.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        CopyJID cj = (CopyJID) request;
-                        JCActor thisActor = (JCActor) internals.getThisActor();
-                        Actor parent = cj.getParent();
-                        if (parent == null)
-                            parent = internals.getParent();
-                        NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
-                        internals.send(thisActor, nj, rp1);
-                    }
-                });
+        internals.bind(CopyJID.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                CopyJID cj = (CopyJID) request;
+                JCActor thisActor = (JCActor) internals.getThisActor();
+                Actor parent = cj.getParent();
+                if (parent == null)
+                    parent = internals.getParent();
+                NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
+                internals.send(thisActor, nj, rp1);
+            }
+        });
 
-                internals.bind(ResolvePathname.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        ResolvePathname rpn = (ResolvePathname) request;
-                        resolvePathname(internals, rpn.getPathname(),rp1);
-                    }
-                });
+        internals.bind(ResolvePathname.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                ResolvePathname rpn = (ResolvePathname) request;
+                resolvePathname(internals, rpn.getPathname(), rp1);
+            }
+        });
 
-                internals.bind(PutBytes.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        PutBytes pb = (PutBytes) request;
-                        putBytes(pb.getBytes());
-                        rp1.process(null);
-                    }
-                });
-
-                rp.process(null);
+        internals.bind(PutBytes.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                PutBytes pb = (PutBytes) request;
+                putBytes(pb.getBytes());
+                rp1.process(null);
             }
         });
     }
@@ -166,7 +163,8 @@ public class JID extends Component {
      *
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(AppendableBytes appendableBytes) {}
+    protected void serialize(AppendableBytes appendableBytes) {
+    }
 
     /**
      * Saves the persistent data in a byte array.
@@ -224,8 +222,8 @@ public class JID extends Component {
      * Resolves a JID pathname, returning a JID actor or null.
      *
      * @param internals The internals of the actor.
-     * @param pathname A JID pathname.
-     * @throws Exception        Any uncaught exception which occurred while processing the request.
+     * @param pathname  A JID pathname.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)
             throws Exception {
@@ -240,7 +238,7 @@ public class JID extends Component {
      * @param receiverInternals The internals of the receiving actor.
      * @param lengthChange      The change in the size of the serialized data.
      * @param rp                The response processor.
-     * @throws Exception        Any uncaught exception which occurred while processing the notification.
+     * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
     public void changed(Internals receiverInternals, int lengthChange, ResponseProcessor rp)
             throws Exception {
@@ -257,7 +255,7 @@ public class JID extends Component {
      * @param receiverInternals The internals of the receiving actor.
      * @param lengthChange      The change in the size of the serialized data.
      * @param rp                The response processor.
-     * @throws Exception        Any uncaught exception which occurred while processing the change.
+     * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     public void change(Internals receiverInternals, int lengthChange, ResponseProcessor rp)
             throws Exception {

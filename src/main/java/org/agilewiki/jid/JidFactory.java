@@ -25,8 +25,8 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
+import org.agilewiki.jactor.bind.AsyncMethodBinding;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.MethodBinding;
 import org.agilewiki.jactor.bind.SMBuilder;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
@@ -35,7 +35,6 @@ import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jactor.stateMachine.ActorFunc;
 import org.agilewiki.jactor.stateMachine.ObjectFunc;
 import org.agilewiki.jactor.stateMachine.StateMachine;
-import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.NewJID;
 
 import java.util.ArrayList;
@@ -58,49 +57,42 @@ public class JidFactory extends Component {
 
     /**
      * Initialize the component after all its includes have been processed.
-     * The response must always be null;
      *
      * @param internals The JBActor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
     @Override
-    public void open(final Internals internals, final ResponseProcessor rp) throws Exception {
-        super.open(internals, new ResponseProcessor() {
-            @Override
-            public void process(Object response) throws Exception {
+    public void open(Internals internals) throws Exception {
+        super.open(internals);
 
-                internals.bind(NewJID.class.getName(), new MethodBinding() {
-                    @Override
-                    public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                            throws Exception {
-                        final NewJID newJID = (NewJID) request;
-                        SMBuilder smBuilder = new SMBuilder(internals);
-                        smBuilder._send(
-                                internals.getThisActor(),
-                                new NewActor(
-                                        newJID.getActorType(),
-                                        newJID.getMailbox(),
-                                        newJID.getActorName(),
-                                        newJID.getParent()), "actor");
-                        smBuilder._send(
-                                new ActorFunc() {
-                                    @Override
-                                    public Actor get(StateMachine sm) {
-                                        return (Actor) sm.get("actor");
-                                    }
-                                },
-                                new PutBytes(newJID.getBytes()));
-                        smBuilder._return(new ObjectFunc() {
+        internals.bind(NewJID.class.getName(), new AsyncMethodBinding() {
+            @Override
+            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
+                    throws Exception {
+                final NewJID newJID = (NewJID) request;
+                SMBuilder smBuilder = new SMBuilder(internals);
+                smBuilder._send(
+                        internals.getThisActor(),
+                        new NewActor(
+                                newJID.getActorType(),
+                                newJID.getMailbox(),
+                                newJID.getActorName(),
+                                newJID.getParent()), "actor");
+                smBuilder._send(
+                        new ActorFunc() {
                             @Override
-                            public Object get(StateMachine sm) {
-                                return sm.get("actor");
+                            public Actor get(StateMachine sm) {
+                                return (Actor) sm.get("actor");
                             }
-                        });
-                        smBuilder.call(rp1);
+                        },
+                        new PutBytes(newJID.getBytes()));
+                smBuilder._return(new ObjectFunc() {
+                    @Override
+                    public Object get(StateMachine sm) {
+                        return sm.get("actor");
                     }
                 });
-
-                rp.process(null);
+                smBuilder.call(rp1);
             }
         });
     }
