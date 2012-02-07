@@ -60,7 +60,7 @@ public class JidTest extends TestCase {
             (new Include(JID.class)).call(a);
             int l = (new GetSerializedLength()).send(future, a);
             AppendableBytes appendableBytes = new AppendableBytes(l);
-            future.send(a, new Save(appendableBytes));
+            (new Save(appendableBytes)).send(future, a);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

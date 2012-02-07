@@ -61,13 +61,10 @@ public class JID extends Component {
                     }
                 });
 
-        thisActor.bind(Save.class.getName(), new MethodBinding() {
+        thisActor.bind(Save.class.getName(), new VoidSynchronousMethodBinding<Save>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                Save s = (Save) request;
-                save(s.getAppendableBytes());
-                rp1.process(null);
+            public void synchronousProcessRequest(Internals internals, Save request) throws Exception {
+                save(request.getAppendableBytes());
             }
         });
 
