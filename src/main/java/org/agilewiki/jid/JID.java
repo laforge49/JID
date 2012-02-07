@@ -115,13 +115,10 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(PutBytes.class.getName(), new MethodBinding() {
+        thisActor.bind(PutBytes.class.getName(), new VoidInitializationMethodBinding<PutBytes>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                PutBytes pb = (PutBytes) request;
-                putBytes(pb.getBytes());
-                rp1.process(null);
+            public void initializationProcessRequest(PutBytes request) throws Exception {
+                putBytes(request.getBytes());
             }
         });
     }

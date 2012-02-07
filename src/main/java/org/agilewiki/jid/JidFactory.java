@@ -27,12 +27,12 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.MethodBinding;
-import org.agilewiki.jactor.bind.SMBuilder;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.requests.NewJID;
+import org.agilewiki.jid.requests.PutBytes;
 
 import java.util.ArrayList;
 
@@ -70,40 +70,9 @@ public class JidFactory extends Component {
                         newJID.getMailbox(),
                         newJID.getActorName(),
                         newJID.getParent())).call(internals, thisActor);
-
-                SMBuilder smBuilder = new SMBuilder(internals);
-                smBuilder._send(actor, new PutBytes(newJID.getBytes()));
-                smBuilder._return(actor);
-                smBuilder.call(rp1);
+                (new PutBytes(newJID.getBytes())).call(actor);
+                rp1.process(actor);
             }
         });
-    }
-}
-
-/**
- * Load serialized data into a JID.
- */
-class PutBytes {
-    /**
-     * The serialized data.
-     */
-    private byte[] bytes;
-
-    /**
-     * Create a PutBytes request.
-     *
-     * @param bytes The serialized data.
-     */
-    PutBytes(byte[] bytes) {
-        this.bytes = bytes;
-    }
-
-    /**
-     * Get the serialized data.
-     *
-     * @return The serialized data.
-     */
-    byte[] getBytes() {
-        return bytes;
     }
 }
