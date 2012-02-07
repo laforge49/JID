@@ -23,12 +23,11 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.MethodBinding;
+import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
+import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
+import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.requests.NewJID;
@@ -60,18 +59,17 @@ public class JidFactory extends Component {
     @Override
     public void bindery() throws Exception {
 
-        thisActor.bind(NewJID.class.getName(), new MethodBinding() {
+        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, JCActor>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                final NewJID newJID = (NewJID) request;
-                Actor actor = (new NewActor(
+            public JCActor concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request) throws Exception {
+                NewJID newJID = (NewJID) request;
+                JCActor actor = (new NewActor(
                         newJID.getActorType(),
                         newJID.getMailbox(),
                         newJID.getActorName(),
-                        newJID.getParent())).call(internals, thisActor);
+                        newJID.getParent())).call(thisActor);
                 (new PutBytes(newJID.getBytes())).call(actor);
-                rp1.process(actor);
+                return actor;
             }
         });
     }
