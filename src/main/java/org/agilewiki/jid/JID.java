@@ -25,10 +25,7 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.ConcurrentBinding;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.MethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
+import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.RequestSource;
@@ -56,13 +53,13 @@ public class JID extends Component {
     @Override
     public void bindery() throws Exception {
 
-        thisActor.bind(GetSerializedLength.class.getName(), new MethodBinding() {
-            @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                rp1.process(getSerializedLength());
-            }
-        });
+        thisActor.bind(GetSerializedLength.class.getName(),
+                new SynchronousMethodBinding<GetSerializedLength, Integer>() {
+                    @Override
+                    public Integer synchronousProcessRequest(Internals internals, GetSerializedLength request) throws Exception {
+                        return getSerializedLength();
+                    }
+                });
 
         thisActor.bind(Save.class.getName(), new MethodBinding() {
             @Override

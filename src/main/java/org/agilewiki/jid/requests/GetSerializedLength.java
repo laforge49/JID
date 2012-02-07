@@ -23,10 +23,12 @@
  */
 package org.agilewiki.jid.requests;
 
+import org.agilewiki.jactor.bind.SynchronousRequest;
+
 /**
  * <p>
  * The response returned is the number of bytes needed to serialize the persistent data.
  * </p>
  */
-public class GetSerializedLength {
+public class GetSerializedLength extends SynchronousRequest<Integer> {
 }
