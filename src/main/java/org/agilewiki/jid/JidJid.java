@@ -119,53 +119,44 @@ public class JidJid extends JID {
         readableBytes.skip(Util.INT_LENGTH);
     }
 
-    protected void getJidValue(Internals internals, ResponseProcessor rp)
+    protected JCActor getJidValue()
             throws Exception {
-        if (dser) {
-            rp.process(jidValue.thisActor);
-            return;
-        }
+        if (dser)
+            return jidValue.thisActor;
         if (!isSerialized())
             throw new IllegalStateException();
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
         if (len == 0) {
             dser = true;
-            rp.process(null);
-            return;
+            return null;
         }
         String actorType = readableBytes.readString();
-        NewActor nj = new NewActor(
+        JCActor nja = (new NewActor(
                 actorType,
                 thisActor.getMailbox(),
                 null,
-                thisActor.getParent());
-        internals.send(thisActor, nj, new ResponseProcessor() {
-            @Override
-            public void process(Object response) throws Exception {
-                JCActor nja = (JCActor) response;
-                //todo
-
-            }
-        });
+                thisActor.getParent())).call(thisActor);
+        //todo
+        return null;
     }
 
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param internals The internals of the actor.
-     * @param pathname  A JID pathname.
+     * @param pathname A JID pathname.
+     * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)
+    public JCActor resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
-            rp.process(null);
-            return;
+            return null;
         }
         if (pathname.startsWith("/"))
             throw new IllegalArgumentException("pathname " + pathname);
         //todo
+        return null;
     }
 }

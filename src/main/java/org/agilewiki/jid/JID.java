@@ -92,12 +92,10 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(ResolvePathname.class.getName(), new MethodBinding() {
+        thisActor.bind(ResolvePathname.class.getName(), new SynchronousMethodBinding<ResolvePathname, JCActor>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                ResolvePathname rpn = (ResolvePathname) request;
-                resolvePathname(internals, rpn.getPathname(), rp1);
+            public JCActor synchronousProcessRequest(Internals internals, ResolvePathname request) throws Exception {
+                return resolvePathname(request.getPathname());
             }
         });
 
@@ -199,15 +197,15 @@ public class JID extends Component {
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param internals The internals of the actor.
-     * @param pathname  A JID pathname.
+     * @param pathname A JID pathname.
+     * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
-    public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)
+    public JCActor resolvePathname(String pathname)
             throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("Invalid pathname");
-        rp.process(thisActor);
+        return thisActor;
     }
 
     /**
