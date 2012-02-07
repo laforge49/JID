@@ -23,8 +23,11 @@
  */
 package org.agilewiki.jid.requests;
 
+import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jid.JID;
+
 /**
  * Returns the JID component.
  */
-public class GetJIDComponent {
+public class GetJIDComponent extends SynchronousRequest<JID> {
 }

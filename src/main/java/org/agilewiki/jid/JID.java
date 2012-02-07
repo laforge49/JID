@@ -28,7 +28,6 @@ import org.agilewiki.jactor.ResponseProcessor;
 import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.lpc.RequestSource;
 import org.agilewiki.jid.requests.*;
 
 /**
@@ -75,16 +74,10 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(GetJIDComponent.class.getName(), new ConcurrentBinding() {
+        thisActor.bind(GetJIDComponent.class.getName(), new SynchronousOnlyMethodBinding<GetJIDComponent, JID>() {
             @Override
-            public void acceptRequest(RequestReceiver requestReceiver,
-                                      RequestSource requestSource,
-                                      Object request,
-                                      ResponseProcessor rp1)
-                    throws Exception {
-                if (requestReceiver.getMailbox() != requestSource.getMailbox())
-                    throw new UnsupportedOperationException("mailboxes are not the same");
-                rp1.process(JID.this);
+            public JID synchronousProcessRequest(Internals internals, GetJIDComponent request) throws Exception {
+                return JID.this;
             }
         });
 
