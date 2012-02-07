@@ -101,8 +101,8 @@ public class JID extends Component {
                 Actor parent = cj.getParent();
                 if (parent == null)
                     parent = thisActor.getParent();
-                NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
-                internals.send(thisActor, nj, rp1);
+                JCActor a = (new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes())).call(thisActor);
+                rp1.process(a);
             }
         });
 
