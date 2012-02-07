@@ -68,11 +68,10 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(GetBytes.class.getName(), new MethodBinding() {
+        thisActor.bind(GetBytes.class.getName(), new SynchronousMethodBinding<GetBytes, byte[]>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                rp1.process(getBytes());
+            public byte[] synchronousProcessRequest(Internals internals, GetBytes request) throws Exception {
+                return getBytes();
             }
         });
 

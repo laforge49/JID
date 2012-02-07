@@ -75,7 +75,7 @@ public class JidTest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor a = new JCActor(mailboxFactory.createMailbox());
             (new Include(JID.class)).call(a);
-            byte[] bytes = (byte[]) future.send(a, new GetBytes());
+            byte[] bytes = (new GetBytes()).send(future, a);
             int l = bytes.length;
             System.err.println(l);
             assertEquals(l, 0);

@@ -23,8 +23,10 @@
  */
 package org.agilewiki.jid.requests;
 
+import org.agilewiki.jactor.bind.SynchronousRequest;
+
 /**
  * Returns a byte array holding the serialized persistent data.
  */
-public class GetBytes {
+public class GetBytes extends SynchronousRequest<byte[]> {
 }
