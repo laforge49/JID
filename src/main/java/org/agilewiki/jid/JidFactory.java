@@ -32,9 +32,6 @@ import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jactor.stateMachine.ActorFunc;
-import org.agilewiki.jactor.stateMachine.ObjectFunc;
-import org.agilewiki.jactor.stateMachine.StateMachine;
 import org.agilewiki.jid.requests.NewJID;
 
 import java.util.ArrayList;
@@ -68,28 +65,15 @@ public class JidFactory extends Component {
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
                 final NewJID newJID = (NewJID) request;
+                Actor actor = (new NewActor(
+                        newJID.getActorType(),
+                        newJID.getMailbox(),
+                        newJID.getActorName(),
+                        newJID.getParent())).call(internals, thisActor);
+
                 SMBuilder smBuilder = new SMBuilder(internals);
-                smBuilder._send(
-                        internals.getThisActor(),
-                        new NewActor(
-                                newJID.getActorType(),
-                                newJID.getMailbox(),
-                                newJID.getActorName(),
-                                newJID.getParent()), "actor");
-                smBuilder._send(
-                        new ActorFunc() {
-                            @Override
-                            public Actor get(StateMachine sm) {
-                                return (Actor) sm.get("actor");
-                            }
-                        },
-                        new PutBytes(newJID.getBytes()));
-                smBuilder._return(new ObjectFunc() {
-                    @Override
-                    public Object get(StateMachine sm) {
-                        return sm.get("actor");
-                    }
-                });
+                smBuilder._send(actor, new PutBytes(newJID.getBytes()));
+                smBuilder._return(actor);
                 smBuilder.call(rp1);
             }
         });
