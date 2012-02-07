@@ -81,17 +81,14 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(CopyJID.class.getName(), new MethodBinding() {
+        thisActor.bind(CopyJID.class.getName(), new SynchronousMethodBinding<CopyJID, JCActor>() {
             @Override
-            public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
-                    throws Exception {
-                CopyJID cj = (CopyJID) request;
+            public JCActor synchronousProcessRequest(Internals internals, CopyJID request) throws Exception {
                 JCActor thisActor = (JCActor) internals.getThisActor();
-                Actor parent = cj.getParent();
+                Actor parent = request.getParent();
                 if (parent == null)
                     parent = thisActor.getParent();
-                JCActor a = (new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes())).call(thisActor);
-                rp1.process(a);
+                return (new NewJID(thisActor.getActorType(), request.getMailbox(), parent, getBytes())).call(thisActor);
             }
         });
 

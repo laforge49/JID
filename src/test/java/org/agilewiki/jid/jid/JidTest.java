@@ -116,7 +116,7 @@ public class JidTest extends TestCase {
             (new Include(JidFactories.class)).call(jidFactory);
 
             JCActor jid1 = (new NewJID(JidFactories.JID_NAME, new byte[0])).call(jidFactory);
-            JCActor jid2 = (JCActor) future.send(jid1, new CopyJID(mailbox));
+            JCActor jid2 = (new CopyJID(mailbox)).send(future, jid1);
             int l = (new GetSerializedLength()).send(future, jid2);
             System.err.println(l);
             assertEquals(l, 0);
