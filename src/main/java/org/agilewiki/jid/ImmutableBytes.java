@@ -50,7 +50,7 @@ final public class ImmutableBytes {
         this.offset = offset;
     }
 
-   /**
+    /**
      * Read into an array of bytes.
      *
      * @param ba  The array of bytes to be read into.

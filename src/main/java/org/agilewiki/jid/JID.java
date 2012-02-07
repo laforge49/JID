@@ -49,16 +49,14 @@ public class JID extends Component {
     protected ImmutableBytes serializedData;
 
     /**
-     * Initialize the component after all its includes have been processed.
+     * Bind request classes.
      *
-     * @param internals The JBActor's internals.
-     * @throws Exception Any exceptions thrown during the open.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    public void open(Internals internals) throws Exception {
-        super.open(internals);
+    public void bindery() throws Exception {
 
-        internals.bind(GetSerializedLength.class.getName(), new MethodBinding() {
+        thisActor.bind(GetSerializedLength.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -66,7 +64,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(Save.class.getName(), new MethodBinding() {
+        thisActor.bind(Save.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -76,7 +74,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(GetBytes.class.getName(), new MethodBinding() {
+        thisActor.bind(GetBytes.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -84,7 +82,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(GetJIDComponent.class.getName(), new ConcurrentBinding() {
+        thisActor.bind(GetJIDComponent.class.getName(), new ConcurrentBinding() {
             @Override
             public void acceptRequest(RequestReceiver requestReceiver,
                                       RequestSource requestSource,
@@ -97,7 +95,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(CopyJID.class.getName(), new MethodBinding() {
+        thisActor.bind(CopyJID.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -105,13 +103,13 @@ public class JID extends Component {
                 JCActor thisActor = (JCActor) internals.getThisActor();
                 Actor parent = cj.getParent();
                 if (parent == null)
-                    parent = internals.getParent();
+                    parent = thisActor.getParent();
                 NewJID nj = new NewJID(thisActor.getActorType(), cj.getMailbox(), parent, getBytes());
                 internals.send(thisActor, nj, rp1);
             }
         });
 
-        internals.bind(ResolvePathname.class.getName(), new MethodBinding() {
+        thisActor.bind(ResolvePathname.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {
@@ -120,7 +118,7 @@ public class JID extends Component {
             }
         });
 
-        internals.bind(PutBytes.class.getName(), new MethodBinding() {
+        thisActor.bind(PutBytes.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {

@@ -23,9 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.ResponseProcessor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SMBuilder;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
@@ -56,14 +53,12 @@ final public class JidFactories extends Component {
     }
 
     /**
-     * Initialize the component after all its includes have been processed.
+     * Bind request classes.
      *
-     * @param internals The JBActor's internals.
-     * @throws Exception Any exceptions thrown during the open.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    public void open(Internals internals) throws Exception {
-        super.open(internals);
-        internals.call(thisActor, new DefineActorType(JID_NAME, JID.class));
+    public void bindery() throws Exception {
+        (new DefineActorType(JID_NAME, JID.class)).call(thisActor);
     }
 }

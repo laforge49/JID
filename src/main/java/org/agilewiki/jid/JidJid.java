@@ -20,20 +20,9 @@ public class JidJid extends JID {
     protected JID jidValue;
 
     /**
-     * The size of the serialized (exclusive of its length header). 
+     * The size of the serialized (exclusive of its length header).
      */
     protected int len = 0;
-    
-    /**
-     * Initialize the component after all its includes have been processed.
-     *
-     * @param internals The JBActor's internals.
-     * @throws Exception Any exceptions thrown during the open.
-     */
-    @Override
-    public void open(Internals internals) throws Exception {
-        super.open(internals);
-    }
 
     /**
      * Returns true when the JID has been deserialized.
@@ -56,7 +45,7 @@ public class JidJid extends JID {
     }
 
     /**
-     * Returns the size of the serialized data (exclusive of its length header). 
+     * Returns the size of the serialized data (exclusive of its length header).
      *
      * @param readableBytes Holds the serialized data.
      * @return The size of the serialized data (exclusive of its length header).
@@ -67,7 +56,7 @@ public class JidJid extends JID {
 
     /**
      * Writes the size of the serialized data (exclusive of its length header).
-     * 
+     *
      * @param appendableBytes The object written to.
      */
     protected void saveLen(AppendableBytes appendableBytes) {
@@ -123,20 +112,20 @@ public class JidJid extends JID {
 
     /**
      * Skip over the length at the beginning of the serialized data.
-     * 
+     *
      * @param readableBytes Holds the serialized data.
      */
     protected void skipLen(ReadableBytes readableBytes) {
         readableBytes.skip(Util.INT_LENGTH);
     }
-    
-    protected void getJidValue(Internals internals, ResponseProcessor rp) 
+
+    protected void getJidValue(Internals internals, ResponseProcessor rp)
             throws Exception {
         if (dser) {
             rp.process(jidValue.thisActor);
             return;
         }
-        if (!isSerialized()) 
+        if (!isSerialized())
             throw new IllegalStateException();
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
@@ -147,8 +136,8 @@ public class JidJid extends JID {
         }
         String actorType = readableBytes.readString();
         NewActor nj = new NewActor(
-                actorType, 
-                thisActor.getMailbox(), 
+                actorType,
+                thisActor.getMailbox(),
                 null,
                 thisActor.getParent());
         internals.send(thisActor, nj, new ResponseProcessor() {
@@ -165,8 +154,8 @@ public class JidJid extends JID {
      * Resolves a JID pathname, returning a JID actor or null.
      *
      * @param internals The internals of the actor.
-     * @param pathname A JID pathname.
-     * @throws Exception        Any uncaught exception which occurred while processing the request.
+     * @param pathname  A JID pathname.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
     public void resolvePathname(Internals internals, String pathname, ResponseProcessor rp)

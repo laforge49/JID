@@ -56,16 +56,14 @@ public class JidFactory extends Component {
     }
 
     /**
-     * Initialize the component after all its includes have been processed.
+     * Bind request classes.
      *
-     * @param internals The JBActor's internals.
-     * @throws Exception Any exceptions thrown during the open.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    public void open(Internals internals) throws Exception {
-        super.open(internals);
+    public void bindery() throws Exception {
 
-        internals.bind(NewJID.class.getName(), new MethodBinding() {
+        thisActor.bind(NewJID.class.getName(), new MethodBinding() {
             @Override
             public void processRequest(Internals internals, Object request, ResponseProcessor rp1)
                     throws Exception {

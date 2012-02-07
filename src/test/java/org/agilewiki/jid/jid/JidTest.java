@@ -8,9 +8,9 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.requests.*;
 
 public class JidTest extends TestCase {
