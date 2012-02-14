@@ -1,6 +1,6 @@
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.ResponseProcessor;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
@@ -88,7 +88,7 @@ public class JidJid extends JID {
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals receiverInternals, int lengthChange, ResponseProcessor rp) throws Exception {
+    public void change(Internals receiverInternals, int lengthChange, RP rp) throws Exception {
         len += lengthChange;
         super.change(receiverInternals, lengthChange, rp);
     }
