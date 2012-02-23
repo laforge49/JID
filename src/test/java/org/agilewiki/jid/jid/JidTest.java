@@ -11,6 +11,7 @@ import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.*;
 
 public class JidTest extends TestCase {

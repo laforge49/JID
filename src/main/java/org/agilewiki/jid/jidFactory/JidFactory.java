@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid;
+package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
 import org.agilewiki.jactor.bind.RequestReceiver;
@@ -30,7 +30,6 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.requests.NewJID;
 import org.agilewiki.jid.requests.PutBytes;
 
 import java.util.ArrayList;

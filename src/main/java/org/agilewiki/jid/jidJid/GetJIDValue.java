@@ -21,35 +21,13 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.requests;
+package org.agilewiki.jid.jidJid;
 
 import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.components.JCActor;
 
 /**
- * Create a JID actor value if one is not already present.
- * Returns true if a new actor was created.
+ * Returns the JID actor value.
  */
-public class MakeJIDValue extends SynchronousRequest<Boolean> {
-    /**
-     * The type of JID.
-     */
-    private String jidType;
-
-    /**
-     * Create a MakeJIDValue request.
-     *
-     * @param jidType The JID type.
-     */
-    public MakeJIDValue(String jidType) {
-        this.jidType = jidType;
-    }
-
-    /**
-     * Returns the JID type.
-     *
-     * @return The JID type.
-     */
-    public String getJidType() {
-        return jidType;
-    }
+public class GetJIDValue extends SynchronousRequest<JCActor> {
 }

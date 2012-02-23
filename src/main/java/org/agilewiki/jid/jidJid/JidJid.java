@@ -1,12 +1,14 @@
-package org.agilewiki.jid;
+package org.agilewiki.jid.jidJid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.AppendableBytes;
+import org.agilewiki.jid.JID;
+import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid.Util;
 import org.agilewiki.jid.requests.GetJIDComponent;
-import org.agilewiki.jid.requests.GetJIDValue;
-import org.agilewiki.jid.requests.MakeJIDValue;
 import org.agilewiki.jid.requests.ResolvePathname;
 
 /**
