@@ -67,7 +67,7 @@ public class JidJid extends JID {
         JCActor nja = na.call(thisActor);
         jidValue = (new GetJIDComponent()).call(internals, nja);
         jidValue.containerJid = this;
-        change(internals, jidValue.getSerializedLength());
+        change(jidValue.getSerializedLength());
         return true;
     }
 
@@ -159,14 +159,13 @@ public class JidJid extends JID {
     /**
      * Process a change in the persistent data.
      *
-     * @param receiverInternals The internals of the receiving actor.
-     * @param lengthChange      The change in the size of the serialized data.
+     * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals receiverInternals, int lengthChange) throws Exception {
+    public void change(int lengthChange) throws Exception {
         len += lengthChange;
-        super.change(receiverInternals, lengthChange);
+        super.change(lengthChange);
     }
 
     /**
