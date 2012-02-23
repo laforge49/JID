@@ -23,8 +23,11 @@
  */
 package org.agilewiki.jid.requests;
 
+import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.components.JCActor;
+
 /**
  * Returns the JID value.
  */
-public class GetJIDValue {
+public class GetJIDValue extends SynchronousRequest<JCActor> {
 }

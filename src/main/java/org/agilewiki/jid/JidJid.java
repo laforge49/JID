@@ -2,8 +2,11 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.requests.GetJIDComponent;
+import org.agilewiki.jid.requests.GetJIDValue;
 
 /**
  * A JID component that holds a JID actor.
@@ -23,6 +26,54 @@ public class JidJid extends JID {
      * The size of the serialized (exclusive of its length header).
      */
     protected int len = 0;
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetJIDValue.class.getName(),
+                new SynchronousMethodBinding<GetJIDValue, JCActor>() {
+                    @Override
+                    public JCActor synchronousProcessRequest(Internals internals, GetJIDValue request)
+                            throws Exception {
+                        return getJidValue(internals);
+                    }
+                });
+    }
+
+    /**
+     * Returns the JID actor held by this component.
+     *
+     * @param internals The actor's internals.
+     * @return The JID actor held by this component.
+     * @throws Exception Any uncaught exception raised during deserialization.
+     */
+    protected JCActor getJidValue(Internals internals)
+            throws Exception {
+        if (dser)
+            return jidValue.thisActor;
+        if (!isSerialized())
+            throw new IllegalStateException();
+        ReadableBytes readableBytes = serializedData.readable();
+        skipLen(readableBytes);
+        if (len == 0) {
+            dser = true;
+            return null;
+        }
+        String actorType = readableBytes.readString();
+        JCActor nja = (new NewActor(
+                actorType,
+                thisActor.getMailbox(),
+                null,
+                thisActor.getParent())).call(thisActor);
+        jidValue = (new GetJIDComponent()).call(internals, nja);
+        return null;
+    }
 
     /**
      * Returns true when the JID has been deserialized.
@@ -119,37 +170,16 @@ public class JidJid extends JID {
         readableBytes.skip(Util.INT_LENGTH);
     }
 
-    protected JCActor getJidValue()
-            throws Exception {
-        if (dser)
-            return jidValue.thisActor;
-        if (!isSerialized())
-            throw new IllegalStateException();
-        ReadableBytes readableBytes = serializedData.readable();
-        skipLen(readableBytes);
-        if (len == 0) {
-            dser = true;
-            return null;
-        }
-        String actorType = readableBytes.readString();
-        JCActor nja = (new NewActor(
-                actorType,
-                thisActor.getMailbox(),
-                null,
-                thisActor.getParent())).call(thisActor);
-        //todo
-        return null;
-    }
-
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param pathname A JID pathname.
+     * @param internals The actor's internals.
+     * @param pathname  A JID pathname.
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public JCActor resolvePathname(String pathname)
+    public JCActor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return null;

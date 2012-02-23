@@ -61,7 +61,8 @@ public class JidFactory extends Component {
 
         thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, JCActor>() {
             @Override
-            public JCActor concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request) throws Exception {
+            public JCActor concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
+                    throws Exception {
                 NewJID newJID = (NewJID) request;
                 JCActor actor = (new NewActor(
                         newJID.getActorType(),
