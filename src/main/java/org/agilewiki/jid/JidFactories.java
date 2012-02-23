@@ -40,12 +40,12 @@ final public class JidFactories extends Component {
     /**
      * The name of the JID component.
      */
-    public final static String JID_NAME = "JID";
+    public final static String JID_TYPE = "JID";
 
     /**
      * The name of the JidJid component.
      */
-    public final static String JID_JID_NAME = "JIDJID";
+    public final static String JID_JID_TYPE = "JIDJID";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -66,7 +66,7 @@ final public class JidFactories extends Component {
      */
     @Override
     public void bindery() throws Exception {
-        (new DefineActorType(JID_NAME, JID.class)).call(thisActor);
-        (new DefineActorType(JID_JID_NAME, JidJid.class)).call(thisActor);
+        (new DefineActorType(JID_TYPE, JID.class)).call(thisActor);
+        (new DefineActorType(JID_JID_TYPE, JidJid.class)).call(thisActor);
     }
 }

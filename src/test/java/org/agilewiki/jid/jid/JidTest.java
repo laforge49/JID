@@ -41,7 +41,7 @@ public class JidTest extends TestCase {
             JCActor jidFactory = new JCActor(mailbox);
             (new Include(JidFactories.class)).call(jidFactory);
 
-            JCActor jid = (JCActor) future.send(jidFactory, new NewActor(JidFactories.JID_NAME));
+            JCActor jid = (JCActor) future.send(jidFactory, new NewActor(JidFactories.JID_TYPE));
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);
@@ -96,7 +96,7 @@ public class JidTest extends TestCase {
             JCActor jidFactory = new JCActor(mailbox);
             (new Include(JidFactories.class)).call(jidFactory);
 
-            JCActor jid = (new NewJID(JidFactories.JID_NAME, new byte[0])).call(jidFactory);
+            JCActor jid = (new NewJID(JidFactories.JID_TYPE, new byte[0])).call(jidFactory);
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);
@@ -116,7 +116,7 @@ public class JidTest extends TestCase {
             JCActor jidFactory = new JCActor(mailbox);
             (new Include(JidFactories.class)).call(jidFactory);
 
-            JCActor jid1 = (new NewJID(JidFactories.JID_NAME, new byte[0])).call(jidFactory);
+            JCActor jid1 = (new NewJID(JidFactories.JID_TYPE, new byte[0])).call(jidFactory);
             JCActor jid2 = (new CopyJID(mailbox)).send(future, jid1);
             int l = GetSerializedLength.req.send(future, jid2);
             System.err.println(l);

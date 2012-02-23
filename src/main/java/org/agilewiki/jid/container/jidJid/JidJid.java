@@ -104,7 +104,8 @@ public class JidJid extends JID {
         JCActor nja = na.call(thisActor);
         jidValue = (new GetJIDComponent()).call(internals, nja);
         jidValue.containerJid = this;
-        change(jidValue.getSerializedLength());
+        int l = Util.stringLength(jidType) + jidValue.getSerializedLength();
+        change(l);
         dser = true;
         return true;
     }
