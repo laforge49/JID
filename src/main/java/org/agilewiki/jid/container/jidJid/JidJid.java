@@ -1,4 +1,4 @@
-package org.agilewiki.jid.jidJid;
+package org.agilewiki.jid.container.jidJid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;

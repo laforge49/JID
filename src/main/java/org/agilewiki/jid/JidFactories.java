@@ -26,8 +26,8 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
+import org.agilewiki.jid.container.jidJid.JidJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.jidJid.JidJid;
 
 import java.util.ArrayList;
 
