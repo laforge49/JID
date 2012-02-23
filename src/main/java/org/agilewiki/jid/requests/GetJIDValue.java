@@ -27,7 +27,7 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 import org.agilewiki.jactor.components.JCActor;
 
 /**
- * Returns the JID value.
+ * Returns the JID actor value.
  */
 public class GetJIDValue extends SynchronousRequest<JCActor> {
 }

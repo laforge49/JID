@@ -24,7 +24,6 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
@@ -214,16 +213,14 @@ public class JID extends Component {
      *
      * @param receiverInternals The internals of the receiving actor.
      * @param lengthChange      The change in the size of the serialized data.
-     * @param rp                The response processor.
      * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
-    public void changed(Internals receiverInternals, int lengthChange, RP rp)
+    public void changed(Internals receiverInternals, int lengthChange)
             throws Exception {
         serializedData = null;
-        if (containerJid == null) {
-            rp.process(null);
-        }
-        containerJid.change(receiverInternals, lengthChange, rp);
+        if (containerJid == null)
+            return;
+        containerJid.change(receiverInternals, lengthChange);
     }
 
     /**
@@ -231,11 +228,10 @@ public class JID extends Component {
      *
      * @param receiverInternals The internals of the receiving actor.
      * @param lengthChange      The change in the size of the serialized data.
-     * @param rp                The response processor.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
-    public void change(Internals receiverInternals, int lengthChange, RP rp)
+    public void change(Internals receiverInternals, int lengthChange)
             throws Exception {
-        changed(receiverInternals, lengthChange, rp);
+        changed(receiverInternals, lengthChange);
     }
 }

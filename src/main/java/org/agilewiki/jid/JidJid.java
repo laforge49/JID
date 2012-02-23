@@ -1,12 +1,12 @@
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.GetJIDValue;
+import org.agilewiki.jid.requests.MakeJIDValue;
 import org.agilewiki.jid.requests.ResolvePathname;
 
 /**
@@ -45,6 +45,28 @@ public class JidJid extends JID {
                         return getJidValue(internals);
                     }
                 });
+
+        thisActor.bind(MakeJIDValue.class.getName(),
+                new SynchronousMethodBinding<MakeJIDValue, Boolean>() {
+                    @Override
+                    public Boolean synchronousProcessRequest(Internals internals, MakeJIDValue request)
+                            throws Exception {
+                        return makeJidValue(internals, request);
+                    }
+                });
+    }
+
+    protected Boolean makeJidValue(Internals internals, MakeJIDValue request)
+            throws Exception {
+        if (len > 0)
+            return false;
+        String jidType = request.getJidType();
+        NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
+        JCActor nja = na.call(thisActor);
+        jidValue = (new GetJIDComponent()).call(internals, nja);
+        jidValue.containerJid = this;
+        change(internals, jidValue.getSerializedLength());
+        return true;
     }
 
     /**
@@ -73,7 +95,8 @@ public class JidJid extends JID {
                 null,
                 thisActor.getParent())).call(thisActor);
         jidValue = (new GetJIDComponent()).call(internals, nja);
-        return null;
+        jidValue.containerJid = this;
+        return nja;
     }
 
     /**
@@ -136,13 +159,12 @@ public class JidJid extends JID {
      *
      * @param receiverInternals The internals of the receiving actor.
      * @param lengthChange      The change in the size of the serialized data.
-     * @param rp                The response processor.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals receiverInternals, int lengthChange, RP rp) throws Exception {
+    public void change(Internals receiverInternals, int lengthChange) throws Exception {
         len += lengthChange;
-        super.change(receiverInternals, lengthChange, rp);
+        super.change(receiverInternals, lengthChange);
     }
 
     /**
