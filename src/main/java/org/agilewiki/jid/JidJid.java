@@ -7,6 +7,7 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.GetJIDValue;
+import org.agilewiki.jid.requests.ResolvePathname;
 
 /**
  * A JID component that holds a JID actor.
@@ -182,11 +183,15 @@ public class JidJid extends JID {
     public JCActor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname.length() == 0) {
-            return null;
+            return thisActor;
         }
-        if (pathname.startsWith("/"))
-            throw new IllegalArgumentException("pathname " + pathname);
-        //todo
-        return null;
+        if (pathname == "$")
+            return getJidValue(internals);
+        if (pathname.startsWith("$/")) {
+            JCActor jca = getJidValue(internals);
+            ResolvePathname req = new ResolvePathname(pathname.substring(2));
+            return req.call(internals, jca);
+        }
+        throw new IllegalArgumentException("pathname " + pathname);
     }
 }
