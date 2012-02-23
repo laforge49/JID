@@ -30,7 +30,7 @@ import org.agilewiki.jactor.components.factory.NewActor;
 /**
  * Creates a JID actor and loads its serialized data.
  */
-public class NewJID extends NewActor {
+final public class NewJID extends NewActor {
     /**
      * Holds the serialized data.
      */

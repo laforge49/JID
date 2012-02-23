@@ -31,7 +31,7 @@ import org.agilewiki.jid.AppendableBytes;
  * Saves the persistent data of a JID to a AppendableBytes object.
  * </p>
  */
-public class Save extends SynchronousRequest {
+final public class Save extends SynchronousRequest {
     /**
      * Where the persistent data is to be saved.
      */

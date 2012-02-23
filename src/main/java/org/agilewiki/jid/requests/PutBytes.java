@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.InitializationRequest;
 /**
  * Load serialized data into a JID.
  */
-public class PutBytes extends InitializationRequest {
+final public class PutBytes extends InitializationRequest {
     /**
      * The serialized data.
      */

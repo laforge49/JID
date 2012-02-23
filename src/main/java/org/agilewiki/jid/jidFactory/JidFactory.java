@@ -37,7 +37,7 @@ import java.util.ArrayList;
 /**
  * Creates a JID actor and loads its serialized data.
  */
-public class JidFactory extends Component {
+final public class JidFactory extends Component {
     /**
      * Returns a list of Includes for inclusion in the actor.
      *

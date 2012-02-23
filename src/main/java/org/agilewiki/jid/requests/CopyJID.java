@@ -31,7 +31,7 @@ import org.agilewiki.jactor.components.JCActor;
 /**
  * Returns a copy of the JID.
  */
-public class CopyJID extends SynchronousRequest<JCActor> {
+final public class CopyJID extends SynchronousRequest<JCActor> {
     /**
      * A mailbox which may be shared with other actors.
      */

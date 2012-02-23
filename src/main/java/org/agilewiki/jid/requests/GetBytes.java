@@ -28,5 +28,6 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 /**
  * Returns a byte array holding the serialized persistent data.
  */
-public class GetBytes extends SynchronousRequest<byte[]> {
+final public class GetBytes extends SynchronousRequest<byte[]> {
+    public final static GetBytes req = new GetBytes();
 }

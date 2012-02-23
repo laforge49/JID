@@ -29,5 +29,6 @@ import org.agilewiki.jid.JID;
 /**
  * Returns the JID component.
  */
-public class GetJIDComponent extends SynchronousRequest<JID> {
+final public class GetJIDComponent extends SynchronousRequest<JID> {
+    public final static GetJIDComponent req = new GetJIDComponent();
 }

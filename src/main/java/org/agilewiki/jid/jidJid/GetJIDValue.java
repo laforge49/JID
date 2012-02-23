@@ -29,5 +29,6 @@ import org.agilewiki.jactor.components.JCActor;
 /**
  * Returns the JID actor value.
  */
-public class GetJIDValue extends SynchronousRequest<JCActor> {
+final public class GetJIDValue extends SynchronousRequest<JCActor> {
+    public final static GetJIDValue req = new GetJIDValue();
 }

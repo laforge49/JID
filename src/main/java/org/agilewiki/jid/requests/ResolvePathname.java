@@ -29,7 +29,7 @@ import org.agilewiki.jactor.components.JCActor;
 /**
  * Returns the JID actor identified by the pathname.
  */
-public class ResolvePathname extends SynchronousRequest<JCActor> {
+final public class ResolvePathname extends SynchronousRequest<JCActor> {
     /**
      * The pathname of a JID.
      */
