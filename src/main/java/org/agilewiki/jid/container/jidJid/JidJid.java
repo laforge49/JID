@@ -2,12 +2,14 @@ package org.agilewiki.jid.container.jidJid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
+import org.agilewiki.jid.container.Clear;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 
@@ -56,8 +58,43 @@ public class JidJid extends JID {
                         return makeJidValue(internals, request);
                     }
                 });
+
+        thisActor.bind(Clear.class.getName(),
+                new VoidSynchronousMethodBinding<Clear>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals, Clear request)
+                            throws Exception {
+                        clear();
+                    }
+                });
     }
 
+    /**
+     * Clear the container content.
+     *
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void clear() throws Exception {
+        if (len == 0)
+            return;
+        int l = len;
+        len = 0;
+        if (jidValue != null) {
+            jidValue.containerJid = null;
+            jidValue = null;
+        }
+        dser = true;
+        change(-l);
+    }
+
+    /**
+     * Creates a jid actor unless one is already present.
+     *
+     * @param internals The actor's internals.
+     * @param request   The MakeJIDValue request.
+     * @return True if a new jid actor is created.
+     * @throws Exception Any uncaught exception raised.
+     */
     protected Boolean makeJidValue(Internals internals, MakeJIDValue request)
             throws Exception {
         if (len > 0)
@@ -68,6 +105,7 @@ public class JidJid extends JID {
         jidValue = (new GetJIDComponent()).call(internals, nja);
         jidValue.containerJid = this;
         change(jidValue.getSerializedLength());
+        dser = true;
         return true;
     }
 
@@ -96,6 +134,7 @@ public class JidJid extends JID {
                 thisActor.getMailbox(),
                 null,
                 thisActor.getParent())).call(thisActor);
+        dser = true;
         jidValue = (new GetJIDComponent()).call(internals, nja);
         jidValue.containerJid = this;
         return nja;
