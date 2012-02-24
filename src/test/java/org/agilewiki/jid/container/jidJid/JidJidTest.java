@@ -77,7 +77,7 @@ public class JidJidTest extends TestCase {
             rpa = (new ResolvePathname("")).send(future, jidJid22);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid22);
-            //rpa = (new ResolvePathname("$")).send(future, jidJid22);
+            rpa = (new ResolvePathname("$")).send(future, jidJid22);
             //assertNotNull(rpa);
 
             JCActor jidJid3 = newJidJid.send(future, factory);

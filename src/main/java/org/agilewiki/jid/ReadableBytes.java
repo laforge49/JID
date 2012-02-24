@@ -197,7 +197,7 @@ final public class ReadableBytes {
         char[] ca = new char[l];
         int i = 0;
         while (i < l) {
-            ca[l] = readChar();
+            ca[i] = readChar();
             i += 1;
         }
         return new String(ca);
@@ -209,7 +209,8 @@ final public class ReadableBytes {
      * @return The string that was read, or null.
      */
     public String readString() {
-        return readString(readInt());
+        int l = readInt();
+        return readString(l);
     }
 
     /**
