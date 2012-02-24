@@ -251,13 +251,14 @@ public class JidJid extends JID {
         if (pathname.length() == 0) {
             return thisActor;
         }
-        if (pathname == "$")
+        if (pathname.equals("$")) {
             return getJidValue(internals);
+        }
         if (pathname.startsWith("$/")) {
             JCActor jca = getJidValue(internals);
             ResolvePathname req = new ResolvePathname(pathname.substring(2));
             return req.call(internals, jca);
         }
-        throw new IllegalArgumentException("pathname " + pathname);
+        throw new IllegalArgumentException("pathname " + pathname + ";");
     }
 }
