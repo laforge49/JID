@@ -238,4 +238,19 @@ public class JID extends Component {
             throws Exception {
         changed(internals, lengthChange);
     }
+
+    public boolean equals(Object v) {
+        if (v == null)
+            return false;
+        if (!v.getClass().equals(getClass()))
+            return false;
+        JID jid = (JID) v;
+        if (jid.getSerializedLength() != getSerializedLength())
+            return false;
+        return jid.getBytes().equals(getBytes());
+    }
+
+    public int hashCode() {
+        return getBytes().hashCode();
+    }
 }
