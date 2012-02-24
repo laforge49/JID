@@ -139,6 +139,8 @@ public class JidJidTest extends TestCase {
             assertEquals(14, sl);
             rpa = (new ResolvePathname("$/$")).send(future, jidJid33);
             assertNotNull(rpa);
+            sl = GetSerializedLength.req.send(future, rpa);
+            assertEquals(0, sl);
 
         } catch (Exception e) {
             e.printStackTrace();
