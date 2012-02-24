@@ -78,7 +78,9 @@ public class JidJidTest extends TestCase {
             assertNotNull(rpa);
             assertEquals(rpa, jidJid22);
             rpa = (new ResolvePathname("$")).send(future, jidJid22);
-            //assertNotNull(rpa);
+            assertNotNull(rpa);
+            sl = GetSerializedLength.req.send(future, rpa);
+            assertEquals(0, sl);
 
             JCActor jidJid3 = newJidJid.send(future, factory);
             sl = GetSerializedLength.req.send(future, jidJid3);
@@ -128,6 +130,15 @@ public class JidJidTest extends TestCase {
             assertNotNull(jidJid33);
             sl = GetSerializedLength.req.send(future, jidJid33);
             assertEquals(34, sl);
+            rpa = (new ResolvePathname("")).send(future, jidJid33);
+            assertNotNull(rpa);
+            assertEquals(rpa, jidJid33);
+            rpa = (new ResolvePathname("$")).send(future, jidJid33);
+            assertNotNull(rpa);
+            sl = GetSerializedLength.req.send(future, rpa);
+            assertEquals(14, sl);
+            rpa = (new ResolvePathname("$/$")).send(future, jidJid33);
+            assertNotNull(rpa);
 
         } catch (Exception e) {
             e.printStackTrace();

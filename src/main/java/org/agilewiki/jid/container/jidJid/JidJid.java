@@ -139,6 +139,7 @@ public class JidJid extends JID {
                 thisActor.getParent())).call(thisActor);
         dser = true;
         jidValue = (new GetJIDComponent()).call(internals, nja);
+        jidValue.load(readableBytes);
         jidValue.containerJid = this;
         return nja;
     }

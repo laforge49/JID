@@ -62,7 +62,7 @@ final public class JidFactory extends Component {
             @Override
             public JCActor concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
                     throws Exception {
-                NewJID newJID = (NewJID) request;
+                NewJID newJID = request;
                 JCActor actor = (new NewActor(
                         newJID.getActorType(),
                         newJID.getMailbox(),
