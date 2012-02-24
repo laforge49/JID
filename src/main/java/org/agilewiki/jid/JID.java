@@ -24,6 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
@@ -84,11 +85,13 @@ public class JID extends Component {
         thisActor.bind(CopyJID.class.getName(), new SynchronousMethodBinding<CopyJID, JCActor>() {
             @Override
             public JCActor synchronousProcessRequest(Internals internals, CopyJID request) throws Exception {
-                JCActor thisActor = (JCActor) internals.getThisActor();
+                Mailbox m = request.getMailbox();
+                if (m == null)
+                    m = thisActor.getMailbox();
                 Actor parent = request.getParent();
                 if (parent == null)
                     parent = thisActor.getParent();
-                return (new NewJID(thisActor.getActorType(), request.getMailbox(), parent, getBytes())).call(thisActor);
+                return (new NewJID(thisActor.getActorType(), m, parent, getBytes())).call(thisActor);
             }
         });
 

@@ -44,6 +44,12 @@ final public class CopyJID extends SynchronousRequest<JCActor> {
 
     /**
      * Create a CopyJID request.
+     */
+    public CopyJID() {
+    }
+
+    /**
+     * Create a CopyJID request.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */

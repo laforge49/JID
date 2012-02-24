@@ -9,6 +9,7 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.container.Clear;
+import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 
 public class JidJidTest extends TestCase {
@@ -33,6 +34,12 @@ public class JidJidTest extends TestCase {
             Clear.req.send(future, jidJid1);
             sl = GetSerializedLength.req.send(future, jidJid1);
             assertEquals(4, sl);
+            JCActor jidJid1a = GetJIDValue.req.send(future, jidJid1);
+            assertNull(jidJid1a);
+            JCActor jidJid11 = (new CopyJID()).send(future, jidJid1);
+            assertNotNull(jidJid11);
+            sl = GetSerializedLength.req.send(future, jidJid11);
+            assertEquals(4, sl);
 
             MakeJIDValue mjvj = new MakeJIDValue(JidFactories.JID_TYPE);
             boolean made = mjvj.send(future, jidJid2);
@@ -45,11 +52,15 @@ public class JidJidTest extends TestCase {
             assertEquals(0, sl);
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(14, sl);
+            JCActor jidJid22 = (new CopyJID()).send(future, jidJid2);
             Clear.req.send(future, jidJid2);
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
             jidJid2a = GetJIDValue.req.send(future, jidJid2);
             assertNull(jidJid2a);
+            assertNotNull(jidJid22);
+            sl = GetSerializedLength.req.send(future, jidJid22);
+            assertEquals(14, sl);
 
             MakeJIDValue mjvjj = new MakeJIDValue(JidFactories.JID_JID_TYPE);
             made = mjvjj.send(future, jidJid3);
@@ -74,6 +85,7 @@ public class JidJidTest extends TestCase {
             assertEquals(14, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
             assertEquals(34, sl);
+            JCActor jidJid33 = (new CopyJID()).send(future, jidJid3);
             Clear.req.send(future, jidJid3a);
             sl = GetSerializedLength.req.send(future, jidJid3a);
             assertEquals(4, sl);
@@ -83,6 +95,9 @@ public class JidJidTest extends TestCase {
             assertNull(jidJid2a);
             JCActor jidJid3aa = GetJIDValue.req.send(future, jidJid3);
             assertEquals(jidJid3a, jidJid3aa);
+            assertNotNull(jidJid33);
+            sl = GetSerializedLength.req.send(future, jidJid33);
+            assertEquals(34, sl);
 
         } catch (Exception e) {
             e.printStackTrace();
