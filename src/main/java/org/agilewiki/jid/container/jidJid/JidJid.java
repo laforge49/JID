@@ -119,7 +119,10 @@ public class JidJid extends JID {
     protected JCActor getJidValue(Internals internals)
             throws Exception {
         if (dser)
-            return jidValue.thisActor;
+            if (len == 0)
+                return null;
+            else
+                return jidValue.thisActor;
         if (!isSerialized())
             throw new IllegalStateException();
         ReadableBytes readableBytes = serializedData.readable();

@@ -48,6 +48,8 @@ public class JidJidTest extends TestCase {
             Clear.req.send(future, jidJid2);
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
+            jidJid2a = GetJIDValue.req.send(future, jidJid2);
+            assertNull(jidJid2a);
 
             MakeJIDValue mjvjj = new MakeJIDValue(JidFactories.JID_JID_TYPE);
             made = mjvjj.send(future, jidJid3);
@@ -77,6 +79,10 @@ public class JidJidTest extends TestCase {
             assertEquals(4, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
             assertEquals(24, sl);
+            jidJid3b = GetJIDValue.req.send(future, jidJid3a);
+            assertNull(jidJid2a);
+            JCActor jidJid3aa = GetJIDValue.req.send(future, jidJid3);
+            assertEquals(jidJid3a, jidJid3aa);
 
         } catch (Exception e) {
             e.printStackTrace();
