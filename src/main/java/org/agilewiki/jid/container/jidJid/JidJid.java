@@ -78,7 +78,6 @@ public class JidJid extends JID {
         if (len == 0)
             return;
         int l = len;
-        len = 0;
         if (jidValue != null) {
             jidValue.containerJid = null;
             jidValue = null;
