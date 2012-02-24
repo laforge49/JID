@@ -64,7 +64,7 @@ public class JidJid extends JID {
                     @Override
                     public void synchronousProcessRequest(Internals internals, Clear request)
                             throws Exception {
-                        clear();
+                        clear(internals);
                     }
                 });
     }
@@ -74,7 +74,7 @@ public class JidJid extends JID {
      *
      * @throws Exception Any uncaught exception raised.
      */
-    protected void clear() throws Exception {
+    protected void clear(Internals internals) throws Exception {
         if (len == 0)
             return;
         int l = len;
@@ -84,7 +84,7 @@ public class JidJid extends JID {
             jidValue = null;
         }
         dser = true;
-        change(-l);
+        change(internals, -l);
     }
 
     /**
@@ -105,7 +105,7 @@ public class JidJid extends JID {
         jidValue = (new GetJIDComponent()).call(internals, nja);
         jidValue.containerJid = this;
         int l = Util.stringLength(jidType) + jidValue.getSerializedLength();
-        change(l);
+        change(internals, l);
         dser = true;
         return true;
     }
@@ -199,13 +199,14 @@ public class JidJid extends JID {
     /**
      * Process a change in the persistent data.
      *
+     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(int lengthChange) throws Exception {
+    public void change(Internals internals, int lengthChange) throws Exception {
         len += lengthChange;
-        super.change(lengthChange);
+        super.change(internals, lengthChange);
     }
 
     /**

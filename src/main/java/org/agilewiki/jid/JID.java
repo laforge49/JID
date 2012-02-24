@@ -212,25 +212,27 @@ public class JID extends Component {
     /**
      * Notification that the persistent data has changed.
      *
+     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
-    public void changed(int lengthChange)
+    public void changed(Internals internals, int lengthChange)
             throws Exception {
         serializedData = null;
         if (containerJid == null)
             return;
-        containerJid.change(lengthChange);
+        containerJid.change(internals, lengthChange);
     }
 
     /**
      * Process a change in the persistent data.
      *
+     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
-    public void change(int lengthChange)
+    public void change(Internals internals, int lengthChange)
             throws Exception {
-        changed(lengthChange);
+        changed(internals, lengthChange);
     }
 }
