@@ -21,13 +21,35 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.container;
+package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.bind.SynchronousRequest;
 
 /**
- * Clears the container.
+ * Assigns a value or creates an actor if there was no previous value.
+ * Returns true if successful.
  */
-final public class Clear extends SynchronousRequest {
-    public final static Clear req = new Clear();
+public class MakeValue<VALUE_TYPE> extends SynchronousRequest<Boolean> {
+    /**
+     * The value (or actor type).
+     */
+    private VALUE_TYPE value;
+
+    /**
+     * Returns the value (or actor type).
+     *
+     * @return The value (or actor type).
+     */
+    public VALUE_TYPE getValue() {
+        return value;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param value The value (or actor type).
+     */
+    public MakeValue(VALUE_TYPE value) {
+        this.value = value;
+    }
 }

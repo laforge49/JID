@@ -21,14 +21,13 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.container.jidJid;
+package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.bind.SynchronousRequest;
-import org.agilewiki.jactor.components.JCActor;
 
 /**
- * Returns the JID actor value.
+ * Returns a Boolean
  */
-final public class GetJID extends SynchronousRequest<JCActor> {
-    public final static GetJID req = new GetJID();
+final public class GetValue<RESPONSE_TYPE> extends SynchronousRequest<RESPONSE_TYPE> {
+    final public static GetValue req = new GetValue();
 }

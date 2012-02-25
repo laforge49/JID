@@ -1,15 +1,13 @@
-package org.agilewiki.jid.container.jidJid;
+package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.container.Clear;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 
@@ -41,39 +39,31 @@ public class JidJid extends JID {
     public void bindery() throws Exception {
         super.bindery();
 
-        thisActor.bind(GetJID.class.getName(),
-                new SynchronousMethodBinding<GetJID, JCActor>() {
+        thisActor.bind(GetValue.class.getName(),
+                new SynchronousMethodBinding<GetValue<JCActor>, JCActor>() {
                     @Override
-                    public JCActor synchronousProcessRequest(Internals internals, GetJID request)
+                    public JCActor synchronousProcessRequest(Internals internals, GetValue<JCActor> request)
                             throws Exception {
-                        return getJidValue(internals);
+                        return getValue(internals);
                     }
                 });
 
-        thisActor.bind(MakeJID.class.getName(),
-                new SynchronousMethodBinding<MakeJID, Boolean>() {
+        thisActor.bind(MakeValue.class.getName(),
+                new SynchronousMethodBinding<MakeValue<String>, Boolean>() {
                     @Override
-                    public Boolean synchronousProcessRequest(Internals internals, MakeJID request)
+                    public Boolean synchronousProcessRequest(Internals internals, MakeValue<String> request)
                             throws Exception {
-                        return makeJidValue(internals, request);
-                    }
-                });
-
-        thisActor.bind(Clear.class.getName(),
-                new VoidSynchronousMethodBinding<Clear>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals, Clear request)
-                            throws Exception {
-                        clear(internals);
+                        return makeValue(internals, request);
                     }
                 });
     }
 
     /**
-     * Clear the container content.
+     * Clear the ontent.
      *
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     protected void clear(Internals internals) throws Exception {
         if (len == 0)
             return;
@@ -94,11 +84,11 @@ public class JidJid extends JID {
      * @return True if a new jid actor is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeJidValue(Internals internals, MakeJID request)
+    protected Boolean makeValue(Internals internals, MakeValue<String> request)
             throws Exception {
         if (len > 0)
             return false;
-        String jidType = request.getJidType();
+        String jidType = request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
         JCActor nja = na.call(thisActor);
         jidValue = (new GetJIDComponent()).call(internals, nja);
@@ -116,7 +106,7 @@ public class JidJid extends JID {
      * @return The JID actor held by this component.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    protected JCActor getJidValue(Internals internals)
+    protected JCActor getValue(Internals internals)
             throws Exception {
         if (dser)
             if (len == 0)
@@ -253,10 +243,10 @@ public class JidJid extends JID {
             return thisActor;
         }
         if (pathname.equals("$")) {
-            return getJidValue(internals);
+            return getValue(internals);
         }
         if (pathname.startsWith("$/")) {
-            JCActor jca = getJidValue(internals);
+            JCActor jca = getValue(internals);
             ResolvePathname req = new ResolvePathname(pathname.substring(2));
             return req.call(internals, jca);
         }

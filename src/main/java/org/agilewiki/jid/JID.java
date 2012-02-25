@@ -140,7 +140,6 @@ public class JID extends Component {
                         GetBytes.req.send(internals, actor, new RP<byte[]>() {
                             @Override
                             public void processResponse(byte[] response) throws Exception {
-                                System.out.println("? " + response.length + " - " + getBytes().length);
                                 boolean eq = Arrays.equals(response, getBytes());
                                 rp.processResponse(eq);
                             }
@@ -149,6 +148,23 @@ public class JID extends Component {
                 });
             }
         });
+
+        thisActor.bind(Clear.class.getName(),
+                new VoidSynchronousMethodBinding<Clear>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals, Clear request)
+                            throws Exception {
+                        clear(internals);
+                    }
+                });
+    }
+
+    /**
+     * Clear the ontent.
+     *
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void clear(Internals internals) throws Exception {
     }
 
     /**

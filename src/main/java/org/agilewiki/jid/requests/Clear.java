@@ -21,33 +21,13 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.bool;
+package org.agilewiki.jid.requests;
+
+import org.agilewiki.jactor.bind.SynchronousRequest;
 
 /**
- * Assigns a boolean value.
+ * Clears the container.
  */
-public class SetBoolean {
-    /**
-     * The boolean value.
-     */
-    private Boolean value;
-
-    /**
-     * Returns the boolean value.
-     *
-     * @return The boolean value.
-     */
-    public Boolean getValue() {
-        return value;
-    }
-
-    /**
-     * Creates the request.
-     *
-     * @param value The boolean value.
-     */
-    public SetBoolean(Boolean value) {
-
-        this.value = value;
-    }
+final public class Clear extends SynchronousRequest {
+    public final static Clear req = new Clear();
 }
