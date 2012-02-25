@@ -25,6 +25,7 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
@@ -114,6 +115,34 @@ public class JID extends Component {
             public String concurrentProcessRequest(RequestReceiver requestReceiver, GetJidClassName request)
                     throws Exception {
                 return JID.this.getClass().getName();
+            }
+        });
+
+        thisActor.bind(IsJidEqual.class.getName(), new MethodBinding<IsJidEqual, Boolean>() {
+
+            @Override
+            public void processRequest(final Internals internals, IsJidEqual request, final RP<Boolean> rp)
+                    throws Exception {
+                final JCActor actor = request.getJidActor();
+                if (!GetJidClassName.req.call(actor).equals(JID.this.getClass().getName())) {
+                    rp.processResponse(false);
+                    return;
+                }
+                GetSerializedLength.req.send(internals, actor, new RP<Integer>() {
+                    @Override
+                    public void processResponse(Integer response) throws Exception {
+                        if (response.intValue() != getSerializedLength()) {
+                            rp.processResponse(false);
+                            return;
+                        }
+                        GetBytes.req.send(internals, actor, new RP<byte[]>() {
+                            @Override
+                            public void processResponse(byte[] response) throws Exception {
+                                rp.processResponse(response.equals(getBytes()));
+                            }
+                        });
+                    }
+                });
             }
         });
     }
