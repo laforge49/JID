@@ -29,18 +29,18 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
  * Assigns a value or creates an actor if there was no previous value.
  * Returns true if successful.
  */
-public class MakeValue<VALUE_TYPE> extends SynchronousRequest<Boolean> {
+public class MakeValue extends SynchronousRequest<Boolean> {
     /**
      * The value (or actor type).
      */
-    private VALUE_TYPE value;
+    private Object value;
 
     /**
      * Returns the value (or actor type).
      *
      * @return The value (or actor type).
      */
-    public VALUE_TYPE getValue() {
+    public Object getValue() {
         return value;
     }
 
@@ -49,7 +49,7 @@ public class MakeValue<VALUE_TYPE> extends SynchronousRequest<Boolean> {
      *
      * @param value The value (or actor type).
      */
-    public MakeValue(VALUE_TYPE value) {
+    public MakeValue(Object value) {
         this.value = value;
     }
 }

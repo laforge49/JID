@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar;
+package org.agilewiki.jid.scalar.jidjid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
@@ -10,11 +10,19 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
+import org.agilewiki.jid.scalar.GetValue;
+import org.agilewiki.jid.scalar.MakeValue;
 
 /**
  * A JID component that holds a JID actor.
  */
 public class JidJid extends JID {
+    public static final GetValue<JCActor> getValueReq = (GetValue<JCActor>) GetValue.req;
+
+    public static final MakeValue makeValueReq(String actorType) {
+        return new MakeValue(actorType);
+    }
+
     /**
      * True when deserialized.
      */
@@ -49,9 +57,9 @@ public class JidJid extends JID {
                 });
 
         thisActor.bind(MakeValue.class.getName(),
-                new SynchronousMethodBinding<MakeValue<String>, Boolean>() {
+                new SynchronousMethodBinding<MakeValue, Boolean>() {
                     @Override
-                    public Boolean synchronousProcessRequest(Internals internals, MakeValue<String> request)
+                    public Boolean synchronousProcessRequest(Internals internals, MakeValue request)
                             throws Exception {
                         return makeValue(internals, request);
                     }
@@ -84,11 +92,11 @@ public class JidJid extends JID {
      * @return True if a new jid actor is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeValue(Internals internals, MakeValue<String> request)
+    protected Boolean makeValue(Internals internals, MakeValue request)
             throws Exception {
         if (len > 0)
             return false;
-        String jidType = request.getValue();
+        String jidType = (String) request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
         JCActor nja = na.call(thisActor);
         jidValue = (new GetJIDComponent()).call(internals, nja);
