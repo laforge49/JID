@@ -32,6 +32,8 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.*;
 
+import java.util.Arrays;
+
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
  */
@@ -138,7 +140,9 @@ public class JID extends Component {
                         GetBytes.req.send(internals, actor, new RP<byte[]>() {
                             @Override
                             public void processResponse(byte[] response) throws Exception {
-                                rp.processResponse(response.equals(getBytes()));
+                                System.out.println("? " + response.length + " - " + getBytes().length);
+                                boolean eq = Arrays.equals(response, getBytes());
+                                rp.processResponse(eq);
                             }
                         });
                     }
@@ -284,7 +288,7 @@ public class JID extends Component {
         JID jid = (JID) v;
         if (jid.getSerializedLength() != getSerializedLength())
             return false;
-        return jid.getBytes().equals(getBytes());
+        return Arrays.equals(jid.getBytes(), getBytes());
     }
 
     public int hashCode() {

@@ -121,6 +121,8 @@ public class JidTest extends TestCase {
             int l = GetSerializedLength.req.send(future, jid2);
             System.err.println(l);
             assertEquals(l, 0);
+            boolean eq = (new IsJidEqual(jid2)).send(future, jid1);
+            assertTrue(eq);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
