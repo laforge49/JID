@@ -108,6 +108,14 @@ public class JID extends Component {
                 putBytes(request.getBytes());
             }
         });
+
+        thisActor.bind(GetJidClassName.class.getName(), new ConcurrentMethodBinding<GetJidClassName, String>() {
+            @Override
+            public String concurrentProcessRequest(RequestReceiver requestReceiver, GetJidClassName request)
+                    throws Exception {
+                return JID.this.getClass().getName();
+            }
+        });
     }
 
     /**
