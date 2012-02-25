@@ -23,11 +23,31 @@
  */
 package org.agilewiki.jid.scalar.bool;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
-
 /**
- * Returns a Boolean
+ * Assigns a boolean value.
  */
-final public class GetBoolean extends SynchronousRequest<Boolean> {
-    final public static GetBoolean req = new GetBoolean();
+public class SetBoolean {
+    /**
+     * The boolean value.
+     */
+    private Boolean value;
+
+    /**
+     * Returns the boolean value.
+     *
+     * @return The boolean value.
+     */
+    public Boolean getValue() {
+        return value;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param value The boolean value.
+     */
+    public SetBoolean(Boolean value) {
+
+        this.value = value;
+    }
 }
