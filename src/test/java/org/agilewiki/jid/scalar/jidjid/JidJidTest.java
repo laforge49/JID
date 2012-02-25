@@ -13,6 +13,7 @@ import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.MakeValue;
+import org.agilewiki.jid.scalar.SetValue;
 
 public class JidJidTest extends TestCase {
     public void test() {
@@ -49,10 +50,10 @@ public class JidJidTest extends TestCase {
             JCActor jidJid2 = newJidJid.send(future, factory);
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
+            SetValue sjvj = JidJid.setValueReq(JidFactories.JID_TYPE);
+            sjvj.send(future, jidJid2);
             MakeValue mjvj = JidJid.makeValueReq(JidFactories.JID_TYPE);
             boolean made = mjvj.send(future, jidJid2);
-            assertEquals(true, made);
-            made = mjvj.send(future, jidJid2);
             assertEquals(false, made);
             JCActor jidJid2a = JidJid.getValueReq.send(future, jidJid2);
             assertNotNull(jidJid2a);

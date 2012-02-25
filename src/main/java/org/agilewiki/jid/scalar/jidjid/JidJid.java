@@ -2,6 +2,7 @@ package org.agilewiki.jid.scalar.jidjid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
@@ -12,6 +13,7 @@ import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.MakeValue;
+import org.agilewiki.jid.scalar.SetValue;
 
 /**
  * A JID component that holds a JID actor.
@@ -21,6 +23,10 @@ public class JidJid extends JID {
 
     public static final MakeValue makeValueReq(String actorType) {
         return new MakeValue(actorType);
+    }
+
+    public static final SetValue setValueReq(String actorType) {
+        return new SetValue(actorType);
     }
 
     /**
@@ -64,6 +70,15 @@ public class JidJid extends JID {
                         return makeValue(internals, request);
                     }
                 });
+
+        thisActor.bind(SetValue.class.getName(),
+                new VoidSynchronousMethodBinding<SetValue>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals, SetValue request)
+                            throws Exception {
+                        setValue(internals, request);
+                    }
+                });
     }
 
     /**
@@ -82,6 +97,28 @@ public class JidJid extends JID {
         }
         dser = true;
         change(internals, -l);
+    }
+
+    /**
+     * Creates a jid actor.
+     *
+     * @param internals The actor's internals.
+     * @param request   The MakeJIDValue request.
+     * @return True if a new jid actor is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void setValue(Internals internals, SetValue request)
+            throws Exception {
+        if (len > 0)
+            clear(internals);
+        String jidType = (String) request.getValue();
+        NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
+        JCActor nja = na.call(thisActor);
+        jidValue = (new GetJIDComponent()).call(internals, nja);
+        jidValue.containerJid = this;
+        int l = Util.stringLength(jidType) + jidValue.getSerializedLength();
+        change(internals, l);
+        dser = true;
     }
 
     /**
