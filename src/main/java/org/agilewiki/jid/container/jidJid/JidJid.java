@@ -41,19 +41,19 @@ public class JidJid extends JID {
     public void bindery() throws Exception {
         super.bindery();
 
-        thisActor.bind(GetJIDValue.class.getName(),
-                new SynchronousMethodBinding<GetJIDValue, JCActor>() {
+        thisActor.bind(GetJID.class.getName(),
+                new SynchronousMethodBinding<GetJID, JCActor>() {
                     @Override
-                    public JCActor synchronousProcessRequest(Internals internals, GetJIDValue request)
+                    public JCActor synchronousProcessRequest(Internals internals, GetJID request)
                             throws Exception {
                         return getJidValue(internals);
                     }
                 });
 
-        thisActor.bind(MakeJIDValue.class.getName(),
-                new SynchronousMethodBinding<MakeJIDValue, Boolean>() {
+        thisActor.bind(MakeJID.class.getName(),
+                new SynchronousMethodBinding<MakeJID, Boolean>() {
                     @Override
-                    public Boolean synchronousProcessRequest(Internals internals, MakeJIDValue request)
+                    public Boolean synchronousProcessRequest(Internals internals, MakeJID request)
                             throws Exception {
                         return makeJidValue(internals, request);
                     }
@@ -94,7 +94,7 @@ public class JidJid extends JID {
      * @return True if a new jid actor is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeJidValue(Internals internals, MakeJIDValue request)
+    protected Boolean makeJidValue(Internals internals, MakeJID request)
             throws Exception {
         if (len > 0)
             return false;

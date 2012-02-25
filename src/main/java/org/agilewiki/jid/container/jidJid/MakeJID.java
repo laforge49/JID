@@ -29,7 +29,7 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
  * Create a JID actor value if one is not already present.
  * Returns true if a new actor was created.
  */
-final public class MakeJIDValue extends SynchronousRequest<Boolean> {
+final public class MakeJID extends SynchronousRequest<Boolean> {
     /**
      * The type of JID.
      */
@@ -40,7 +40,7 @@ final public class MakeJIDValue extends SynchronousRequest<Boolean> {
      *
      * @param jidType The JID type.
      */
-    public MakeJIDValue(String jidType) {
+    public MakeJID(String jidType) {
         this.jidType = jidType;
     }
 
