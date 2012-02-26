@@ -108,9 +108,9 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
             throws Exception;
 
     /**
-     * Returns true when the JID has been deserialized.
+     * Returns true when the value has been deserialized.
      *
-     * @return True when the JID has been deserialized.
+     * @return True when the value has been deserialized.
      */
     @Override
     protected boolean isDeserialized() {
