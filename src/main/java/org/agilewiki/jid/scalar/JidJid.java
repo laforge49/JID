@@ -187,8 +187,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        if (!dser)
-            throw new IllegalStateException();
         saveLen(appendableBytes);
         if (len == 0)
             return;

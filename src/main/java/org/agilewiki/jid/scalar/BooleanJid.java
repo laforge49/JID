@@ -141,8 +141,6 @@ public class BooleanJid extends ScalarJid<Boolean> {
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        if (!dser)
-            throw new IllegalStateException();
         appendableBytes.writeBoolean(value);
     }
 }
