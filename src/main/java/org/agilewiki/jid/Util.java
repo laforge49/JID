@@ -45,6 +45,11 @@ public class Util {
     public final int LONG_LENGTH = 8;
 
     /**
+     * Size of an float in bytes.
+     */
+    public final static int FLOAT_LENGTH = 4;
+
+    /**
      * Returns the number of bytes needed to write a string.
      *
      * @param length The number of characters in the string.

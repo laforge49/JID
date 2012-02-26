@@ -150,10 +150,10 @@ final public class ReadableBytes {
      * @return The it that was read.
      */
     public int readInt() {
-        int w = (int) readByte();
-        w = (w << 8) | (int) readByte();
-        w = (w << 8) | (int) readByte();
-        return (w << 8) | (int) readByte();
+        int w = 255 & (int) readByte();
+        w = (w << 8) | (255 & (int) readByte());
+        w = (w << 8) | (255 & (int) readByte());
+        return (w << 8) | (255 & (int) readByte());
     }
 
     /**
@@ -171,14 +171,14 @@ final public class ReadableBytes {
      * @return The long that was read.
      */
     public long readLong() {
-        long w = (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        w = (w << 8) | (long) readByte();
-        return (w << 8) | (long) readByte();
+        long w = 256 & (long) readByte();
+        w = (w << 8) | (255 & (long) readByte());
+        w = (w << 8) | (255 & (long) readByte());
+        w = (w << 8) | (255 & (long) readByte());
+        w = (w << 8) | (255 & (long) readByte());
+        w = (w << 8) | (255 & (long) readByte());
+        w = (w << 8) | (255 & (long) readByte());
+        return (w << 8) | (255 & (long) readByte());
     }
 
     /**
@@ -219,7 +219,8 @@ final public class ReadableBytes {
      * @return The float that was read.
      */
     public float readFloat() {
-        return Float.intBitsToFloat(readInt());
+        int i = readInt();
+        return Float.intBitsToFloat(i);
     }
 
     /**

@@ -215,7 +215,8 @@ final public class AppendableBytes {
      * @param f The float to be written.
      */
     public void writeFloat(float f) {
-        writeInt(Float.floatToIntBits(f));
+        int i = Float.floatToIntBits(f);
+        writeInt(i);
     }
 
     /**
