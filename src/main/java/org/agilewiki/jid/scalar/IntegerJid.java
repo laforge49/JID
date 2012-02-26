@@ -29,14 +29,14 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 
 /**
- * A JID component that holds a boolean.
+ * A JID component that holds an integer.
  */
-public class BooleanJid
-        extends ScalarJid<Boolean> implements Comparable<BooleanJid> {
+public class IntegerJid
+        extends ScalarJid<Integer> implements Comparable<IntegerJid> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Boolean> getValueReq = (GetValue<Boolean>) GetValue.req;
+    public static final GetValue<Integer> getValueReq = (GetValue<Integer>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -44,7 +44,7 @@ public class BooleanJid
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(Boolean value) {
+    public static final MakeValue makeValueReq(Integer value) {
         return new MakeValue(value);
     }
 
@@ -54,14 +54,14 @@ public class BooleanJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Boolean value) {
+    public static final SetValue setValueReq(Integer value) {
         return new SetValue(value);
     }
 
     /**
      * The value.
      */
-    private boolean value;
+    private int value;
 
     /**
      * Clear the content.
@@ -70,10 +70,10 @@ public class BooleanJid
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (!value)
+        if (value != 0)
             return;
         serializedData = null;
-        value = false;
+        value = 0;
         dser = true;
         change(internals, 0);
     }
@@ -87,7 +87,7 @@ public class BooleanJid
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        boolean v = (Boolean) request.getValue();
+        int v = (Integer) request.getValue();
         if (value == v)
             return;
         value = v;
@@ -97,7 +97,7 @@ public class BooleanJid
     }
 
     /**
-     * Assign a value unless already set to true.
+     * Assign a value only if currently set to 0.
      *
      * @param internals The actor's internals.
      * @param request   The MakeValue request.
@@ -106,9 +106,9 @@ public class BooleanJid
      */
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
-        if (value)
+        if (value != 0)
             return false;
-        boolean v = (Boolean) request.getValue();
+        int v = (Integer) request.getValue();
         if (value == v)
             return true;
         value = v;
@@ -126,7 +126,7 @@ public class BooleanJid
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
-    protected Boolean getValue(Internals internals) throws Exception {
+    protected Integer getValue(Internals internals) throws Exception {
         return getValue();
     }
 
@@ -135,11 +135,11 @@ public class BooleanJid
      *
      * @return The value held by this component.
      */
-    public Boolean getValue() {
+    public Integer getValue() {
         if (dser)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readBoolean();
+        value = readableBytes.readInt();
         return value;
     }
 
@@ -150,7 +150,7 @@ public class BooleanJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.BOOLEAN_LENGTH;
+        return Util.INT_LENGTH;
     }
 
     /**
@@ -161,7 +161,7 @@ public class BooleanJid
     @Override
     public void load(ReadableBytes readableBytes) {
         super.load(readableBytes);
-        value = false;
+        value = 0;
         dser = false;
     }
 
@@ -172,7 +172,7 @@ public class BooleanJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeBoolean(value);
+        appendableBytes.writeInt(value);
     }
 
     /**
@@ -214,7 +214,7 @@ public class BooleanJid
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(BooleanJid o) {
-        return (new Boolean(value)).compareTo(o.getValue());
+    public int compareTo(IntegerJid o) {
+        return (new Integer(value)).compareTo(o.getValue());
     }
 }
