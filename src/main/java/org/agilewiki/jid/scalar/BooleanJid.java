@@ -38,7 +38,7 @@ public class BooleanJid
     /**
      * The value.
      */
-    private Boolean value;
+    private boolean value;
 
     /**
      * Clear the content.
@@ -47,7 +47,7 @@ public class BooleanJid
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (!value.booleanValue())
+        if (!value)
             return;
         serializedData = null;
         value = false;
@@ -64,8 +64,8 @@ public class BooleanJid
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        Boolean v = (Boolean) request.getValue();
-        if (value.equals(v))
+        boolean v = (Boolean) request.getValue();
+        if (value == v)
             return;
         value = v;
         serializedData = null;
@@ -83,10 +83,10 @@ public class BooleanJid
      */
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
-        if (value.booleanValue())
+        if (value)
             return false;
-        Boolean v = (Boolean) request.getValue();
-        if (value.equals(v))
+        boolean v = (Boolean) request.getValue();
+        if (value == v)
             return true;
         value = v;
         serializedData = null;
@@ -192,6 +192,6 @@ public class BooleanJid
      */
     @Override
     public int compareTo(BooleanJid o) {
-        return value.compareTo(o.getValue());
+        return (new Boolean(value)).compareTo(o.getValue());
     }
 }

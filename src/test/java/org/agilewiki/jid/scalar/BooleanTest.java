@@ -6,7 +6,9 @@ import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
+import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.requests.CopyJID;
 
 public class BooleanTest extends TestCase {
     public void test() {
@@ -15,6 +17,11 @@ public class BooleanTest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
+
+            NewActor newBooleanJid = new NewActor(JidFactories.BOOLEAN_JID_TYPE);
+            JCActor boolean1 = newBooleanJid.send(future, factory);
+            JCActor boolean2 = (new CopyJID()).send(future, boolean1);
+
 
         } catch (Exception e) {
             e.printStackTrace();
