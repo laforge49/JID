@@ -9,6 +9,7 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.requests.CopyJID;
+import org.agilewiki.jid.requests.GetSerializedLength;
 
 public class BooleanTest extends TestCase {
     public void test() {
@@ -21,7 +22,19 @@ public class BooleanTest extends TestCase {
             NewActor newBooleanJid = new NewActor(JidFactories.BOOLEAN_JID_TYPE);
             JCActor boolean1 = newBooleanJid.send(future, factory);
             JCActor boolean2 = (new CopyJID()).send(future, boolean1);
+            BooleanJid.setValueReq(true).send(future, boolean2);
+            JCActor boolean3 = (new CopyJID()).send(future, boolean2);
 
+            int sl = GetSerializedLength.req.send(future, boolean1);
+            assertEquals(1, sl);
+            sl = GetSerializedLength.req.send(future, boolean2);
+            assertEquals(1, sl);
+            sl = GetSerializedLength.req.send(future, boolean3);
+            assertEquals(1, sl);
+
+            assertFalse(BooleanJid.getValueReq.send(future, boolean1));
+            assertTrue(BooleanJid.getValueReq.send(future, boolean2));
+            assertTrue(BooleanJid.getValueReq.send(future, boolean3));
 
         } catch (Exception e) {
             e.printStackTrace();
