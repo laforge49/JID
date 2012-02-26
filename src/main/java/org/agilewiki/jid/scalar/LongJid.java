@@ -29,14 +29,14 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 
 /**
- * A JID component that holds a float.
+ * A JID component that holds a long.
  */
-public class FloatJid
-        extends ScalarJid<Float> implements Comparable<FloatJid> {
+public class LongJid
+        extends ScalarJid<Long> implements Comparable<LongJid> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Float> getValueReq = (GetValue<Float>) GetValue.req;
+    public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -44,7 +44,7 @@ public class FloatJid
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(Float value) {
+    public static final MakeValue makeValueReq(Long value) {
         return new MakeValue(value);
     }
 
@@ -54,14 +54,14 @@ public class FloatJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Float value) {
+    public static final SetValue setValueReq(Long value) {
         return new SetValue(value);
     }
 
     /**
      * The value.
      */
-    private float value;
+    private long value;
 
     /**
      * Clear the content.
@@ -70,10 +70,10 @@ public class FloatJid
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (value != 0.f)
+        if (value != 0L)
             return;
         serializedData = null;
-        value = 0.f;
+        value = 0L;
         dser = true;
         change(internals, 0);
     }
@@ -87,7 +87,7 @@ public class FloatJid
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        float v = (Float) request.getValue();
+        long v = (Long) request.getValue();
         if (value == v)
             return;
         value = v;
@@ -108,7 +108,7 @@ public class FloatJid
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
         if (value != 0)
             return false;
-        float v = (Float) request.getValue();
+        long v = (Long) request.getValue();
         if (value == v)
             return true;
         value = v;
@@ -126,7 +126,7 @@ public class FloatJid
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
-    protected Float getValue(Internals internals) throws Exception {
+    protected Long getValue(Internals internals) throws Exception {
         return getValue();
     }
 
@@ -135,11 +135,11 @@ public class FloatJid
      *
      * @return The value held by this component.
      */
-    public Float getValue() {
+    public Long getValue() {
         if (dser)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readFloat();
+        value = readableBytes.readLong();
         return value;
     }
 
@@ -150,7 +150,7 @@ public class FloatJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.FLOAT_LENGTH;
+        return Util.LONG_LENGTH;
     }
 
     /**
@@ -161,7 +161,7 @@ public class FloatJid
     @Override
     public void load(ReadableBytes readableBytes) {
         super.load(readableBytes);
-        value = 0.f;
+        value = 0L;
         dser = false;
     }
 
@@ -172,7 +172,7 @@ public class FloatJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeFloat(value);
+        appendableBytes.writeLong(value);
     }
 
     /**
@@ -214,7 +214,7 @@ public class FloatJid
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(FloatJid o) {
-        return (new Float(value)).compareTo(o.getValue());
+    public int compareTo(LongJid o) {
+        return (new Long(value)).compareTo(o.getValue());
     }
 }

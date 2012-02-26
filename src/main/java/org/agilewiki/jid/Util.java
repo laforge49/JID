@@ -42,7 +42,7 @@ public class Util {
     /**
      * Size of a long in bytes.
      */
-    public final int LONG_LENGTH = 8;
+    public final static int LONG_LENGTH = 8;
 
     /**
      * Size of an float in bytes.
