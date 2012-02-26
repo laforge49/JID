@@ -26,30 +26,17 @@ package org.agilewiki.jid.scalar;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
-import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.Util;
 
 /**
  * A JID component that holds a value.
  */
-abstract public class ScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends JID {
+abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
 
     /**
      * True when deserialized.
      */
     protected boolean dser = true;
-
-    /**
-     * Holds the value, or null.
-     */
-    protected VALUE_TYPE value;
-
-    /**
-     * The size of the serialized (exclusive of its length header).
-     */
-    protected int len = 0;
 
     /**
      * Bind request classes.
@@ -87,21 +74,6 @@ abstract public class ScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends JID {
                         setValue(internals, request);
                     }
                 });
-    }
-
-    /**
-     * Clear the content.
-     *
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void clear(Internals internals) throws Exception {
-        if (len == 0)
-            return;
-        int l = len;
-        value = null;
-        dser = true;
-        change(internals, -l);
     }
 
     /**
@@ -143,56 +115,5 @@ abstract public class ScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends JID {
     @Override
     protected boolean isDeserialized() {
         return dser;
-    }
-
-    /**
-     * Returns the number of bytes needed to serialize the persistent data.
-     *
-     * @return The minimum size of the byte array needed to serialize the persistent data.
-     */
-    @Override
-    public int getSerializedLength() {
-        return Util.INT_LENGTH + len;
-    }
-
-    /**
-     * Returns the size of the serialized data (exclusive of its length header).
-     *
-     * @param readableBytes Holds the serialized data.
-     * @return The size of the serialized data (exclusive of its length header).
-     */
-    protected int loadLen(ReadableBytes readableBytes) {
-        return readableBytes.readInt();
-    }
-
-    /**
-     * Writes the size of the serialized data (exclusive of its length header).
-     *
-     * @param appendableBytes The object written to.
-     */
-    protected void saveLen(AppendableBytes appendableBytes) {
-        appendableBytes.writeInt(len);
-    }
-
-    /**
-     * Skip over the length at the beginning of the serialized data.
-     *
-     * @param readableBytes Holds the serialized data.
-     */
-    protected void skipLen(ReadableBytes readableBytes) {
-        readableBytes.skip(Util.INT_LENGTH);
-    }
-
-    /**
-     * Process a change in the persistent data.
-     *
-     * @param internals    The actor's internals.
-     * @param lengthChange The change in the size of the serialized data.
-     * @throws Exception Any uncaught exception which occurred while processing the change.
-     */
-    @Override
-    public void change(Internals internals, int lengthChange) throws Exception {
-        len += lengthChange;
-        super.change(internals, lengthChange);
     }
 }

@@ -34,19 +34,34 @@ import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.MakeValue;
-import org.agilewiki.jid.scalar.ScalarJid;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.VLenScalarJid;
 
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends ScalarJid<JID, JCActor> {
+public class JidJid extends VLenScalarJid<JID, JCActor> {
+    /**
+     * The GetValue request.
+     */
     public static final GetValue<JCActor> getValueReq = (GetValue<JCActor>) GetValue.req;
 
+    /**
+     * Returns the MakeValue request.
+     *
+     * @param actorType The actor type.
+     * @return The MakeValue request.
+     */
     public static final MakeValue makeValueReq(String actorType) {
         return new MakeValue(actorType);
     }
 
+    /**
+     * Returns the SetValue request.
+     *
+     * @param actorType The actor type.
+     * @return The SetValue request.
+     */
     public static final SetValue setValueReq(String actorType) {
         return new SetValue(actorType);
     }
