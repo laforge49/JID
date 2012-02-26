@@ -50,6 +50,11 @@ public class Util {
     public final static int FLOAT_LENGTH = 4;
 
     /**
+     * Size of an double in bytes.
+     */
+    public final static int DOUBLE_LENGTH = 8;
+
+    /**
      * Returns the number of bytes needed to write a string.
      *
      * @param length The number of characters in the string.

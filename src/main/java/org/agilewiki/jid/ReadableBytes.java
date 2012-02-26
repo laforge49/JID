@@ -171,7 +171,7 @@ final public class ReadableBytes {
      * @return The long that was read.
      */
     public long readLong() {
-        long w = 256 & (long) readByte();
+        long w = 255 & (long) readByte();
         w = (w << 8) | (255 & (long) readByte());
         w = (w << 8) | (255 & (long) readByte());
         w = (w << 8) | (255 & (long) readByte());
@@ -229,6 +229,7 @@ final public class ReadableBytes {
      * @return The double that was read.
      */
     public double readDouble() {
-        return Double.longBitsToDouble(readLong());
+        long l = readLong();
+        return Double.longBitsToDouble(l);
     }
 }

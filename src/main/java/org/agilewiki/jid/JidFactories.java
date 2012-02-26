@@ -68,6 +68,11 @@ final public class JidFactories extends Component {
     public final static String FLOAT_JID_TYPE = "FLOAT_JID";
 
     /**
+     * The name of the BooleanJid component.
+     */
+    public final static String DOUBLE_JID_TYPE = "DOUBLE_JID";
+
+    /**
      * Returns a list of Includes for inclusion in the actor.
      *
      * @return A list of classes for inclusion in the actor.
@@ -92,5 +97,6 @@ final public class JidFactories extends Component {
         (new DefineActorType(INTEGER_JID_TYPE, IntegerJid.class)).call(thisActor);
         (new DefineActorType(LONG_JID_TYPE, LongJid.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_TYPE, FloatJid.class)).call(thisActor);
+        (new DefineActorType(DOUBLE_JID_TYPE, DoubleJid.class)).call(thisActor);
     }
 }

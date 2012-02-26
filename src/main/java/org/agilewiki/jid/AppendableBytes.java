@@ -225,6 +225,7 @@ final public class AppendableBytes {
      * @param d The double to be written.
      */
     public void writeDouble(double d) {
-        writeLong(Double.doubleToLongBits(d));
+        long l = Double.doubleToLongBits(d);
+        writeLong(l);
     }
 }
