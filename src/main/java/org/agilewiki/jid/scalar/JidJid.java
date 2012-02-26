@@ -100,6 +100,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
         dser = true;
+        serializedData = null;
     }
 
     /**
@@ -123,6 +124,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
         dser = true;
+        serializedData = null;
         return true;
     }
 
