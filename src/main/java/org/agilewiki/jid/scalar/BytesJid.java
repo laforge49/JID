@@ -24,6 +24,8 @@
 package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jid.AppendableBytes;
+import org.agilewiki.jid.ReadableBytes;
 
 /**
  * A JID component that holds a byte array.
@@ -63,7 +65,14 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        //To change body of implemented methods use File | Settings | File Templates.
+        byte[] v = (byte[]) request.getValue();
+        int c = v.length;
+        if (len > -1)
+            c -= len;
+        value = v;
+        serializedData = null;
+        dser = true;
+        change(internals, c);
     }
 
     /**
@@ -76,7 +85,17 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      */
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (len > -1)
+            return false;
+        byte[] v = (byte[]) request.getValue();
+        int c = v.length;
+        if (len > -1)
+            c -= len;
+        value = v;
+        serializedData = null;
+        dser = true;
+        change(internals, c);
+        return true;
     }
 
     /**
@@ -88,6 +107,35 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      */
     @Override
     protected byte[] getValue(Internals internals) throws Exception {
-        return new byte[0];  //To change body of implemented methods use File | Settings | File Templates.
+        return getValue();
+    }
+
+    /**
+     * Returns the value held by this component.
+     *
+     * @return The value held by this component.
+     */
+    public byte[] getValue() {
+        if (dser)
+            if (len == -1)
+                return null;
+            else
+                return value;
+        ReadableBytes readableBytes = serializedData.readable();
+        value = readableBytes.readBytes(len);
+        return value;
+    }
+
+    /**
+     * Serialize the persistent data.
+     *
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
+     */
+    @Override
+    protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
+        if (len == -1)
+            return;
+        appendableBytes.writeBytes(value);
     }
 }

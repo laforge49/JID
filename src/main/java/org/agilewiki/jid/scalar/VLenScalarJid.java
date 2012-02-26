@@ -36,7 +36,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     /**
      * Holds the value, or null.
      */
-    protected VALUE_TYPE value;
+    protected VALUE_TYPE value = null;
 
     /**
      * The size of the serialized (exclusive of its length header).
@@ -114,5 +114,21 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
         else
             len += lengthChange;
         super.change(internals, lengthChange);
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    @Override
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        len = loadLen(readableBytes);
+        value = null;
+        if (len > -1) {
+            readableBytes.skip(len);
+            dser = false;
+        } else dser = true;
     }
 }
