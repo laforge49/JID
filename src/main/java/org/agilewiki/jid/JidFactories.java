@@ -27,6 +27,7 @@ import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.scalar.BooleanJid;
 import org.agilewiki.jid.scalar.JidJid;
 
 import java.util.ArrayList;
@@ -45,7 +46,12 @@ final public class JidFactories extends Component {
     /**
      * The name of the JidJid component.
      */
-    public final static String JID_JID_TYPE = "JIDJID";
+    public final static String JID_JID_TYPE = "JID_JID";
+
+    /**
+     * The name of the BooleanJid component.
+     */
+    public final static String BOOLEAN_JID_TYPE = "BOOLEAN_JID";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -68,5 +74,6 @@ final public class JidFactories extends Component {
     public void bindery() throws Exception {
         (new DefineActorType(JID_TYPE, JID.class)).call(thisActor);
         (new DefineActorType(JID_JID_TYPE, JidJid.class)).call(thisActor);
+        (new DefineActorType(BOOLEAN_JID_TYPE, BooleanJid.class)).call(thisActor);
     }
 }
