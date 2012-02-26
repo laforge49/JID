@@ -55,6 +55,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
         int l = len;
         value = null;
         dser = true;
+        serializedData = null;
         change(internals, -l);
     }
 

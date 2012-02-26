@@ -76,6 +76,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
             value.containerJid = null;
             value = null;
         }
+        serializedData = null;
         dser = true;
         change(internals, -l);
     }

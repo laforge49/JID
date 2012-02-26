@@ -6,7 +6,25 @@ import org.agilewiki.jactor.bind.Internals;
  * A JID component that holds a boolean.
  */
 public class BooleanJid extends ScalarJid<Boolean> {
+    /**
+     * The value.
+     */
     private Boolean value;
+
+    /**
+     * Clear the content.
+     *
+     * @throws Exception Any uncaught exception raised.
+     */
+    @Override
+    protected void clear(Internals internals) throws Exception {
+        if (!value.booleanValue())
+            return;
+        serializedData = null;
+        value = false;
+        dser = true;
+        change(internals, 0);
+    }
 
     /**
      * Assign a value.
@@ -22,10 +40,12 @@ public class BooleanJid extends ScalarJid<Boolean> {
             return;
         value = v;
         serializedData = null;
+        dser = true;
+        change(internals, 0);
     }
 
     /**
-     * Assign a value unless one is already present.
+     * Assign a value unless already set to true.
      *
      * @param internals The actor's internals.
      * @param request   The MakeValue request.
@@ -34,8 +54,16 @@ public class BooleanJid extends ScalarJid<Boolean> {
      */
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
+        if (value.booleanValue())
+            return false;
         Boolean v = (Boolean) request.getValue();
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (value.equals(v))
+            return true;
+        value = v;
+        serializedData = null;
+        dser = true;
+        change(internals, 0);
+        return true;
     }
 
     /**
