@@ -41,7 +41,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     /**
      * The size of the serialized (exclusive of its length header).
      */
-    protected int len = 0;
+    protected int len = -1;
 
     /**
      * Clear the content.
@@ -50,13 +50,14 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (len == 0)
+        if (len == -1)
             return;
         int l = len;
         value = null;
         dser = true;
         serializedData = null;
         change(internals, -l);
+        len = -1;
     }
 
     /**
@@ -66,6 +67,8 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
      */
     @Override
     public int getSerializedLength() {
+        if (len == -1)
+            return Util.INT_LENGTH;
         return Util.INT_LENGTH + len;
     }
 
@@ -106,7 +109,10 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
      */
     @Override
     public void change(Internals internals, int lengthChange) throws Exception {
-        len += lengthChange;
+        if (len == -1)
+            len = lengthChange;
+        else
+            len += lengthChange;
         super.change(internals, lengthChange);
     }
 }

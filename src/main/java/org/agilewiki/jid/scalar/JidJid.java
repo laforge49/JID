@@ -69,7 +69,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (len == 0)
+        if (len == -1)
             return;
         int l = len;
         if (value != null) {
@@ -79,6 +79,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         serializedData = null;
         dser = true;
         change(internals, -l);
+        len = -1;
     }
 
     /**
@@ -91,7 +92,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
     @Override
     protected void setValue(Internals internals, SetValue request)
             throws Exception {
-        if (len > 0)
+        if (len > -1)
             clear(internals);
         String jidType = (String) request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
@@ -115,7 +116,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request)
             throws Exception {
-        if (len > 0)
+        if (len > -1)
             return false;
         String jidType = (String) request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
@@ -139,13 +140,13 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
     protected JCActor getValue(Internals internals)
             throws Exception {
         if (dser)
-            if (len == 0)
+            if (len == -1)
                 return null;
             else
                 return value.thisActor;
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
-        if (len == 0) {
+        if (len == -1) {
             dser = true;
             return null;
         }
@@ -186,7 +187,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
         saveLen(appendableBytes);
-        if (len == 0)
+        if (len == -1)
             return;
         String actorType = value.thisActor.getActorType();
         appendableBytes.writeString(actorType);
