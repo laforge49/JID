@@ -50,6 +50,8 @@ public class MakeValue extends SynchronousRequest<Boolean> {
      * @param value The value (or actor type).
      */
     public MakeValue(Object value) {
+        if (value == null)
+            throw new IllegalArgumentException("value may not be null");
         this.value = value;
     }
 }

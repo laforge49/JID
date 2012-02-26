@@ -18,6 +18,10 @@ public class BooleanJid extends ScalarJid<Boolean> {
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
         Boolean v = (Boolean) request.getValue();
+        if (value.equals(v))
+            return;
+        value = v;
+        serializedData = null;
     }
 
     /**

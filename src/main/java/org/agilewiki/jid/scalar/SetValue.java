@@ -49,6 +49,8 @@ public class SetValue extends SynchronousRequest<Boolean> {
      * @param value The value (or actor type).
      */
     public SetValue(Object value) {
+        if (value == null)
+            throw new IllegalArgumentException("value may not be null");
         this.value = value;
     }
 }
