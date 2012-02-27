@@ -21,13 +21,36 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar;
+package org.agilewiki.jid.tuple;
 
 import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.components.JCActor;
 
 /**
- * Returns a value.
+ * Returns the ith element of a tuple.
  */
-final public class GetValue<RESPONSE_TYPE> extends SynchronousRequest<RESPONSE_TYPE> {
-    final public static GetValue req = new GetValue();
+public class IGet extends SynchronousRequest<JCActor> {
+    /**
+     * The index of the desired element.
+     */
+    private int i;
+
+    /**
+     * Returns the index of the desired element.
+     *
+     * @return The index of the desired element.
+     */
+    public int getI() {
+        return i;
+    }
+
+    /**
+     * Create the request.
+     *
+     * @param i The index of the desired element.
+     */
+    public IGet(int i) {
+
+        this.i = i;
+    }
 }
