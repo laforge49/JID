@@ -75,6 +75,17 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     }
 
     /**
+     * Assign a value unless one is already present.
+     *
+     * @param internals The actor's internals.
+     * @param request   The MakeValue request.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    abstract protected Boolean makeValue(Internals internals, MakeValue request)
+            throws Exception;
+
+    /**
      * Clear the content.
      *
      * @throws Exception Any uncaught exception raised.

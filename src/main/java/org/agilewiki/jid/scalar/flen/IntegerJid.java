@@ -29,7 +29,6 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 /**
  * A JID component that holds an integer.
@@ -72,28 +71,6 @@ public class IntegerJid
         serializedData = null;
         dser = true;
         change(internals, 0);
-    }
-
-    /**
-     * Assign a value only if currently set to 0.
-     *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
-     * @return True if a new value is created.
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
-        if (value != 0)
-            return false;
-        int v = (Integer) request.getValue();
-        if (value == v)
-            return true;
-        value = v;
-        serializedData = null;
-        dser = true;
-        change(internals, 0);
-        return true;
     }
 
     /**
