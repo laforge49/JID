@@ -12,6 +12,7 @@ import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.vlen.BytesJid;
+import org.agilewiki.jid.scalar.vlen.Clear;
 import org.agilewiki.jid.scalar.vlen.JidJid;
 
 public class BytesTest extends TestCase {
@@ -45,9 +46,12 @@ public class BytesTest extends TestCase {
             sjvbs.send(future, jidJid1);
             JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
             assertNull(BytesJid.getValueReq.send(future, rpa));
-            BytesJid.setValueReq(new byte[0]).send(future, rpa);
+            assertTrue(BytesJid.makeValueReq(new byte[0]).send(future, rpa));
+            assertFalse(BytesJid.makeValueReq(new byte[99]).send(future, rpa));
             rpa = (new ResolvePathname("$")).send(future, jidJid1);
             assertEquals(0, BytesJid.getValueReq.send(future, rpa).length);
+            Clear.req.sendEvent(rpa);
+            assertNull(BytesJid.getValueReq.send(future, rpa));
 
         } catch (Exception e) {
             e.printStackTrace();
