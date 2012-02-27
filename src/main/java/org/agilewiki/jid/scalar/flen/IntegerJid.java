@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.flen;
 
-import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
@@ -34,7 +33,7 @@ import org.agilewiki.jid.scalar.SetValue;
  * A JID component that holds an integer.
  */
 public class IntegerJid
-        extends FLenScalarJid<Integer> implements Comparable<IntegerJid> {
+        extends FLenScalarJid<Integer> {
     /**
      * The GetValue request.
      */
@@ -51,48 +50,13 @@ public class IntegerJid
     }
 
     /**
-     * The value.
-     */
-    private int value;
-
-    /**
      * Create the value.
      *
      * @return
      */
     @Override
-    protected Object newValue() {
+    protected Integer newValue() {
         return new Integer(0);
-    }
-
-    /**
-     * Assign a value.
-     *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void setValue(Internals internals, SetValue request) throws Exception {
-        int v = (Integer) request.getValue();
-        if (value == v)
-            return;
-        value = v;
-        serializedData = null;
-        dser = true;
-        change(internals, 0);
-    }
-
-    /**
-     * Returns the value held by this component.
-     *
-     * @param internals The actor's internals.
-     * @return The value held by this component.
-     * @throws Exception Any uncaught exception raised during deserialization.
-     */
-    @Override
-    protected Integer getValue(Internals internals) throws Exception {
-        return getValue();
     }
 
     /**
@@ -101,7 +65,7 @@ public class IntegerJid
      * @return The value held by this component.
      */
     public Integer getValue() {
-        if (dser)
+        if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
         value = readableBytes.readInt();
@@ -126,48 +90,5 @@ public class IntegerJid
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
         appendableBytes.writeInt(value);
-    }
-
-    /**
-     * Compares this object with the specified object for order.  Returns a
-     * negative integer, zero, or a positive integer as this object is less
-     * than, equal to, or greater than the specified object.
-     * <p/>
-     * <p>The implementor must ensure <tt>sgn(x.compareTo(y)) ==
-     * -sgn(y.compareTo(x))</tt> for all <tt>x</tt> and <tt>y</tt>.  (This
-     * implies that <tt>x.compareTo(y)</tt> must throw an exception iff
-     * <tt>y.compareTo(x)</tt> throws an exception.)
-     * <p/>
-     * <p>The implementor must also ensure that the relation is transitive:
-     * <tt>(x.compareTo(y)&gt;0 &amp;&amp; y.compareTo(z)&gt;0)</tt> implies
-     * <tt>x.compareTo(z)&gt;0</tt>.
-     * <p/>
-     * <p>Finally, the implementor must ensure that <tt>x.compareTo(y)==0</tt>
-     * implies that <tt>sgn(x.compareTo(z)) == sgn(y.compareTo(z))</tt>, for
-     * all <tt>z</tt>.
-     * <p/>
-     * <p>It is strongly recommended, but <i>not</i> strictly required that
-     * <tt>(x.compareTo(y)==0) == (x.equals(y))</tt>.  Generally speaking, any
-     * class that implements the <tt>Comparable</tt> interface and violates
-     * this condition should clearly indicate this fact.  The recommended
-     * language is "Note: this class has a natural ordering that is
-     * inconsistent with equals."
-     * <p/>
-     * <p>In the foregoing description, the notation
-     * <tt>sgn(</tt><i>expression</i><tt>)</tt> designates the mathematical
-     * <i>signum</i> function, which is defined to return one of <tt>-1</tt>,
-     * <tt>0</tt>, or <tt>1</tt> according to whether the value of
-     * <i>expression</i> is negative, zero or positive.
-     *
-     * @param o the object to be compared.
-     * @return a negative integer, zero, or a positive integer as this object
-     *         is less than, equal to, or greater than the specified object.
-     * @throws NullPointerException if the specified object is null
-     * @throws ClassCastException   if the specified object's type prevents it
-     *                              from being compared to this object.
-     */
-    @Override
-    public int compareTo(IntegerJid o) {
-        return (new Integer(value)).compareTo(o.getValue());
     }
 }
