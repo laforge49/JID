@@ -169,14 +169,4 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
         if (len > -1)
             readableBytes.skip(len);
     }
-
-    /**
-     * Returns true when the value has been deserialized.
-     *
-     * @return True when the value has been deserialized.
-     */
-    @Override
-    protected boolean isDeserialized() {
-        return len == -1 || value == null;
-    }
 }

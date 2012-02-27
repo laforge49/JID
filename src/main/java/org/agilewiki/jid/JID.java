@@ -169,15 +169,6 @@ public class JID extends Component {
     }
 
     /**
-     * Returns true when the JID has been deserialized.
-     *
-     * @return True when the JID has been deserialized.
-     */
-    protected boolean isDeserialized() {
-        return true;
-    }
-
-    /**
      * Serialize the persistent data.
      *
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.

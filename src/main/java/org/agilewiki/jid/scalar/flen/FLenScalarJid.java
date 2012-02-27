@@ -48,16 +48,6 @@ abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
     abstract protected RESPONSE_TYPE newValue();
 
     /**
-     * Returns true when the value has been deserialized.
-     *
-     * @return True when the value has been deserialized.
-     */
-    @Override
-    protected boolean isDeserialized() {
-        return value != null;
-    }
-
-    /**
      * Load the serialized data into the JID.
      *
      * @param readableBytes Holds the serialized data.
