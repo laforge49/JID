@@ -56,6 +56,16 @@ public class BooleanJid
     private boolean value;
 
     /**
+     * Create the value.
+     *
+     * @return
+     */
+    @Override
+    protected Object newValue() {
+        return new Boolean(false);
+    }
+
+    /**
      * Assign a value.
      *
      * @param internals The actor's internals.

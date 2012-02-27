@@ -56,6 +56,16 @@ public class IntegerJid
     private int value;
 
     /**
+     * Create the value.
+     *
+     * @return
+     */
+    @Override
+    protected Object newValue() {
+        return new Integer(0);
+    }
+
+    /**
      * Assign a value.
      *
      * @param internals The actor's internals.

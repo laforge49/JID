@@ -56,6 +56,16 @@ public class FloatJid
     private float value;
 
     /**
+     * Create the value.
+     *
+     * @return
+     */
+    @Override
+    protected Object newValue() {
+        return new Float(0.F);
+    }
+
+    /**
      * Assign a value.
      *
      * @param internals The actor's internals.

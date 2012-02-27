@@ -56,6 +56,16 @@ public class DoubleJid
     private double value;
 
     /**
+     * Create the value.
+     *
+     * @return
+     */
+    @Override
+    protected Object newValue() {
+        return new Double(0.D);
+    }
+
+    /**
      * Assign a value.
      *
      * @param internals The actor's internals.

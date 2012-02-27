@@ -37,6 +37,13 @@ abstract public class FLenScalarJid<RESPONSE_TYPE> extends ScalarJid<RESPONSE_TY
     protected boolean dser = true;
 
     /**
+     * Create the value.
+     *
+     * @return
+     */
+    abstract protected Object newValue();
+
+    /**
      * Returns true when the value has been deserialized.
      *
      * @return True when the value has been deserialized.
