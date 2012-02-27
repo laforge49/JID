@@ -30,13 +30,13 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a byte array.
+ * A JID component that holds a String.
  */
-public class BytesJid extends VLenScalarJid<byte[], byte[]> {
+public class StringJid extends VLenScalarJid<String, String> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<byte[]> getValueReq = (GetValue<byte[]>) GetValue.req;
+    public static final GetValue<String> getValueReq = (GetValue<String>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -44,7 +44,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(byte[] value) {
+    public static final MakeValue makeValueReq(String value) {
         return new MakeValue(value);
     }
 
@@ -54,7 +54,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(byte[] value) {
+    public static final SetValue setValueReq(String value) {
         return new SetValue(value);
     }
 
@@ -67,8 +67,8 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        byte[] v = (byte[]) request.getValue();
-        int c = v.length;
+        String v = (String) request.getValue();
+        int c = v.length() * 2;
         if (len > -1)
             c -= len;
         value = v;
@@ -88,8 +88,8 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
         if (len > -1)
             return false;
-        byte[] v = (byte[]) request.getValue();
-        int c = v.length;
+        String v = (String) request.getValue();
+        int c = v.length() * 2;
         if (len > -1)
             c -= len;
         value = v;
@@ -106,7 +106,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
-    protected byte[] getValue(Internals internals) throws Exception {
+    protected String getValue(Internals internals) throws Exception {
         return getValue();
     }
 
@@ -115,14 +115,14 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      *
      * @return The value held by this component, or null.
      */
-    public byte[] getValue() {
+    public String getValue() {
         if (len == -1)
             return null;
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
-        value = readableBytes.readBytes(len);
+        value = readableBytes.readString(len);
         return value;
     }
 
@@ -133,9 +133,9 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        saveLen(appendableBytes);
         if (len == -1)
-            return;
-        appendableBytes.writeBytes(value);
+            saveLen(appendableBytes);
+        else
+            appendableBytes.writeString(value);
     }
 }

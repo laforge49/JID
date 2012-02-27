@@ -143,10 +143,10 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         if (value != null)
             return value.thisActor;
         ReadableBytes readableBytes = serializedData.readable();
-        skipLen(readableBytes);
         if (len == -1) {
             return null;
         }
+        skipLen(readableBytes);
         String actorType = readableBytes.readString();
         JCActor nja = (new NewActor(
                 actorType,

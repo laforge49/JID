@@ -30,6 +30,7 @@ import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flen.*;
 import org.agilewiki.jid.scalar.vlen.BytesJid;
 import org.agilewiki.jid.scalar.vlen.JidJid;
+import org.agilewiki.jid.scalar.vlen.StringJid;
 
 import java.util.ArrayList;
 
@@ -43,11 +44,6 @@ final public class JidFactories extends Component {
      * The name of the JID component.
      */
     public final static String JID_TYPE = "JID";
-
-    /**
-     * The name of the JidJid component.
-     */
-    public final static String JID_JID_TYPE = "JID_JID";
 
     /**
      * The name of the BooleanJid component.
@@ -73,6 +69,16 @@ final public class JidFactories extends Component {
      * The name of the BooleanJid component.
      */
     public final static String DOUBLE_JID_TYPE = "DOUBLE_JID";
+
+    /**
+     * The name of the JidJid component.
+     */
+    public final static String JID_JID_TYPE = "JID_JID";
+
+    /**
+     * The name of the JidJid component.
+     */
+    public final static String STRING_JID_TYPE = "STRING_JID";
 
     /**
      * The name of the BooleanJid component.
@@ -107,6 +113,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(DOUBLE_JID_TYPE, DoubleJid.class)).call(thisActor);
 
         (new DefineActorType(JID_JID_TYPE, JidJid.class)).call(thisActor);
+        (new DefineActorType(STRING_JID_TYPE, StringJid.class)).call(thisActor);
         (new DefineActorType(BYTES_JID_TYPE, BytesJid.class)).call(thisActor);
     }
 }
