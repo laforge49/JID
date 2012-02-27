@@ -200,8 +200,8 @@ final public class ReadableBytes {
     /**
      * Read string.
      *
-     * @param l The size of the char array to be read.
-     * @return The string that was read.
+     * @param l The number of bytes to be read (2 * the number of characters) or -1.
+     * @return The string that was read, or null.
      */
     public String readString(int l) {
         if (l == -1)
@@ -209,8 +209,8 @@ final public class ReadableBytes {
         if (l == 0)
             return "";
         if (l < -1)
-            throw new IllegalArgumentException("invalid string length: " + l);
-        return new String(readChars(l));
+            throw new IllegalArgumentException("invalid byte length: " + l);
+        return new String(readChars(l / 2));
     }
 
     /**

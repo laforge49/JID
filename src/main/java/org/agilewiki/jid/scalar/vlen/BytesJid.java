@@ -102,7 +102,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      * Returns the value held by this component.
      *
      * @param internals The actor's internals.
-     * @return The value held by this component.
+     * @return The value held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
@@ -113,7 +113,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * Returns the value held by this component.
      *
-     * @return The value held by this component.
+     * @return The value held by this component, or null.
      */
     public byte[] getValue() {
         if (len == -1)

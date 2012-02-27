@@ -211,7 +211,7 @@ final public class AppendableBytes {
             writeInt(-1);
             return;
         }
-        writeInt(s.length());
+        writeInt(s.length() * 2);
         if (s.length() == 0)
             return;
         writeChars(s.toCharArray());

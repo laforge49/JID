@@ -133,7 +133,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
      * Returns the value held by this component.
      *
      * @param internals The actor's internals.
-     * @return The value held by this component.
+     * @return The value held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     protected JCActor getValue(Internals internals)
