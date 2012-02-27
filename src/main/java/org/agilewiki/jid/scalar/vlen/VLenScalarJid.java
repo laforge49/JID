@@ -95,7 +95,6 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
             return;
         int l = len;
         value = null;
-        dser = true;
         serializedData = null;
         change(internals, -l);
         len = -1;
@@ -167,9 +166,17 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
         super.load(readableBytes);
         len = loadLen(readableBytes);
         value = null;
-        if (len > -1) {
+        if (len > -1)
             readableBytes.skip(len);
-            dser = false;
-        } else dser = true;
+    }
+
+    /**
+     * Returns true when the value has been deserialized.
+     *
+     * @return True when the value has been deserialized.
+     */
+    @Override
+    protected boolean isDeserialized() {
+        return len == -1 || value == null;
     }
 }

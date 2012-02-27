@@ -79,7 +79,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
             value = null;
         }
         serializedData = null;
-        dser = true;
         change(internals, -l);
         len = -1;
     }
@@ -103,7 +102,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         value.containerJid = this;
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
-        dser = true;
         serializedData = null;
     }
 
@@ -127,7 +125,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
         value.containerJid = this;
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
-        dser = true;
         serializedData = null;
         return true;
     }
@@ -141,15 +138,13 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
      */
     protected JCActor getValue(Internals internals)
             throws Exception {
-        if (dser)
-            if (len == -1)
-                return null;
-            else
-                return value.thisActor;
+        if (len == -1)
+            return null;
+        if (value != null)
+            return value.thisActor;
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
         if (len == -1) {
-            dser = true;
             return null;
         }
         String actorType = readableBytes.readString();
@@ -158,7 +153,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
                 thisActor.getMailbox(),
                 null,
                 thisActor.getParent())).call(thisActor);
-        dser = true;
         value = (new GetJIDComponent()).call(internals, nja);
         value.load(readableBytes);
         value.containerJid = this;

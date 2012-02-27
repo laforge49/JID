@@ -29,4 +29,19 @@ import org.agilewiki.jid.scalar.ScalarJid;
  * A JID component that holds a fixed-length value that is always present.
  */
 abstract public class FLenScalarJid<RESPONSE_TYPE> extends ScalarJid<RESPONSE_TYPE> {
+
+    /**
+     * True when deserialized.
+     */
+    protected boolean dser = true;
+
+    /**
+     * Returns true when the value has been deserialized.
+     *
+     * @return True when the value has been deserialized.
+     */
+    @Override
+    protected boolean isDeserialized() {
+        return dser;
+    }
 }

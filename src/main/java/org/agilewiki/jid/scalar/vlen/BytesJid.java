@@ -73,7 +73,6 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
             c -= len;
         value = v;
         serializedData = null;
-        dser = true;
         change(internals, c);
     }
 
@@ -95,7 +94,6 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
             c -= len;
         value = v;
         serializedData = null;
-        dser = true;
         change(internals, c);
         return true;
     }
@@ -118,11 +116,10 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
      * @return The value held by this component.
      */
     public byte[] getValue() {
-        if (dser)
-            if (len == -1)
-                return null;
-            else
-                return value;
+        if (len == -1)
+            return null;
+        if (value != null)
+            return value;
         ReadableBytes readableBytes = serializedData.readable();
         value = readableBytes.readBytes(len);
         return value;

@@ -34,11 +34,6 @@ import org.agilewiki.jid.JID;
 abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
 
     /**
-     * True when deserialized.
-     */
-    protected boolean dser = true;
-
-    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -86,14 +81,4 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
      */
     abstract protected RESPONSE_TYPE getValue(Internals internals)
             throws Exception;
-
-    /**
-     * Returns true when the value has been deserialized.
-     *
-     * @return True when the value has been deserialized.
-     */
-    @Override
-    protected boolean isDeserialized() {
-        return dser;
-    }
 }
