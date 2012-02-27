@@ -33,7 +33,6 @@ import org.agilewiki.jid.Util;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.MakeValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**

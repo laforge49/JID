@@ -28,8 +28,8 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.MakeValue;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 /**
  * A JID component that holds a boolean.
@@ -55,21 +55,6 @@ public class BooleanJid
      * The value.
      */
     private boolean value;
-
-    /**
-     * Clear the content.
-     *
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void clear(Internals internals) throws Exception {
-        if (!value)
-            return;
-        serializedData = null;
-        value = false;
-        dser = true;
-        change(internals, 0);
-    }
 
     /**
      * Assign a value.

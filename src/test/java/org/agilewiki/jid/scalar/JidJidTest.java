@@ -8,11 +8,12 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.requests.Clear;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
+import org.agilewiki.jid.scalar.vlen.Clear;
 import org.agilewiki.jid.scalar.vlen.JidJid;
+import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 public class JidJidTest extends TestCase {
     public void test() {

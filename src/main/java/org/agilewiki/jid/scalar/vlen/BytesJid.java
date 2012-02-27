@@ -27,7 +27,6 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.MakeValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**

@@ -24,6 +24,8 @@
 package org.agilewiki.jid.scalar.vlen;
 
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
@@ -45,11 +47,38 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     protected int len = -1;
 
     /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(Clear.class.getName(),
+                new VoidSynchronousMethodBinding<Clear>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals, Clear request)
+                            throws Exception {
+                        clear(internals);
+                    }
+                });
+
+        thisActor.bind(MakeValue.class.getName(),
+                new SynchronousMethodBinding<MakeValue, Boolean>() {
+                    @Override
+                    public Boolean synchronousProcessRequest(Internals internals, MakeValue request)
+                            throws Exception {
+                        return makeValue(internals, request);
+                    }
+                });
+    }
+
+    /**
      * Clear the content.
      *
      * @throws Exception Any uncaught exception raised.
      */
-    @Override
     protected void clear(Internals internals) throws Exception {
         if (len == -1)
             return;

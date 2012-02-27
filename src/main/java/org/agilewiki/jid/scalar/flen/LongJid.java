@@ -28,8 +28,8 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.MakeValue;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 /**
  * A JID component that holds a long.
@@ -55,21 +55,6 @@ public class LongJid
      * The value.
      */
     private long value;
-
-    /**
-     * Clear the content.
-     *
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void clear(Internals internals) throws Exception {
-        if (value != 0L)
-            return;
-        serializedData = null;
-        value = 0L;
-        dser = true;
-        change(internals, 0);
-    }
 
     /**
      * Assign a value.

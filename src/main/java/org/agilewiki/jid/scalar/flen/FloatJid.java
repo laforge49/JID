@@ -28,8 +28,8 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.MakeValue;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 /**
  * A JID component that holds a float.
@@ -55,21 +55,6 @@ public class FloatJid
      * The value.
      */
     private float value;
-
-    /**
-     * Clear the content.
-     *
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void clear(Internals internals) throws Exception {
-        if (value != 0.f)
-            return;
-        serializedData = null;
-        value = 0.f;
-        dser = true;
-        change(internals, 0);
-    }
 
     /**
      * Assign a value.

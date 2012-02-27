@@ -27,6 +27,7 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.JID;
+import org.agilewiki.jid.scalar.vlen.MakeValue;
 
 /**
  * A JID component that holds a value.
@@ -54,15 +55,6 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
                                                                    GetValue<RESPONSE_TYPE> request)
                             throws Exception {
                         return getValue(internals);
-                    }
-                });
-
-        thisActor.bind(MakeValue.class.getName(),
-                new SynchronousMethodBinding<MakeValue, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals, MakeValue request)
-                            throws Exception {
-                        return makeValue(internals, request);
                     }
                 });
 

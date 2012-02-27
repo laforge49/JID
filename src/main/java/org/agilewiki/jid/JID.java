@@ -148,23 +148,6 @@ public class JID extends Component {
                 });
             }
         });
-
-        thisActor.bind(Clear.class.getName(),
-                new VoidSynchronousMethodBinding<Clear>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals, Clear request)
-                            throws Exception {
-                        clear(internals);
-                    }
-                });
-    }
-
-    /**
-     * Clear the ontent.
-     *
-     * @throws Exception Any uncaught exception raised.
-     */
-    protected void clear(Internals internals) throws Exception {
     }
 
     /**
