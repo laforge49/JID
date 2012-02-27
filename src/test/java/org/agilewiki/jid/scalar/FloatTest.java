@@ -11,6 +11,8 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
+import org.agilewiki.jid.scalar.flen.FloatJid;
+import org.agilewiki.jid.scalar.vlen.JidJid;
 
 public class FloatTest extends TestCase {
     public void test() {

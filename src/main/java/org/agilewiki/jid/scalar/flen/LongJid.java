@@ -21,22 +21,26 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar;
+package org.agilewiki.jid.scalar.flen;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
+import org.agilewiki.jid.scalar.GetValue;
+import org.agilewiki.jid.scalar.MakeValue;
+import org.agilewiki.jid.scalar.ScalarJid;
+import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a boolean.
+ * A JID component that holds a long.
  */
-public class BooleanJid
-        extends ScalarJid<Boolean> implements Comparable<BooleanJid> {
+public class LongJid
+        extends ScalarJid<Long> implements Comparable<LongJid> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Boolean> getValueReq = (GetValue<Boolean>) GetValue.req;
+    public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -44,7 +48,7 @@ public class BooleanJid
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(Boolean value) {
+    public static final MakeValue makeValueReq(Long value) {
         return new MakeValue(value);
     }
 
@@ -54,14 +58,14 @@ public class BooleanJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Boolean value) {
+    public static final SetValue setValueReq(Long value) {
         return new SetValue(value);
     }
 
     /**
      * The value.
      */
-    private boolean value;
+    private long value;
 
     /**
      * Clear the content.
@@ -70,10 +74,10 @@ public class BooleanJid
      */
     @Override
     protected void clear(Internals internals) throws Exception {
-        if (!value)
+        if (value != 0L)
             return;
         serializedData = null;
-        value = false;
+        value = 0L;
         dser = true;
         change(internals, 0);
     }
@@ -87,7 +91,7 @@ public class BooleanJid
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        boolean v = (Boolean) request.getValue();
+        long v = (Long) request.getValue();
         if (value == v)
             return;
         value = v;
@@ -97,7 +101,7 @@ public class BooleanJid
     }
 
     /**
-     * Assign a value unless already set to true.
+     * Assign a value only if currently set to 0.
      *
      * @param internals The actor's internals.
      * @param request   The MakeValue request.
@@ -106,9 +110,9 @@ public class BooleanJid
      */
     @Override
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
-        if (value)
+        if (value != 0)
             return false;
-        boolean v = (Boolean) request.getValue();
+        long v = (Long) request.getValue();
         if (value == v)
             return true;
         value = v;
@@ -126,7 +130,7 @@ public class BooleanJid
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
-    protected Boolean getValue(Internals internals) throws Exception {
+    protected Long getValue(Internals internals) throws Exception {
         return getValue();
     }
 
@@ -135,11 +139,11 @@ public class BooleanJid
      *
      * @return The value held by this component.
      */
-    public Boolean getValue() {
+    public Long getValue() {
         if (dser)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readBoolean();
+        value = readableBytes.readLong();
         return value;
     }
 
@@ -150,7 +154,7 @@ public class BooleanJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.BOOLEAN_LENGTH;
+        return Util.LONG_LENGTH;
     }
 
     /**
@@ -161,7 +165,7 @@ public class BooleanJid
     @Override
     public void load(ReadableBytes readableBytes) {
         super.load(readableBytes);
-        value = false;
+        value = 0L;
         dser = false;
     }
 
@@ -172,7 +176,7 @@ public class BooleanJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeBoolean(value);
+        appendableBytes.writeLong(value);
     }
 
     /**
@@ -214,7 +218,7 @@ public class BooleanJid
      *                              from being compared to this object.
      */
     @Override
-    public int compareTo(BooleanJid o) {
-        return (new Boolean(value)).compareTo(o.getValue());
+    public int compareTo(LongJid o) {
+        return (new Long(value)).compareTo(o.getValue());
     }
 }
