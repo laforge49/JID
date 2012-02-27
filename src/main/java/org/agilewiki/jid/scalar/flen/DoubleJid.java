@@ -29,14 +29,13 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.MakeValue;
-import org.agilewiki.jid.scalar.ScalarJid;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
  * A JID component that holds a double.
  */
 public class DoubleJid
-        extends ScalarJid<Double> implements Comparable<DoubleJid> {
+        extends FLenScalarJid<Double> implements Comparable<DoubleJid> {
     /**
      * The GetValue request.
      */

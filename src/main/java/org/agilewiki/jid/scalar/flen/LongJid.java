@@ -29,14 +29,13 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.MakeValue;
-import org.agilewiki.jid.scalar.ScalarJid;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
  * A JID component that holds a long.
  */
 public class LongJid
-        extends ScalarJid<Long> implements Comparable<LongJid> {
+        extends FLenScalarJid<Long> implements Comparable<LongJid> {
     /**
      * The GetValue request.
      */

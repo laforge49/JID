@@ -29,14 +29,13 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.MakeValue;
-import org.agilewiki.jid.scalar.ScalarJid;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
  * A JID component that holds an integer.
  */
 public class IntegerJid
-        extends ScalarJid<Integer> implements Comparable<IntegerJid> {
+        extends FLenScalarJid<Integer> implements Comparable<IntegerJid> {
     /**
      * The GetValue request.
      */
