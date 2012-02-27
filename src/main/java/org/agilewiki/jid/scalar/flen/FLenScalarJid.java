@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.flen;
 
+import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.ScalarJid;
 
 /**
@@ -43,5 +44,16 @@ abstract public class FLenScalarJid<RESPONSE_TYPE> extends ScalarJid<RESPONSE_TY
     @Override
     protected boolean isDeserialized() {
         return dser;
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    @Override
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        dser = false;
     }
 }

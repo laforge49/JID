@@ -109,18 +109,6 @@ public class FloatJid
     }
 
     /**
-     * Load the serialized data into the JID.
-     *
-     * @param readableBytes Holds the serialized data.
-     */
-    @Override
-    public void load(ReadableBytes readableBytes) {
-        super.load(readableBytes);
-        value = 0.f;
-        dser = false;
-    }
-
-    /**
      * Serialize the persistent data.
      *
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
