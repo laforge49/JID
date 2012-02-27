@@ -182,6 +182,22 @@ final public class ReadableBytes {
     }
 
     /**
+     * Read an array of char.
+     *
+     * @param len The number of char to be read.
+     * @return The array of char that was read.
+     */
+    public char[] readChars(int len) {
+        char[] ca = new char[len];
+        int i = 0;
+        while (i < len) {
+            ca[i] = readChar();
+            i += 1;
+        }
+        return ca;
+    }
+
+    /**
      * Read string.
      *
      * @param l The size of the char array to be read.
@@ -194,13 +210,7 @@ final public class ReadableBytes {
             return "";
         if (l < -1)
             throw new IllegalArgumentException("invalid string length: " + l);
-        char[] ca = new char[l];
-        int i = 0;
-        while (i < l) {
-            ca[i] = readChar();
-            i += 1;
-        }
-        return new String(ca);
+        return new String(readChars(l));
     }
 
     /**

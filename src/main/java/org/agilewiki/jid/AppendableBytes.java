@@ -187,6 +187,19 @@ final public class AppendableBytes {
     }
 
     /**
+     * Write an array of char.
+     *
+     * @param ca The array to be written.
+     */
+    public void writeChars(char[] ca) {
+        int i = 0;
+        while (i < ca.length) {
+            writeChar(ca[i]);
+            i += 1;
+        }
+    }
+
+    /**
      * Write a string as an int and a char array.
      * (This approach uses more bytes than other approaches but is not so computationally intensive
      * while preserving the full range of character values.)
@@ -201,12 +214,7 @@ final public class AppendableBytes {
         writeInt(s.length());
         if (s.length() == 0)
             return;
-        char[] ca = s.toCharArray();
-        int i = 0;
-        while (i < ca.length) {
-            writeChar(ca[i]);
-            i += 1;
-        }
+        writeChars(s.toCharArray());
     }
 
     /**
