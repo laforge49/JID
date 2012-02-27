@@ -42,16 +42,6 @@ public class FloatJid
     public static final GetValue<Float> getValueReq = (GetValue<Float>) GetValue.req;
 
     /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue makeValueReq(Float value) {
-        return new MakeValue(value);
-    }
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.

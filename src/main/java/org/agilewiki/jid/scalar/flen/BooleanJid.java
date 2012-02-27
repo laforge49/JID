@@ -42,16 +42,6 @@ public class BooleanJid
     public static final GetValue<Boolean> getValueReq = (GetValue<Boolean>) GetValue.req;
 
     /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue makeValueReq(Boolean value) {
-        return new MakeValue(value);
-    }
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.

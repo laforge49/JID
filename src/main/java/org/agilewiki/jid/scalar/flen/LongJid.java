@@ -42,16 +42,6 @@ public class LongJid
     public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
 
     /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue makeValueReq(Long value) {
-        return new MakeValue(value);
-    }
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.

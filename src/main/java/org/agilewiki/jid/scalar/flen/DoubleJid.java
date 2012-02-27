@@ -42,16 +42,6 @@ public class DoubleJid
     public static final GetValue<Double> getValueReq = (GetValue<Double>) GetValue.req;
 
     /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue makeValueReq(Double value) {
-        return new MakeValue(value);
-    }
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.

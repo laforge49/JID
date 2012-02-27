@@ -42,16 +42,6 @@ public class IntegerJid
     public static final GetValue<Integer> getValueReq = (GetValue<Integer>) GetValue.req;
 
     /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue makeValueReq(Integer value) {
-        return new MakeValue(value);
-    }
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.
