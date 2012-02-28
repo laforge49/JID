@@ -33,9 +33,6 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.requests.GetJIDComponent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * Holds an array of actors.
  */
@@ -208,8 +205,6 @@ public class TupleJid
     @Override
     public JCActor resolvePathname(Internals internals, String pathname)
             throws Exception {
-        ArrayList x = new ArrayList();
-        Arrays.binarySearch(x.toArray(), "");
         if (pathname.length() == 0) {
             return thisActor;
         }
