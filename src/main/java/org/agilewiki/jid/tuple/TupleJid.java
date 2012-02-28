@@ -4,6 +4,7 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
@@ -27,16 +28,6 @@ public class TupleJid extends JID {
      * The size of the serialized (exclusive of its length header).
      */
     protected int len;
-
-    /**
-     * Get the actor types.
-     *
-     * @throws Exception Any exceptions thrown during the initialization.
-     */
-    protected void fetchActorTypes() throws Exception {
-        if (actorTypes == null)
-            actorTypes = GetActorTypes.req.call(thisActor);
-    }
 
     protected JID createJid(int i, Internals internals)
             throws Exception {
@@ -64,29 +55,40 @@ public class TupleJid extends JID {
             public JCActor synchronousProcessRequest(Internals internals, IGet request)
                     throws Exception {
                 int ndx = request.getI();
-                if (tuple != null)
-                    return tuple[ndx].thisActor;
-                ReadableBytes readableBytes = null;
-                if (isSerialized()) {
-                    readableBytes = serializedData.readable();
-                    skipLen(readableBytes);
-                }
-                fetchActorTypes();
-                tuple = new JID[actorTypes.length];
-                int i = 0;
-                len = 0;
-                while (i < actorTypes.length) {
-                    JID elementJid = createJid(i, internals);
-                    if (readableBytes != null)
-                        elementJid.load(readableBytes);
-                    len += elementJid.getSerializedLength();
-                    elementJid.containerJid = TupleJid.this;
-                    tuple[i] = elementJid;
-                    i += 1;
-                }
                 return tuple[ndx].thisActor;
             }
         });
+    }
+
+    /**
+     * Open is called when an actor becomes active by receiving a
+     * non-initialization request--useful initialization like opening files.
+     * Components are opened in dependency order, the root component being the last.
+     *
+     * @param internals The actor's internals.
+     * @throws Exception Any exceptions thrown during the open.
+     */
+    @Override
+    public void open(Internals internals) throws Exception {
+        actorTypes = GetActorTypes.req.call(thisActor);
+        ReadableBytes readableBytes = null;
+        if (isSerialized()) {
+            readableBytes = serializedData.readable();
+            skipLen(readableBytes);
+        }
+        tuple = new JID[actorTypes.length];
+        int i = 0;
+        len = 0;
+        while (i < actorTypes.length) {
+            JID elementJid = createJid(i, internals);
+            if (readableBytes != null) {
+                elementJid.load(readableBytes);
+            }
+            len += elementJid.getSerializedLength();
+            elementJid.containerJid = TupleJid.this;
+            tuple[i] = elementJid;
+            i += 1;
+        }
     }
 
     /**
@@ -99,6 +101,25 @@ public class TupleJid extends JID {
     }
 
     /**
+     * Returns the size of the serialized data (exclusive of its length header).
+     *
+     * @param readableBytes Holds the serialized data.
+     * @return The size of the serialized data (exclusive of its length header).
+     */
+    protected int loadLen(ReadableBytes readableBytes) {
+        return readableBytes.readInt();
+    }
+
+    /**
+     * Writes the size of the serialized data (exclusive of its length header).
+     *
+     * @param appendableBytes The object written to.
+     */
+    protected void saveLen(AppendableBytes appendableBytes) {
+        appendableBytes.writeInt(len);
+    }
+
+    /**
      * Returns the number of bytes needed to serialize the persistent data.
      *
      * @return The minimum size of the byte array needed to serialize the persistent data.
@@ -106,5 +127,45 @@ public class TupleJid extends JID {
     @Override
     public int getSerializedLength() {
         return Util.INT_LENGTH + len;
+    }
+
+    /**
+     * Serialize the persistent data.
+     *
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
+     */
+    @Override
+    protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
+        int i = 0;
+        while (i < actorTypes.length) {
+            tuple[i].save(appendableBytes);
+        }
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    @Override
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        len = loadLen(readableBytes);
+        tuple = null;
+        readableBytes.skip(len);
+    }
+
+    /**
+     * Process a change in the persistent data.
+     *
+     * @param internals    The actor's internals.
+     * @param lengthChange The change in the size of the serialized data.
+     * @throws Exception Any uncaught exception which occurred while processing the change.
+     */
+    @Override
+    public void change(Internals internals, int lengthChange) throws Exception {
+        len += lengthChange;
+        super.change(internals, lengthChange);
     }
 }
