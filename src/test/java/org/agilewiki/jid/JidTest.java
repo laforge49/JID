@@ -1,4 +1,4 @@
-package org.agilewiki.jid.jid;
+package org.agilewiki.jid;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
@@ -8,9 +8,6 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.JID;
-import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.*;
 
