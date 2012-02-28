@@ -31,6 +31,7 @@ import org.agilewiki.jid.scalar.flen.*;
 import org.agilewiki.jid.scalar.vlen.BytesJid;
 import org.agilewiki.jid.scalar.vlen.JidJid;
 import org.agilewiki.jid.scalar.vlen.StringJid;
+import org.agilewiki.jid.tuple.TupleJid;
 
 import java.util.ArrayList;
 
@@ -86,6 +87,11 @@ final public class JidFactories extends Component {
     public final static String BYTES_JID_TYPE = "BYTES_JID";
 
     /**
+     * The name of the BooleanJid component.
+     */
+    public final static String TUPLE_JID_TYPE = "TUPLE_JID";
+
+    /**
      * Returns a list of Includes for inclusion in the actor.
      *
      * @return A list of classes for inclusion in the actor.
@@ -115,5 +121,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(JID_JID_TYPE, JidJid.class)).call(thisActor);
         (new DefineActorType(STRING_JID_TYPE, StringJid.class)).call(thisActor);
         (new DefineActorType(BYTES_JID_TYPE, BytesJid.class)).call(thisActor);
+
+        (new DefineActorType(TUPLE_JID_TYPE, TupleJid.class)).call(thisActor);
     }
 }
