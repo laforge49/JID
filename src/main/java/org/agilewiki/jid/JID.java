@@ -239,7 +239,7 @@ public class JID extends Component {
     public JCActor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname != "")
-            throw new IllegalArgumentException("Invalid pathname");
+            throw new IllegalArgumentException("pathname " + pathname);
         return thisActor;
     }
 

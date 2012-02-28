@@ -196,6 +196,6 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
             ResolvePathname req = new ResolvePathname(pathname.substring(2));
             return req.call(internals, jca);
         }
-        throw new IllegalArgumentException("pathname " + pathname + ";");
+        throw new IllegalArgumentException("pathname " + pathname);
     }
 }
