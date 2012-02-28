@@ -50,6 +50,10 @@ public class StringTest extends TestCase {
             assertFalse(StringJid.makeValueReq("Hello?").send(future, rpa));
             rpa = (new ResolvePathname("$")).send(future, jidJid1);
             assertEquals("", StringJid.getValueReq.send(future, rpa));
+            StringJid.setValueReq("bye").send(future, rpa);
+            assertEquals("bye", StringJid.getValueReq.send(future, rpa));
+            sl = GetSerializedLength.req.send(future, rpa);
+            assertEquals(10, sl);
             Clear.req.sendEvent(rpa);
             assertNull(StringJid.getValueReq.send(future, rpa));
 
