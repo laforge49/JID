@@ -15,8 +15,7 @@ public class TupleTest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            //todo fix JActor to handle this!
-            //(new Include(StringStringTuple.class)).call(factory);
+            (new Include(StringStringTuple.class)).call(factory);
 
         } catch (Exception e) {
             e.printStackTrace();
