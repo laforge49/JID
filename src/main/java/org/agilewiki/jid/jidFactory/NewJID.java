@@ -23,8 +23,8 @@
  */
 package org.agilewiki.jid.jidFactory;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.bind.JBActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 
 /**
@@ -90,7 +90,7 @@ final public class NewJID extends NewActor {
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      * @param bytes     Holds the serialized data.
      */
-    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes) {
+    public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes) {
         this(actorType, mailbox, parent, bytes, 0, bytes.length);
     }
 
@@ -104,7 +104,7 @@ final public class NewJID extends NewActor {
      * @param offset    The position of the serialized data.
      * @param length    The length of the serialized data.
      */
-    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes, int offset, int length) {
+    public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes, int offset, int length) {
         super(actorType, mailbox, null, parent);
         this.bytes = new byte[length];
         System.arraycopy(bytes, offset, this.bytes, 0, length);

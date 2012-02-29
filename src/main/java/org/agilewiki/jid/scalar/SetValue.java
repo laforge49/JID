@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 /**
  * Assigns a value.
  */
-public class SetValue extends SynchronousRequest<Boolean> {
+public class SetValue extends SynchronousRequest<Object> {
     /**
      * The value (or actor type).
      */

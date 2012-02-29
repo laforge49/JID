@@ -28,6 +28,6 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 /**
  * Clears the container.
  */
-final public class Clear extends SynchronousRequest {
+final public class Clear extends SynchronousRequest<Object> {
     public final static Clear req = new Clear();
 }

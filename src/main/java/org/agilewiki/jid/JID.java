@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.*;
@@ -91,7 +90,7 @@ public class JID extends Component {
                 Mailbox m = request.getMailbox();
                 if (m == null)
                     m = thisActor.getMailbox();
-                Actor parent = request.getParent();
+                JBActor parent = request.getParent();
                 if (parent == null)
                     parent = thisActor.getParent();
                 return (new NewJID(thisActor.getActorType(), m, parent, getBytes())).call(thisActor);

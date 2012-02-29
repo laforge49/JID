@@ -23,8 +23,8 @@
  */
 package org.agilewiki.jid.requests;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.bind.JBActor;
 import org.agilewiki.jactor.bind.SynchronousRequest;
 import org.agilewiki.jactor.components.JCActor;
 
@@ -40,7 +40,7 @@ final public class CopyJID extends SynchronousRequest<JCActor> {
     /**
      * The parent actor to which unrecognized requests are forwarded.
      */
-    private Actor parent;
+    private JBActor parent;
 
     /**
      * Create a CopyJID request.
@@ -63,7 +63,7 @@ final public class CopyJID extends SynchronousRequest<JCActor> {
      * @param mailbox A mailbox which may be shared with other actors.
      * @param parent  The parent actor to which unrecognized requests are forwarded.
      */
-    public CopyJID(Mailbox mailbox, Actor parent) {
+    public CopyJID(Mailbox mailbox, JBActor parent) {
         this.mailbox = mailbox;
         this.parent = parent;
     }
@@ -82,7 +82,7 @@ final public class CopyJID extends SynchronousRequest<JCActor> {
      *
      * @return The parent actor to which unrecognized requests are forwarded, or null.
      */
-    public Actor getParent() {
+    public JBActor getParent() {
         return parent;
     }
 }
