@@ -26,10 +26,7 @@ package org.agilewiki.jid.scalar.vlen;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.JID;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.Util;
+import org.agilewiki.jid.*;
 import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
@@ -38,7 +35,8 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<JID, JCActor> {
+public class JidJid extends VLenScalarJid<JID, JCActor>
+        implements ComparableKey<Object> {
     /**
      * The GetValue request.
      */
@@ -197,5 +195,17 @@ public class JidJid extends VLenScalarJid<JID, JCActor> {
             return req.call(internals, jca);
         }
         throw new IllegalArgumentException("pathname " + pathname);
+    }
+
+    /**
+     * Compares the key or value;
+     *
+     * @param o The comparison value.
+     * @return The result of a compareTo(o).
+     */
+    @Override
+    public int compareKeyTo(Object o) {
+        ComparableKey<Object> v = (ComparableKey<Object>) value;
+        return v.compareKeyTo(o);
     }
 }

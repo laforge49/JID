@@ -27,17 +27,15 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.JID;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.Util;
+import org.agilewiki.jid.*;
 import org.agilewiki.jid.requests.GetJIDComponent;
 
 /**
  * Holds an array of actors.
  */
-public class TupleJid<KEY_TYPE>
-        extends JID {
+public class TupleJid
+        extends JID
+        implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.
      */
@@ -233,8 +231,8 @@ public class TupleJid<KEY_TYPE>
      * @param o The comparison value.
      * @return The result of a compareTo(o) using element 0.
      */
-    public int compareKeyTo(KEY_TYPE o) {
-        Comparable e0 = (Comparable<KEY_TYPE>) tuple[0];
-        return e0.compareTo(o);
+    public int compareKeyTo(Object o) {
+        ComparableKey<Object> e0 = (ComparableKey<Object>) tuple[0];
+        return e0.compareKeyTo(o);
     }
 }
