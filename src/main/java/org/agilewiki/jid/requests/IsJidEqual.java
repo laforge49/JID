@@ -23,7 +23,7 @@
  */
 package org.agilewiki.jid.requests;
 
-import org.agilewiki.jactor.bind.Request;
+import org.agilewiki.jactor.Request;
 import org.agilewiki.jactor.components.JCActor;
 
 /**
