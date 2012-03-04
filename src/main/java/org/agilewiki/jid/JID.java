@@ -106,7 +106,7 @@ public class JID extends Component {
 
         thisActor.bind(PutBytes.class.getName(), new VoidInitializationMethodBinding<PutBytes>() {
             @Override
-            public void initializationProcessRequest(PutBytes request) throws Exception {
+            public void initializationProcessRequest(Internals internals, PutBytes request) throws Exception {
                 putBytes(request.getBytes());
             }
         });
