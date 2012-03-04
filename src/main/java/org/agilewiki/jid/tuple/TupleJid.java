@@ -48,23 +48,6 @@ public class TupleJid
     protected JID[] tuple;
 
     /**
-     * The size of the serialized (exclusive of its length header).
-     */
-    protected int len;
-
-    protected JID createJid(int i, Internals internals)
-            throws Exception {
-        String actorType = actorTypes[i];
-        NewActor newActor = new NewActor(
-                actorType,
-                thisActor.getMailbox(),
-                thisActor.getParent());
-        JCActor elementActor = newActor.call(thisActor);
-        Open.req.call(internals, elementActor);
-        return GetJIDComponent.req.call(internals, elementActor);
-    }
-
-    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -84,6 +67,23 @@ public class TupleJid
     }
 
     /**
+     * The size of the serialized (exclusive of its length header).
+     */
+    protected int len;
+
+    protected JID createJid(int i, Internals internals)
+            throws Exception {
+        String actorType = actorTypes[i];
+        NewActor newActor = new NewActor(
+                actorType,
+                thisActor.getMailbox(),
+                thisActor.getParent());
+        JCActor elementActor = newActor.call(thisActor.getParent());
+        Open.req.call(internals, elementActor);
+        return GetJIDComponent.req.call(internals, elementActor);
+    }
+
+    /**
      * Open is called when an actor becomes active by receiving a
      * non-initialization request--useful initialization like opening files.
      * Components are opened in dependency order, the root component being the last.
@@ -93,7 +93,7 @@ public class TupleJid
      */
     @Override
     public void open(Internals internals) throws Exception {
-        actorTypes = GetActorTypes.req.call(internals, thisActor);
+        actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = serializedData.readable();
