@@ -66,7 +66,6 @@ final public class JidFactory extends Component {
                 JCActor actor = (new NewActor(
                         newJID.getActorType(),
                         newJID.getMailbox(),
-                        newJID.getActorName(),
                         newJID.getParent())).call(thisActor);
                 (new PutBytes(newJID.getBytes())).call(actor);
                 return actor;

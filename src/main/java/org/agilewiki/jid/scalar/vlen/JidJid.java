@@ -24,6 +24,7 @@
 package org.agilewiki.jid.scalar.vlen;
 
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
@@ -94,8 +95,9 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         if (len > -1)
             clear(internals);
         String jidType = (String) request.getValue();
-        NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
+        NewActor na = new NewActor(jidType, thisActor.getMailbox(), thisActor.getParent());
         JCActor nja = na.call(thisActor);
+        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.containerJid = this;
         int l = Util.stringLength(jidType) + value.getSerializedLength();
@@ -117,8 +119,9 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         if (len > -1)
             return false;
         String jidType = (String) request.getValue();
-        NewActor na = new NewActor(jidType, thisActor.getMailbox(), null, thisActor.getParent());
+        NewActor na = new NewActor(jidType, thisActor.getMailbox(), thisActor.getParent());
         JCActor nja = na.call(thisActor);
+        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.containerJid = this;
         int l = Util.stringLength(jidType) + value.getSerializedLength();
@@ -149,8 +152,8 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         JCActor nja = (new NewActor(
                 actorType,
                 thisActor.getMailbox(),
-                null,
                 thisActor.getParent())).call(thisActor);
+        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.load(readableBytes);
         value.containerJid = this;

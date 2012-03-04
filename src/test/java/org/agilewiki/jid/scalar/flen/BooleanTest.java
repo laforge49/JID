@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
+import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
@@ -21,12 +22,16 @@ public class BooleanTest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
+            Open.req.call(factory);
 
             NewActor newBooleanJid = new NewActor(JidFactories.BOOLEAN_JID_TYPE);
             JCActor boolean1 = newBooleanJid.send(future, factory);
+            Open.req.call(boolean1);
             JCActor boolean2 = (new CopyJID()).send(future, boolean1);
+            Open.req.call(boolean2);
             BooleanJid.setValueReq(true).send(future, boolean2);
             JCActor boolean3 = (new CopyJID()).send(future, boolean2);
+            Open.req.call(boolean3);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
             assertEquals(1, sl);
@@ -41,6 +46,7 @@ public class BooleanTest extends TestCase {
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
             JCActor jidJid1 = newJidJid.send(future, factory);
+            Open.req.call(jidJid1);
             SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_TYPE);
             sjvb.send(future, jidJid1);
             JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);

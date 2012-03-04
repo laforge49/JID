@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
+import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
@@ -21,12 +22,16 @@ public class DoubleTest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
+            Open.req.call(factory);
 
             NewActor newDoubleJid = new NewActor(JidFactories.DOUBLE_JID_TYPE);
             JCActor double1 = newDoubleJid.send(future, factory);
+            Open.req.call(double1);
             JCActor double2 = (new CopyJID()).send(future, double1);
+            Open.req.call(double2);
             DoubleJid.setValueReq(1.D).send(future, double2);
             JCActor double3 = (new CopyJID()).send(future, double2);
+            Open.req.call(double3);
 
             int sl = GetSerializedLength.req.send(future, double1);
             assertEquals(8, sl);
@@ -44,6 +49,7 @@ public class DoubleTest extends TestCase {
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
             JCActor jidJid1 = newJidJid.send(future, factory);
+            Open.req.call(jidJid1);
             SetValue sjvl = JidJid.setValueReq(JidFactories.DOUBLE_JID_TYPE);
             sjvl.send(future, jidJid1);
             JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);

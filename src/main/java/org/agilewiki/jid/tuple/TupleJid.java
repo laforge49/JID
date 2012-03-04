@@ -24,6 +24,7 @@
 package org.agilewiki.jid.tuple;
 
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
@@ -57,9 +58,9 @@ public class TupleJid
         NewActor newActor = new NewActor(
                 actorType,
                 thisActor.getMailbox(),
-                null,
                 thisActor.getParent());
         JCActor elementActor = newActor.call(thisActor);
+        Open.req.call(internals, elementActor);
         return GetJIDComponent.req.call(internals, elementActor);
     }
 
@@ -92,7 +93,7 @@ public class TupleJid
      */
     @Override
     public void open(Internals internals) throws Exception {
-        actorTypes = GetActorTypes.req.call(thisActor);
+        actorTypes = GetActorTypes.req.call(internals, thisActor);
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = serializedData.readable();

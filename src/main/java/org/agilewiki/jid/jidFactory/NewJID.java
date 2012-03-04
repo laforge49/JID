@@ -105,7 +105,7 @@ final public class NewJID extends NewActor {
      * @param length    The length of the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes, int offset, int length) {
-        super(actorType, mailbox, null, parent);
+        super(actorType, mailbox, parent);
         this.bytes = new byte[length];
         System.arraycopy(bytes, offset, this.bytes, 0, length);
     }
