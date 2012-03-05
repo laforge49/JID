@@ -219,6 +219,8 @@ public class JID extends Component {
      * @param readableBytes Holds the serialized data.
      */
     public void load(ReadableBytes readableBytes) {
+        if (thisActor.isOpen())
+            throw new IllegalStateException("Already active");
         serializedData = readableBytes.immutable();
     }
 

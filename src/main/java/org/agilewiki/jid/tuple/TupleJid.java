@@ -71,7 +71,7 @@ public class TupleJid
      */
     protected int len;
 
-    protected JID createJid(int i, Internals internals)
+    protected JID createJid(int i, Internals internals, ReadableBytes readableBytes)
             throws Exception {
         String actorType = actorTypes[i];
         NewActor newActor = new NewActor(
@@ -79,9 +79,12 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent());
         JCActor elementActor = newActor.call(thisActor.getParent());
-        JID rv = GetJIDComponent.req.call(internals, elementActor);
+        JID elementJid = GetJIDComponent.req.call(internals, elementActor);
+        if (readableBytes != null) {
+            elementJid.load(readableBytes);
+        }
         Open.req.call(internals, elementActor);
-        return rv;
+        return elementJid;
     }
 
     /**
@@ -104,10 +107,7 @@ public class TupleJid
         int i = 0;
         len = 0;
         while (i < actorTypes.length) {
-            JID elementJid = createJid(i, internals);
-            if (readableBytes != null) {
-                elementJid.load(readableBytes);
-            }
+            JID elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
             elementJid.containerJid = TupleJid.this;
             tuple[i] = elementJid;
