@@ -50,7 +50,6 @@ public class IGet extends SynchronousRequest<JCActor> {
      * @param i The index of the desired element.
      */
     public IGet(int i) {
-
         this.i = i;
     }
 }

@@ -7,7 +7,9 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
+import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.scalar.vlen.StringJid;
 
 public class TupleTest extends TestCase {
@@ -19,20 +21,25 @@ public class TupleTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             (new Include(StringStringTuple.class)).call(factory);
             Open.req.call(factory);
-            JCActor t0 = new JCActor(mailboxFactory.createMailbox());
-            t0.setParent(factory);
-            (new Include(TupleJid.class)).call(t0);
+            NewActor newTupleJid = new NewActor(JidFactories.TUPLE_JID_TYPE);
+            JCActor t0 = newTupleJid.send(future, factory);
             Open.req.call(t0);
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
             JCActor e0 = iget0.send(future, t0);
             assertNull(StringJid.getValueReq.send(future, e0));
-            JCActor e1 = iget0.send(future, t0);
+            JCActor e1 = iget1.send(future, t0);
             assertNull(StringJid.getValueReq.send(future, e1));
             StringJid.setValueReq("Apples").send(future, e0);
             assertEquals("Apples", StringJid.getValueReq.send(future, e0));
             StringJid.setValueReq("Oranges").send(future, e1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, e1));
+            JCActor t1 = (new CopyJID()).send(future, t0);
+            Open.req.call(t1);
+            JCActor f0 = iget0.send(future, t1);
+            assertEquals("Apples", StringJid.getValueReq.send(future, f0));
+            JCActor f1 = iget1.send(future, t1);
+            assertEquals("Oranges", StringJid.getValueReq.send(future, f1));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -163,6 +163,7 @@ public class TupleJid
         int i = 0;
         while (i < actorTypes.length) {
             tuple[i].save(appendableBytes);
+            i += 1;
         }
     }
 
