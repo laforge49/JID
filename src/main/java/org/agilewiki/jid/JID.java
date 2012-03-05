@@ -58,7 +58,8 @@ public class JID extends Component {
         thisActor.bind(GetSerializedLength.class.getName(),
                 new SynchronousMethodBinding<GetSerializedLength, Integer>() {
                     @Override
-                    public Integer synchronousProcessRequest(Internals internals, GetSerializedLength request) throws Exception {
+                    public Integer synchronousProcessRequest(Internals internals, GetSerializedLength request)
+                            throws Exception {
                         return getSerializedLength();
                     }
                 });
@@ -77,12 +78,15 @@ public class JID extends Component {
             }
         });
 
-        thisActor.bind(GetJIDComponent.class.getName(), new SynchronousOnlyMethodBinding<GetJIDComponent, JID>() {
-            @Override
-            public JID synchronousProcessRequest(Internals internals, GetJIDComponent request) throws Exception {
-                return JID.this;
-            }
-        });
+        thisActor.bind(
+                GetJIDComponent.class.getName(),
+                new SynchronousOnlyInitializationMethodBinding<GetJIDComponent, JID>() {
+                    @Override
+                    public JID initializationProcessRequest(Internals internals, GetJIDComponent request)
+                            throws Exception {
+                        return JID.this;
+                    }
+                });
 
         thisActor.bind(CopyJID.class.getName(), new SynchronousMethodBinding<CopyJID, JCActor>() {
             @Override

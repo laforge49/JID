@@ -79,8 +79,9 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent());
         JCActor elementActor = newActor.call(thisActor.getParent());
+        JID rv = GetJIDComponent.req.call(internals, elementActor);
         Open.req.call(internals, elementActor);
-        return GetJIDComponent.req.call(internals, elementActor);
+        return rv;
     }
 
     /**

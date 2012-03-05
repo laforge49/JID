@@ -97,9 +97,9 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         String jidType = (String) request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), thisActor.getParent());
         JCActor nja = na.call(thisActor);
-        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.containerJid = this;
+        Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
         serializedData = null;
@@ -121,9 +121,9 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         String jidType = (String) request.getValue();
         NewActor na = new NewActor(jidType, thisActor.getMailbox(), thisActor.getParent());
         JCActor nja = na.call(thisActor);
-        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.containerJid = this;
+        Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
         serializedData = null;
@@ -153,10 +153,10 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
                 actorType,
                 thisActor.getMailbox(),
                 thisActor.getParent())).call(thisActor);
-        Open.req.call(internals, nja);
         value = (new GetJIDComponent()).call(internals, nja);
         value.load(readableBytes);
         value.containerJid = this;
+        Open.req.call(internals, nja);
         return nja;
     }
 
