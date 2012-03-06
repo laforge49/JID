@@ -10,6 +10,7 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.requests.CopyJID;
+import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.vlen.StringJid;
 
 public class TupleTest extends TestCase {
@@ -36,9 +37,9 @@ public class TupleTest extends TestCase {
             assertEquals("Oranges", StringJid.getValueReq.send(future, e1));
             JCActor t1 = (new CopyJID()).send(future, t0);
             Open.req.call(t1);
-            JCActor f0 = iget0.send(future, t1);
+            JCActor f0 = (new ResolvePathname("0")).send(future, t1);
             assertEquals("Apples", StringJid.getValueReq.send(future, f0));
-            JCActor f1 = iget1.send(future, t1);
+            JCActor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, f1));
         } catch (Exception e) {
             e.printStackTrace();
