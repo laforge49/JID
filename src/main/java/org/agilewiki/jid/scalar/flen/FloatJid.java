@@ -52,7 +52,7 @@ public class FloatJid
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     @Override
     protected Float newValue() {

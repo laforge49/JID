@@ -52,7 +52,7 @@ public class BooleanJid
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     @Override
     protected Boolean newValue() {

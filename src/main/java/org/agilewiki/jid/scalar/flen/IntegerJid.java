@@ -52,7 +52,7 @@ public class IntegerJid
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     @Override
     protected Integer newValue() {

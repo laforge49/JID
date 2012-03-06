@@ -52,7 +52,7 @@ public class DoubleJid
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     @Override
     protected Double newValue() {

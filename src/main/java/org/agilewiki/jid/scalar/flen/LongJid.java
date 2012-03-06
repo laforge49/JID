@@ -52,7 +52,7 @@ public class LongJid
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     @Override
     protected Long newValue() {

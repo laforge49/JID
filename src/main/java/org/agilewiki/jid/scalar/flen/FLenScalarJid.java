@@ -44,7 +44,7 @@ abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
     /**
      * Create the value.
      *
-     * @return
+     * @return The default value
      */
     abstract protected RESPONSE_TYPE newValue();
 
