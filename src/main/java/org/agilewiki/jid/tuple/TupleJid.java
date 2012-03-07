@@ -88,15 +88,14 @@ public class TupleJid
     }
 
     /**
-     * Open is called when an actor becomes active by receiving a
-     * non-initialization request--useful initialization like opening files.
-     * Components are opened in dependency order, the root component being the last.
+     * Opening is called when a Open initialization request is processed,
+     * but before the actor is marked as active.
      *
      * @param internals The actor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
     @Override
-    public void open(Internals internals) throws Exception {
+    public void opening(Internals internals) throws Exception {
         actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
