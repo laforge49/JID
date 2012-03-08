@@ -65,6 +65,11 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         return new SetValue(actorType);
     }
 
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+    }
+
     /**
      * Clear the content.
      *
