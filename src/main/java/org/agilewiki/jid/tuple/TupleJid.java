@@ -138,7 +138,7 @@ public class TupleJid
         oldElementJid.containerJid = null;
         tuple[i] = elementJid;
         elementJid.containerJid = this;
-        change(internals, elementJid.getSerializedLength() - len);
+        change(internals, elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 
     /**
