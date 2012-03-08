@@ -29,8 +29,8 @@ import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flen.*;
 import org.agilewiki.jid.scalar.vlen.BytesJid;
-import org.agilewiki.jid.scalar.vlen.JidJid;
 import org.agilewiki.jid.scalar.vlen.StringJid;
+import org.agilewiki.jid.scalar.vlen.jidjid.JidJid;
 import org.agilewiki.jid.tuple.TupleJid;
 
 import java.util.ArrayList;

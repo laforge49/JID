@@ -13,6 +13,7 @@ import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlen.jidjid.JidJid;
 
 public class BytesTest extends TestCase {
     public void test() {
