@@ -124,6 +124,14 @@ public class TupleJid
         }
     }
 
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param internals The actor's internals.
+     * @param i         The index of the desired element.
+     * @param bytes     Holds the serialized data.
+     * @throws Exception Any exceptions thrown while processing the request.
+     */
     public void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
         String actorType = actorTypes[i];
