@@ -10,11 +10,13 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.requests.CopyJID;
+import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlen.Clear;
 import org.agilewiki.jid.scalar.vlen.MakeValue;
+import org.agilewiki.jid.scalar.vlen.StringJid;
 
 public class JidJidTest extends TestCase {
     public void test() {
@@ -50,6 +52,15 @@ public class JidJidTest extends TestCase {
             assertEquals(rpa, jidJid11);
             rpa = (new ResolvePathname("$")).send(future, jidJid11);
             assertNull(rpa);
+
+            NewActor newStringJid = new NewActor(JidFactories.STRING_JID_TYPE);
+            JCActor string1 = newStringJid.send(future, factory);
+            Open.req.call(string1);
+            StringJid.setValueReq("abc").send(future, string1);
+            byte[] sb = GetBytes.req.send(future, string1);
+            (new SetBytes(JidFactories.STRING_JID_TYPE, sb)).send(future, jidJid1);
+            JCActor sj = JidJid.getValueReq.send(future, jidJid1);
+            assertEquals("abc", StringJid.getValueReq.send(future, sj));
 
             JCActor jidJid2 = newJidJid.send(future, factory);
             Open.req.call(jidJid2);
