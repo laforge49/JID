@@ -26,9 +26,11 @@ package org.agilewiki.jid.tuple;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.GetJIDComponent;
 
 /**
@@ -48,6 +50,11 @@ public class TupleJid
     protected JID[] tuple;
 
     /**
+     * The size of the serialized (exclusive of its length header).
+     */
+    protected int len;
+
+    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -64,12 +71,15 @@ public class TupleJid
                 return tuple[ndx].thisActor;
             }
         });
-    }
 
-    /**
-     * The size of the serialized (exclusive of its length header).
-     */
-    protected int len;
+        thisActor.bind(ISetBytes.class.getName(), new VoidSynchronousMethodBinding<ISetBytes>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, ISetBytes request)
+                    throws Exception {
+                iSetBytes(internals, request.getI(), request.getBytes());
+            }
+        });
+    }
 
     protected JID createJid(int i, Internals internals, ReadableBytes readableBytes)
             throws Exception {
@@ -108,10 +118,27 @@ public class TupleJid
         while (i < actorTypes.length) {
             JID elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
-            elementJid.containerJid = TupleJid.this;
+            elementJid.containerJid = this;
             tuple[i] = elementJid;
             i += 1;
         }
+    }
+
+    public void iSetBytes(Internals internals, int i, byte[] bytes)
+            throws Exception {
+        String actorType = actorTypes[i];
+        JCActor elementActor = (new NewJID(
+                actorType,
+                thisActor.getMailbox(),
+                thisActor.getParent(),
+                bytes)).call(internals, thisActor.getParent());
+        JID elementJid = GetJIDComponent.req.call(internals, elementActor);
+        Open.req.call(internals, elementActor);
+        JID oldElementJid = tuple[i];
+        oldElementJid.containerJid = null;
+        tuple[i] = elementJid;
+        elementJid.containerJid = this;
+        change(internals, elementJid.getSerializedLength() - len);
     }
 
     /**
