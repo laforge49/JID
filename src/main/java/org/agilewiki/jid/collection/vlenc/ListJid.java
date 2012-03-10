@@ -27,8 +27,10 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.JID;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid.Util;
 import org.agilewiki.jid.collection.CollectionJid;
 import org.agilewiki.jid.requests.GetJIDComponent;
 
@@ -68,10 +70,26 @@ public class ListJid extends CollectionJid {
     }
 
     /**
-     * Reset the collection.
+     * Returns the number of bytes needed to serialize the persistent data.
+     *
+     * @return The minimum size of the byte array needed to serialize the persistent data.
      */
-    protected void reset() {
+    @Override
+    public int getSerializedLength() {
+        return Util.INT_LENGTH * 2 + len;
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    @Override
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        len = loadLen(readableBytes);
         list = null;
+        readableBytes.skip(Util.INT_LENGTH + len);
     }
 
     /**
@@ -97,12 +115,15 @@ public class ListJid extends CollectionJid {
             throws Exception {
         if (list != null)
             return;
-        list = new ArrayList<JID>();
-        if (!isSerialized())
+        if (!isSerialized()) {
+            list = new ArrayList<JID>();
             return;
+        }
         loadElementsType(internals);
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
+        int count = readableBytes.readInt();
+        list = new ArrayList<JID>(count);
         int limit = len + readableBytes.getOffset();
         while (readableBytes.getOffset() < limit) {
             NewActor newActor = new NewActor(
@@ -116,6 +137,22 @@ public class ListJid extends CollectionJid {
             len += elementJid.getSerializedLength();
             elementJid.containerJid = this;
             list.add(elementJid);
+        }
+    }
+
+    /**
+     * Serialize the persistent data.
+     *
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
+     */
+    @Override
+    protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
+        appendableBytes.writeInt(size());
+        int i = 0;
+        while (i < size()) {
+            get(i).save(appendableBytes);
+            i += 1;
         }
     }
 

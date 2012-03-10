@@ -46,16 +46,6 @@ abstract public class CollectionJid extends JID {
     }
 
     /**
-     * Returns the number of bytes needed to serialize the persistent data.
-     *
-     * @return The minimum size of the byte array needed to serialize the persistent data.
-     */
-    @Override
-    public int getSerializedLength() {
-        return Util.INT_LENGTH + len;
-    }
-
-    /**
      * Returns the size of the collection.
      *
      * @return The size of the collection.
@@ -69,39 +59,6 @@ abstract public class CollectionJid extends JID {
      * @return The ith JID component.
      */
     abstract protected JID get(int i);
-
-    /**
-     * Serialize the persistent data.
-     *
-     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
-     */
-    @Override
-    protected void serialize(AppendableBytes appendableBytes) {
-        saveLen(appendableBytes);
-        int i = 0;
-        while (i < size()) {
-            get(i).save(appendableBytes);
-            i += 1;
-        }
-    }
-
-    /**
-     * Reset the collection.
-     */
-    abstract protected void reset();
-
-    /**
-     * Load the serialized data into the JID.
-     *
-     * @param readableBytes Holds the serialized data.
-     */
-    @Override
-    public void load(ReadableBytes readableBytes) {
-        super.load(readableBytes);
-        len = loadLen(readableBytes);
-        reset();
-        readableBytes.skip(len);
-    }
 
     /**
      * Process a change in the persistent data.

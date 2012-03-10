@@ -29,9 +29,7 @@ import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.ComparableKey;
-import org.agilewiki.jid.JID;
-import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
@@ -150,6 +148,16 @@ public class TupleJid
     }
 
     /**
+     * Returns the number of bytes needed to serialize the persistent data.
+     *
+     * @return The minimum size of the byte array needed to serialize the persistent data.
+     */
+    @Override
+    public int getSerializedLength() {
+        return Util.INT_LENGTH + len;
+    }
+
+    /**
      * Returns the size of the collection.
      *
      * @return The size of the collection.
@@ -169,10 +177,31 @@ public class TupleJid
     }
 
     /**
-     * Reset the collection.
+     * Serialize the persistent data.
+     *
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void reset() {
+    @Override
+    protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
+        int i = 0;
+        while (i < size()) {
+            get(i).save(appendableBytes);
+            i += 1;
+        }
+    }
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    @Override
+    public void load(ReadableBytes readableBytes) {
+        super.load(readableBytes);
+        len = loadLen(readableBytes);
         tuple = null;
+        readableBytes.skip(len);
     }
 
     /**
