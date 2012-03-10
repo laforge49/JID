@@ -21,27 +21,50 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.tuple;
+package org.agilewiki.jid.collection;
 
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jactor.bind.SynchronousRequest;
 
 /**
- * Defines (String, String) tuples.
+ * Creates a JID actor in place of the ith element of the collection and loads its serialized data.
  */
-public class StringStringTuple extends ActorTypes {
-    private static final String[] ats = new String[2];
+public class ISetBytes extends SynchronousRequest<Object> {
+    /**
+     * The index of the desired element.
+     */
+    private int i;
 
-    static {
-        ats[0] = JidFactories.STRING_JID_TYPE;
-        ats[1] = JidFactories.STRING_JID_TYPE;
+    /**
+     * Holds the serialized data.
+     */
+    private byte[] bytes;
+
+    /**
+     * Create the request
+     *
+     * @param i     The index of the desired element.
+     * @param bytes Holds the serialized data.
+     */
+    public ISetBytes(int i, byte[] bytes) {
+        this.i = i;
+        this.bytes = bytes;
     }
 
     /**
-     * Returns an array of actor types.
+     * Returns the index of the desired element.
      *
-     * @return An array of actor types.
+     * @return The index of the desired element.
      */
-    protected String[] ats() {
-        return ats;
+    public int getI() {
+        return i;
+    }
+
+    /**
+     * Returns the serialized data.
+     *
+     * @return The serialized data.
+     */
+    public byte[] getBytes() {
+        return bytes;
     }
 }

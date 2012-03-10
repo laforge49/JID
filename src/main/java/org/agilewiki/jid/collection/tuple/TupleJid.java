@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.tuple;
+package org.agilewiki.jid.collection.tuple;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
@@ -30,6 +30,8 @@ import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
+import org.agilewiki.jid.collection.IGet;
+import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.GetJIDComponent;
 

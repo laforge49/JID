@@ -21,40 +21,35 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.tuple;
+package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.components.JCActor;
 
 /**
- * Base class for defining array types of tuples.
+ * Returns the ith element of a collection.
  */
-abstract public class ActorTypes extends Component {
+public class IGet extends SynchronousRequest<JCActor> {
+    /**
+     * The index of the desired element.
+     */
+    private int i;
 
     /**
-     * Returns an array of actor types.
+     * Returns the index of the desired element.
      *
-     * @return An array of actor types.
+     * @return The index of the desired element.
      */
-    abstract protected String[] ats();
+    public int getI() {
+        return i;
+    }
 
     /**
-     * Bind request classes.
+     * Create the request.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param i The index of the desired element.
      */
-    @Override
-    public void bindery() throws Exception {
-        thisActor.bind(
-                GetActorTypes.class.getName(),
-                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
-                    @Override
-                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                             GetActorTypes request)
-                            throws Exception {
-                        return ats();
-                    }
-                });
+    public IGet(int i) {
+        this.i = i;
     }
 }

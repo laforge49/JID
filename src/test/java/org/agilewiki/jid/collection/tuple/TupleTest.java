@@ -1,4 +1,4 @@
-package org.agilewiki.jid.tuple;
+package org.agilewiki.jid.collection.tuple;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
@@ -9,6 +9,8 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.collection.IGet;
+import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.ResolvePathname;
