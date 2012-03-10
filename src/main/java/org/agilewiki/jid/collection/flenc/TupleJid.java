@@ -36,7 +36,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.GetJIDComponent;
 
 /**
- * Holds an array of actors.
+ * Holds a fixed-size array of JID actors of various types.
  */
 public class TupleJid
         extends JID
