@@ -26,7 +26,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
-import org.agilewiki.jid.collection.flenc.tuple.TupleJid;
+import org.agilewiki.jid.collection.flenc.TupleJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.*;
 import org.agilewiki.jid.scalar.vlens.BytesJid;

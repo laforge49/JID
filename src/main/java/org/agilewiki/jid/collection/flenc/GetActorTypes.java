@@ -21,40 +21,13 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc.tuple;
+package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jactor.bind.ConcurrentRequest;
 
 /**
- * Base class for defining array types of tuples.
+ * Returns an array of actor types.
  */
-abstract public class ActorTypes extends Component {
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return An array of actor types.
-     */
-    abstract protected String[] ats();
-
-    /**
-     * Bind request classes.
-     *
-     * @throws Exception Any exceptions thrown while binding.
-     */
-    @Override
-    public void bindery() throws Exception {
-        thisActor.bind(
-                GetActorTypes.class.getName(),
-                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
-                    @Override
-                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                             GetActorTypes request)
-                            throws Exception {
-                        return ats();
-                    }
-                });
-    }
+public class GetActorTypes extends ConcurrentRequest<String[]> {
+    public final static GetActorTypes req = new GetActorTypes();
 }

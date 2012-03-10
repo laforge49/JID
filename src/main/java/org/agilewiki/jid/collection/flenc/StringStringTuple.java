@@ -21,13 +21,27 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc.tuple;
+package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentRequest;
+import org.agilewiki.jid.JidFactories;
 
 /**
- * Returns an array of actor types.
+ * Defines (String, String) tuples.
  */
-public class GetActorTypes extends ConcurrentRequest<String[]> {
-    public final static GetActorTypes req = new GetActorTypes();
+public class StringStringTuple extends ActorTypes {
+    private static final String[] ats = new String[2];
+
+    static {
+        ats[0] = JidFactories.STRING_JID_TYPE;
+        ats[1] = JidFactories.STRING_JID_TYPE;
+    }
+
+    /**
+     * Returns an array of actor types.
+     *
+     * @return An array of actor types.
+     */
+    protected String[] ats() {
+        return ats;
+    }
 }
