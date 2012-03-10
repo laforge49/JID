@@ -1,4 +1,4 @@
-package org.agilewiki.jid.collection.tuple;
+package org.agilewiki.jid.collection.flenc.tuple;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
