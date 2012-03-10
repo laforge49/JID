@@ -55,6 +55,33 @@ public class TupleJid
     protected JID[] tuple;
 
     /**
+     * Opening is called when a Open initialization request is processed,
+     * but before the actor is marked as active.
+     *
+     * @param internals The actor's internals.
+     * @throws Exception Any exceptions thrown during the open.
+     */
+    @Override
+    public void opening(Internals internals) throws Exception {
+        actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
+        ReadableBytes readableBytes = null;
+        if (isSerialized()) {
+            readableBytes = serializedData.readable();
+            skipLen(readableBytes);
+        }
+        tuple = new JID[size()];
+        int i = 0;
+        len = 0;
+        while (i < size()) {
+            JID elementJid = createJid(i, internals, readableBytes);
+            len += elementJid.getSerializedLength();
+            elementJid.containerJid = this;
+            tuple[i] = elementJid;
+            i += 1;
+        }
+    }
+
+    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -95,33 +122,6 @@ public class TupleJid
         }
         Open.req.call(internals, elementActor);
         return elementJid;
-    }
-
-    /**
-     * Opening is called when a Open initialization request is processed,
-     * but before the actor is marked as active.
-     *
-     * @param internals The actor's internals.
-     * @throws Exception Any exceptions thrown during the open.
-     */
-    @Override
-    public void opening(Internals internals) throws Exception {
-        actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
-        ReadableBytes readableBytes = null;
-        if (isSerialized()) {
-            readableBytes = serializedData.readable();
-            skipLen(readableBytes);
-        }
-        tuple = new JID[size()];
-        int i = 0;
-        len = 0;
-        while (i < size()) {
-            JID elementJid = createJid(i, internals, readableBytes);
-            len += elementJid.getSerializedLength();
-            elementJid.containerJid = this;
-            tuple[i] = elementJid;
-            i += 1;
-        }
     }
 
     /**
