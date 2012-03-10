@@ -29,7 +29,10 @@ import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
-import org.agilewiki.jid.*;
+import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.JID;
+import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid.collection.CollectionJid;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
@@ -39,7 +42,7 @@ import org.agilewiki.jid.requests.GetJIDComponent;
  * Holds a fixed-size array of JID actors of various types.
  */
 public class TupleJid
-        extends JID
+        extends CollectionJid
         implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.
@@ -50,11 +53,6 @@ public class TupleJid
      * A tuple of actors.
      */
     protected JID[] tuple;
-
-    /**
-     * The size of the serialized (exclusive of its length header).
-     */
-    protected int len;
 
     /**
      * Bind request classes.
@@ -70,7 +68,7 @@ public class TupleJid
             public JCActor synchronousProcessRequest(Internals internals, IGet request)
                     throws Exception {
                 int ndx = request.getI();
-                return tuple[ndx].thisActor;
+                return get(ndx).thisActor;
             }
         });
 
@@ -114,10 +112,10 @@ public class TupleJid
             readableBytes = serializedData.readable();
             skipLen(readableBytes);
         }
-        tuple = new JID[actorTypes.length];
+        tuple = new JID[size()];
         int i = 0;
         len = 0;
-        while (i < actorTypes.length) {
+        while (i < size()) {
             JID elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
             elementJid.containerJid = this;
@@ -144,7 +142,7 @@ public class TupleJid
                 bytes)).call(internals, thisActor.getParent());
         JID elementJid = GetJIDComponent.req.call(internals, elementActor);
         Open.req.call(internals, elementActor);
-        JID oldElementJid = tuple[i];
+        JID oldElementJid = get(i);
         oldElementJid.containerJid = null;
         tuple[i] = elementJid;
         elementJid.containerJid = this;
@@ -152,116 +150,29 @@ public class TupleJid
     }
 
     /**
-     * Skip over the length at the beginning of the serialized data.
+     * Returns the size of the collection.
      *
-     * @param readableBytes Holds the serialized data.
+     * @return The size of the collection.
      */
-    protected void skipLen(ReadableBytes readableBytes) {
-        readableBytes.skip(Util.INT_LENGTH);
+    protected int size() {
+        return actorTypes.length;
     }
 
     /**
-     * Returns the size of the serialized data (exclusive of its length header).
+     * Returns the ith JID component.
      *
-     * @param readableBytes Holds the serialized data.
-     * @return The size of the serialized data (exclusive of its length header).
+     * @param i The index of the element of interest.
+     * @return The ith JID component.
      */
-    protected int loadLen(ReadableBytes readableBytes) {
-        return readableBytes.readInt();
+    protected JID get(int i) {
+        return tuple[i];
     }
 
     /**
-     * Writes the size of the serialized data (exclusive of its length header).
-     *
-     * @param appendableBytes The object written to.
+     * Reset the collection.
      */
-    protected void saveLen(AppendableBytes appendableBytes) {
-        appendableBytes.writeInt(len);
-    }
-
-    /**
-     * Returns the number of bytes needed to serialize the persistent data.
-     *
-     * @return The minimum size of the byte array needed to serialize the persistent data.
-     */
-    @Override
-    public int getSerializedLength() {
-        return Util.INT_LENGTH + len;
-    }
-
-    /**
-     * Serialize the persistent data.
-     *
-     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
-     */
-    @Override
-    protected void serialize(AppendableBytes appendableBytes) {
-        saveLen(appendableBytes);
-        int i = 0;
-        while (i < actorTypes.length) {
-            tuple[i].save(appendableBytes);
-            i += 1;
-        }
-    }
-
-    /**
-     * Load the serialized data into the JID.
-     *
-     * @param readableBytes Holds the serialized data.
-     */
-    @Override
-    public void load(ReadableBytes readableBytes) {
-        super.load(readableBytes);
-        len = loadLen(readableBytes);
+    protected void reset() {
         tuple = null;
-        readableBytes.skip(len);
-    }
-
-    /**
-     * Process a change in the persistent data.
-     *
-     * @param internals    The actor's internals.
-     * @param lengthChange The change in the size of the serialized data.
-     * @throws Exception Any uncaught exception which occurred while processing the change.
-     */
-    @Override
-    public void change(Internals internals, int lengthChange) throws Exception {
-        len += lengthChange;
-        super.change(internals, lengthChange);
-    }
-
-    /**
-     * Resolves a JID pathname, returning a JID actor or null.
-     *
-     * @param internals The actor's internals.
-     * @param pathname  A JID pathname.
-     * @return A JID actor or null.
-     * @throws Exception Any uncaught exception which occurred while processing the request.
-     */
-    @Override
-    public JCActor resolvePathname(Internals internals, String pathname)
-            throws Exception {
-        if (pathname.length() == 0) {
-            return thisActor;
-        }
-        int s = pathname.indexOf("/");
-        if (s == -1)
-            s = pathname.length();
-        if (s == 0)
-            throw new IllegalArgumentException("pathname " + pathname);
-        String ns = pathname.substring(0, s);
-        int n = 0;
-        try {
-            n = Integer.parseInt(ns);
-        } catch (Exception ex) {
-            throw new IllegalArgumentException("pathname " + pathname);
-        }
-        if (n < 0 || n >= tuple.length)
-            throw new IllegalArgumentException("pathname " + pathname);
-        JID jid = tuple[n];
-        if (s == pathname.length())
-            return jid.thisActor;
-        return jid.resolvePathname(internals, pathname.substring(s + 1));
     }
 
     /**
@@ -271,7 +182,7 @@ public class TupleJid
      * @return The result of a compareTo(o) using element 0.
      */
     public int compareKeyTo(Object o) {
-        ComparableKey<Object> e0 = (ComparableKey<Object>) tuple[0];
+        ComparableKey<Object> e0 = (ComparableKey<Object>) get(0);
         return e0.compareKeyTo(o);
     }
 }

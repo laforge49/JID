@@ -23,8 +23,48 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
+import org.agilewiki.jid.JID;
+import org.agilewiki.jid.collection.CollectionJid;
+
+import java.util.ArrayList;
+
 /**
  * Holds an ArrayList of JID actors, all of the same type.
  */
-public class SetJid {
+public class ListJid extends CollectionJid {
+    /**
+     * Actor type of the elements.
+     */
+    protected String elementsType;
+
+    /**
+     * A list of JID actors.
+     */
+    protected ArrayList<JID> list = new ArrayList<JID>();
+
+    /**
+     * Returns the size of the collection.
+     *
+     * @return The size of the collection.
+     */
+    protected int size() {
+        return list.size();
+    }
+
+    /**
+     * Returns the ith JID component.
+     *
+     * @param i The index of the element of interest.
+     * @return The ith JID component.
+     */
+    protected JID get(int i) {
+        return list.get(i);
+    }
+
+    /**
+     * Reset the collection.
+     */
+    protected void reset() {
+        list.clear();
+    }
 }
