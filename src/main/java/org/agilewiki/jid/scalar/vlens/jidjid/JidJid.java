@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlen.jidjid;
+package org.agilewiki.jid.scalar.vlens.jidjid;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
@@ -35,8 +35,8 @@ import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlen.MakeValue;
-import org.agilewiki.jid.scalar.vlen.VLenScalarJid;
+import org.agilewiki.jid.scalar.vlens.MakeValue;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
  * A JID component that holds a JID actor.

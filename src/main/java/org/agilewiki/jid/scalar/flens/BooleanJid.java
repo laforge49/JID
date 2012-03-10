@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flen;
+package org.agilewiki.jid.scalar.flens;
 
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds an integer.
+ * A JID component that holds a boolean.
  */
-public class IntegerJid
-        extends FLenScalarJid<Integer> {
+public class BooleanJid
+        extends FLenScalarJid<Boolean> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Integer> getValueReq = (GetValue<Integer>) GetValue.req;
+    public static final GetValue<Boolean> getValueReq = (GetValue<Boolean>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class IntegerJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Integer value) {
+    public static final SetValue setValueReq(Boolean value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class IntegerJid
      * @return The default value
      */
     @Override
-    protected Integer newValue() {
-        return new Integer(0);
+    protected Boolean newValue() {
+        return new Boolean(false);
     }
 
     /**
@@ -64,11 +64,12 @@ public class IntegerJid
      *
      * @return The value held by this component.
      */
-    public Integer getValue() {
+    @Override
+    public Boolean getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readInt();
+        value = readableBytes.readBoolean();
         return value;
     }
 
@@ -79,7 +80,7 @@ public class IntegerJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.INT_LENGTH;
+        return Util.BOOLEAN_LENGTH;
     }
 
     /**
@@ -89,6 +90,6 @@ public class IntegerJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeInt(value);
+        appendableBytes.writeBoolean(((Boolean) value).booleanValue());
     }
 }

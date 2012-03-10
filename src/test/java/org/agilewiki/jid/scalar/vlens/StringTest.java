@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.vlen;
+package org.agilewiki.jid.scalar.vlens;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
@@ -13,7 +13,7 @@ import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlen.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
 
 public class StringTest extends TestCase {
     public void test() {

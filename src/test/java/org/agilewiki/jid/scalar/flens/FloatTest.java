@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.flen;
+package org.agilewiki.jid.scalar.flens;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.JAFuture;
@@ -13,9 +13,9 @@ import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlen.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
 
-public class IntegerTest extends TestCase {
+public class FloatTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -24,41 +24,41 @@ public class IntegerTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewActor newIntegerJid = new NewActor(JidFactories.INTEGER_JID_TYPE);
-            JCActor int1 = newIntegerJid.send(future, factory);
-            Open.req.call(int1);
-            JCActor int2 = (new CopyJID()).send(future, int1);
-            Open.req.call(int2);
-            IntegerJid.setValueReq(1).send(future, int2);
-            JCActor int3 = (new CopyJID()).send(future, int2);
-            Open.req.call(int3);
+            NewActor newFloatJid = new NewActor(JidFactories.FLOAT_JID_TYPE);
+            JCActor float1 = newFloatJid.send(future, factory);
+            Open.req.call(float1);
+            JCActor float2 = (new CopyJID()).send(future, float1);
+            Open.req.call(float2);
+            FloatJid.setValueReq(1.0f).send(future, float2);
+            JCActor float3 = (new CopyJID()).send(future, float2);
+            Open.req.call(float3);
 
-            int sl = GetSerializedLength.req.send(future, int1);
+            int sl = GetSerializedLength.req.send(future, float1);
             assertEquals(4, sl);
-            sl = GetSerializedLength.req.send(future, int2);
+            sl = GetSerializedLength.req.send(future, float2);
             assertEquals(4, sl);
-            sl = GetSerializedLength.req.send(future, int3);
+            sl = GetSerializedLength.req.send(future, float3);
             assertEquals(4, sl);
 
-            int v = IntegerJid.getValueReq.send(future, int1);
-            assertEquals(0, v);
-            v = IntegerJid.getValueReq.send(future, int2);
-            assertEquals(1, v);
-            v = IntegerJid.getValueReq.send(future, int3);
-            assertEquals(1, v);
+            float v = FloatJid.getValueReq.send(future, float1);
+            assertEquals(0.f, v);
+            v = FloatJid.getValueReq.send(future, float2);
+            assertEquals(1.f, v);
+            v = FloatJid.getValueReq.send(future, float3);
+            assertEquals(1.f, v);
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
             JCActor jidJid1 = newJidJid.send(future, factory);
             Open.req.call(jidJid1);
-            SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_TYPE);
-            sjvi.send(future, jidJid1);
+            SetValue sjvf = JidJid.setValueReq(JidFactories.FLOAT_JID_TYPE);
+            sjvf.send(future, jidJid1);
             JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
-            v = IntegerJid.getValueReq.send(future, rpa);
-            assertEquals(0, v);
-            IntegerJid.setValueReq(-1).send(future, rpa);
+            v = FloatJid.getValueReq.send(future, rpa);
+            assertEquals(0.f, v);
+            FloatJid.setValueReq(-1.f).send(future, rpa);
             rpa = (new ResolvePathname("$")).send(future, jidJid1);
-            v = IntegerJid.getValueReq.send(future, rpa);
-            assertEquals(-1, v);
+            v = FloatJid.getValueReq.send(future, rpa);
+            assertEquals(-1.f, v);
 
         } catch (Exception e) {
             e.printStackTrace();

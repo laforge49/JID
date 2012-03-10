@@ -28,10 +28,10 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jid.collection.tuple.TupleJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.scalar.flen.*;
-import org.agilewiki.jid.scalar.vlen.BytesJid;
-import org.agilewiki.jid.scalar.vlen.StringJid;
-import org.agilewiki.jid.scalar.vlen.jidjid.JidJid;
+import org.agilewiki.jid.scalar.flens.*;
+import org.agilewiki.jid.scalar.vlens.BytesJid;
+import org.agilewiki.jid.scalar.vlens.StringJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
 
 import java.util.ArrayList;
 

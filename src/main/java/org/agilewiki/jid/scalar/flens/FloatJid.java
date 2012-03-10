@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flen;
+package org.agilewiki.jid.scalar.flens;
 
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a long.
+ * A JID component that holds a float.
  */
-public class LongJid
-        extends FLenScalarJid<Long> {
+public class FloatJid
+        extends FLenScalarJid<Float> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
+    public static final GetValue<Float> getValueReq = (GetValue<Float>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class LongJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Long value) {
+    public static final SetValue setValueReq(Float value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class LongJid
      * @return The default value
      */
     @Override
-    protected Long newValue() {
-        return new Long(0L);
+    protected Float newValue() {
+        return new Float(0.F);
     }
 
     /**
@@ -64,11 +64,11 @@ public class LongJid
      *
      * @return The value held by this component.
      */
-    public Long getValue() {
+    public Float getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readLong();
+        value = readableBytes.readFloat();
         return value;
     }
 
@@ -79,7 +79,7 @@ public class LongJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.LONG_LENGTH;
+        return Util.FLOAT_LENGTH;
     }
 
     /**
@@ -89,6 +89,6 @@ public class LongJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeLong(value);
+        appendableBytes.writeFloat(value);
     }
 }

@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flen;
+package org.agilewiki.jid.scalar.flens;
 
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a double.
+ * A JID component that holds a long.
  */
-public class DoubleJid
-        extends FLenScalarJid<Double> {
+public class LongJid
+        extends FLenScalarJid<Long> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Double> getValueReq = (GetValue<Double>) GetValue.req;
+    public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class DoubleJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Double value) {
+    public static final SetValue setValueReq(Long value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class DoubleJid
      * @return The default value
      */
     @Override
-    protected Double newValue() {
-        return new Double(0.D);
+    protected Long newValue() {
+        return new Long(0L);
     }
 
     /**
@@ -64,11 +64,11 @@ public class DoubleJid
      *
      * @return The value held by this component.
      */
-    public Double getValue() {
+    public Long getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readDouble();
+        value = readableBytes.readLong();
         return value;
     }
 
@@ -79,7 +79,7 @@ public class DoubleJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.DOUBLE_LENGTH;
+        return Util.LONG_LENGTH;
     }
 
     /**
@@ -89,6 +89,6 @@ public class DoubleJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeDouble(value);
+        appendableBytes.writeLong(value);
     }
 }

@@ -14,7 +14,7 @@ import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.ResolvePathname;
-import org.agilewiki.jid.scalar.vlen.StringJid;
+import org.agilewiki.jid.scalar.vlens.StringJid;
 
 public class TupleTest extends TestCase {
     public void test() {

@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flen;
+package org.agilewiki.jid.scalar.flens;
 
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a float.
+ * A JID component that holds an integer.
  */
-public class FloatJid
-        extends FLenScalarJid<Float> {
+public class IntegerJid
+        extends FLenScalarJid<Integer> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Float> getValueReq = (GetValue<Float>) GetValue.req;
+    public static final GetValue<Integer> getValueReq = (GetValue<Integer>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class FloatJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Float value) {
+    public static final SetValue setValueReq(Integer value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class FloatJid
      * @return The default value
      */
     @Override
-    protected Float newValue() {
-        return new Float(0.F);
+    protected Integer newValue() {
+        return new Integer(0);
     }
 
     /**
@@ -64,11 +64,11 @@ public class FloatJid
      *
      * @return The value held by this component.
      */
-    public Float getValue() {
+    public Integer getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
-        value = readableBytes.readFloat();
+        value = readableBytes.readInt();
         return value;
     }
 
@@ -79,7 +79,7 @@ public class FloatJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.FLOAT_LENGTH;
+        return Util.INT_LENGTH;
     }
 
     /**
@@ -89,6 +89,6 @@ public class FloatJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeFloat(value);
+        appendableBytes.writeInt(value);
     }
 }

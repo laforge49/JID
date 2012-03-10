@@ -21,25 +21,22 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlen;
+package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a String.
+ * A JID component that holds a byte array.
  */
-public class StringJid
-        extends VLenScalarJid<String, String>
-        implements ComparableKey<String> {
+public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<String> getValueReq = (GetValue<String>) GetValue.req;
+    public static final GetValue<byte[]> getValueReq = (GetValue<byte[]>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -47,7 +44,7 @@ public class StringJid
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(String value) {
+    public static final MakeValue makeValueReq(byte[] value) {
         return new MakeValue(value);
     }
 
@@ -57,7 +54,7 @@ public class StringJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(String value) {
+    public static final SetValue setValueReq(byte[] value) {
         return new SetValue(value);
     }
 
@@ -70,8 +67,8 @@ public class StringJid
      */
     @Override
     protected void setValue(Internals internals, SetValue request) throws Exception {
-        String v = (String) request.getValue();
-        int c = v.length() * 2;
+        byte[] v = (byte[]) request.getValue();
+        int c = v.length;
         if (len > -1)
             c -= len;
         value = v;
@@ -91,8 +88,8 @@ public class StringJid
     protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
         if (len > -1)
             return false;
-        String v = (String) request.getValue();
-        int c = v.length() * 2;
+        byte[] v = (byte[]) request.getValue();
+        int c = v.length;
         if (len > -1)
             c -= len;
         value = v;
@@ -109,7 +106,7 @@ public class StringJid
      * @throws Exception Any uncaught exception raised during deserialization.
      */
     @Override
-    protected String getValue(Internals internals) throws Exception {
+    protected byte[] getValue(Internals internals) throws Exception {
         return getValue();
     }
 
@@ -118,14 +115,14 @@ public class StringJid
      *
      * @return The value held by this component, or null.
      */
-    public String getValue() {
+    public byte[] getValue() {
         if (len == -1)
             return null;
         if (value != null)
             return value;
         ReadableBytes readableBytes = serializedData.readable();
         skipLen(readableBytes);
-        value = readableBytes.readString(len);
+        value = readableBytes.readBytes(len);
         return value;
     }
 
@@ -136,20 +133,9 @@ public class StringJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
         if (len == -1)
-            saveLen(appendableBytes);
-        else
-            appendableBytes.writeString(value);
-    }
-
-    /**
-     * Compares the key or value;
-     *
-     * @param o The comparison value.
-     * @return The result of a compareTo(o).
-     */
-    @Override
-    public int compareKeyTo(String o) {
-        return value.compareTo(o);
+            return;
+        appendableBytes.writeBytes(value);
     }
 }
