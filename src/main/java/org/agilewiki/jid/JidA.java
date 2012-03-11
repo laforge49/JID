@@ -1,6 +1,5 @@
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 
@@ -65,10 +64,11 @@ public class JidA extends LiteActor implements Jid {
      */
     @Override
     public void setContainerJid(Jid containerJid) {
+        this.containerJid = containerJid;
     }
 
     @Override
-    public Actor thisActor() {
+    public JidA thisActor() {
         return this;
     }
 
@@ -83,12 +83,46 @@ public class JidA extends LiteActor implements Jid {
     }
 
     /**
+     * Returns true when the persistent data is already serialized.
+     *
+     * @return True when the persistent data is already serialized.
+     */
+    final protected boolean isSerialized() {
+        return serializedBytes != null;
+    }
+
+    /**
+     * Serialize the persistent data.
+     *
+     * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
+     */
+    protected void serialize(AppendableBytes appendableBytes) {
+    }
+
+    /**
      * Saves the persistent data in a byte array.
      *
      * @param appendableBytes Holds the byte array and offset.
      */
     @Override
     public void save(AppendableBytes appendableBytes) {
+        if (isSerialized()) {
+            byte[] bs = appendableBytes.getBytes();
+            int off = appendableBytes.getOffset();
+            appendableBytes.writeBytes(serializedBytes, serializedOffset, getSerializedLength());
+            serializedBytes = bs;
+            serializedOffset = off;
+        } else {
+            serializedBytes = appendableBytes.getBytes();
+            serializedOffset = appendableBytes.getOffset();
+            serialize(appendableBytes);
+        }
+        if (serializedOffset + getSerializedLength() != appendableBytes.getOffset()) {
+            System.err.println("\n" + getClass().getName());
+            System.err.println("" + serializedOffset +
+                    " + " + getSerializedLength() + " != " + appendableBytes.getOffset());
+            throw new IllegalStateException();
+        }
     }
 
     /**
@@ -98,6 +132,8 @@ public class JidA extends LiteActor implements Jid {
      */
     @Override
     public void load(ReadableBytes readableBytes) {
+        serializedBytes = readableBytes.getBytes();
+        serializedOffset = readableBytes.getOffset();
     }
 
     /**
@@ -108,8 +144,10 @@ public class JidA extends LiteActor implements Jid {
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname) throws Exception {
-        return null;
+    public JidA resolvePathname(String pathname) throws Exception {
+        if (pathname != "")
+            throw new IllegalArgumentException("pathname " + pathname);
+        return this;
     }
 
     /**
