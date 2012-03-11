@@ -132,16 +132,18 @@ public class JidC extends Component implements Jid {
                     }
                 });
 
-        thisActor.bind(CopyJID.class.getName(), new SynchronousMethodBinding<CopyJID, JCActor>() {
+        thisActor.bind(CopyJID.class.getName(), new SynchronousMethodBinding<CopyJID, Actor>() {
             @Override
-            public JCActor synchronousProcessRequest(Internals internals, CopyJID request) throws Exception {
+            public Actor synchronousProcessRequest(Internals internals, CopyJID request) throws Exception {
                 Mailbox m = request.getMailbox();
                 if (m == null)
                     m = thisActor.getMailbox();
                 JBActor parent = request.getParent();
                 if (parent == null)
                     parent = thisActor.getParent();
-                return (new NewJID(thisActor.getActorType(), m, parent, getBytes())).call(thisActor);
+                JCActor jcActor = (new NewJID(thisActor.getActorType(), m, parent, getBytes())).call(thisActor);
+                Open.req.call(jcActor);
+                return jcActor;
             }
         });
 

@@ -28,11 +28,9 @@ public class IntegerTest extends TestCase {
             NewActor newIntegerJid = new NewActor(JidFactories.INTEGER_JID_TYPE);
             JCActor int1 = newIntegerJid.send(future, factory);
             Open.req.call(int1);
-            JCActor int2 = (new CopyJID()).send(future, int1);
-            Open.req.call(int2);
+            Actor int2 = (new CopyJID()).send(future, int1);
             IntegerJid.setValueReq(1).send(future, int2);
-            JCActor int3 = (new CopyJID()).send(future, int2);
-            Open.req.call(int3);
+            Actor int3 = (new CopyJID()).send(future, int2);
 
             int sl = GetSerializedLength.req.send(future, int1);
             assertEquals(4, sl);

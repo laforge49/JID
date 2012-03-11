@@ -28,11 +28,9 @@ public class DoubleTest extends TestCase {
             NewActor newDoubleJid = new NewActor(JidFactories.DOUBLE_JID_TYPE);
             JCActor double1 = newDoubleJid.send(future, factory);
             Open.req.call(double1);
-            JCActor double2 = (new CopyJID()).send(future, double1);
-            Open.req.call(double2);
+            Actor double2 = (new CopyJID()).send(future, double1);
             DoubleJid.setValueReq(1.D).send(future, double2);
-            JCActor double3 = (new CopyJID()).send(future, double2);
-            Open.req.call(double3);
+            Actor double3 = (new CopyJID()).send(future, double2);
 
             int sl = GetSerializedLength.req.send(future, double1);
             assertEquals(8, sl);

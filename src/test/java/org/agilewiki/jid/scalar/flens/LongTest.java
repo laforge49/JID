@@ -28,11 +28,9 @@ public class LongTest extends TestCase {
             NewActor newLongJid = new NewActor(JidFactories.LONG_JID_TYPE);
             JCActor long1 = newLongJid.send(future, factory);
             Open.req.call(long1);
-            JCActor long2 = (new CopyJID()).send(future, long1);
-            Open.req.call(long2);
+            Actor long2 = (new CopyJID()).send(future, long1);
             LongJid.setValueReq(1L).send(future, long2);
-            JCActor float3 = (new CopyJID()).send(future, long2);
-            Open.req.call(float3);
+            Actor float3 = (new CopyJID()).send(future, long2);
 
             int sl = GetSerializedLength.req.send(future, long1);
             assertEquals(8, sl);

@@ -1,10 +1,7 @@
 package org.agilewiki.jid;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.JAFuture;
-import org.agilewiki.jactor.JAMailboxFactory;
-import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.MailboxFactory;
+import org.agilewiki.jactor.*;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
@@ -124,8 +121,7 @@ public class JidTest extends TestCase {
 
             JCActor jid1 = (new NewJID(JidFactories.JID_TYPE, new byte[0])).call(jidFactory);
             Open.req.call(jid1);
-            JCActor jid2 = (new CopyJID(mailbox)).send(future, jid1);
-            Open.req.call(jid2);
+            Actor jid2 = (new CopyJID(mailbox)).send(future, jid1);
             int l = GetSerializedLength.req.send(future, jid2);
             System.err.println(l);
             assertEquals(l, 0);

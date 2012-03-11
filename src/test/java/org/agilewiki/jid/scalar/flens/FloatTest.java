@@ -28,11 +28,9 @@ public class FloatTest extends TestCase {
             NewActor newFloatJid = new NewActor(JidFactories.FLOAT_JID_TYPE);
             JCActor float1 = newFloatJid.send(future, factory);
             Open.req.call(float1);
-            JCActor float2 = (new CopyJID()).send(future, float1);
-            Open.req.call(float2);
+            Actor float2 = (new CopyJID()).send(future, float1);
             FloatJid.setValueReq(1.0f).send(future, float2);
-            JCActor float3 = (new CopyJID()).send(future, float2);
-            Open.req.call(float3);
+            Actor float3 = (new CopyJID()).send(future, float2);
 
             int sl = GetSerializedLength.req.send(future, float1);
             assertEquals(4, sl);

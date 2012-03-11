@@ -39,8 +39,7 @@ public class TupleTest extends TestCase {
             assertEquals("Apples", StringJid.getValueReq.send(future, e0));
             StringJid.setValueReq("Oranges").send(future, e1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, e1));
-            JCActor t1 = (new CopyJID()).send(future, t0);
-            Open.req.call(t1);
+            Actor t1 = (new CopyJID()).send(future, t0);
             Actor f0 = (new ResolvePathname("0")).send(future, t1);
             assertEquals("Apples", StringJid.getValueReq.send(future, f0));
             Actor f1 = (new ResolvePathname("1")).send(future, t1);

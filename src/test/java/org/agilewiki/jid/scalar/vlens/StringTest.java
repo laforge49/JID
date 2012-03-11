@@ -28,11 +28,9 @@ public class StringTest extends TestCase {
             NewActor newStringJid = new NewActor(JidFactories.STRING_JID_TYPE);
             JCActor string1 = newStringJid.send(future, factory);
             Open.req.call(string1);
-            JCActor string2 = (new CopyJID()).send(future, string1);
-            Open.req.call(string2);
+            Actor string2 = (new CopyJID()).send(future, string1);
             StringJid.setValueReq("abc").send(future, string2);
-            JCActor string3 = (new CopyJID()).send(future, string2);
-            Open.req.call(string3);
+            Actor string3 = (new CopyJID()).send(future, string2);
 
             int sl = GetSerializedLength.req.send(future, string1);
             assertEquals(4, sl);

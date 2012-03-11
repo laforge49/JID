@@ -28,11 +28,9 @@ public class BooleanTest extends TestCase {
             NewActor newBooleanJid = new NewActor(JidFactories.BOOLEAN_JID_TYPE);
             JCActor boolean1 = newBooleanJid.send(future, factory);
             Open.req.call(boolean1);
-            JCActor boolean2 = (new CopyJID()).send(future, boolean1);
-            Open.req.call(boolean2);
+            Actor boolean2 = (new CopyJID()).send(future, boolean1);
             BooleanJid.setValueReq(true).send(future, boolean2);
-            JCActor boolean3 = (new CopyJID()).send(future, boolean2);
-            Open.req.call(boolean3);
+            Actor boolean3 = (new CopyJID()).send(future, boolean2);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
             assertEquals(1, sl);

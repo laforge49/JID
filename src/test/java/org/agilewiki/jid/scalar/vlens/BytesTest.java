@@ -28,11 +28,9 @@ public class BytesTest extends TestCase {
             NewActor newBytesJid = new NewActor(JidFactories.BYTES_JID_TYPE);
             JCActor bytes1 = newBytesJid.send(future, factory);
             Open.req.call(bytes1);
-            JCActor bytes2 = (new CopyJID()).send(future, bytes1);
-            Open.req.call(bytes2);
+            Actor bytes2 = (new CopyJID()).send(future, bytes1);
             BytesJid.setValueReq(new byte[3]).send(future, bytes2);
-            JCActor bytes3 = (new CopyJID()).send(future, bytes2);
-            Open.req.call(bytes3);
+            Actor bytes3 = (new CopyJID()).send(future, bytes2);
 
             int sl = GetSerializedLength.req.send(future, bytes1);
             assertEquals(4, sl);
