@@ -32,7 +32,6 @@ import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.GetJIDComponent;
-import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
@@ -219,18 +218,33 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
     }
 
     /**
+     * Returns the actor held by this component.
+     *
+     * @param internals The actor's internals.
+     * @return The actor held by this component, or null.
+     * @throws Exception Any uncaught exception raised during deserialization.
+     */
+    protected JCActor getValue(Internals internals)
+            throws Exception {
+        Jid v = get(internals);
+        if (v == null)
+            return null;
+        return value.thisActor();
+    }
+
+    /**
      * Returns the value held by this component.
      *
      * @param internals The actor's internals.
      * @return The value held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    protected JCActor getValue(Internals internals)
+    private Jid get(Internals internals)
             throws Exception {
         if (len == -1)
             return null;
         if (value != null)
-            return value.thisActor();
+            return value;
         if (len == -1) {
             return null;
         }
@@ -245,7 +259,7 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
         value.load(readableBytes);
         value.setContainerJid(this);
         Open.req.call(internals, nja);
-        return nja;
+        return value;
     }
 
     /**
@@ -281,9 +295,10 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
             return getValue(internals);
         }
         if (pathname.startsWith("$/")) {
-            JCActor jca = getValue(internals);
-            ResolvePathname req = new ResolvePathname(pathname.substring(2));
-            return req.call(internals, jca);
+            Jid v = get(internals);
+            if (v == null)
+                return null;
+            return v.resolvePathname(internals, pathname.substring(2));
         }
         throw new IllegalArgumentException("pathname " + pathname);
     }
