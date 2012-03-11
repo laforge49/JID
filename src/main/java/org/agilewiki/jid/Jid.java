@@ -24,6 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.components.JCActor;
 
 /**
  * Incremental Deserialization / Reserialization.
@@ -46,4 +47,38 @@ public interface Jid {
      * @param containerJid The container, or null.
      */
     public void setContainerJid(Jid containerJid);
+
+    public JCActor thisActor();
+
+    /**
+     * Returns the number of bytes needed to serialize the persistent data.
+     *
+     * @return The minimum size of the byte array needed to serialize the persistent data.
+     */
+    public int getSerializedLength();
+
+    /**
+     * Saves the persistent data in a byte array.
+     *
+     * @param appendableBytes Holds the byte array and offset.
+     */
+    public void save(AppendableBytes appendableBytes);
+
+    /**
+     * Load the serialized data into the JID.
+     *
+     * @param readableBytes Holds the serialized data.
+     */
+    public void load(ReadableBytes readableBytes);
+
+    /**
+     * Resolves a JID pathname, returning a JID actor or null.
+     *
+     * @param internals The actor's internals.
+     * @param pathname  A JID pathname.
+     * @return A JID actor or null.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
+     */
+    public JCActor resolvePathname(Internals internals, String pathname)
+            throws Exception;
 }

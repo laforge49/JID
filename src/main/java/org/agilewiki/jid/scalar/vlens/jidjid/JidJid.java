@@ -41,7 +41,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<JidC, JCActor>
+public class JidJid extends VLenScalarJid<Jid, JCActor>
         implements ComparableKey<Object> {
     /**
      * The GetValue request.
@@ -230,7 +230,7 @@ public class JidJid extends VLenScalarJid<JidC, JCActor>
         if (len == -1)
             return null;
         if (value != null)
-            return value.thisActor;
+            return value.thisActor();
         if (len == -1) {
             return null;
         }
@@ -258,7 +258,7 @@ public class JidJid extends VLenScalarJid<JidC, JCActor>
         saveLen(appendableBytes);
         if (len == -1)
             return;
-        String actorType = value.thisActor.getActorType();
+        String actorType = value.thisActor().getActorType();
         appendableBytes.writeString(actorType);
         value.save(appendableBytes);
     }

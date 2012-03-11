@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.JidC;
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.collection.CollectionJid;
@@ -48,7 +48,7 @@ public class ListJid extends CollectionJid {
     /**
      * A list of JID actors.
      */
-    private ArrayList<JidC> list;
+    private ArrayList<Jid> list;
 
     /**
      * Returns the size of the collection.
@@ -65,7 +65,7 @@ public class ListJid extends CollectionJid {
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected JidC get(int i) {
+    protected Jid get(int i) {
         return list.get(i);
     }
 
@@ -116,14 +116,14 @@ public class ListJid extends CollectionJid {
         if (list != null)
             return;
         if (!isSerialized()) {
-            list = new ArrayList<JidC>();
+            list = new ArrayList<Jid>();
             return;
         }
         loadElementsType(internals);
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();
-        list = new ArrayList<JidC>(count);
+        list = new ArrayList<Jid>(count);
         int limit = len + readableBytes.getOffset();
         while (readableBytes.getOffset() < limit) {
             NewActor newActor = new NewActor(
@@ -131,7 +131,7 @@ public class ListJid extends CollectionJid {
                     thisActor.getMailbox(),
                     thisActor.getParent());
             JCActor elementActor = newActor.call(thisActor.getParent());
-            JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
+            Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
             elementJid.load(readableBytes);
             Open.req.call(internals, elementActor);
             len += elementJid.getSerializedLength();

@@ -52,6 +52,10 @@ public class JidC extends Component implements Jid {
      */
     protected int serializedOffset;
 
+    public JCActor thisActor() {
+        return thisActor;
+    }
+
     /**
      * Assign the container.
      *
@@ -182,6 +186,7 @@ public class JidC extends Component implements Jid {
      *
      * @return The minimum size of the byte array needed to serialize the persistent data.
      */
+    @Override
     public int getSerializedLength() {
         return 0;
     }
@@ -208,6 +213,7 @@ public class JidC extends Component implements Jid {
      *
      * @param appendableBytes Holds the byte array and offset.
      */
+    @Override
     final public void save(AppendableBytes appendableBytes) {
         if (isSerialized()) {
             byte[] bs = appendableBytes.getBytes();
@@ -245,6 +251,7 @@ public class JidC extends Component implements Jid {
      *
      * @param readableBytes Holds the serialized data.
      */
+    @Override
     public void load(ReadableBytes readableBytes) {
         if (thisActor.isOpen())
             throw new IllegalStateException("Already active");

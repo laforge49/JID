@@ -2,10 +2,7 @@ package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.JidC;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.Util;
+import org.agilewiki.jid.*;
 
 /**
  * A collection of JID actors.
@@ -58,7 +55,7 @@ abstract public class CollectionJid extends JidC {
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    abstract protected JidC get(int i);
+    abstract protected Jid get(int i);
 
     /**
      * Process a change in the persistent data.
@@ -101,9 +98,9 @@ abstract public class CollectionJid extends JidC {
         }
         if (n < 0 || n >= size())
             throw new IllegalArgumentException("pathname " + pathname);
-        JidC jid = get(n);
+        Jid jid = get(n);
         if (s == pathname.length())
-            return jid.thisActor;
+            return jid.thisActor();
         return jid.resolvePathname(internals, pathname.substring(s + 1));
     }
 }

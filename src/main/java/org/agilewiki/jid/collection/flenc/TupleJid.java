@@ -50,7 +50,7 @@ public class TupleJid
     /**
      * A tuple of actors.
      */
-    protected JidC[] tuple;
+    protected Jid[] tuple;
 
     /**
      * Opening is called when a Open initialization request is processed,
@@ -67,11 +67,11 @@ public class TupleJid
             readableBytes = readable();
             skipLen(readableBytes);
         }
-        tuple = new JidC[size()];
+        tuple = new Jid[size()];
         int i = 0;
         len = 0;
         while (i < size()) {
-            JidC elementJid = createJid(i, internals, readableBytes);
+            Jid elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
             elementJid.setContainerJid(this);
             tuple[i] = elementJid;
@@ -93,7 +93,7 @@ public class TupleJid
             public JCActor synchronousProcessRequest(Internals internals, IGet request)
                     throws Exception {
                 int ndx = request.getI();
-                return get(ndx).thisActor;
+                return get(ndx).thisActor();
             }
         });
 
@@ -106,7 +106,7 @@ public class TupleJid
         });
     }
 
-    protected JidC createJid(int i, Internals internals, ReadableBytes readableBytes)
+    protected Jid createJid(int i, Internals internals, ReadableBytes readableBytes)
             throws Exception {
         String actorType = actorTypes[i];
         NewActor newActor = new NewActor(
@@ -114,7 +114,7 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent());
         JCActor elementActor = newActor.call(thisActor.getParent());
-        JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
+        Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
         if (readableBytes != null) {
             elementJid.load(readableBytes);
         }
@@ -138,9 +138,9 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent(),
                 bytes)).call(internals, thisActor.getParent());
-        JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
+        Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
         Open.req.call(internals, elementActor);
-        JidC oldElementJid = get(i);
+        Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
         elementJid.setContainerJid(this);
@@ -172,7 +172,7 @@ public class TupleJid
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected JidC get(int i) {
+    protected Jid get(int i) {
         return tuple[i];
     }
 
