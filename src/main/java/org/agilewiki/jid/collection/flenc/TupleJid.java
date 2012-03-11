@@ -50,7 +50,7 @@ public class TupleJid
     /**
      * A tuple of actors.
      */
-    protected JID[] tuple;
+    protected JidC[] tuple;
 
     /**
      * Opening is called when a Open initialization request is processed,
@@ -67,11 +67,11 @@ public class TupleJid
             readableBytes = readable();
             skipLen(readableBytes);
         }
-        tuple = new JID[size()];
+        tuple = new JidC[size()];
         int i = 0;
         len = 0;
         while (i < size()) {
-            JID elementJid = createJid(i, internals, readableBytes);
+            JidC elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
             elementJid.containerJid = this;
             tuple[i] = elementJid;
@@ -106,7 +106,7 @@ public class TupleJid
         });
     }
 
-    protected JID createJid(int i, Internals internals, ReadableBytes readableBytes)
+    protected JidC createJid(int i, Internals internals, ReadableBytes readableBytes)
             throws Exception {
         String actorType = actorTypes[i];
         NewActor newActor = new NewActor(
@@ -114,7 +114,7 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent());
         JCActor elementActor = newActor.call(thisActor.getParent());
-        JID elementJid = GetJIDComponent.req.call(internals, elementActor);
+        JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
         if (readableBytes != null) {
             elementJid.load(readableBytes);
         }
@@ -138,9 +138,9 @@ public class TupleJid
                 thisActor.getMailbox(),
                 thisActor.getParent(),
                 bytes)).call(internals, thisActor.getParent());
-        JID elementJid = GetJIDComponent.req.call(internals, elementActor);
+        JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
         Open.req.call(internals, elementActor);
-        JID oldElementJid = get(i);
+        JidC oldElementJid = get(i);
         oldElementJid.containerJid = null;
         tuple[i] = elementJid;
         elementJid.containerJid = this;
@@ -172,7 +172,7 @@ public class TupleJid
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected JID get(int i) {
+    protected JidC get(int i) {
         return tuple[i];
     }
 

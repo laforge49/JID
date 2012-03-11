@@ -110,7 +110,7 @@ final public class JidFactories extends Component {
      */
     @Override
     public void bindery() throws Exception {
-        (new DefineActorType(JID_TYPE, JID.class)).call(thisActor);
+        (new DefineActorType(JID_TYPE, JidC.class)).call(thisActor);
 
         (new DefineActorType(BOOLEAN_JID_TYPE, BooleanJid.class)).call(thisActor);
         (new DefineActorType(INTEGER_JID_TYPE, IntegerJid.class)).call(thisActor);

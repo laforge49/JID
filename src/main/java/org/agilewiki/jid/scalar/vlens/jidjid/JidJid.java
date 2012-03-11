@@ -41,7 +41,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<JID, JCActor>
+public class JidJid extends VLenScalarJid<JidC, JCActor>
         implements ComparableKey<Object> {
     /**
      * The GetValue request.

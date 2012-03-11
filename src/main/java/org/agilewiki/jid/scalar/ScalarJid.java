@@ -26,12 +26,12 @@ package org.agilewiki.jid.scalar;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
-import org.agilewiki.jid.JID;
+import org.agilewiki.jid.JidC;
 
 /**
  * A JID component that holds a value.
  */
-abstract public class ScalarJid<RESPONSE_TYPE> extends JID {
+abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
 
     /**
      * Bind request classes.

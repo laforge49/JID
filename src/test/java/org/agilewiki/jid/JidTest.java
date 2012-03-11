@@ -19,7 +19,7 @@ public class JidTest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JID.class)).call(a);
+            (new Include(JidC.class)).call(a);
             Open.req.call(a);
             int l = GetSerializedLength.req.send(future, a);
             System.err.println(l);
@@ -59,7 +59,7 @@ public class JidTest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JID.class)).call(a);
+            (new Include(JidC.class)).call(a);
             Open.req.call(a);
             int l = GetSerializedLength.req.send(future, a);
             AppendableBytes appendableBytes = new AppendableBytes(l);
@@ -77,7 +77,7 @@ public class JidTest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JID.class)).call(a);
+            (new Include(JidC.class)).call(a);
             Open.req.call(a);
             byte[] bytes = GetBytes.req.send(future, a);
             int l = bytes.length;
@@ -144,7 +144,7 @@ public class JidTest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JID.class)).call(a);
+            (new Include(JidC.class)).call(a);
             Open.req.call(a);
             JCActor b = (JCActor) future.send(a, new ResolvePathname(""));
             assertEquals(a, b);

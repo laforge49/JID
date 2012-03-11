@@ -36,11 +36,11 @@ import java.util.Arrays;
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
  */
-public class JID extends Component {
+public class JidC extends Component {
     /**
      * The JID actor which holds this actor.
      */
-    public JID containerJid;
+    public JidC containerJid;
 
     /**
      * Holds the serialized data.
@@ -94,11 +94,11 @@ public class JID extends Component {
 
         thisActor.bind(
                 GetJIDComponent.class.getName(),
-                new SynchronousOnlyInitializationMethodBinding<GetJIDComponent, JID>() {
+                new SynchronousOnlyInitializationMethodBinding<GetJIDComponent, JidC>() {
                     @Override
-                    public JID initializationProcessRequest(Internals internals, GetJIDComponent request)
+                    public JidC initializationProcessRequest(Internals internals, GetJIDComponent request)
                             throws Exception {
-                        return JID.this;
+                        return JidC.this;
                     }
                 });
 
@@ -133,7 +133,7 @@ public class JID extends Component {
             @Override
             public String concurrentProcessRequest(RequestReceiver requestReceiver, GetJidClassName request)
                     throws Exception {
-                return JID.this.getClass().getName();
+                return JidC.this.getClass().getName();
             }
         });
 
@@ -143,7 +143,7 @@ public class JID extends Component {
             public void processRequest(final Internals internals, IsJidEqual request, final RP<Boolean> rp)
                     throws Exception {
                 final JCActor actor = request.getJidActor();
-                if (!GetJidClassName.req.call(actor).equals(JID.this.getClass().getName())) {
+                if (!GetJidClassName.req.call(actor).equals(JidC.this.getClass().getName())) {
                     rp.processResponse(false);
                     return;
                 }
@@ -299,7 +299,7 @@ public class JID extends Component {
             return false;
         if (!v.getClass().equals(getClass()))
             return false;
-        JID jid = (JID) v;
+        JidC jid = (JidC) v;
         if (jid.getSerializedLength() != getSerializedLength())
             return false;
         return Arrays.equals(jid.getBytes(), getBytes());
