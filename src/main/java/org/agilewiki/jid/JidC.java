@@ -35,7 +35,7 @@ import org.agilewiki.jid.requests.*;
 import java.util.Arrays;
 
 /**
- * <p>Base class for Incremental Deserialization Components.</p>
+ * Base class for Incremental Deserialization Components.
  */
 public class JidC extends Component implements Jid {
     /**
