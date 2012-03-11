@@ -24,7 +24,6 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.NewActor;
@@ -96,23 +95,21 @@ public class ListJid extends CollectionJid {
     /**
      * Load the elements type.
      *
-     * @param internals The actor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
-    protected void loadElementsType(Internals internals)
+    protected void loadElementsType()
             throws Exception {
         if (elementsType != null)
             return;
-        elementsType = GetElementsType.req.call(internals, thisActor);
+        elementsType = GetElementsType.req.call(thisActor);
     }
 
     /**
      * Deserialize if serialized data is available.
      *
-     * @param internals The actor's internals.
      * @throws Exception Any exceptions thrown during the open.
      */
-    protected void deserialize(Internals internals)
+    protected void deserialize()
             throws Exception {
         if (list != null)
             return;
@@ -120,7 +117,7 @@ public class ListJid extends CollectionJid {
             list = new ArrayList<Jid>();
             return;
         }
-        loadElementsType(internals);
+        loadElementsType();
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();
@@ -132,9 +129,9 @@ public class ListJid extends CollectionJid {
                     thisActor.getMailbox(),
                     thisActor.getParent());
             JCActor elementActor = newActor.call(thisActor.getParent());
-            Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
+            Jid elementJid = GetJIDComponent.req.call(elementActor);
             elementJid.load(readableBytes);
-            Open.req.call(internals, elementActor);
+            Open.req.call(elementActor);
             len += elementJid.getSerializedLength();
             elementJid.setContainerJid(this);
             list.add(elementJid);
@@ -160,15 +157,14 @@ public class ListJid extends CollectionJid {
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param internals The actor's internals.
-     * @param pathname  A JID pathname.
+     * @param pathname A JID pathname.
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(String pathname)
             throws Exception {
-        deserialize(internals);
-        return super.resolvePathname(internals, pathname);
+        deserialize();
+        return super.resolvePathname(pathname);
     }
 }

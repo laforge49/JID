@@ -106,18 +106,6 @@ public class StringJid
     /**
      * Returns the value held by this component.
      *
-     * @param internals The actor's internals.
-     * @return The value held by this component, or null.
-     * @throws Exception Any uncaught exception raised during deserialization.
-     */
-    @Override
-    protected String getValue(Internals internals) throws Exception {
-        return getValue();
-    }
-
-    /**
-     * Returns the value held by this component.
-     *
      * @return The value held by this component, or null.
      */
     public String getValue() {

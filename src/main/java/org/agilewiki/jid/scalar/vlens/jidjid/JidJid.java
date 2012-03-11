@@ -221,13 +221,12 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * Returns the actor held by this component.
      *
-     * @param internals The actor's internals.
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    protected Actor getValue(Internals internals)
+    protected Actor getValue()
             throws Exception {
-        Jid v = get(internals);
+        Jid v = get();
         if (v == null)
             return null;
         return value.thisActor();
@@ -236,11 +235,10 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * Returns the value held by this component.
      *
-     * @param internals The actor's internals.
      * @return The value held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    private Jid get(Internals internals)
+    private Jid get()
             throws Exception {
         if (len == -1)
             return null;
@@ -256,10 +254,10 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
                 actorType,
                 thisActor.getMailbox(),
                 thisActor.getParent())).call(thisActor);
-        value = (new GetJIDComponent()).call(internals, nja);
+        value = (new GetJIDComponent()).call(nja);
         value.load(readableBytes);
         value.setContainerJid(this);
-        Open.req.call(internals, nja);
+        Open.req.call(nja);
         return value;
     }
 
@@ -281,25 +279,24 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param internals The actor's internals.
-     * @param pathname  A JID pathname.
+     * @param pathname A JID pathname.
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return thisActor;
         }
         if (pathname.equals("0")) {
-            return getValue(internals);
+            return getValue();
         }
         if (pathname.startsWith("0/")) {
-            Jid v = get(internals);
+            Jid v = get();
             if (v == null)
                 return null;
-            return v.resolvePathname(internals, pathname.substring(2));
+            return v.resolvePathname(pathname.substring(2));
         }
         throw new IllegalArgumentException("pathname " + pathname);
     }

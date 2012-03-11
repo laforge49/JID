@@ -48,7 +48,7 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
                     public RESPONSE_TYPE synchronousProcessRequest(Internals internals,
                                                                    GetValue<RESPONSE_TYPE> request)
                             throws Exception {
-                        return getValue(internals);
+                        return getValue();
                     }
                 });
 
@@ -75,10 +75,9 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
     /**
      * Returns the value held by this component.
      *
-     * @param internals The actor's internals.
      * @return The value held by this component.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    abstract protected RESPONSE_TYPE getValue(Internals internals)
+    abstract protected RESPONSE_TYPE getValue()
             throws Exception;
 }

@@ -148,7 +148,7 @@ public class JidC extends Component implements Jid {
         thisActor.bind(ResolvePathname.class.getName(), new SynchronousMethodBinding<ResolvePathname, Actor>() {
             @Override
             public Actor synchronousProcessRequest(Internals internals, ResolvePathname request) throws Exception {
-                return resolvePathname(internals, request.getPathname());
+                return resolvePathname(request.getPathname());
             }
         });
 
@@ -287,12 +287,11 @@ public class JidC extends Component implements Jid {
     /**
      * Resolves a JID pathname, returning a JID actor or null.
      *
-     * @param internals The actor's internals.
-     * @param pathname  A JID pathname.
+     * @param pathname A JID pathname.
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
-    public Actor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(String pathname)
             throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);
