@@ -1,7 +1,14 @@
 package org.agilewiki.jid;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jid.requests.GetBytes;
+import org.agilewiki.jid.requests.GetSerializedLength;
+import org.agilewiki.jid.requests.IsJidEqual;
+import org.agilewiki.jid.requests.ResolvePathname;
+
+import java.util.Arrays;
 
 /**
  * Base class for Incremental Deserialization Actors.
@@ -126,6 +133,18 @@ public class JidA extends LiteActor implements Jid {
     }
 
     /**
+     * Returns a byte array holding the serialized persistent data.
+     *
+     * @return The byte array holding the serialized persistent data.
+     */
+    final public byte[] getBytes() {
+        byte[] bs = new byte[getSerializedLength()];
+        AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
+        save(appendableBytes);
+        return bs;
+    }
+
+    /**
      * Load the serialized data into the JID.
      *
      * @param readableBytes Holds the serialized data.
@@ -150,6 +169,23 @@ public class JidA extends LiteActor implements Jid {
         return this;
     }
 
+    @Override
+    public boolean equals(Object v) {
+        if (v == null)
+            return false;
+        if (!v.getClass().equals(getClass()))
+            return false;
+        JidC jid = (JidC) v;
+        if (jid.getSerializedLength() != getSerializedLength())
+            return false;
+        return Arrays.equals(jid.getBytes(), getBytes());
+    }
+
+    @Override
+    public int hashCode() {
+        return getBytes().hashCode();
+    }
+
     /**
      * The application method for processing requests sent to the actor.
      *
@@ -160,5 +196,36 @@ public class JidA extends LiteActor implements Jid {
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
+        if (request instanceof ResolvePathname)
+            rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
+        else if (request instanceof IsJidEqual)
+            isJidEqual(((IsJidEqual) request).getJidActor(), rp);
+        else throw new UnsupportedOperationException(request.getClass().getName());
+    }
+
+
+    public void isJidEqual(Actor actor, final RP rp)
+            throws Exception {
+        if (!(actor instanceof JidA)) {
+            rp.processResponse(false);
+            return;
+        }
+        final JidA jidA = (JidA) actor;
+        send(jidA, GetSerializedLength.req, new RP<Integer>() {
+            @Override
+            public void processResponse(Integer response) throws Exception {
+                if (response.intValue() != getSerializedLength()) {
+                    rp.processResponse(false);
+                    return;
+                }
+                send(jidA, GetBytes.req, new RP<byte[]>() {
+                    @Override
+                    public void processResponse(byte[] response) throws Exception {
+                        boolean eq = Arrays.equals(response, getBytes());
+                        rp.processResponse(eq);
+                    }
+                });
+            }
+        });
     }
 }

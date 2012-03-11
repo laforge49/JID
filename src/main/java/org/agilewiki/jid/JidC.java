@@ -168,23 +168,27 @@ public class JidC extends Component implements Jid {
         });
 
         thisActor.bind(IsJidEqual.class.getName(), new MethodBinding<IsJidEqual, Boolean>() {
-
             @Override
             public void processRequest(final Internals internals, IsJidEqual request, final RP<Boolean> rp)
                     throws Exception {
-                final JCActor actor = request.getJidActor();
-                if (!GetJidClassName.req.call(actor).equals(JidC.this.getClass().getName())) {
+                Actor actor = request.getJidActor();
+                if (!(actor instanceof JCActor)) {
                     rp.processResponse(false);
                     return;
                 }
-                GetSerializedLength.req.send(internals, actor, new RP<Integer>() {
+                final JCActor jcActor = (JCActor) actor;
+                if (!GetJidClassName.req.call(jcActor).equals(JidC.this.getClass().getName())) {
+                    rp.processResponse(false);
+                    return;
+                }
+                GetSerializedLength.req.send(internals, jcActor, new RP<Integer>() {
                     @Override
                     public void processResponse(Integer response) throws Exception {
                         if (response.intValue() != getSerializedLength()) {
                             rp.processResponse(false);
                             return;
                         }
-                        GetBytes.req.send(internals, actor, new RP<byte[]>() {
+                        GetBytes.req.send(internals, jcActor, new RP<byte[]>() {
                             @Override
                             public void processResponse(byte[] response) throws Exception {
                                 boolean eq = Arrays.equals(response, getBytes());

@@ -23,21 +23,21 @@
  */
 package org.agilewiki.jid.requests;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Request;
-import org.agilewiki.jactor.components.JCActor;
 
 /**
  * Returns true when the persistent content are equal.
  */
 public class IsJidEqual extends Request<Boolean> {
-    private JCActor jidActor;
+    private Actor jidActor;
 
     /**
      * Returns the jid actor.
      *
      * @return The Jid actor.
      */
-    public JCActor getJidActor() {
+    public Actor getJidActor() {
         return jidActor;
     }
 
@@ -46,7 +46,7 @@ public class IsJidEqual extends Request<Boolean> {
      *
      * @param jidActor The Jid actor.
      */
-    public IsJidEqual(JCActor jidActor) {
+    public IsJidEqual(Actor jidActor) {
 
         this.jidActor = jidActor;
     }
