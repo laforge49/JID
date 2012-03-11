@@ -74,7 +74,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
         value = v;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, c);
+        change(c);
     }
 
     /**
@@ -96,7 +96,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
         value = v;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, c);
+        change(c);
         return true;
     }
 

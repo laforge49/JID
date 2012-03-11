@@ -34,11 +34,10 @@ public interface Jid {
     /**
      * Process a change in the persistent data.
      *
-     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
-    public void change(Internals internals, int lengthChange)
+    public void change(int lengthChange)
             throws Exception;
 
     /**

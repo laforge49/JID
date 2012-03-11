@@ -302,30 +302,28 @@ public class JidC extends Component implements Jid {
     /**
      * Notification that the persistent data has changed.
      *
-     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
-    public void changed(Internals internals, int lengthChange)
+    public void changed(int lengthChange)
             throws Exception {
         serializedBytes = null;
         serializedOffset = -1;
         if (containerJid == null)
             return;
-        containerJid.change(internals, lengthChange);
+        containerJid.change(lengthChange);
     }
 
     /**
      * Process a change in the persistent data.
      *
-     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals internals, int lengthChange)
+    public void change(int lengthChange)
             throws Exception {
-        changed(internals, lengthChange);
+        changed(lengthChange);
     }
 
     @Override

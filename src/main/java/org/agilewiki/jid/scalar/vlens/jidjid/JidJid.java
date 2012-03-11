@@ -105,7 +105,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
         }
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, -l);
+        change(-l);
         len = -1;
     }
 
@@ -158,7 +158,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
         value.setContainerJid(this);
         Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
-        change(internals, l);
+        change(l);
         serializedBytes = null;
         serializedOffset = -1;
     }
@@ -213,7 +213,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
         value.setContainerJid(this);
         Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
-        change(internals, l);
+        change(l);
         serializedBytes = null;
         serializedOffset = -1;
     }

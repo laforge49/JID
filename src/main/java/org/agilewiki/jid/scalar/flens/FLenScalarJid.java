@@ -74,7 +74,7 @@ abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
         value = v;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, 0);
+        change(0);
     }
 
     /**

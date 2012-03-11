@@ -60,14 +60,13 @@ abstract public class CollectionJid extends JidC {
     /**
      * Process a change in the persistent data.
      *
-     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals internals, int lengthChange) throws Exception {
+    public void change(int lengthChange) throws Exception {
         len += lengthChange;
-        super.change(internals, lengthChange);
+        super.change(lengthChange);
     }
 
     /**

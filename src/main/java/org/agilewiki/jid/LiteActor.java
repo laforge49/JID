@@ -13,9 +13,14 @@ import org.agilewiki.jactor.stateMachine._SMBuilder;
 import java.util.ArrayList;
 
 /**
- * A light-weight alternative to JLPCActor
+ * A light-weight alternative to JLPCActor,
+ * but with support for actor type.
  */
 abstract public class LiteActor implements Actor, RequestProcessor, RequestSource {
+    /**
+     * The type of actor.
+     */
+    private String actorType;
 
     /**
      * The inbox and outbox of the actor.
@@ -26,6 +31,27 @@ abstract public class LiteActor implements Actor, RequestProcessor, RequestSourc
      * The current exception handler, or null.
      */
     private ExceptionHandler exceptionHandler;
+
+    /**
+     * Returns the actor type.
+     *
+     * @return The actor type, or null.
+     */
+    public String getActorType() {
+        return actorType;
+    }
+
+    /**
+     * Assigns the actorType.
+     * Once assigned, it can not be changed.
+     *
+     * @param actorType The actor type.
+     */
+    public void setActorType(String actorType) {
+        if (this.actorType != null)
+            throw new UnsupportedOperationException("The actorType can not be changed");
+        this.actorType = actorType;
+    }
 
     /**
      * Returns the exception handler.

@@ -97,7 +97,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
         value = null;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, -l);
+        change(-l);
         len = -1;
     }
 
@@ -144,17 +144,16 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     /**
      * Process a change in the persistent data.
      *
-     * @param internals    The actor's internals.
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(Internals internals, int lengthChange) throws Exception {
+    public void change(int lengthChange) throws Exception {
         if (len == -1)
             len = lengthChange;
         else
             len += lengthChange;
-        super.change(internals, lengthChange);
+        super.change(lengthChange);
     }
 
     /**

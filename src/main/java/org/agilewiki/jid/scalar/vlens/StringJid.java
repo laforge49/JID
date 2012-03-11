@@ -77,7 +77,7 @@ public class StringJid
         value = v;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, c);
+        change(c);
     }
 
     /**
@@ -99,7 +99,7 @@ public class StringJid
         value = v;
         serializedBytes = null;
         serializedOffset = -1;
-        change(internals, c);
+        change(c);
         return true;
     }
 
