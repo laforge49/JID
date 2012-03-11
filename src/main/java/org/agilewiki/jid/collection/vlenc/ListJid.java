@@ -135,7 +135,7 @@ public class ListJid extends CollectionJid {
             elementJid.load(readableBytes);
             Open.req.call(internals, elementActor);
             len += elementJid.getSerializedLength();
-            elementJid.containerJid = this;
+            elementJid.setContainerJid(this);
             list.add(elementJid);
         }
     }

@@ -36,11 +36,11 @@ import java.util.Arrays;
 /**
  * <p>Base class for Incremental Deserialization Components.</p>
  */
-public class JidC extends Component {
+public class JidC extends Component implements Jid {
     /**
      * The JID actor which holds this actor.
      */
-    public JidC containerJid;
+    private Jid containerJid;
 
     /**
      * Holds the serialized data.
@@ -51,6 +51,16 @@ public class JidC extends Component {
      * The start of the serialized data.
      */
     protected int serializedOffset;
+
+    /**
+     * Assign the container.
+     *
+     * @param containerJid The container, or null.
+     */
+    @Override
+    public void setContainerJid(Jid containerJid) {
+        this.containerJid = containerJid;
+    }
 
     /**
      * Returns a readable form of the serialized data.
@@ -289,11 +299,13 @@ public class JidC extends Component {
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
+    @Override
     public void change(Internals internals, int lengthChange)
             throws Exception {
         changed(internals, lengthChange);
     }
 
+    @Override
     public boolean equals(Object v) {
         if (v == null)
             return false;
@@ -305,6 +317,7 @@ public class JidC extends Component {
         return Arrays.equals(jid.getBytes(), getBytes());
     }
 
+    @Override
     public int hashCode() {
         return getBytes().hashCode();
     }

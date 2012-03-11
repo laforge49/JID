@@ -73,7 +73,7 @@ public class TupleJid
         while (i < size()) {
             JidC elementJid = createJid(i, internals, readableBytes);
             len += elementJid.getSerializedLength();
-            elementJid.containerJid = this;
+            elementJid.setContainerJid(this);
             tuple[i] = elementJid;
             i += 1;
         }
@@ -141,9 +141,9 @@ public class TupleJid
         JidC elementJid = GetJIDComponent.req.call(internals, elementActor);
         Open.req.call(internals, elementActor);
         JidC oldElementJid = get(i);
-        oldElementJid.containerJid = null;
+        oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
-        elementJid.containerJid = this;
+        elementJid.setContainerJid(this);
         change(internals, elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 
