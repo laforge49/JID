@@ -95,7 +95,8 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
             return;
         int l = len;
         value = null;
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         change(internals, -l);
         len = -1;
     }

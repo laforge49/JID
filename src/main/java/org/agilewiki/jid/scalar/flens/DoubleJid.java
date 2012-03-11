@@ -67,7 +67,7 @@ public class DoubleJid
     public Double getValue() {
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         value = readableBytes.readDouble();
         return value;
     }

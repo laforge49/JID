@@ -68,7 +68,7 @@ public class BooleanJid
     public Boolean getValue() {
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         value = readableBytes.readBoolean();
         return value;
     }

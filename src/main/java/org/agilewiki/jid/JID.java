@@ -43,9 +43,23 @@ public class JID extends Component {
     public JID containerJid;
 
     /**
-     * The serialized form of the persistent data, or null.
+     * Holds the serialized data.
      */
-    protected ImmutableBytes serializedData;
+    protected byte[] serializedBytes;
+
+    /**
+     * The start of the serialized data.
+     */
+    protected int serializedOffset;
+
+    /**
+     * Returns a readable form of the serialized data.
+     *
+     * @return A ReadableBytes wrapper of the serialized data.
+     */
+    protected ReadableBytes readable() {
+        return new ReadableBytes(serializedBytes, serializedOffset);
+    }
 
     /**
      * Bind request classes.
@@ -168,7 +182,7 @@ public class JID extends Component {
      * @return True when the persistent data is already serialized.
      */
     final protected boolean isSerialized() {
-        return serializedData != null;
+        return serializedBytes != null;
     }
 
     /**
@@ -186,16 +200,19 @@ public class JID extends Component {
      */
     final public void save(AppendableBytes appendableBytes) {
         if (isSerialized()) {
-            ImmutableBytes sd = appendableBytes.immutable();
-            appendableBytes.writeBytes(serializedData.getBytes(), serializedData.getOffset(), getSerializedLength());
-            serializedData = sd;
+            byte[] bs = appendableBytes.getBytes();
+            int off = appendableBytes.getOffset();
+            appendableBytes.writeBytes(serializedBytes, serializedOffset, getSerializedLength());
+            serializedBytes = bs;
+            serializedOffset = off;
         } else {
-            serializedData = appendableBytes.immutable();
+            serializedBytes = appendableBytes.getBytes();
+            serializedOffset = appendableBytes.getOffset();
             serialize(appendableBytes);
         }
-        if (serializedData.getOffset() + getSerializedLength() != appendableBytes.getOffset()) {
+        if (serializedOffset + getSerializedLength() != appendableBytes.getOffset()) {
             System.err.println("\n" + getClass().getName());
-            System.err.println("" + serializedData.getOffset() +
+            System.err.println("" + serializedOffset +
                     " + " + getSerializedLength() + " != " + appendableBytes.getOffset());
             throw new IllegalStateException();
         }
@@ -221,7 +238,8 @@ public class JID extends Component {
     public void load(ReadableBytes readableBytes) {
         if (thisActor.isOpen())
             throw new IllegalStateException("Already active");
-        serializedData = readableBytes.immutable();
+        serializedBytes = readableBytes.getBytes();
+        serializedOffset = readableBytes.getOffset();
     }
 
     /**
@@ -257,7 +275,8 @@ public class JID extends Component {
      */
     public void changed(Internals internals, int lengthChange)
             throws Exception {
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         if (containerJid == null)
             return;
         containerJid.change(internals, lengthChange);

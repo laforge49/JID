@@ -64,7 +64,7 @@ public class TupleJid
         actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
-            readableBytes = serializedData.readable();
+            readableBytes = readable();
             skipLen(readableBytes);
         }
         tuple = new JID[size()];

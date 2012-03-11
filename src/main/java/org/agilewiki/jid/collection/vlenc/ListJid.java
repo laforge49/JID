@@ -120,7 +120,7 @@ public class ListJid extends CollectionJid {
             return;
         }
         loadElementsType(internals);
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();
         list = new ArrayList<JID>(count);

@@ -67,7 +67,7 @@ public class LongJid
     public Long getValue() {
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         value = readableBytes.readLong();
         return value;
     }

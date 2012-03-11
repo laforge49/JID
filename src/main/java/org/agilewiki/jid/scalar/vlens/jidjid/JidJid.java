@@ -103,7 +103,8 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
             value.containerJid = null;
             value = null;
         }
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         change(internals, -l);
         len = -1;
     }
@@ -158,7 +159,8 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
     }
 
     /**
@@ -212,7 +214,8 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         Open.req.call(internals, nja);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(internals, l);
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
     }
 
     /**
@@ -231,7 +234,7 @@ public class JidJid extends VLenScalarJid<JID, JCActor>
         if (len == -1) {
             return null;
         }
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         String actorType = readableBytes.readString();
         JCActor nja = (new NewActor(

@@ -67,7 +67,7 @@ public class IntegerJid
     public Integer getValue() {
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         value = readableBytes.readInt();
         return value;
     }

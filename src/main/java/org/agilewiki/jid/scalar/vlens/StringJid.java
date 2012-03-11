@@ -75,7 +75,8 @@ public class StringJid
         if (len > -1)
             c -= len;
         value = v;
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         change(internals, c);
     }
 
@@ -96,7 +97,8 @@ public class StringJid
         if (len > -1)
             c -= len;
         value = v;
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         change(internals, c);
         return true;
     }
@@ -123,7 +125,7 @@ public class StringJid
             return null;
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         value = readableBytes.readString(len);
         return value;

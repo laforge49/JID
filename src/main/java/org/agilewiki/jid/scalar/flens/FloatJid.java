@@ -67,7 +67,7 @@ public class FloatJid
     public Float getValue() {
         if (value != null)
             return value;
-        ReadableBytes readableBytes = serializedData.readable();
+        ReadableBytes readableBytes = readable();
         value = readableBytes.readFloat();
         return value;
     }

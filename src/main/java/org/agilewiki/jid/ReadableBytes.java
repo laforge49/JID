@@ -64,12 +64,12 @@ final public class ReadableBytes {
     }
 
     /**
-     * Creates an ImmutableBytes object from this readableBytes object.
+     * Returns the bytes.
      *
-     * @return The ImmutableBytes object.
+     * @return The byte array.
      */
-    public ImmutableBytes immutable() {
-        return new ImmutableBytes(bytes, offset);
+    public byte[] getBytes() {
+        return bytes;
     }
 
     /**

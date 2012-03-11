@@ -72,7 +72,8 @@ abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
         if (v.equals(value))
             return;
         value = v;
-        serializedData = null;
+        serializedBytes = null;
+        serializedOffset = -1;
         change(internals, 0);
     }
 

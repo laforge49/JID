@@ -73,12 +73,12 @@ final public class AppendableBytes {
     }
 
     /**
-     * Creates an ImmutableBytes object from this mutableBytes object.
+     * Returns the bytes.
      *
-     * @return The ImmutableBytes object.
+     * @return The byte array.
      */
-    public ImmutableBytes immutable() {
-        return new ImmutableBytes(bytes, offset);
+    public byte[] getBytes() {
+        return bytes;
     }
 
     /**
