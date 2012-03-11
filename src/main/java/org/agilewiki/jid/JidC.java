@@ -53,8 +53,23 @@ public class JidC extends Component implements Jid {
      */
     protected int serializedOffset;
 
+    /**
+     * Returns the actor.
+     *
+     * @return The actor.
+     */
     public JCActor thisActor() {
         return thisActor;
+    }
+
+    /**
+     * Returns the actor type.
+     *
+     * @return The actor type, or null.
+     */
+    @Override
+    public String getActorType() {
+        return thisActor.getActorType();
     }
 
     /**

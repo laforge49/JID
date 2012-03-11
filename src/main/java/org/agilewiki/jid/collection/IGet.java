@@ -23,13 +23,13 @@
  */
 package org.agilewiki.jid.collection;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.SynchronousRequest;
-import org.agilewiki.jactor.components.JCActor;
 
 /**
  * Returns the ith element of a collection.
  */
-public class IGet extends SynchronousRequest<JCActor> {
+public class IGet extends SynchronousRequest<Actor> {
     /**
      * The index of the desired element.
      */

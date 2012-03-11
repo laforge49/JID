@@ -31,9 +31,9 @@ public class TupleTest extends TestCase {
             Open.req.call(t0);
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
-            JCActor e0 = iget0.send(future, t0);
+            Actor e0 = iget0.send(future, t0);
             assertNull(StringJid.getValueReq.send(future, e0));
-            JCActor e1 = iget1.send(future, t0);
+            Actor e1 = iget1.send(future, t0);
             assertNull(StringJid.getValueReq.send(future, e1));
             StringJid.setValueReq("Apples").send(future, e0);
             assertEquals("Apples", StringJid.getValueReq.send(future, e0));

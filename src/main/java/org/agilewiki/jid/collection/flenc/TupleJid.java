@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
@@ -88,9 +89,9 @@ public class TupleJid
     public void bindery() throws Exception {
         super.bindery();
 
-        thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, JCActor>() {
+        thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, Actor>() {
             @Override
-            public JCActor synchronousProcessRequest(Internals internals, IGet request)
+            public Actor synchronousProcessRequest(Internals internals, IGet request)
                     throws Exception {
                 int ndx = request.getI();
                 return get(ndx).thisActor();

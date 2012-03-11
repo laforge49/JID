@@ -25,7 +25,6 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.components.JCActor;
 
 /**
  * Incremental Deserialization / Reserialization.
@@ -49,7 +48,7 @@ public interface Jid {
      */
     public void setContainerJid(Jid containerJid);
 
-    public JCActor thisActor();
+    public Actor thisActor();
 
     /**
      * Returns the number of bytes needed to serialize the persistent data.
@@ -82,4 +81,11 @@ public interface Jid {
      */
     public Actor resolvePathname(Internals internals, String pathname)
             throws Exception;
+
+    /**
+     * Returns the actor type.
+     *
+     * @return The actor type, or null.
+     */
+    public String getActorType();
 }

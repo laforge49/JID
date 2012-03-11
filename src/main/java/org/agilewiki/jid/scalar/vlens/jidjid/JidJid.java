@@ -41,12 +41,12 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<Jid, JCActor>
+public class JidJid extends VLenScalarJid<Jid, Actor>
         implements ComparableKey<Object> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<JCActor> getValueReq = (GetValue<JCActor>) GetValue.req;
+    public static final GetValue<Actor> getValueReq = (GetValue<Actor>) GetValue.req;
 
     /**
      * Returns the MakeValue request.
@@ -225,7 +225,7 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    protected JCActor getValue(Internals internals)
+    protected Actor getValue(Internals internals)
             throws Exception {
         Jid v = get(internals);
         if (v == null)
@@ -273,7 +273,7 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
         saveLen(appendableBytes);
         if (len == -1)
             return;
-        String actorType = value.thisActor().getActorType();
+        String actorType = value.getActorType();
         appendableBytes.writeString(actorType);
         value.save(appendableBytes);
     }
