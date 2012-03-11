@@ -52,11 +52,11 @@ public class DoubleTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvl = JidJid.setValueReq(JidFactories.DOUBLE_JID_TYPE);
             sjvl.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = DoubleJid.getValueReq.send(future, rpa);
             assertEquals(0.D, v);
             DoubleJid.setValueReq(-1.D).send(future, rpa);
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = DoubleJid.getValueReq.send(future, rpa);
             assertEquals(-1.D, v);
 

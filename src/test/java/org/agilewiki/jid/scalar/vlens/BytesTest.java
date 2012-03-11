@@ -49,11 +49,11 @@ public class BytesTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvbs = JidJid.setValueReq(JidFactories.BYTES_JID_TYPE);
             sjvbs.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(BytesJid.getValueReq.send(future, rpa));
             assertTrue(BytesJid.makeValueReq(new byte[0]).send(future, rpa));
             assertFalse(BytesJid.makeValueReq(new byte[99]).send(future, rpa));
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertEquals(0, BytesJid.getValueReq.send(future, rpa).length);
             Clear.req.sendEvent(rpa);
             assertNull(BytesJid.getValueReq.send(future, rpa));

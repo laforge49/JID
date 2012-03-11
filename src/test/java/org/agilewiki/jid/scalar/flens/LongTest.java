@@ -52,11 +52,11 @@ public class LongTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvl = JidJid.setValueReq(JidFactories.LONG_JID_TYPE);
             sjvl.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = LongJid.getValueReq.send(future, rpa);
             assertEquals(0L, v);
             LongJid.setValueReq(-1000000000000L).send(future, rpa);
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = LongJid.getValueReq.send(future, rpa);
             assertEquals(-1000000000000L, v);
 

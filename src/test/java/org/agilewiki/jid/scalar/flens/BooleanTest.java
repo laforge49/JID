@@ -49,10 +49,10 @@ public class BooleanTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_TYPE);
             sjvb.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(BooleanJid.getValueReq.send(future, rpa));
             BooleanJid.setValueReq(true).send(future, rpa);
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertTrue(BooleanJid.getValueReq.send(future, rpa));
 
         } catch (Exception e) {

@@ -291,10 +291,10 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
         if (pathname.length() == 0) {
             return thisActor;
         }
-        if (pathname.equals("$")) {
+        if (pathname.equals("0")) {
             return getValue(internals);
         }
-        if (pathname.startsWith("$/")) {
+        if (pathname.startsWith("0/")) {
             Jid v = get(internals);
             if (v == null)
                 return null;

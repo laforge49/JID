@@ -49,11 +49,11 @@ public class StringTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvbs = JidJid.setValueReq(JidFactories.STRING_JID_TYPE);
             sjvbs.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(StringJid.getValueReq.send(future, rpa));
             assertTrue(StringJid.makeValueReq("").send(future, rpa));
             assertFalse(StringJid.makeValueReq("Hello?").send(future, rpa));
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertEquals("", StringJid.getValueReq.send(future, rpa));
             StringJid.setValueReq("bye").send(future, rpa);
             assertEquals("bye", StringJid.getValueReq.send(future, rpa));

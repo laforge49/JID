@@ -52,11 +52,11 @@ public class FloatTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvf = JidJid.setValueReq(JidFactories.FLOAT_JID_TYPE);
             sjvf.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = FloatJid.getValueReq.send(future, rpa);
             assertEquals(0.f, v);
             FloatJid.setValueReq(-1.f).send(future, rpa);
-            rpa = (new ResolvePathname("$")).send(future, jidJid1);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = FloatJid.getValueReq.send(future, rpa);
             assertEquals(-1.f, v);
 
