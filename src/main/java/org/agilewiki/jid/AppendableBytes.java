@@ -84,11 +84,11 @@ final public class AppendableBytes {
     /**
      * Write selected bytes.
      *
-     * @param immutableBytes The source of the bytes to be written.
-     * @param length         The number of bytes to be written.
+     * @param readableBytes The source of the bytes to be written.
+     * @param length        The number of bytes to be written.
      */
-    public void writeImmutableBytes(ImmutableBytes immutableBytes, int length) {
-        immutableBytes.readBytes(bytes, offset, length);
+    public void writeReadableBytes(ReadableBytes readableBytes, int length) {
+        readableBytes.readBytes(bytes, offset, length);
         offset += length;
     }
 

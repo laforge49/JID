@@ -51,18 +51,6 @@ final public class ImmutableBytes {
     }
 
     /**
-     * Read into an array of bytes.
-     *
-     * @param ba  The array of bytes to be read into.
-     * @param off The offset into the array of bytes to be read into.
-     * @param len The number of bytes to be read.
-     */
-    public void readBytes(byte[] ba, int off, int len) {
-        System.arraycopy(bytes, offset, ba, off, len);
-        offset += len;
-    }
-
-    /**
      * Returns the offset.
      *
      * @return The offset.
@@ -72,12 +60,12 @@ final public class ImmutableBytes {
     }
 
     /**
-     * Creates a ReadableBytes object from this ImmutableBytes object.
+     * Returns the immutable array of bytes.
      *
-     * @return The ReadableBytes object.
+     * @return The immutable array of bytes.
      */
-    public ReadableBytes readable() {
-        return new ReadableBytes(bytes, offset);
+    public byte[] getBytes() {
+        return bytes;
     }
 
     /**

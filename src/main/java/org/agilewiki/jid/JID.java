@@ -187,7 +187,7 @@ public class JID extends Component {
     final public void save(AppendableBytes appendableBytes) {
         if (isSerialized()) {
             ImmutableBytes sd = appendableBytes.immutable();
-            appendableBytes.writeImmutableBytes(serializedData, getSerializedLength());
+            appendableBytes.writeBytes(serializedData.getBytes(), serializedData.getOffset(), getSerializedLength());
             serializedData = sd;
         } else {
             serializedData = appendableBytes.immutable();
