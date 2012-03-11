@@ -1,7 +1,7 @@
 package org.agilewiki.jid.collection;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.*;
 
 /**
@@ -79,7 +79,7 @@ abstract public class CollectionJid extends JidC {
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public JCActor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return thisActor;

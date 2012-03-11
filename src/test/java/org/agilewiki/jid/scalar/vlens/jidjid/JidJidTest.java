@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.vlens.jidjid;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -37,7 +38,7 @@ public class JidJidTest extends TestCase {
             assertEquals(4, sl);
             JCActor jidJid1a = JidJid.getValueReq.send(future, jidJid1);
             assertNull(jidJid1a);
-            JCActor rpa = (new ResolvePathname("")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("")).send(future, jidJid1);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid1);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);

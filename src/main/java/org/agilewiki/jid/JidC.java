@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.bind.*;
@@ -129,9 +130,9 @@ public class JidC extends Component implements Jid {
             }
         });
 
-        thisActor.bind(ResolvePathname.class.getName(), new SynchronousMethodBinding<ResolvePathname, JCActor>() {
+        thisActor.bind(ResolvePathname.class.getName(), new SynchronousMethodBinding<ResolvePathname, Actor>() {
             @Override
-            public JCActor synchronousProcessRequest(Internals internals, ResolvePathname request) throws Exception {
+            public Actor synchronousProcessRequest(Internals internals, ResolvePathname request) throws Exception {
                 return resolvePathname(internals, request.getPathname());
             }
         });
@@ -276,7 +277,7 @@ public class JidC extends Component implements Jid {
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
-    public JCActor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);

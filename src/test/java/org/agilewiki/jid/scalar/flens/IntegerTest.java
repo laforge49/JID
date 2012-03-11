@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.flens;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -52,7 +53,7 @@ public class IntegerTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_TYPE);
             sjvi.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = IntegerJid.getValueReq.send(future, rpa);
             assertEquals(0, v);
             IntegerJid.setValueReq(-1).send(future, rpa);

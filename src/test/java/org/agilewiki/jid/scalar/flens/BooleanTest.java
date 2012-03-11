@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.flens;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -49,7 +50,7 @@ public class BooleanTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_TYPE);
             sjvb.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(BooleanJid.getValueReq.send(future, rpa));
             BooleanJid.setValueReq(true).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);

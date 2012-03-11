@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.components.JCActor;
 
@@ -79,6 +80,6 @@ public interface Jid {
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
-    public JCActor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(Internals internals, String pathname)
             throws Exception;
 }

@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.flens;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -52,7 +53,7 @@ public class FloatTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvf = JidJid.setValueReq(JidFactories.FLOAT_JID_TYPE);
             sjvf.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = FloatJid.getValueReq.send(future, rpa);
             assertEquals(0.f, v);
             FloatJid.setValueReq(-1.f).send(future, rpa);

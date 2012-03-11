@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.flens;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -52,7 +53,7 @@ public class DoubleTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvl = JidJid.setValueReq(JidFactories.DOUBLE_JID_TYPE);
             sjvl.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = DoubleJid.getValueReq.send(future, rpa);
             assertEquals(0.D, v);
             DoubleJid.setValueReq(-1.D).send(future, rpa);

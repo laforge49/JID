@@ -1,6 +1,7 @@
 package org.agilewiki.jid.collection.flenc;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -40,9 +41,9 @@ public class TupleTest extends TestCase {
             assertEquals("Oranges", StringJid.getValueReq.send(future, e1));
             JCActor t1 = (new CopyJID()).send(future, t0);
             Open.req.call(t1);
-            JCActor f0 = (new ResolvePathname("0")).send(future, t1);
+            Actor f0 = (new ResolvePathname("0")).send(future, t1);
             assertEquals("Apples", StringJid.getValueReq.send(future, f0));
-            JCActor f1 = (new ResolvePathname("1")).send(future, t1);
+            Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, f1));
 
             NewActor newStringJid = new NewActor(JidFactories.STRING_JID_TYPE);
@@ -51,7 +52,7 @@ public class TupleTest extends TestCase {
             StringJid.setValueReq("Peaches").send(future, string1);
             byte[] sb = GetBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);
-            JCActor f1b = (new ResolvePathname("1")).send(future, t1);
+            Actor f1b = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Peaches", StringJid.getValueReq.send(future, f1b));
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import junit.framework.TestCase;
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
@@ -49,7 +50,7 @@ public class BytesTest extends TestCase {
             Open.req.call(jidJid1);
             SetValue sjvbs = JidJid.setValueReq(JidFactories.BYTES_JID_TYPE);
             sjvbs.send(future, jidJid1);
-            JCActor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(BytesJid.getValueReq.send(future, rpa));
             assertTrue(BytesJid.makeValueReq(new byte[0]).send(future, rpa));
             assertFalse(BytesJid.makeValueReq(new byte[99]).send(future, rpa));

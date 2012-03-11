@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.vlens.jidjid;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
@@ -286,7 +287,7 @@ public class JidJid extends VLenScalarJid<Jid, JCActor>
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public JCActor resolvePathname(Internals internals, String pathname)
+    public Actor resolvePathname(Internals internals, String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return thisActor;
