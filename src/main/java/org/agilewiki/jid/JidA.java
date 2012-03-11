@@ -3,10 +3,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
-import org.agilewiki.jid.requests.GetBytes;
-import org.agilewiki.jid.requests.GetSerializedLength;
-import org.agilewiki.jid.requests.IsJidEqual;
-import org.agilewiki.jid.requests.ResolvePathname;
+import org.agilewiki.jid.requests.*;
 
 import java.util.Arrays;
 
@@ -36,6 +33,25 @@ public class JidA extends LiteActor implements Jid {
      */
     public JidA(final Mailbox mailbox) {
         super(mailbox);
+    }
+
+    /**
+     * Returns a new instance.
+     *
+     * @param m The mailbox.
+     * @return The new instance.
+     */
+    public JidA newInstance(Mailbox m) {
+        return new JidA(m);
+    }
+
+    /**
+     * Returns a readable form of the serialized data.
+     *
+     * @return A ReadableBytes wrapper of the serialized data.
+     */
+    protected ReadableBytes readable() {
+        return new ReadableBytes(serializedBytes, serializedOffset);
     }
 
     /**
@@ -198,9 +214,20 @@ public class JidA extends LiteActor implements Jid {
             throws Exception {
         if (request instanceof ResolvePathname)
             rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
+        else if (request instanceof CopyJID)
+            rp.processResponse(copyJID(((CopyJID) request).getMailbox()));
         else if (request instanceof IsJidEqual)
             isJidEqual(((IsJidEqual) request).getJidActor(), rp);
         else throw new UnsupportedOperationException(request.getClass().getName());
+    }
+
+    public JidA copyJID(Mailbox m) {
+        Mailbox mb = m;
+        if (mb == null)
+            mb = getMailbox();
+        JidA jidA = newInstance(m);
+        jidA.load(readable());
+        return jidA;
     }
 
     public void isJidEqual(Actor actor, final RP rp)
