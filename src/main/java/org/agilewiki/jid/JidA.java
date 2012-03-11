@@ -203,7 +203,6 @@ public class JidA extends LiteActor implements Jid {
         else throw new UnsupportedOperationException(request.getClass().getName());
     }
 
-
     public void isJidEqual(Actor actor, final RP rp)
             throws Exception {
         if (!(actor instanceof JidA)) {
