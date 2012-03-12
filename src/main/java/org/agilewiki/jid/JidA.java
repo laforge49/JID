@@ -212,15 +212,28 @@ public class JidA extends LiteActor implements Jid {
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof ResolvePathname)
+        if (request instanceof GetSerializedLength)
+            rp.processResponse(getSerializedLength());
+        else if (request instanceof ResolvePathname)
             rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
-        else if (request instanceof CopyJID)
+        else if (request instanceof GetBytes)
+            rp.processResponse(getBytes());
+        else if (request instanceof Save) {
+            save(((Save) request).getAppendableBytes());
+            rp.processResponse(null);
+        } else if (request instanceof CopyJID)
             rp.processResponse(copyJID(((CopyJID) request).getMailbox()));
         else if (request instanceof IsJidEqual)
             isJidEqual(((IsJidEqual) request).getJidActor(), rp);
         else throw new UnsupportedOperationException(request.getClass().getName());
     }
 
+    /**
+     * Returns a copy of the actor.
+     *
+     * @param m The mailbox.
+     * @return a copy of the actor.
+     */
     public JidA copyJID(Mailbox m) {
         Mailbox mb = m;
         if (mb == null)
