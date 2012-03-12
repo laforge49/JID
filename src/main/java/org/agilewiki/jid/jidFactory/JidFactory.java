@@ -67,7 +67,9 @@ final public class JidFactory extends Component {
                         newJID.getActorType(),
                         newJID.getMailbox(),
                         newJID.getParent())).call(thisActor);
-                (new PutBytes(newJID.getBytes())).call(actor);
+                byte[] bytes = newJID.getBytes();
+                if (bytes != null)
+                    (new PutBytes(bytes)).call(actor);
                 return actor;
             }
         });
