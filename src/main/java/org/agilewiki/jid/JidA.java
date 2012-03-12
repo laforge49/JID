@@ -3,6 +3,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.requests.*;
 
 import java.util.Arrays;
@@ -10,7 +11,7 @@ import java.util.Arrays;
 /**
  * Base class for Incremental Deserialization Actors.
  */
-public class JidA extends LiteActor implements Jid {
+public class JidA extends JLPCActor implements Jid {
     /**
      * The JID actor which holds this actor.
      */

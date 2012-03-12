@@ -128,7 +128,7 @@ public class ListJid extends CollectionJid {
                     elementsType,
                     thisActor.getMailbox(),
                     thisActor.getParent());
-            JCActor elementActor = newActor.call(thisActor.getParent());
+            JCActor elementActor = (JCActor) newActor.call(thisActor.getParent());
             Jid elementJid = GetJIDComponent.req.call(elementActor);
             elementJid.load(readableBytes);
             Open.req.call(elementActor);

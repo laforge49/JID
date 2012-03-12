@@ -26,7 +26,7 @@ public class FloatTest extends TestCase {
             Open.req.call(factory);
 
             NewActor newFloatJid = new NewActor(JidFactories.FLOAT_JID_TYPE);
-            JCActor float1 = newFloatJid.send(future, factory);
+            JCActor float1 = (JCActor) newFloatJid.send(future, factory);
             Open.req.call(float1);
             Actor float2 = (new CopyJID()).send(future, float1);
             FloatJid.setValueReq(1.0f).send(future, float2);
@@ -47,7 +47,7 @@ public class FloatTest extends TestCase {
             assertEquals(1.f, v);
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
-            JCActor jidJid1 = newJidJid.send(future, factory);
+            JCActor jidJid1 = (JCActor) newJidJid.send(future, factory);
             Open.req.call(jidJid1);
             SetValue sjvf = JidJid.setValueReq(JidFactories.FLOAT_JID_TYPE);
             sjvf.send(future, jidJid1);

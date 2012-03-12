@@ -58,7 +58,7 @@ public class TupleJid
      */
     @Override
     public void opening(Internals internals) throws Exception {
-        actorTypes = GetActorTypes.req.call(internals, thisActor.getParent());
+        actorTypes = GetActorTypes.req.call(thisActor.getParent());
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = readable();
@@ -123,7 +123,7 @@ public class TupleJid
                 actorType,
                 thisActor.getMailbox(),
                 thisActor.getParent(),
-                bytes, this)).call(internals, thisActor.getParent());
+                bytes, this)).call(thisActor.getParent());
         Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;

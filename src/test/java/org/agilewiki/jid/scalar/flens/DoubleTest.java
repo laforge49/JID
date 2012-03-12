@@ -26,7 +26,7 @@ public class DoubleTest extends TestCase {
             Open.req.call(factory);
 
             NewActor newDoubleJid = new NewActor(JidFactories.DOUBLE_JID_TYPE);
-            JCActor double1 = newDoubleJid.send(future, factory);
+            JCActor double1 = (JCActor) newDoubleJid.send(future, factory);
             Open.req.call(double1);
             Actor double2 = (new CopyJID()).send(future, double1);
             DoubleJid.setValueReq(1.D).send(future, double2);
@@ -47,7 +47,7 @@ public class DoubleTest extends TestCase {
             assertEquals(1.D, v);
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
-            JCActor jidJid1 = newJidJid.send(future, factory);
+            JCActor jidJid1 = (JCActor) newJidJid.send(future, factory);
             Open.req.call(jidJid1);
             SetValue sjvl = JidJid.setValueReq(JidFactories.DOUBLE_JID_TYPE);
             sjvl.send(future, jidJid1);

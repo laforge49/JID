@@ -26,7 +26,7 @@ public class BytesTest extends TestCase {
             Open.req.call(factory);
 
             NewActor newBytesJid = new NewActor(JidFactories.BYTES_JID_TYPE);
-            JCActor bytes1 = newBytesJid.send(future, factory);
+            JCActor bytes1 = (JCActor) newBytesJid.send(future, factory);
             Open.req.call(bytes1);
             Actor bytes2 = (new CopyJID()).send(future, bytes1);
             BytesJid.setValueReq(new byte[3]).send(future, bytes2);
@@ -44,7 +44,7 @@ public class BytesTest extends TestCase {
             assertEquals(3, BytesJid.getValueReq.send(future, bytes3).length);
 
             NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
-            JCActor jidJid1 = newJidJid.send(future, factory);
+            JCActor jidJid1 = (JCActor) newJidJid.send(future, factory);
             Open.req.call(jidJid1);
             SetValue sjvbs = JidJid.setValueReq(JidFactories.BYTES_JID_TYPE);
             sjvbs.send(future, jidJid1);
