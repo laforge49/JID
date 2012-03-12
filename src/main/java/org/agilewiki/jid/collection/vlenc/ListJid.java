@@ -24,15 +24,12 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.Open;
-import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.collection.CollectionJid;
-import org.agilewiki.jid.requests.GetJIDComponent;
+import org.agilewiki.jid.jidFactory.NewJID;
 
 import java.util.ArrayList;
 
@@ -124,14 +121,13 @@ public class ListJid extends CollectionJid {
         list = new ArrayList<Jid>(count);
         int limit = len + readableBytes.getOffset();
         while (readableBytes.getOffset() < limit) {
-            NewActor newActor = new NewActor(
+            NewJID newJid = new NewJID(
                     elementsType,
                     thisActor.getMailbox(),
-                    thisActor.getParent());
-            JCActor elementActor = (JCActor) newActor.call(thisActor.getParent());
-            Jid elementJid = GetJIDComponent.req.call(elementActor);
-            elementJid.load(readableBytes);
-            Open.req.call(elementActor);
+                    thisActor.getParent(),
+                    readableBytes,
+                    this);
+            Jid elementJid = newJid.call(thisActor.getParent());
             len += elementJid.getSerializedLength();
             elementJid.setContainerJid(this);
             list.add(elementJid);
