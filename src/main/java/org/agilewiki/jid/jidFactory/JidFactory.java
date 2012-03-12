@@ -24,6 +24,7 @@
 package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
+import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
@@ -32,8 +33,8 @@ import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidC;
+import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.requests.GetJIDComponent;
-import org.agilewiki.jid.requests.PutBytes;
 
 import java.util.ArrayList;
 
@@ -61,23 +62,24 @@ final public class JidFactory extends Component {
     @Override
     public void bindery() throws Exception {
 
-        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, JCActor>() {
+        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, Jid>() {
             @Override
-            public JCActor concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
+            public Jid concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
                     throws Exception {
                 NewJID newJID = request;
                 JCActor actor = (new NewActor(
                         newJID.getActorType(),
                         newJID.getMailbox(),
                         newJID.getParent())).call(thisActor);
-                byte[] bytes = newJID.getBytes();
-                if (bytes != null)
-                    (new PutBytes(bytes)).call(actor);
                 JidC jidC = GetJIDComponent.req.call(actor);
+                ReadableBytes readableBytes = newJID.getReadableBytes();
+                if (readableBytes != null)
+                    jidC.load(readableBytes);
                 Jid container = newJID.getContainer();
                 if (container != null)
                     jidC.setContainerJid(container);
-                return actor;
+                Open.req.call(actor);
+                return jidC;
             }
         });
     }

@@ -138,9 +138,8 @@ public class JidC extends Component implements Jid {
                 Mailbox m = request.getMailbox();
                 if (m == null)
                     m = thisActor.getMailbox();
-                JCActor jcActor = (new NewJID(thisActor.getActorType(), m, getBytes())).call(thisActor);
-                Open.req.call(jcActor);
-                return jcActor;
+                Jid jid = (new NewJID(thisActor.getActorType(), m, getBytes())).call(thisActor);
+                return jid.thisActor();
             }
         });
 

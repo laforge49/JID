@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.GetValue;
@@ -61,12 +60,11 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * Assign a value.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param request The MakeValue request.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(Internals internals, SetValue request) throws Exception {
+    protected void setValue(SetValue request) throws Exception {
         byte[] v = (byte[]) request.getValue();
         int c = v.length;
         if (len > -1)
@@ -80,13 +78,12 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * Assign a value unless one is already present.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param request The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(Internals internals, MakeValue request) throws Exception {
+    protected Boolean makeValue(MakeValue request) throws Exception {
         if (len > -1)
             return false;
         byte[] v = (byte[]) request.getValue();

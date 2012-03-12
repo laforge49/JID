@@ -25,14 +25,10 @@ package org.agilewiki.jid.scalar.vlens.jidjid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
-import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
@@ -76,7 +72,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
             @Override
             public void synchronousProcessRequest(Internals internals, SetBytes request)
                     throws Exception {
-                setBytes(internals, request);
+                setBytes(request);
             }
         });
 
@@ -95,7 +91,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void clear(Internals internals) throws Exception {
+    protected void clear() throws Exception {
         if (len == -1)
             return;
         int l = len;
@@ -112,51 +108,45 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * Assign a value.
      *
-     * @param internals The actor's internals.
-     * @param request   The SetValue request.
+     * @param request The SetValue request.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(Internals internals, SetValue request)
+    protected void setValue(SetValue request)
             throws Exception {
         if (len > -1)
-            clear(internals);
+            clear();
         String jidType = (String) request.getValue();
-        setValue(internals, jidType);
+        setValue(jidType);
     }
 
     /**
      * Assign a value unless one is already present.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param request The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(Internals internals, MakeValue request)
+    protected Boolean makeValue(MakeValue request)
             throws Exception {
         if (len > -1)
             return false;
         String jidType = (String) request.getValue();
-        setValue(internals, jidType);
+        setValue(jidType);
         return true;
     }
 
     /**
      * Assign a value.
      *
-     * @param internals The actor's internals.
-     * @param jidType   The actor type.
+     * @param jidType The actor type.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setValue(Internals internals, String jidType)
+    protected void setValue(String jidType)
             throws Exception {
-        NewActor na = new NewActor(jidType, thisActor.getMailbox(), thisActor.getParent());
-        JCActor nja = na.call(thisActor);
-        value = (new GetJIDComponent()).call(internals, nja);
-        value.setContainerJid(this);
-        Open.req.call(internals, nja);
+        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), (byte[]) null, this);
+        value = na.call(thisActor);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -166,17 +156,16 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param internals The actor's internals.
-     * @param request   The SetBytes request.
+     * @param request The SetBytes request.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(Internals internals, SetBytes request)
+    protected void setBytes(SetBytes request)
             throws Exception {
         if (len > -1)
-            clear(internals);
+            clear();
         String jidType = request.getActorType();
         byte[] bytes = request.getBytes();
-        setBytes(internals, jidType, bytes);
+        setBytes(jidType, bytes);
     }
 
     /**
@@ -193,25 +182,21 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
             return false;
         String jidType = request.getActorType();
         byte[] bytes = request.getBytes();
-        setBytes(internals, jidType, bytes);
+        setBytes(jidType, bytes);
         return true;
     }
 
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param internals The actor's internals.
-     * @param jidType   The actor type.
-     * @param bytes     The serialized data.
+     * @param jidType The actor type.
+     * @param bytes   The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(Internals internals, String jidType, byte[] bytes)
+    protected void setBytes(String jidType, byte[] bytes)
             throws Exception {
-        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes);
-        JCActor nja = na.call(thisActor);
-        value = (new GetJIDComponent()).call(internals, nja);
-        value.setContainerJid(this);
-        Open.req.call(internals, nja);
+        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes, this);
+        value = na.call(thisActor);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -250,14 +235,10 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         String actorType = readableBytes.readString();
-        JCActor nja = (new NewActor(
+        value = (new NewJID(
                 actorType,
                 thisActor.getMailbox(),
-                thisActor.getParent())).call(thisActor);
-        value = (new GetJIDComponent()).call(nja);
-        value.load(readableBytes);
-        value.setContainerJid(this);
-        Open.req.call(nja);
+                thisActor.getParent(), readableBytes, this)).call(thisActor);
         return value;
     }
 

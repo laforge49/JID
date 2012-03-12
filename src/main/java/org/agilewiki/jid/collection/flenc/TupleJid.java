@@ -25,17 +25,13 @@ package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
-import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.requests.GetJIDComponent;
 
 /**
  * Holds a fixed-size array of JID actors of various types.
@@ -72,9 +68,14 @@ public class TupleJid
         int i = 0;
         len = 0;
         while (i < size()) {
-            Jid elementJid = createJid(i, internals, readableBytes);
+            String actorType = actorTypes[i];
+            Jid elementJid = (new NewJID(
+                    actorType,
+                    thisActor.getMailbox(),
+                    thisActor.getParent(),
+                    readableBytes,
+                    this)).call(thisActor.getParent());
             len += elementJid.getSerializedLength();
-            elementJid.setContainerJid(this);
             tuple[i] = elementJid;
             i += 1;
         }
@@ -107,22 +108,6 @@ public class TupleJid
         });
     }
 
-    protected Jid createJid(int i, Internals internals, ReadableBytes readableBytes)
-            throws Exception {
-        String actorType = actorTypes[i];
-        NewActor newActor = new NewActor(
-                actorType,
-                thisActor.getMailbox(),
-                thisActor.getParent());
-        JCActor elementActor = newActor.call(thisActor.getParent());
-        Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
-        if (readableBytes != null) {
-            elementJid.load(readableBytes);
-        }
-        Open.req.call(internals, elementActor);
-        return elementJid;
-    }
-
     /**
      * Creates a JID actor and loads its serialized data.
      *
@@ -134,17 +119,14 @@ public class TupleJid
     public void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
         String actorType = actorTypes[i];
-        JCActor elementActor = (new NewJID(
+        Jid elementJid = (new NewJID(
                 actorType,
                 thisActor.getMailbox(),
                 thisActor.getParent(),
-                bytes)).call(internals, thisActor.getParent());
-        Jid elementJid = GetJIDComponent.req.call(internals, elementActor);
-        Open.req.call(internals, elementActor);
+                bytes, this)).call(internals, thisActor.getParent());
         Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
-        elementJid.setContainerJid(this);
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 

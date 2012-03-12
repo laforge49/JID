@@ -57,7 +57,7 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
                     @Override
                     public void synchronousProcessRequest(Internals internals, SetValue request)
                             throws Exception {
-                        setValue(internals, request);
+                        setValue(request);
                     }
                 });
     }
@@ -65,11 +65,10 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
     /**
      * Assign a value.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param request The MakeValue request.
      * @throws Exception Any uncaught exception raised.
      */
-    abstract protected void setValue(Internals internals, SetValue request)
+    abstract protected void setValue(SetValue request)
             throws Exception;
 
     /**

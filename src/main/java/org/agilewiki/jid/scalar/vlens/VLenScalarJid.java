@@ -60,7 +60,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
                     @Override
                     public void synchronousProcessRequest(Internals internals, Clear request)
                             throws Exception {
-                        clear(internals);
+                        clear();
                     }
                 });
 
@@ -69,7 +69,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
                     @Override
                     public Boolean synchronousProcessRequest(Internals internals, MakeValue request)
                             throws Exception {
-                        return makeValue(internals, request);
+                        return makeValue(request);
                     }
                 });
     }
@@ -77,12 +77,11 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
     /**
      * Assign a value unless one is already present.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param request The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    abstract protected Boolean makeValue(Internals internals, MakeValue request)
+    abstract protected Boolean makeValue(MakeValue request)
             throws Exception;
 
     /**
@@ -90,7 +89,7 @@ abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid
      *
      * @throws Exception Any uncaught exception raised.
      */
-    protected void clear(Internals internals) throws Exception {
+    protected void clear() throws Exception {
         if (len == -1)
             return;
         int l = len;
