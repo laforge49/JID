@@ -24,14 +24,30 @@
 package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.bind.ConcurrentRequest;
 import org.agilewiki.jactor.bind.JBActor;
-import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.Jid;
 
 /**
  * Creates a JID actor and loads its serialized data.
  */
-final public class NewJID extends NewActor {
+final public class NewJID extends ConcurrentRequest<JCActor> {
+    /**
+     * An actor type name.
+     */
+    private String actorType;
+
+    /**
+     * A mailbox which may be shared with other actors, or null.
+     */
+    private Mailbox mailbox;
+
+    /**
+     * The parent actor to which unrecognized requests are forwarded, or null.
+     */
+    private JBActor parent;
+
     /**
      * Holds the serialized data.
      */
@@ -48,7 +64,7 @@ final public class NewJID extends NewActor {
      * @param actorType An actor type name.
      */
     public NewJID(String actorType) {
-        super(actorType);
+        this(actorType, null, null, null);
     }
 
     /**
@@ -68,7 +84,7 @@ final public class NewJID extends NewActor {
      * @param mailbox   A mailbox which may be shared with other actors, or null.
      */
     public NewJID(String actorType, Mailbox mailbox) {
-        super(actorType, mailbox);
+        this(actorType, mailbox, null, null);
     }
 
     /**
@@ -90,7 +106,7 @@ final public class NewJID extends NewActor {
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      */
     public NewJID(String actorType, Mailbox mailbox, JBActor parent) {
-        super(actorType, mailbox, parent);
+        this(actorType, mailbox, parent, null);
     }
 
     /**
@@ -102,9 +118,39 @@ final public class NewJID extends NewActor {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes) {
-        super(actorType, mailbox, parent);
+        this.actorType = actorType;
+        this.mailbox = mailbox;
+        this.parent = parent;
         this.bytes = new byte[bytes.length];
-        System.arraycopy(bytes, 0, this.bytes, 0, bytes.length);
+        if (bytes != null)
+            System.arraycopy(bytes, 0, this.bytes, 0, bytes.length);
+    }
+
+    /**
+     * Returns an actor type name.
+     *
+     * @return An actor type name.
+     */
+    public String getActorType() {
+        return actorType;
+    }
+
+    /**
+     * Returns a mailbox which may be shared with other actors.
+     *
+     * @return A mailbox which may be shared with other actors, or null.
+     */
+    public Mailbox getMailbox() {
+        return mailbox;
+    }
+
+    /**
+     * Returns the parent actor to which unrecognized requests are forwarded.
+     *
+     * @return The parent actor to which unrecognized requests are forwarded, or null.
+     */
+    public JBActor getParent() {
+        return parent;
     }
 
     /**

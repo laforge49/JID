@@ -207,7 +207,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
      */
     protected void setBytes(Internals internals, String jidType, byte[] bytes)
             throws Exception {
-        NewActor na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes);
+        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes);
         JCActor nja = na.call(thisActor);
         value = (new GetJIDComponent()).call(internals, nja);
         value.setContainerJid(this);
