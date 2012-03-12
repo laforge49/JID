@@ -64,7 +64,7 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param actorType An actor type name.
      */
     public NewJID(String actorType) {
-        this(actorType, null, null, null);
+        this(actorType, null, null, null, null);
     }
 
     /**
@@ -74,7 +74,18 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, byte[] bytes) {
-        this(actorType, null, null, bytes);
+        this(actorType, null, null, bytes, null);
+    }
+
+    /**
+     * Create a NewJID request.
+     *
+     * @param actorType An actor type name.
+     * @param bytes     Holds the serialized data.
+     * @param container The container of the new Jid.
+     */
+    public NewJID(String actorType, byte[] bytes, Jid container) {
+        this(actorType, null, null, bytes, container);
     }
 
     /**
@@ -84,7 +95,7 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param mailbox   A mailbox which may be shared with other actors, or null.
      */
     public NewJID(String actorType, Mailbox mailbox) {
-        this(actorType, mailbox, null, null);
+        this(actorType, mailbox, null, null, null);
     }
 
     /**
@@ -95,7 +106,19 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, byte[] bytes) {
-        this(actorType, mailbox, null, bytes);
+        this(actorType, mailbox, null, bytes, null);
+    }
+
+    /**
+     * Create a NewJID request.
+     *
+     * @param actorType An actor type name.
+     * @param mailbox   A mailbox which may be shared with other actors, or null.
+     * @param bytes     Holds the serialized data.
+     * @param container The container of the new Jid.
+     */
+    public NewJID(String actorType, Mailbox mailbox, byte[] bytes, Jid container) {
+        this(actorType, mailbox, null, bytes, container);
     }
 
     /**
@@ -106,7 +129,7 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      */
     public NewJID(String actorType, Mailbox mailbox, JBActor parent) {
-        this(actorType, mailbox, parent, null);
+        this(actorType, mailbox, parent, null, null);
     }
 
     /**
@@ -118,12 +141,26 @@ final public class NewJID extends ConcurrentRequest<JCActor> {
      * @param bytes     Holds the serialized data.
      */
     public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes) {
+        this(actorType, mailbox, parent, bytes, null);
+    }
+
+    /**
+     * Create a NewJID request.
+     *
+     * @param actorType An actor type name.
+     * @param mailbox   A mailbox which may be shared with other actors, or null.
+     * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
+     * @param bytes     Holds the serialized data.
+     * @param container The container of the new Jid.
+     */
+    public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes, Jid container) {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
         this.bytes = new byte[bytes.length];
         if (bytes != null)
             System.arraycopy(bytes, 0, this.bytes, 0, bytes.length);
+        this.container = container;
     }
 
     /**
