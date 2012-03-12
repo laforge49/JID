@@ -30,6 +30,9 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.Jid;
+import org.agilewiki.jid.JidC;
+import org.agilewiki.jid.requests.GetJIDComponent;
 import org.agilewiki.jid.requests.PutBytes;
 
 import java.util.ArrayList;
@@ -70,6 +73,10 @@ final public class JidFactory extends Component {
                 byte[] bytes = newJID.getBytes();
                 if (bytes != null)
                     (new PutBytes(bytes)).call(actor);
+                JidC jidC = GetJIDComponent.req.call(actor);
+                Jid container = newJID.getContainer();
+                if (container != null)
+                    jidC.setContainerJid(container);
                 return actor;
             }
         });

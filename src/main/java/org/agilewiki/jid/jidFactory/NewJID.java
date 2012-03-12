@@ -26,6 +26,7 @@ package org.agilewiki.jid.jidFactory;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.bind.JBActor;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.Jid;
 
 /**
  * Creates a JID actor and loads its serialized data.
@@ -35,6 +36,11 @@ final public class NewJID extends NewActor {
      * Holds the serialized data.
      */
     private byte[] bytes;
+
+    /**
+     * The container of the new Jid.
+     */
+    private Jid container;
 
     /**
      * Create a NewJID request.
@@ -108,5 +114,14 @@ final public class NewJID extends NewActor {
      */
     public byte[] getBytes() {
         return bytes;
+    }
+
+    /**
+     * Returns the container.
+     *
+     * @return The container.
+     */
+    public Jid getContainer() {
+        return container;
     }
 }

@@ -124,7 +124,7 @@ public class JidC extends Component implements Jid {
 
         thisActor.bind(
                 GetJIDComponent.class.getName(),
-                new SynchronousOnlyInitializationMethodBinding<GetJIDComponent, JidC>() {
+                new InitializationMethodBinding<GetJIDComponent, JidC>() {
                     @Override
                     public JidC initializationProcessRequest(Internals internals, GetJIDComponent request)
                             throws Exception {
