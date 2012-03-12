@@ -5,7 +5,6 @@ import org.agilewiki.jactor.*;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.*;
 
@@ -38,8 +37,7 @@ public class JidTest extends TestCase {
             (new Include(JidFactories.class)).call(jidFactory);
             Open.req.call(jidFactory);
 
-            JCActor jid = (JCActor) future.send(jidFactory, new NewActor(JidFactories.JID_TYPE));
-            Open.req.call(jid);
+            Actor jid = (new NewJID(JidFactories.JID_TYPE)).call(jidFactory).thisActor();
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);

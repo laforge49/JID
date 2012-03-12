@@ -8,10 +8,10 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetBytes;
 import org.agilewiki.jid.requests.ResolvePathname;
@@ -26,9 +26,8 @@ public class TupleTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             (new Include(StringStringTuple.class)).call(factory);
             Open.req.call(factory);
-            NewActor newTupleJid = new NewActor(JidFactories.TUPLE_JID_TYPE);
-            JCActor t0 = (JCActor) newTupleJid.send(future, factory);
-            Open.req.call(t0);
+            NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_TYPE);
+            Actor t0 = newTupleJid.send(future, factory).thisActor();
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
             Actor e0 = iget0.send(future, t0);
@@ -45,9 +44,8 @@ public class TupleTest extends TestCase {
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, f1));
 
-            NewActor newStringJid = new NewActor(JidFactories.STRING_JID_TYPE);
-            JCActor string1 = (JCActor) newStringJid.send(future, factory);
-            Open.req.call(string1);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
+            Actor string1 = newStringJid.send(future, factory).thisActor();
             StringJid.setValueReq("Peaches").send(future, string1);
             byte[] sb = GetBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);

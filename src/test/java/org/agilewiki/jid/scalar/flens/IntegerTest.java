@@ -8,8 +8,8 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
-import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.CopyJID;
 import org.agilewiki.jid.requests.GetSerializedLength;
 import org.agilewiki.jid.requests.ResolvePathname;
@@ -25,9 +25,8 @@ public class IntegerTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewActor newIntegerJid = new NewActor(JidFactories.INTEGER_JID_TYPE);
-            JCActor int1 = (JCActor) newIntegerJid.send(future, factory);
-            Open.req.call(int1);
+            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_TYPE);
+            Actor int1 = newIntegerJid.send(future, factory).thisActor();
             Actor int2 = (new CopyJID()).send(future, int1);
             IntegerJid.setValueReq(1).send(future, int2);
             Actor int3 = (new CopyJID()).send(future, int2);
@@ -46,9 +45,8 @@ public class IntegerTest extends TestCase {
             v = IntegerJid.getValueReq.send(future, int3);
             assertEquals(1, v);
 
-            NewActor newJidJid = new NewActor(JidFactories.JID_JID_TYPE);
-            JCActor jidJid1 = (JCActor) newJidJid.send(future, factory);
-            Open.req.call(jidJid1);
+            NewJID newJidJid = new NewJID(JidFactories.JID_JID_TYPE);
+            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
             SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_TYPE);
             sjvi.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
