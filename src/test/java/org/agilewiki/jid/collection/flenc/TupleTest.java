@@ -26,7 +26,7 @@ public class TupleTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             (new Include(StringStringTuple.class)).call(factory);
             Open.req.call(factory);
-            NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_TYPE);
+            NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_CTYPE);
             Actor t0 = newTupleJid.send(future, factory).thisActor();
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
@@ -44,7 +44,7 @@ public class TupleTest extends TestCase {
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", StringJid.getValueReq.send(future, f1));
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
             StringJid.setValueReq("Peaches").send(future, string1);
             byte[] sb = GetBytes.req.send(future, string1);

@@ -25,7 +25,7 @@ public class BooleanTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_TYPE);
+            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_CTYPE);
             Actor boolean1 = newBooleanJid.send(future, factory).thisActor();
             Actor boolean2 = (new CopyJID()).send(future, boolean1);
             BooleanJid.setValueReq(true).send(future, boolean2);
@@ -42,9 +42,9 @@ public class BooleanTest extends TestCase {
             assertTrue(BooleanJid.getValueReq.send(future, boolean2));
             assertTrue(BooleanJid.getValueReq.send(future, boolean3));
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_TYPE);
+            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_TYPE);
+            SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
             sjvb.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(BooleanJid.getValueReq.send(future, rpa));

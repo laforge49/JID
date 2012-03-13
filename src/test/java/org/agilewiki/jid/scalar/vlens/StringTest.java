@@ -25,7 +25,7 @@ public class StringTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
             Actor string2 = (new CopyJID()).send(future, string1);
             StringJid.setValueReq("abc").send(future, string2);
@@ -42,9 +42,9 @@ public class StringTest extends TestCase {
             assertEquals("abc", StringJid.getValueReq.send(future, string2));
             assertEquals("abc", StringJid.getValueReq.send(future, string3));
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_TYPE);
+            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvbs = JidJid.setValueReq(JidFactories.STRING_JID_TYPE);
+            SetValue sjvbs = JidJid.setValueReq(JidFactories.STRING_JID_CTYPE);
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(StringJid.getValueReq.send(future, rpa));

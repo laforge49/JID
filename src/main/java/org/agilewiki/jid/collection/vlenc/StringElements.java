@@ -29,7 +29,7 @@ import org.agilewiki.jid.JidFactories;
  * Defines collection of Strings.
  */
 public class StringElements extends ElementsType {
-    private static final String at = JidFactories.STRING_JID_TYPE;
+    private static final String at = JidFactories.STRING_JID_CTYPE;
 
     /**
      * Returns an actor type.

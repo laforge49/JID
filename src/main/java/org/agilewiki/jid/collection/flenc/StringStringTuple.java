@@ -32,8 +32,8 @@ public class StringStringTuple extends ActorTypes {
     private static final String[] ats = new String[2];
 
     static {
-        ats[0] = JidFactories.STRING_JID_TYPE;
-        ats[1] = JidFactories.STRING_JID_TYPE;
+        ats[0] = JidFactories.STRING_JID_CTYPE;
+        ats[1] = JidFactories.STRING_JID_CTYPE;
     }
 
     /**

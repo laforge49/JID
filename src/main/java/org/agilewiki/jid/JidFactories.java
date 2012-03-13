@@ -44,52 +44,57 @@ final public class JidFactories extends Component {
     /**
      * The name of the JID component.
      */
-    public final static String JID_TYPE = "JID";
+    public final static String JID_CTYPE = "JIDc";
+
+    /**
+     * The name of the JID component.
+     */
+    public final static String JID_ATYPE = "JIDa";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String BOOLEAN_JID_TYPE = "BOOLEAN_JID";
+    public final static String BOOLEAN_JID_CTYPE = "BOOLEAN_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String INTEGER_JID_TYPE = "INT_JID";
+    public final static String INTEGER_JID_CTYPE = "INT_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String LONG_JID_TYPE = "LONG_JID";
+    public final static String LONG_JID_CTYPE = "LONG_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String FLOAT_JID_TYPE = "FLOAT_JID";
+    public final static String FLOAT_JID_CTYPE = "FLOAT_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String DOUBLE_JID_TYPE = "DOUBLE_JID";
+    public final static String DOUBLE_JID_CTYPE = "DOUBLE_JIDc";
 
     /**
      * The name of the JidJid component.
      */
-    public final static String JID_JID_TYPE = "JID_JID";
+    public final static String JID_JID_CTYPE = "JID_JIDc";
 
     /**
      * The name of the JidJid component.
      */
-    public final static String STRING_JID_TYPE = "STRING_JID";
+    public final static String STRING_JID_CTYPE = "STRING_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String BYTES_JID_TYPE = "BYTES_JID";
+    public final static String BYTES_JID_CTYPE = "BYTES_JIDc";
 
     /**
      * The name of the BooleanJid component.
      */
-    public final static String TUPLE_JID_TYPE = "TUPLE_JID";
+    public final static String TUPLE_JID_CTYPE = "TUPLE_JIDc";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -110,18 +115,19 @@ final public class JidFactories extends Component {
      */
     @Override
     public void bindery() throws Exception {
-        (new DefineActorType(JID_TYPE, JidC.class)).call(thisActor);
+        (new DefineActorType(JID_CTYPE, JidC.class)).call(thisActor);
+        (new DefineActorType(JID_ATYPE, JidA.class)).call(thisActor);
 
-        (new DefineActorType(BOOLEAN_JID_TYPE, BooleanJid.class)).call(thisActor);
-        (new DefineActorType(INTEGER_JID_TYPE, IntegerJid.class)).call(thisActor);
-        (new DefineActorType(LONG_JID_TYPE, LongJid.class)).call(thisActor);
-        (new DefineActorType(FLOAT_JID_TYPE, FloatJid.class)).call(thisActor);
-        (new DefineActorType(DOUBLE_JID_TYPE, DoubleJid.class)).call(thisActor);
+        (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJid.class)).call(thisActor);
+        (new DefineActorType(INTEGER_JID_CTYPE, IntegerJid.class)).call(thisActor);
+        (new DefineActorType(LONG_JID_CTYPE, LongJid.class)).call(thisActor);
+        (new DefineActorType(FLOAT_JID_CTYPE, FloatJid.class)).call(thisActor);
+        (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJid.class)).call(thisActor);
 
-        (new DefineActorType(JID_JID_TYPE, JidJid.class)).call(thisActor);
-        (new DefineActorType(STRING_JID_TYPE, StringJid.class)).call(thisActor);
-        (new DefineActorType(BYTES_JID_TYPE, BytesJid.class)).call(thisActor);
+        (new DefineActorType(JID_JID_CTYPE, JidJid.class)).call(thisActor);
+        (new DefineActorType(STRING_JID_CTYPE, StringJid.class)).call(thisActor);
+        (new DefineActorType(BYTES_JID_CTYPE, BytesJid.class)).call(thisActor);
 
-        (new DefineActorType(TUPLE_JID_TYPE, TupleJid.class)).call(thisActor);
+        (new DefineActorType(TUPLE_JID_CTYPE, TupleJid.class)).call(thisActor);
     }
 }

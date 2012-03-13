@@ -25,7 +25,7 @@ public class IntegerTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_TYPE);
+            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_CTYPE);
             Actor int1 = newIntegerJid.send(future, factory).thisActor();
             Actor int2 = (new CopyJID()).send(future, int1);
             IntegerJid.setValueReq(1).send(future, int2);
@@ -45,9 +45,9 @@ public class IntegerTest extends TestCase {
             v = IntegerJid.getValueReq.send(future, int3);
             assertEquals(1, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_TYPE);
+            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_TYPE);
+            SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_CTYPE);
             sjvi.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = IntegerJid.getValueReq.send(future, rpa);

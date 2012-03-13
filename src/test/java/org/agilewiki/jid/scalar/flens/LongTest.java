@@ -25,7 +25,7 @@ public class LongTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newLongJid = new NewJID(JidFactories.LONG_JID_TYPE);
+            NewJID newLongJid = new NewJID(JidFactories.LONG_JID_CTYPE);
             Actor long1 = newLongJid.send(future, factory).thisActor();
             Actor long2 = (new CopyJID()).send(future, long1);
             LongJid.setValueReq(1L).send(future, long2);
@@ -45,9 +45,9 @@ public class LongTest extends TestCase {
             v = LongJid.getValueReq.send(future, float3);
             assertEquals(1L, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_TYPE);
+            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvl = JidJid.setValueReq(JidFactories.LONG_JID_TYPE);
+            SetValue sjvl = JidJid.setValueReq(JidFactories.LONG_JID_CTYPE);
             sjvl.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = LongJid.getValueReq.send(future, rpa);
