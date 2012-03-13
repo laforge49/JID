@@ -31,10 +31,10 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jid.GetJIDComponent;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidC;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.requests.GetJIDComponent;
 
 import java.util.ArrayList;
 

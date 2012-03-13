@@ -21,15 +21,29 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.requests;
+package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * <p>
  * The response returned is the number of bytes needed to serialize the persistent data.
  * </p>
  */
-final public class GetSerializedLength extends SynchronousRequest<Integer> {
+final public class GetSerializedLength
+        extends JLPCSynchronousRequest<Integer, JidA> {
     public final static GetSerializedLength req = new GetSerializedLength();
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Integer call(JidA targetActor)
+            throws Exception {
+        return targetActor.getSerializedLength();
+    }
 }
