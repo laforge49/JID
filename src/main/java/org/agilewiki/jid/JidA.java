@@ -4,6 +4,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.requests.*;
 
 import java.util.Arrays;
@@ -34,16 +35,6 @@ public class JidA extends JLPCActor implements Jid {
      */
     public JidA(final Mailbox mailbox) {
         super(mailbox);
-    }
-
-    /**
-     * Returns a new instance.
-     *
-     * @param m The mailbox.
-     * @return The new instance.
-     */
-    public JidA newInstance(Mailbox m) {
-        return new JidA(m);
     }
 
     /**
@@ -235,13 +226,12 @@ public class JidA extends JLPCActor implements Jid {
      * @param m The mailbox.
      * @return a copy of the actor.
      */
-    public JidA copyJID(Mailbox m) {
+    public Actor copyJID(Mailbox m)
+            throws Exception {
         Mailbox mb = m;
         if (mb == null)
             mb = getMailbox();
-        JidA jidA = newInstance(m);
-        jidA.load(readable());
-        return jidA;
+        return (new NewJID(getActorType(), m, getBytes())).call(getParent()).thisActor();
     }
 
     public void isJidEqual(Actor actor, final RP rp)
