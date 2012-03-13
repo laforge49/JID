@@ -21,17 +21,17 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.requests;
+package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
-import org.agilewiki.jid.AppendableBytes;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * <p>
  * Saves the persistent data of a JID to a AppendableBytes object.
  * </p>
  */
-final public class Save extends SynchronousRequest<Object> {
+final public class Save
+        extends JLPCSynchronousRequest<Object, JidA> {
     /**
      * Where the persistent data is to be saved.
      */
@@ -53,5 +53,19 @@ final public class Save extends SynchronousRequest<Object> {
      */
     public AppendableBytes getAppendableBytes() {
         return appendableBytes;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Object call(JidA targetActor)
+            throws Exception {
+        targetActor.save(appendableBytes);
+        return null;
     }
 }

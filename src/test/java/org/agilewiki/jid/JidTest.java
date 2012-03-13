@@ -6,7 +6,6 @@ import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.requests.*;
 
 public class JidTest extends TestCase {
     public void test1() {
