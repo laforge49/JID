@@ -7,7 +7,7 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.jidFactory.NewJID;
 
-public class JidTest extends TestCase {
+public class JidCTest extends TestCase {
     public void test1() {
         System.err.println("\nTest 1");
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
