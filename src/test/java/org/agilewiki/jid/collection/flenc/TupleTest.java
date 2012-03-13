@@ -11,10 +11,10 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetBytes;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.requests.ResolvePathname;
 import org.agilewiki.jid.scalar.vlens.StringJid;
 
 public class TupleTest extends TestCase {

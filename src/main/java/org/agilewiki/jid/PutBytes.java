@@ -21,8 +21,34 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
+package org.agilewiki.jid;
+
+import org.agilewiki.jactor.bind.InitializationRequest;
 
 /**
- * JID Request Messages.
+ * Load serialized data into a JID.
  */
-package org.agilewiki.jid.requests;
+final public class PutBytes extends InitializationRequest<Object> {
+    /**
+     * The serialized data.
+     */
+    private byte[] bytes;
+
+    /**
+     * Create a PutBytes request.
+     *
+     * @param bytes The serialized data.
+     */
+    public PutBytes(byte[] bytes) {
+        this.bytes = bytes;
+    }
+
+    /**
+     * Get the serialized data.
+     *
+     * @return The serialized data.
+     */
+    public byte[] getBytes() {
+        return bytes;
+    }
+}

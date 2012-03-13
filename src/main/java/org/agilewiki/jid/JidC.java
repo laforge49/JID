@@ -30,7 +30,7 @@ import org.agilewiki.jactor.bind.*;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.requests.*;
+import org.agilewiki.jid.requests.Save;
 
 import java.util.Arrays;
 
@@ -281,7 +281,7 @@ public class JidC extends Component implements Jid {
      *
      * @param bytes Holds the serialized data.
      */
-    final public void putBytes(byte[] bytes) {
+    final private void putBytes(byte[] bytes) {
         load(new ReadableBytes(bytes, 0));
     }
 

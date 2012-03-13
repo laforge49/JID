@@ -21,34 +21,33 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.requests;
+package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.InitializationRequest;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.Request;
 
 /**
- * Load serialized data into a JID.
+ * Returns true when the persistent content are equal.
  */
-final public class PutBytes extends InitializationRequest<Object> {
-    /**
-     * The serialized data.
-     */
-    private byte[] bytes;
+public class IsJidEqual extends Request<Boolean> {
+    private Actor jidActor;
 
     /**
-     * Create a PutBytes request.
+     * Returns the jid actor.
      *
-     * @param bytes The serialized data.
+     * @return The Jid actor.
      */
-    public PutBytes(byte[] bytes) {
-        this.bytes = bytes;
+    public Actor getJidActor() {
+        return jidActor;
     }
 
     /**
-     * Get the serialized data.
+     * Creates the request.
      *
-     * @return The serialized data.
+     * @param jidActor The Jid actor.
      */
-    public byte[] getBytes() {
-        return bytes;
+    public IsJidEqual(Actor jidActor) {
+
+        this.jidActor = jidActor;
     }
 }
