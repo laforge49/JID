@@ -58,7 +58,7 @@ public class JidC extends Component implements Jid {
      *
      * @return The actor.
      */
-    public JCActor thisActor() {
+    final public JCActor thisActor() {
         return thisActor;
     }
 
@@ -68,7 +68,7 @@ public class JidC extends Component implements Jid {
      * @return The actor type, or null.
      */
     @Override
-    public String getActorType() {
+    final public String getActorType() {
         return thisActor.getActorType();
     }
 
@@ -78,7 +78,7 @@ public class JidC extends Component implements Jid {
      * @param containerJid The container, or null.
      */
     @Override
-    public void setContainerJid(Jid containerJid) {
+    final public void setContainerJid(Jid containerJid) {
         this.containerJid = containerJid;
     }
 
@@ -87,7 +87,7 @@ public class JidC extends Component implements Jid {
      *
      * @return A ReadableBytes wrapper of the serialized data.
      */
-    protected ReadableBytes readable() {
+    final protected ReadableBytes readable() {
         return new ReadableBytes(serializedBytes, serializedOffset);
     }
 
@@ -256,7 +256,7 @@ public class JidC extends Component implements Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    final public byte[] getBytes() {
+    final private byte[] getBytes() {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
         save(appendableBytes);
@@ -305,7 +305,7 @@ public class JidC extends Component implements Jid {
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
-    public void changed(int lengthChange)
+    protected void changed(int lengthChange)
             throws Exception {
         serializedBytes = null;
         serializedOffset = -1;
@@ -327,7 +327,7 @@ public class JidC extends Component implements Jid {
     }
 
     @Override
-    public boolean equals(Object v) {
+    final public boolean equals(Object v) {
         if (v == null)
             return false;
         if (!v.getClass().equals(getClass()))
@@ -339,7 +339,7 @@ public class JidC extends Component implements Jid {
     }
 
     @Override
-    public int hashCode() {
+    final public int hashCode() {
         return getBytes().hashCode();
     }
 }

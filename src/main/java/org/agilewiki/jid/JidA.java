@@ -42,7 +42,7 @@ public class JidA extends JLPCActor implements Jid {
      *
      * @return A ReadableBytes wrapper of the serialized data.
      */
-    protected ReadableBytes readable() {
+    final protected ReadableBytes readable() {
         return new ReadableBytes(serializedBytes, serializedOffset);
     }
 
@@ -52,7 +52,7 @@ public class JidA extends JLPCActor implements Jid {
      * @param lengthChange The change in the size of the serialized data.
      * @throws Exception Any uncaught exception which occurred while processing the notification.
      */
-    public void changed(int lengthChange)
+    protected void changed(int lengthChange)
             throws Exception {
         serializedBytes = null;
         serializedOffset = -1;
@@ -145,7 +145,7 @@ public class JidA extends JLPCActor implements Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    final public byte[] getBytes() {
+    final byte[] getBytes() {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
         save(appendableBytes);
@@ -178,19 +178,19 @@ public class JidA extends JLPCActor implements Jid {
     }
 
     @Override
-    public boolean equals(Object v) {
+    final public boolean equals(Object v) {
         if (v == null)
             return false;
         if (!v.getClass().equals(getClass()))
             return false;
-        JidC jid = (JidC) v;
-        if (jid.getSerializedLength() != getSerializedLength())
+        JidA jidA = (JidA) v;
+        if (jidA.getSerializedLength() != getSerializedLength())
             return false;
-        return Arrays.equals(jid.getBytes(), getBytes());
+        return Arrays.equals(jidA.getBytes(), getBytes());
     }
 
     @Override
-    public int hashCode() {
+    final public int hashCode() {
         return getBytes().hashCode();
     }
 
@@ -226,7 +226,7 @@ public class JidA extends JLPCActor implements Jid {
      * @param m The mailbox.
      * @return a copy of the actor.
      */
-    public Actor copyJID(Mailbox m)
+    final Actor copyJID(Mailbox m)
             throws Exception {
         Mailbox mb = m;
         if (mb == null)
@@ -234,7 +234,7 @@ public class JidA extends JLPCActor implements Jid {
         return (new NewJID(getActorType(), m, getBytes())).call(getParent()).thisActor();
     }
 
-    public void isJidEqual(Actor actor, final RP rp)
+    final public void isJidEqual(Actor actor, final RP rp)
             throws Exception {
         if (!(actor instanceof JidA)) {
             rp.processResponse(false);

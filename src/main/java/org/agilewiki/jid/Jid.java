@@ -46,6 +46,11 @@ public interface Jid {
      */
     public void setContainerJid(Jid containerJid);
 
+    /**
+     * Returns this actor.
+     *
+     * @return This actor.
+     */
     public Actor thisActor();
 
     /**

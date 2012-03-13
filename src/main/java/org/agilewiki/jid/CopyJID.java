@@ -21,16 +21,17 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.requests;
+package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * Returns a copy of the JID.
  */
-final public class CopyJID extends SynchronousRequest<Actor> {
+final public class CopyJID
+        extends JLPCSynchronousRequest<Actor, JidA> {
     /**
      * A mailbox which may be shared with other actors.
      */
@@ -58,5 +59,18 @@ final public class CopyJID extends SynchronousRequest<Actor> {
      */
     public Mailbox getMailbox() {
         return mailbox;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Actor call(JidA targetActor)
+            throws Exception {
+        return targetActor.copyJID(mailbox);
     }
 }
