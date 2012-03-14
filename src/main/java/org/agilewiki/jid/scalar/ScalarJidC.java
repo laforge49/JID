@@ -53,11 +53,12 @@ abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
                 });
 
         thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue>() {
+                new VoidSynchronousMethodBinding<SetValue<VALUE_TYPE, RESPONSE_TYPE>>() {
                     @Override
-                    public void synchronousProcessRequest(Internals internals, SetValue request)
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetValue<VALUE_TYPE, RESPONSE_TYPE> request)
                             throws Exception {
-                        setValue(request);
+                        setValue(request.getValue());
                     }
                 });
     }
@@ -68,7 +69,7 @@ abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
      * @param request The MakeValue request.
      * @throws Exception Any uncaught exception raised.
      */
-    abstract protected void setValue(SetValue request)
+    abstract protected void setValue(VALUE_TYPE request)
             throws Exception;
 
     /**

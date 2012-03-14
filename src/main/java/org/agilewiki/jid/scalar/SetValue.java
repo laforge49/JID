@@ -23,23 +23,24 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * Assigns a value.
  */
-public class SetValue extends SynchronousRequest<Object> {
+public class SetValue<VALUE_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<Object, ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>> {
     /**
      * The value (or actor type).
      */
-    private Object value;
+    private VALUE_TYPE value;
 
     /**
      * Returns the value (or actor type).
      *
      * @return The value (or actor type).
      */
-    public Object getValue() {
+    public VALUE_TYPE getValue() {
         return value;
     }
 
@@ -48,9 +49,23 @@ public class SetValue extends SynchronousRequest<Object> {
      *
      * @param value The value (or actor type).
      */
-    public SetValue(Object value) {
+    public SetValue(VALUE_TYPE value) {
         if (value == null)
             throw new IllegalArgumentException("value may not be null");
         this.value = value;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Object call(ScalarJidA<VALUE_TYPE, RESPONSE_TYPE> targetActor)
+            throws Exception {
+        targetActor.setValue(value);
+        return null;
     }
 }

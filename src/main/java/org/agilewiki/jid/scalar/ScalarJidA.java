@@ -44,8 +44,9 @@ abstract public class ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>
      * Returns the value held by this component.
      *
      * @return The value held by this component.
+     * @throws Exception Any uncaught exception raised.
      */
-    abstract protected RESPONSE_TYPE getValue();
+    abstract protected RESPONSE_TYPE getValue() throws Exception;
 
     /**
      * Assign a value.
