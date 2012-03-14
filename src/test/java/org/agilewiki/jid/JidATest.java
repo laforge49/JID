@@ -1,7 +1,10 @@
 package org.agilewiki.jid;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.*;
+import org.agilewiki.jactor.JAFuture;
+import org.agilewiki.jactor.JAMailboxFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
@@ -50,9 +53,7 @@ public class JidATest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidC.class)).call(a);
-            Open.req.call(a);
+            JidA a = new JidA(mailboxFactory.createMailbox());
             int l = GetSerializedLength.req.send(future, a);
             AppendableBytes appendableBytes = new AppendableBytes(l);
             (new Save(appendableBytes)).send(future, a);
@@ -68,9 +69,7 @@ public class JidATest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidC.class)).call(a);
-            Open.req.call(a);
+            JidA a = new JidA(mailboxFactory.createMailbox());
             byte[] bytes = GetBytes.req.send(future, a);
             int l = bytes.length;
             System.err.println(l);
@@ -92,7 +91,7 @@ public class JidATest extends TestCase {
             (new Include(JidFactories.class)).call(jidFactory);
             Open.req.call(jidFactory);
 
-            Actor jid = (new NewJID(JidFactories.JID_CTYPE, new byte[0])).call(jidFactory).thisActor();
+            JidA jid = (JidA) (new NewJID(JidFactories.JID_ATYPE, new byte[0])).call(jidFactory).thisActor();
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);
@@ -113,8 +112,8 @@ public class JidATest extends TestCase {
             (new Include(JidFactories.class)).call(jidFactory);
             Open.req.call(jidFactory);
 
-            Actor jid1 = (new NewJID(JidFactories.JID_CTYPE, new byte[0])).call(jidFactory).thisActor();
-            Actor jid2 = (new CopyJID(mailbox)).send(future, jid1);
+            JidA jid1 = (JidA) (new NewJID(JidFactories.JID_ATYPE, new byte[0])).call(jidFactory).thisActor();
+            JidA jid2 = (JidA) (new CopyJID(mailbox)).send(future, jid1);
             int l = GetSerializedLength.req.send(future, jid2);
             System.err.println(l);
             assertEquals(l, 0);
@@ -132,10 +131,8 @@ public class JidATest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            JCActor a = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidC.class)).call(a);
-            Open.req.call(a);
-            JCActor b = (JCActor) future.send(a, new ResolvePathname(""));
+            JidA a = new JidA(mailboxFactory.createMailbox());
+            JidA b = (JidA) future.send(a, new ResolvePathname(""));
             assertEquals(a, b);
         } catch (Exception e) {
             e.printStackTrace();
