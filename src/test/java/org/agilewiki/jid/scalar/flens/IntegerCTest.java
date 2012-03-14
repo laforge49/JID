@@ -16,7 +16,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
-public class BooleanTest extends TestCase {
+public class IntegerCTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -25,32 +25,37 @@ public class BooleanTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_CTYPE);
-            Actor boolean1 = newBooleanJid.send(future, factory).thisActor();
-            Actor boolean2 = (new CopyJID()).send(future, boolean1);
-            BooleanJidC.setValueReq(true).send(future, boolean2);
-            Actor boolean3 = (new CopyJID()).send(future, boolean2);
+            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_CTYPE);
+            Actor int1 = newIntegerJid.send(future, factory).thisActor();
+            Actor int2 = (new CopyJID()).send(future, int1);
+            IntegerJidC.setValueReq(1).send(future, int2);
+            Actor int3 = (new CopyJID()).send(future, int2);
 
-            int sl = GetSerializedLength.req.send(future, boolean1);
-            assertEquals(1, sl);
-            sl = GetSerializedLength.req.send(future, boolean2);
-            assertEquals(1, sl);
-            sl = GetSerializedLength.req.send(future, boolean3);
-            assertEquals(1, sl);
+            int sl = GetSerializedLength.req.send(future, int1);
+            assertEquals(4, sl);
+            sl = GetSerializedLength.req.send(future, int2);
+            assertEquals(4, sl);
+            sl = GetSerializedLength.req.send(future, int3);
+            assertEquals(4, sl);
 
-            assertFalse(BooleanJidC.getValueReq.send(future, boolean1));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean2));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean3));
+            int v = IntegerJidC.getValueReq.send(future, int1);
+            assertEquals(0, v);
+            v = IntegerJidC.getValueReq.send(future, int2);
+            assertEquals(1, v);
+            v = IntegerJidC.getValueReq.send(future, int3);
+            assertEquals(1, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
-            sjvb.send(future, jidJid1);
+            SetValue sjvi = JidJidC.setValueReq(JidFactories.INTEGER_JID_CTYPE);
+            sjvi.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertFalse(BooleanJidC.getValueReq.send(future, rpa));
-            BooleanJidC.setValueReq(true).send(future, rpa);
+            v = IntegerJidC.getValueReq.send(future, rpa);
+            assertEquals(0, v);
+            IntegerJidC.setValueReq(-1).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertTrue(BooleanJidC.getValueReq.send(future, rpa));
+            v = IntegerJidC.getValueReq.send(future, rpa);
+            assertEquals(-1, v);
 
         } catch (Exception e) {
             e.printStackTrace();

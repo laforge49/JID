@@ -15,7 +15,7 @@ import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.StringJidC;
 
-public class JidJidTest extends TestCase {
+public class JidJidCTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
