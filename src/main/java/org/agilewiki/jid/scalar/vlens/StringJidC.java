@@ -32,8 +32,8 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds a String.
  */
-public class StringJid
-        extends VLenScalarJid<String, String, String>
+public class StringJidC
+        extends VLenScalarJidC<String, String, String>
         implements ComparableKey<String> {
     /**
      * The GetValue request.

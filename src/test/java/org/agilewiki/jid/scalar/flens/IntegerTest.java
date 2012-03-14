@@ -14,7 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class IntegerTest extends TestCase {
     public void test() {
@@ -28,7 +28,7 @@ public class IntegerTest extends TestCase {
             NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_CTYPE);
             Actor int1 = newIntegerJid.send(future, factory).thisActor();
             Actor int2 = (new CopyJID()).send(future, int1);
-            IntegerJid.setValueReq(1).send(future, int2);
+            IntegerJidC.setValueReq(1).send(future, int2);
             Actor int3 = (new CopyJID()).send(future, int2);
 
             int sl = GetSerializedLength.req.send(future, int1);
@@ -38,23 +38,23 @@ public class IntegerTest extends TestCase {
             sl = GetSerializedLength.req.send(future, int3);
             assertEquals(4, sl);
 
-            int v = IntegerJid.getValueReq.send(future, int1);
+            int v = IntegerJidC.getValueReq.send(future, int1);
             assertEquals(0, v);
-            v = IntegerJid.getValueReq.send(future, int2);
+            v = IntegerJidC.getValueReq.send(future, int2);
             assertEquals(1, v);
-            v = IntegerJid.getValueReq.send(future, int3);
+            v = IntegerJidC.getValueReq.send(future, int3);
             assertEquals(1, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvi = JidJid.setValueReq(JidFactories.INTEGER_JID_CTYPE);
+            SetValue sjvi = JidJidC.setValueReq(JidFactories.INTEGER_JID_CTYPE);
             sjvi.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = IntegerJid.getValueReq.send(future, rpa);
+            v = IntegerJidC.getValueReq.send(future, rpa);
             assertEquals(0, v);
-            IntegerJid.setValueReq(-1).send(future, rpa);
+            IntegerJidC.setValueReq(-1).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = IntegerJid.getValueReq.send(future, rpa);
+            v = IntegerJidC.getValueReq.send(future, rpa);
             assertEquals(-1, v);
 
         } catch (Exception e) {

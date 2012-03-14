@@ -14,7 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class StringTest extends TestCase {
     public void test() {
@@ -28,7 +28,7 @@ public class StringTest extends TestCase {
             NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
             Actor string2 = (new CopyJID()).send(future, string1);
-            StringJid.setValueReq("abc").send(future, string2);
+            StringJidC.setValueReq("abc").send(future, string2);
             Actor string3 = (new CopyJID()).send(future, string2);
 
             int sl = GetSerializedLength.req.send(future, string1);
@@ -38,26 +38,26 @@ public class StringTest extends TestCase {
             sl = GetSerializedLength.req.send(future, string3);
             assertEquals(10, sl);
 
-            assertNull(StringJid.getValueReq.send(future, string1));
-            assertEquals("abc", StringJid.getValueReq.send(future, string2));
-            assertEquals("abc", StringJid.getValueReq.send(future, string3));
+            assertNull(StringJidC.getValueReq.send(future, string1));
+            assertEquals("abc", StringJidC.getValueReq.send(future, string2));
+            assertEquals("abc", StringJidC.getValueReq.send(future, string3));
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvbs = JidJid.setValueReq(JidFactories.STRING_JID_CTYPE);
+            SetValue sjvbs = JidJidC.setValueReq(JidFactories.STRING_JID_CTYPE);
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertNull(StringJid.getValueReq.send(future, rpa));
-            assertTrue(StringJid.makeValueReq("").send(future, rpa));
-            assertFalse(StringJid.makeValueReq("Hello?").send(future, rpa));
+            assertNull(StringJidC.getValueReq.send(future, rpa));
+            assertTrue(StringJidC.makeValueReq("").send(future, rpa));
+            assertFalse(StringJidC.makeValueReq("Hello?").send(future, rpa));
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertEquals("", StringJid.getValueReq.send(future, rpa));
-            StringJid.setValueReq("bye").send(future, rpa);
-            assertEquals("bye", StringJid.getValueReq.send(future, rpa));
+            assertEquals("", StringJidC.getValueReq.send(future, rpa));
+            StringJidC.setValueReq("bye").send(future, rpa);
+            assertEquals("bye", StringJidC.getValueReq.send(future, rpa));
             sl = GetSerializedLength.req.send(future, rpa);
             assertEquals(10, sl);
             Clear.req.sendEvent(rpa);
-            assertNull(StringJid.getValueReq.send(future, rpa));
+            assertNull(StringJidC.getValueReq.send(future, rpa));
 
         } catch (Exception e) {
             e.printStackTrace();

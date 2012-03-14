@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a boolean.
+ * A JID component that holds a float.
  */
-public class BooleanJid
-        extends FLenScalarJid<Boolean> {
+public class FloatJidC
+        extends FLenScalarJidC<Float> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Boolean, Boolean> getValueReq = (GetValue<Boolean, Boolean>) GetValue.req;
+    public static final GetValue<Float, Float> getValueReq = (GetValue<Float, Float>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class BooleanJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Boolean value) {
+    public static final SetValue setValueReq(Float value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class BooleanJid
      * @return The default value
      */
     @Override
-    protected Boolean newValue() {
-        return new Boolean(false);
+    protected Float newValue() {
+        return new Float(0.F);
     }
 
     /**
@@ -64,12 +64,11 @@ public class BooleanJid
      *
      * @return The value held by this component.
      */
-    @Override
-    public Boolean getValue() {
+    public Float getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
-        value = readableBytes.readBoolean();
+        value = readableBytes.readFloat();
         return value;
     }
 
@@ -80,7 +79,7 @@ public class BooleanJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.BOOLEAN_LENGTH;
+        return Util.FLOAT_LENGTH;
     }
 
     /**
@@ -90,6 +89,6 @@ public class BooleanJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeBoolean(((Boolean) value).booleanValue());
+        appendableBytes.writeFloat(value);
     }
 }

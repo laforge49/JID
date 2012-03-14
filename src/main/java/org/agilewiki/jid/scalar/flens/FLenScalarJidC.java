@@ -30,7 +30,7 @@ import org.agilewiki.jid.scalar.ScalarJidC;
 /**
  * A JID component that holds a fixed-length value that is always present.
  */
-abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
+abstract public class FLenScalarJidC<RESPONSE_TYPE extends Comparable>
         extends ScalarJidC<RESPONSE_TYPE, RESPONSE_TYPE>
         implements ComparableKey<RESPONSE_TYPE> {
 

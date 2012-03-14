@@ -26,12 +26,12 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
-import org.agilewiki.jid.collection.flenc.TupleJid;
+import org.agilewiki.jid.collection.flenc.TupleJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.*;
-import org.agilewiki.jid.scalar.vlens.BytesJid;
-import org.agilewiki.jid.scalar.vlens.StringJid;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.BytesJidC;
+import org.agilewiki.jid.scalar.vlens.StringJidC;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 import java.util.ArrayList;
 
@@ -118,16 +118,16 @@ final public class JidFactories extends Component {
         (new DefineActorType(JID_CTYPE, JidC.class)).call(thisActor);
         (new DefineActorType(JID_ATYPE, JidA.class)).call(thisActor);
 
-        (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJid.class)).call(thisActor);
-        (new DefineActorType(INTEGER_JID_CTYPE, IntegerJid.class)).call(thisActor);
+        (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
+        (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
         (new DefineActorType(LONG_JID_CTYPE, LongJid.class)).call(thisActor);
-        (new DefineActorType(FLOAT_JID_CTYPE, FloatJid.class)).call(thisActor);
-        (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJid.class)).call(thisActor);
+        (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
+        (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
 
-        (new DefineActorType(JID_JID_CTYPE, JidJid.class)).call(thisActor);
-        (new DefineActorType(STRING_JID_CTYPE, StringJid.class)).call(thisActor);
-        (new DefineActorType(BYTES_JID_CTYPE, BytesJid.class)).call(thisActor);
+        (new DefineActorType(JID_JID_CTYPE, JidJidC.class)).call(thisActor);
+        (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
+        (new DefineActorType(BYTES_JID_CTYPE, BytesJidC.class)).call(thisActor);
 
-        (new DefineActorType(TUPLE_JID_CTYPE, TupleJid.class)).call(thisActor);
+        (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
     }
 }

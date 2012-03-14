@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a float.
+ * A JID component that holds a double.
  */
-public class FloatJid
-        extends FLenScalarJid<Float> {
+public class DoubleJidC
+        extends FLenScalarJidC<Double> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Float, Float> getValueReq = (GetValue<Float, Float>) GetValue.req;
+    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class FloatJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Float value) {
+    public static final SetValue setValueReq(Double value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class FloatJid
      * @return The default value
      */
     @Override
-    protected Float newValue() {
-        return new Float(0.F);
+    protected Double newValue() {
+        return new Double(0.D);
     }
 
     /**
@@ -64,11 +64,11 @@ public class FloatJid
      *
      * @return The value held by this component.
      */
-    public Float getValue() {
+    public Double getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
-        value = readableBytes.readFloat();
+        value = readableBytes.readDouble();
         return value;
     }
 
@@ -79,7 +79,7 @@ public class FloatJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.FLOAT_LENGTH;
+        return Util.DOUBLE_LENGTH;
     }
 
     /**
@@ -89,6 +89,6 @@ public class FloatJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeFloat(value);
+        appendableBytes.writeDouble(value);
     }
 }

@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.collection.CollectionJid;
+import org.agilewiki.jid.collection.CollectionJidC;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
@@ -36,8 +36,8 @@ import org.agilewiki.jid.jidFactory.NewJID;
 /**
  * Holds a fixed-size array of JID actors of various types.
  */
-public class TupleJid
-        extends CollectionJid
+public class TupleJidC
+        extends CollectionJidC
         implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.

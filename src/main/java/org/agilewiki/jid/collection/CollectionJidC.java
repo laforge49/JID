@@ -6,7 +6,8 @@ import org.agilewiki.jid.*;
 /**
  * A collection of JID actors.
  */
-abstract public class CollectionJid extends JidC {
+abstract public class CollectionJidC
+        extends JidC {
 
     /**
      * The size of the serialized data (exclusive of its length header).

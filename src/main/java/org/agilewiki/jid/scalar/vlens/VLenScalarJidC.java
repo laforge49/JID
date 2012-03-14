@@ -34,7 +34,8 @@ import org.agilewiki.jid.scalar.ScalarJidC;
 /**
  * A JID component that holds a variable-length value, or null.
  */
-abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> extends ScalarJidC<SET_TYPE, RESPONSE_TYPE> {
+abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
+        extends ScalarJidC<SET_TYPE, RESPONSE_TYPE> {
 
     /**
      * Holds the value, or null.

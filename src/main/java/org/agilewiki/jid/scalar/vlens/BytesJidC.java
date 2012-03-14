@@ -31,7 +31,8 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds a byte array.
  */
-public class BytesJid extends VLenScalarJid<byte[], byte[], byte[]> {
+public class BytesJidC
+        extends VLenScalarJidC<byte[], byte[], byte[]> {
     /**
      * The GetValue request.
      */

@@ -33,7 +33,7 @@ import org.agilewiki.jid.scalar.SetValue;
  * A JID component that holds a long.
  */
 public class LongJid
-        extends FLenScalarJid<Long> {
+        extends FLenScalarJidC<Long> {
     /**
      * The GetValue request.
      */

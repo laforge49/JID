@@ -28,7 +28,7 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.collection.CollectionJid;
+import org.agilewiki.jid.collection.CollectionJidC;
 import org.agilewiki.jid.jidFactory.NewJID;
 
 import java.util.ArrayList;
@@ -36,7 +36,8 @@ import java.util.ArrayList;
 /**
  * Holds an ArrayList of JID actors, all of the same type.
  */
-public class ListJid extends CollectionJid {
+public class ListJidC
+        extends CollectionJidC {
     /**
      * Actor type of the elements.
      */

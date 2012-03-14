@@ -14,7 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class FloatTest extends TestCase {
     public void test() {
@@ -28,7 +28,7 @@ public class FloatTest extends TestCase {
             NewJID newFloatJid = new NewJID(JidFactories.FLOAT_JID_CTYPE);
             Actor float1 = newFloatJid.send(future, factory).thisActor();
             Actor float2 = (new CopyJID()).send(future, float1);
-            FloatJid.setValueReq(1.0f).send(future, float2);
+            FloatJidC.setValueReq(1.0f).send(future, float2);
             Actor float3 = (new CopyJID()).send(future, float2);
 
             int sl = GetSerializedLength.req.send(future, float1);
@@ -38,23 +38,23 @@ public class FloatTest extends TestCase {
             sl = GetSerializedLength.req.send(future, float3);
             assertEquals(4, sl);
 
-            float v = FloatJid.getValueReq.send(future, float1);
+            float v = FloatJidC.getValueReq.send(future, float1);
             assertEquals(0.f, v);
-            v = FloatJid.getValueReq.send(future, float2);
+            v = FloatJidC.getValueReq.send(future, float2);
             assertEquals(1.f, v);
-            v = FloatJid.getValueReq.send(future, float3);
+            v = FloatJidC.getValueReq.send(future, float3);
             assertEquals(1.f, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvf = JidJid.setValueReq(JidFactories.FLOAT_JID_CTYPE);
+            SetValue sjvf = JidJidC.setValueReq(JidFactories.FLOAT_JID_CTYPE);
             sjvf.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = FloatJid.getValueReq.send(future, rpa);
+            v = FloatJidC.getValueReq.send(future, rpa);
             assertEquals(0.f, v);
-            FloatJid.setValueReq(-1.f).send(future, rpa);
+            FloatJidC.setValueReq(-1.f).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = FloatJid.getValueReq.send(future, rpa);
+            v = FloatJidC.getValueReq.send(future, rpa);
             assertEquals(-1.f, v);
 
         } catch (Exception e) {

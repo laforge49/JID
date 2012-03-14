@@ -14,7 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJid;
+import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class BooleanTest extends TestCase {
     public void test() {
@@ -28,7 +28,7 @@ public class BooleanTest extends TestCase {
             NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_CTYPE);
             Actor boolean1 = newBooleanJid.send(future, factory).thisActor();
             Actor boolean2 = (new CopyJID()).send(future, boolean1);
-            BooleanJid.setValueReq(true).send(future, boolean2);
+            BooleanJidC.setValueReq(true).send(future, boolean2);
             Actor boolean3 = (new CopyJID()).send(future, boolean2);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
@@ -38,19 +38,19 @@ public class BooleanTest extends TestCase {
             sl = GetSerializedLength.req.send(future, boolean3);
             assertEquals(1, sl);
 
-            assertFalse(BooleanJid.getValueReq.send(future, boolean1));
-            assertTrue(BooleanJid.getValueReq.send(future, boolean2));
-            assertTrue(BooleanJid.getValueReq.send(future, boolean3));
+            assertFalse(BooleanJidC.getValueReq.send(future, boolean1));
+            assertTrue(BooleanJidC.getValueReq.send(future, boolean2));
+            assertTrue(BooleanJidC.getValueReq.send(future, boolean3));
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvb = JidJid.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
+            SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
             sjvb.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertFalse(BooleanJid.getValueReq.send(future, rpa));
-            BooleanJid.setValueReq(true).send(future, rpa);
+            assertFalse(BooleanJidC.getValueReq.send(future, rpa));
+            BooleanJidC.setValueReq(true).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertTrue(BooleanJid.getValueReq.send(future, rpa));
+            assertTrue(BooleanJidC.getValueReq.send(future, rpa));
 
         } catch (Exception e) {
             e.printStackTrace();

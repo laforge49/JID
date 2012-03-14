@@ -32,12 +32,13 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
-import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<Jid, String, Actor>
+public class JidJidC
+        extends VLenScalarJidC<Jid, String, Actor>
         implements ComparableKey<Object> {
     /**
      * The GetValue request.

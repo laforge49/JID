@@ -30,14 +30,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a double.
+ * A JID component that holds a boolean.
  */
-public class DoubleJid
-        extends FLenScalarJid<Double> {
+public class BooleanJidC
+        extends FLenScalarJidC<Boolean> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
+    public static final GetValue<Boolean, Boolean> getValueReq = (GetValue<Boolean, Boolean>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -45,7 +45,7 @@ public class DoubleJid
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Double value) {
+    public static final SetValue setValueReq(Boolean value) {
         return new SetValue(value);
     }
 
@@ -55,8 +55,8 @@ public class DoubleJid
      * @return The default value
      */
     @Override
-    protected Double newValue() {
-        return new Double(0.D);
+    protected Boolean newValue() {
+        return new Boolean(false);
     }
 
     /**
@@ -64,11 +64,12 @@ public class DoubleJid
      *
      * @return The value held by this component.
      */
-    public Double getValue() {
+    @Override
+    public Boolean getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
-        value = readableBytes.readDouble();
+        value = readableBytes.readBoolean();
         return value;
     }
 
@@ -79,7 +80,7 @@ public class DoubleJid
      */
     @Override
     public int getSerializedLength() {
-        return Util.DOUBLE_LENGTH;
+        return Util.BOOLEAN_LENGTH;
     }
 
     /**
@@ -89,6 +90,6 @@ public class DoubleJid
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeDouble(value);
+        appendableBytes.writeBoolean(((Boolean) value).booleanValue());
     }
 }

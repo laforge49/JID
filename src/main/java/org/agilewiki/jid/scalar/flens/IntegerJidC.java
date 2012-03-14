@@ -32,8 +32,8 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds an integer.
  */
-public class IntegerJid
-        extends FLenScalarJid<Integer> {
+public class IntegerJidC
+        extends FLenScalarJidC<Integer> {
     /**
      * The GetValue request.
      */
