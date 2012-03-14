@@ -31,7 +31,7 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID component that holds a boolean.
+ * A JID actor that holds a boolean.
  */
 public class BooleanJidA
         extends FLenScalarJidA<Boolean> {

@@ -28,7 +28,7 @@ public class BooleanATest extends TestCase {
             NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_ATYPE);
             BooleanJidA boolean1 = (BooleanJidA) newBooleanJid.send(future, factory).thisActor();
             BooleanJidA boolean2 = (BooleanJidA) (new CopyJID()).send(future, boolean1);
-            BooleanJidC.setValueReq(true).send(future, boolean2);
+            BooleanJidA.setValueReq(true).send(future, boolean2);
             BooleanJidA boolean3 = (BooleanJidA) (new CopyJID()).send(future, boolean2);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
@@ -38,19 +38,19 @@ public class BooleanATest extends TestCase {
             sl = GetSerializedLength.req.send(future, boolean3);
             assertEquals(1, sl);
 
-            assertFalse(BooleanJidC.getValueReq.send(future, boolean1));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean2));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean3));
+            assertFalse(BooleanJidA.getValueReq.send(future, boolean1));
+            assertTrue(BooleanJidA.getValueReq.send(future, boolean2));
+            assertTrue(BooleanJidA.getValueReq.send(future, boolean3));
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
             SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_ATYPE);
             sjvb.send(future, jidJid1);
             BooleanJidA rpa = (BooleanJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            assertFalse(BooleanJidC.getValueReq.send(future, rpa));
-            BooleanJidC.setValueReq(true).send(future, rpa);
+            assertFalse(BooleanJidA.getValueReq.send(future, rpa));
+            BooleanJidA.setValueReq(true).send(future, rpa);
             rpa = (BooleanJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            assertTrue(BooleanJidC.getValueReq.send(future, rpa));
+            assertTrue(BooleanJidA.getValueReq.send(future, rpa));
 
         } catch (Exception e) {
             e.printStackTrace();

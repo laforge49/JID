@@ -31,14 +31,14 @@ import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
- * A JID actor that holds a double.
+ * A JID actor that holds a float.
  */
-public class DoubleJidA
-        extends FLenScalarJidA<Double> {
+public class FloatJidA
+        extends FLenScalarJidA<Float> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
+    public static final GetValue<Float, Float> getValueReq = (GetValue<Float, Float>) GetValue.req;
 
     /**
      * Returns the SetValue request.
@@ -46,16 +46,16 @@ public class DoubleJidA
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(Double value) {
+    public static final SetValue setValueReq(Float value) {
         return new SetValue(value);
     }
 
     /**
-     * Create a DoubleJidA.
+     * Create a FloatJidA.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public DoubleJidA(Mailbox mailbox) {
+    public FloatJidA(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -65,8 +65,8 @@ public class DoubleJidA
      * @return The default value
      */
     @Override
-    protected Double newValue() {
-        return new Double(0.D);
+    protected Float newValue() {
+        return new Float(0.F);
     }
 
     /**
@@ -74,11 +74,11 @@ public class DoubleJidA
      *
      * @return The value held by this component.
      */
-    public Double getValue() {
+    public Float getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
-        value = readableBytes.readDouble();
+        value = readableBytes.readFloat();
         return value;
     }
 
@@ -89,7 +89,7 @@ public class DoubleJidA
      */
     @Override
     public int getSerializedLength() {
-        return Util.DOUBLE_LENGTH;
+        return Util.FLOAT_LENGTH;
     }
 
     /**
@@ -99,6 +99,6 @@ public class DoubleJidA
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeDouble(value);
+        appendableBytes.writeFloat(value);
     }
 }

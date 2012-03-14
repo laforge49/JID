@@ -28,7 +28,7 @@ public class DoubleATest extends TestCase {
             NewJID newDoubleJid = new NewJID(JidFactories.DOUBLE_JID_ATYPE);
             DoubleJidA double1 = (DoubleJidA) newDoubleJid.send(future, factory).thisActor();
             DoubleJidA double2 = (DoubleJidA) (new CopyJID()).send(future, double1);
-            DoubleJidC.setValueReq(1.D).send(future, double2);
+            DoubleJidA.setValueReq(1.D).send(future, double2);
             DoubleJidA double3 = (DoubleJidA) (new CopyJID()).send(future, double2);
 
             int sl = GetSerializedLength.req.send(future, double1);
@@ -38,11 +38,11 @@ public class DoubleATest extends TestCase {
             sl = GetSerializedLength.req.send(future, double3);
             assertEquals(8, sl);
 
-            double v = DoubleJidC.getValueReq.send(future, double1);
+            double v = DoubleJidA.getValueReq.send(future, double1);
             assertEquals(0.D, v);
-            v = DoubleJidC.getValueReq.send(future, double2);
+            v = DoubleJidA.getValueReq.send(future, double2);
             assertEquals(1.D, v);
-            v = DoubleJidC.getValueReq.send(future, double3);
+            v = DoubleJidA.getValueReq.send(future, double3);
             assertEquals(1.D, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class DoubleATest extends TestCase {
             SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_ATYPE);
             sjvl.send(future, jidJid1);
             DoubleJidA rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidC.getValueReq.send(future, rpa);
+            v = DoubleJidA.getValueReq.send(future, rpa);
             assertEquals(0.D, v);
-            DoubleJidC.setValueReq(-1.D).send(future, rpa);
+            DoubleJidA.setValueReq(-1.D).send(future, rpa);
             rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidC.getValueReq.send(future, rpa);
+            v = DoubleJidA.getValueReq.send(future, rpa);
             assertEquals(-1.D, v);
 
         } catch (Exception e) {
