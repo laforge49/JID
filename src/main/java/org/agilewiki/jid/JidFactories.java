@@ -47,7 +47,7 @@ final public class JidFactories extends Component {
     public final static String JID_CTYPE = "JIDc";
 
     /**
-     * The name of the JID component.
+     * The name of the JID actor.
      */
     public final static String JID_ATYPE = "JIDa";
 
@@ -57,22 +57,27 @@ final public class JidFactories extends Component {
     public final static String BOOLEAN_JID_CTYPE = "BOOLEAN_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the BooleanJid actor.
+     */
+    public final static String BOOLEAN_JID_ATYPE = "BOOLEAN_JIDa";
+
+    /**
+     * The name of the IntegerJid component.
      */
     public final static String INTEGER_JID_CTYPE = "INT_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the LongJid component.
      */
     public final static String LONG_JID_CTYPE = "LONG_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the FloatJid component.
      */
     public final static String FLOAT_JID_CTYPE = "FLOAT_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the DoubleJid component.
      */
     public final static String DOUBLE_JID_CTYPE = "DOUBLE_JIDc";
 
@@ -82,17 +87,17 @@ final public class JidFactories extends Component {
     public final static String JID_JID_CTYPE = "JID_JIDc";
 
     /**
-     * The name of the JidJid component.
+     * The name of the String component.
      */
     public final static String STRING_JID_CTYPE = "STRING_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the BytesJid component.
      */
     public final static String BYTES_JID_CTYPE = "BYTES_JIDc";
 
     /**
-     * The name of the BooleanJid component.
+     * The name of the TupleJid component.
      */
     public final static String TUPLE_JID_CTYPE = "TUPLE_JIDc";
 
@@ -119,6 +124,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(JID_ATYPE, JidA.class)).call(thisActor);
 
         (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
+        (new DefineActorType(BOOLEAN_JID_ATYPE, BooleanJidA.class)).call(thisActor);
         (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
         (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
