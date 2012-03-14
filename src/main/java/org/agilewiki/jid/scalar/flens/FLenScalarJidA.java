@@ -23,22 +23,32 @@
  */
 package org.agilewiki.jid.scalar.flens;
 
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.ScalarJidC;
+import org.agilewiki.jid.scalar.ScalarJidA;
 
 /**
- * A JID component that holds a fixed-length value.
+ * A JID actor that holds a fixed-length value.
  * The value is always present.
  */
-abstract public class FLenScalarJidC<RESPONSE_TYPE extends Comparable>
-        extends ScalarJidC<RESPONSE_TYPE, RESPONSE_TYPE>
+abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
+        extends ScalarJidA<RESPONSE_TYPE, RESPONSE_TYPE>
         implements ComparableKey<RESPONSE_TYPE> {
 
     /**
      * The value.
      */
     protected RESPONSE_TYPE value = newValue();
+
+    /**
+     * Create a FLenScalarJidA.
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public FLenScalarJidA(final Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
      * Create the value.

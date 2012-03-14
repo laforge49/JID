@@ -27,7 +27,7 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidA;
 
 /**
- * JidA that hold a single value.
+ * A Jid actor that hold a single value.
  */
 abstract public class ScalarJidA<SET_TYPE, RESPONSE_TYPE>
         extends JidA {
