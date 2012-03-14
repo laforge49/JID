@@ -67,6 +67,11 @@ final public class JidFactories extends Component {
     public final static String INTEGER_JID_CTYPE = "INT_JIDc";
 
     /**
+     * The name of the IntegerJid actor.
+     */
+    public final static String INTEGER_JID_ATYPE = "INT_JIDa";
+
+    /**
      * The name of the LongJid component.
      */
     public final static String LONG_JID_CTYPE = "LONG_JIDc";
@@ -136,6 +141,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
         (new DefineActorType(BOOLEAN_JID_ATYPE, BooleanJidA.class)).call(thisActor);
         (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
+        (new DefineActorType(INTEGER_JID_ATYPE, IntegerJidA.class)).call(thisActor);
         (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_ATYPE, FloatJidA.class)).call(thisActor);
