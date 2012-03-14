@@ -44,8 +44,8 @@ public class BytesJidC
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue<byte[], byte[]> makeValueReq(byte[] value) {
-        return new MakeValue<byte[], byte[]>(value);
+    public static final MakeValue<byte[], byte[], byte[]> makeValueReq(byte[] value) {
+        return new MakeValue<byte[], byte[], byte[]>(value);
     }
 
     /**

@@ -46,8 +46,8 @@ public class StringJidC
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue<String, String> makeValueReq(String value) {
-        return new MakeValue<String, String>(value);
+    public static final MakeValue<String, String, String> makeValueReq(String value) {
+        return new MakeValue<String, String, String>(value);
     }
 
     /**

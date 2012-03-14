@@ -66,10 +66,10 @@ abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
                 });
 
         thisActor.bind(MakeValue.class.getName(),
-                new SynchronousMethodBinding<MakeValue<SET_TYPE, RESPONSE_TYPE>, Boolean>() {
+                new SynchronousMethodBinding<MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>, Boolean>() {
                     @Override
                     public Boolean synchronousProcessRequest(Internals internals,
-                                                             MakeValue<SET_TYPE, RESPONSE_TYPE> request)
+                                                             MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> request)
                             throws Exception {
                         return makeValue(request.getValue());
                     }

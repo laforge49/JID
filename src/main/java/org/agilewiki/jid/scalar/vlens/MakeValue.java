@@ -24,14 +24,13 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
-import org.agilewiki.jid.scalar.ScalarJidA;
 
 /**
  * Assigns a value or creates an actor if there was no previous value.
  * Returns true if successful.
  */
-public class MakeValue<SET_TYPE, RESPONSE_TYPE>
-        extends JLPCSynchronousRequest<Boolean, ScalarJidA<SET_TYPE, RESPONSE_TYPE>> {
+public class MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<Boolean, VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>> {
     /**
      * The value (or actor type).
      */
@@ -55,5 +54,18 @@ public class MakeValue<SET_TYPE, RESPONSE_TYPE>
         if (value == null)
             throw new IllegalArgumentException("value may not be null");
         this.value = value;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Boolean call(VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> targetActor)
+            throws Exception {
+        return targetActor.makeValue(value);
     }
 }

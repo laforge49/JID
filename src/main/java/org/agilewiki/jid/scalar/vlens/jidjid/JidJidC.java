@@ -51,8 +51,8 @@ public class JidJidC
      * @param actorType The actor type.
      * @return The MakeValue request.
      */
-    public static final MakeValue<String, Actor> makeValueReq(String actorType) {
-        return new MakeValue<String, Actor>(actorType);
+    public static final MakeValue<Jid, String, Actor> makeValueReq(String actorType) {
+        return new MakeValue<Jid, String, Actor>(actorType);
     }
 
     /**

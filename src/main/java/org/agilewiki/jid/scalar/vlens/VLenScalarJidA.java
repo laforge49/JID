@@ -69,7 +69,7 @@ abstract public class VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
             clear();
             rp.processResponse(null);
         } else if (request instanceof MakeValue) {
-            makeValue(((MakeValue<SET_TYPE, RESPONSE_TYPE>) request).getValue());
+            makeValue(((MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>) request).getValue());
             rp.processResponse(null);
         } else super.processRequest(request, rp);
     }
