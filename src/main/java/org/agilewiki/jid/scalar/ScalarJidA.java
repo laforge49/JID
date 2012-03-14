@@ -24,6 +24,7 @@
 package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.JidA;
 
 /**
@@ -38,6 +39,24 @@ abstract public class ScalarJidA<SET_TYPE, RESPONSE_TYPE>
      */
     public ScalarJidA(final Mailbox mailbox) {
         super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetValue)
+            rp.processResponse(getValue());
+        else if (request instanceof SetValue) {
+            setValue(((SetValue<SET_TYPE, RESPONSE_TYPE>) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

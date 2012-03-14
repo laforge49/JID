@@ -25,11 +25,11 @@ public class BooleanATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_CTYPE);
-            Actor boolean1 = newBooleanJid.send(future, factory).thisActor();
-            Actor boolean2 = (new CopyJID()).send(future, boolean1);
+            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_ATYPE);
+            BooleanJidA boolean1 = (BooleanJidA) newBooleanJid.send(future, factory).thisActor();
+            BooleanJidA boolean2 = (BooleanJidA) (new CopyJID()).send(future, boolean1);
             BooleanJidC.setValueReq(true).send(future, boolean2);
-            Actor boolean3 = (new CopyJID()).send(future, boolean2);
+            BooleanJidA boolean3 = (BooleanJidA) (new CopyJID()).send(future, boolean2);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
             assertEquals(1, sl);
@@ -44,12 +44,12 @@ public class BooleanATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
+            SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_ATYPE);
             sjvb.send(future, jidJid1);
-            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            BooleanJidA rpa = (BooleanJidA) (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(BooleanJidC.getValueReq.send(future, rpa));
             BooleanJidC.setValueReq(true).send(future, rpa);
-            rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            rpa = (BooleanJidA) (new ResolvePathname("0")).send(future, jidJid1);
             assertTrue(BooleanJidC.getValueReq.send(future, rpa));
 
         } catch (Exception e) {
