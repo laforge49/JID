@@ -31,7 +31,7 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds a byte array.
  */
-public class BytesJid extends VLenScalarJid<byte[], byte[]> {
+public class BytesJid extends VLenScalarJid<byte[], byte[], byte[]> {
     /**
      * The GetValue request.
      */
@@ -60,12 +60,11 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * Assign a value.
      *
-     * @param request The MakeValue request.
+     * @param v The new value.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(SetValue request) throws Exception {
-        byte[] v = (byte[]) request.getValue();
+    protected void setValue(byte[] v) throws Exception {
         int c = v.length;
         if (len > -1)
             c -= len;

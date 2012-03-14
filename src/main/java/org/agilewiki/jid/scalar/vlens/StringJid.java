@@ -33,7 +33,7 @@ import org.agilewiki.jid.scalar.SetValue;
  * A JID component that holds a String.
  */
 public class StringJid
-        extends VLenScalarJid<String, String>
+        extends VLenScalarJid<String, String, String>
         implements ComparableKey<String> {
     /**
      * The GetValue request.
@@ -63,12 +63,11 @@ public class StringJid
     /**
      * Assign a value.
      *
-     * @param request The MakeValue request.
+     * @param v The new value.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(SetValue request) throws Exception {
-        String v = (String) request.getValue();
+    protected void setValue(String v) throws Exception {
         int c = v.length() * 2;
         if (len > -1)
             c -= len;

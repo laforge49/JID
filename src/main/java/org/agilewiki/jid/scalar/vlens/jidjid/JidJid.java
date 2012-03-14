@@ -37,7 +37,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJid extends VLenScalarJid<Jid, Actor>
+public class JidJid extends VLenScalarJid<Jid, String, Actor>
         implements ComparableKey<Object> {
     /**
      * The GetValue request.
@@ -106,21 +106,6 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     }
 
     /**
-     * Assign a value.
-     *
-     * @param request The SetValue request.
-     * @throws Exception Any uncaught exception raised.
-     */
-    @Override
-    protected void setValue(SetValue request)
-            throws Exception {
-        if (len > -1)
-            clear();
-        String jidType = (String) request.getValue();
-        setValue(jidType);
-    }
-
-    /**
      * Assign a value unless one is already present.
      *
      * @param request The MakeValue request.
@@ -143,6 +128,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
      * @param jidType The actor type.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     protected void setValue(String jidType)
             throws Exception {
         NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), (byte[]) null, this);

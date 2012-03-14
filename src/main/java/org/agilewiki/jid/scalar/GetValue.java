@@ -28,8 +28,8 @@ import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 /**
  * Returns a value.
  */
-final public class GetValue<VALUE_TYPE, RESPONSE_TYPE>
-        extends JLPCSynchronousRequest<RESPONSE_TYPE, ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>> {
+final public class GetValue<SET_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<RESPONSE_TYPE, ScalarJidA<SET_TYPE, RESPONSE_TYPE>> {
     final public static GetValue req = new GetValue();
 
     /**
@@ -40,7 +40,7 @@ final public class GetValue<VALUE_TYPE, RESPONSE_TYPE>
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected RESPONSE_TYPE call(ScalarJidA<VALUE_TYPE, RESPONSE_TYPE> targetActor)
+    protected RESPONSE_TYPE call(ScalarJidA<SET_TYPE, RESPONSE_TYPE> targetActor)
             throws Exception {
         return targetActor.getValue();
     }

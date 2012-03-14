@@ -28,19 +28,19 @@ import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 /**
  * Assigns a value.
  */
-public class SetValue<VALUE_TYPE, RESPONSE_TYPE>
-        extends JLPCSynchronousRequest<Object, ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>> {
+public class SetValue<SET_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<Object, ScalarJidA<SET_TYPE, RESPONSE_TYPE>> {
     /**
      * The value (or actor type).
      */
-    private VALUE_TYPE value;
+    private SET_TYPE value;
 
     /**
      * Returns the value (or actor type).
      *
      * @return The value (or actor type).
      */
-    public VALUE_TYPE getValue() {
+    public SET_TYPE getValue() {
         return value;
     }
 
@@ -49,7 +49,7 @@ public class SetValue<VALUE_TYPE, RESPONSE_TYPE>
      *
      * @param value The value (or actor type).
      */
-    public SetValue(VALUE_TYPE value) {
+    public SetValue(SET_TYPE value) {
         if (value == null)
             throw new IllegalArgumentException("value may not be null");
         this.value = value;
@@ -63,7 +63,7 @@ public class SetValue<VALUE_TYPE, RESPONSE_TYPE>
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ScalarJidA<VALUE_TYPE, RESPONSE_TYPE> targetActor)
+    protected Object call(ScalarJidA<SET_TYPE, RESPONSE_TYPE> targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

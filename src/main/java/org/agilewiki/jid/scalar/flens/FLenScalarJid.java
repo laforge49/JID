@@ -26,7 +26,6 @@ package org.agilewiki.jid.scalar.flens;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.ScalarJidC;
-import org.agilewiki.jid.scalar.SetValue;
 
 /**
  * A JID component that holds a fixed-length value that is always present.
@@ -61,12 +60,11 @@ abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
     /**
      * Assign a value.
      *
-     * @param request The MakeValue request.
+     * @param v The new value.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(SetValue request) throws Exception {
-        RESPONSE_TYPE v = (RESPONSE_TYPE) request.getValue();
+    protected void setValue(RESPONSE_TYPE v) throws Exception {
         if (v.equals(value))
             return;
         value = v;

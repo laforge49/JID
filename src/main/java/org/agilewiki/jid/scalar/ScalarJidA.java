@@ -29,7 +29,7 @@ import org.agilewiki.jid.JidA;
 /**
  * JidA that hold a single value.
  */
-abstract public class ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>
+abstract public class ScalarJidA<SET_TYPE, RESPONSE_TYPE>
         extends JidA {
     /**
      * Create a ScalaA.
@@ -54,5 +54,5 @@ abstract public class ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>
      * @param request The MakeValue request.
      * @throws Exception Any uncaught exception raised.
      */
-    abstract protected void setValue(VALUE_TYPE request) throws Exception;
+    abstract protected void setValue(SET_TYPE request) throws Exception;
 }

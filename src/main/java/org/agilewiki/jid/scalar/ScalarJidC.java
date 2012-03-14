@@ -31,7 +31,7 @@ import org.agilewiki.jid.JidC;
 /**
  * A JID component that holds a value.
  */
-abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
+abstract public class ScalarJidC<SET_TYPE, RESPONSE_TYPE> extends JidC {
 
     /**
      * Bind request classes.
@@ -43,20 +43,20 @@ abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
         super.bindery();
 
         thisActor.bind(GetValue.class.getName(),
-                new SynchronousMethodBinding<GetValue<VALUE_TYPE, RESPONSE_TYPE>, RESPONSE_TYPE>() {
+                new SynchronousMethodBinding<GetValue<SET_TYPE, RESPONSE_TYPE>, RESPONSE_TYPE>() {
                     @Override
                     public RESPONSE_TYPE synchronousProcessRequest(Internals internals,
-                                                                   GetValue<VALUE_TYPE, RESPONSE_TYPE> request)
+                                                                   GetValue<SET_TYPE, RESPONSE_TYPE> request)
                             throws Exception {
                         return getValue();
                     }
                 });
 
         thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<VALUE_TYPE, RESPONSE_TYPE>>() {
+                new VoidSynchronousMethodBinding<SetValue<SET_TYPE, RESPONSE_TYPE>>() {
                     @Override
                     public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<VALUE_TYPE, RESPONSE_TYPE> request)
+                                                          SetValue<SET_TYPE, RESPONSE_TYPE> request)
                             throws Exception {
                         setValue(request.getValue());
                     }
@@ -69,7 +69,7 @@ abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
      * @param request The MakeValue request.
      * @throws Exception Any uncaught exception raised.
      */
-    abstract protected void setValue(VALUE_TYPE request)
+    abstract protected void setValue(SET_TYPE request)
             throws Exception;
 
     /**
