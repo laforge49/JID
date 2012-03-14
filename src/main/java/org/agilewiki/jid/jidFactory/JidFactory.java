@@ -23,17 +23,18 @@
  */
 package org.agilewiki.jid.jidFactory;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
+import org.agilewiki.jactor.bind.JBActor;
 import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.Factory;
 import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.GetJIDComponent;
 import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.JidC;
+import org.agilewiki.jid.JidA;
 import org.agilewiki.jid.ReadableBytes;
 
 import java.util.ArrayList;
@@ -66,20 +67,29 @@ final public class JidFactory extends Component {
             @Override
             public Jid concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
                     throws Exception {
-                NewJID newJID = request;
-                JCActor actor = (JCActor) (new NewActor(
-                        newJID.getActorType(),
-                        newJID.getMailbox(),
-                        newJID.getParent())).call(thisActor);
-                JidC jidC = GetJIDComponent.req.call(actor);
-                ReadableBytes readableBytes = newJID.getReadableBytes();
-                if (readableBytes != null)
-                    jidC.load(readableBytes);
-                Jid container = newJID.getContainer();
-                if (container != null)
-                    jidC.setContainerJid(container);
-                Open.req.call(actor);
-                return jidC;
+                Jid container = request.getContainer();
+                ReadableBytes readableBytes = request.getReadableBytes();
+                Actor actor = (new NewActor(
+                        request.getActorType(),
+                        request.getMailbox(),
+                        request.getParent())).call(thisActor);
+                if (actor instanceof JidA) {
+                    Jid jid = (Jid) actor;
+                    if (readableBytes != null)
+                        jid.load(readableBytes);
+                    if (container != null)
+                        jid.setContainerJid(container);
+                    return jid;
+                } else {
+                    JBActor jBActor = (JBActor) actor;
+                    Jid jid = GetJIDComponent.req.call(jBActor);
+                    if (readableBytes != null)
+                        jid.load(readableBytes);
+                    if (container != null)
+                        jid.setContainerJid(container);
+                    Open.req.call(jBActor);
+                    return jid;
+                }
             }
         });
     }
