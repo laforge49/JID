@@ -82,6 +82,11 @@ final public class JidFactories extends Component {
     public final static String DOUBLE_JID_CTYPE = "DOUBLE_JIDc";
 
     /**
+     * The name of the DoubleJid actor.
+     */
+    public final static String DOUBLE_JID_ATYPE = "DOUBLE_JIDa";
+
+    /**
      * The name of the JidJid component.
      */
     public final static String JID_JID_CTYPE = "JID_JIDc";
@@ -129,6 +134,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
         (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
+        (new DefineActorType(DOUBLE_JID_ATYPE, DoubleJidA.class)).call(thisActor);
 
         (new DefineActorType(JID_JID_CTYPE, JidJidC.class)).call(thisActor);
         (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
