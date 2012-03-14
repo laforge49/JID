@@ -120,7 +120,7 @@ final public class JidFactories extends Component {
 
         (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
         (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
-        (new DefineActorType(LONG_JID_CTYPE, LongJid.class)).call(thisActor);
+        (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
         (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
 
