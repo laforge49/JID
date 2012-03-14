@@ -23,11 +23,26 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * Clears the container.
  */
-final public class Clear extends SynchronousRequest<Object> {
+final public class Clear<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<Object, VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>> {
     public final static Clear req = new Clear();
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Object call(VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> targetActor)
+            throws Exception {
+        targetActor.clear();
+        return null;
+    }
 }

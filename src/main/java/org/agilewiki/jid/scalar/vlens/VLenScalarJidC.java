@@ -57,7 +57,7 @@ abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
         super.bindery();
 
         thisActor.bind(Clear.class.getName(),
-                new VoidSynchronousMethodBinding<Clear>() {
+                new VoidSynchronousMethodBinding<Clear<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>>() {
                     @Override
                     public void synchronousProcessRequest(Internals internals, Clear request)
                             throws Exception {
