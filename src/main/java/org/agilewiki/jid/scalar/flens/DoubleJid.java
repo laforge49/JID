@@ -37,7 +37,7 @@ public class DoubleJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<Double> getValueReq = (GetValue<Double>) GetValue.req;
+    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
 
     /**
      * Returns the SetValue request.

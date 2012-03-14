@@ -37,7 +37,7 @@ public class LongJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<Long> getValueReq = (GetValue<Long>) GetValue.req;
+    public static final GetValue<Long, Long> getValueReq = (GetValue<Long, Long>) GetValue.req;
 
     /**
      * Returns the SetValue request.

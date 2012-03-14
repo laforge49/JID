@@ -42,7 +42,7 @@ public class JidJid extends VLenScalarJid<Jid, Actor>
     /**
      * The GetValue request.
      */
-    public static final GetValue<Actor> getValueReq = (GetValue<Actor>) GetValue.req;
+    public static final GetValue<String, Actor> getValueReq = (GetValue<String, Actor>) GetValue.req;
 
     /**
      * Returns the MakeValue request.

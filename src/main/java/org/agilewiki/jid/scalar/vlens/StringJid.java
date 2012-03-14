@@ -38,7 +38,7 @@ public class StringJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<String> getValueReq = (GetValue<String>) GetValue.req;
+    public static final GetValue<String, String> getValueReq = (GetValue<String, String>) GetValue.req;
 
     /**
      * Returns the MakeValue request.

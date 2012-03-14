@@ -35,7 +35,7 @@ public class BytesJid extends VLenScalarJid<byte[], byte[]> {
     /**
      * The GetValue request.
      */
-    public static final GetValue<byte[]> getValueReq = (GetValue<byte[]>) GetValue.req;
+    public static final GetValue<byte[], byte[]> getValueReq = (GetValue<byte[], byte[]>) GetValue.req;
 
     /**
      * Returns the MakeValue request.

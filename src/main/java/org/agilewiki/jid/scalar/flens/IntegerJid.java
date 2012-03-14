@@ -37,7 +37,7 @@ public class IntegerJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<Integer> getValueReq = (GetValue<Integer>) GetValue.req;
+    public static final GetValue<Integer, Integer> getValueReq = (GetValue<Integer, Integer>) GetValue.req;
 
     /**
      * Returns the SetValue request.

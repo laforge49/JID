@@ -23,25 +23,35 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidA;
 
 /**
- * Returns a value.
+ * JidA that hold a single value.
  */
-final public class GetValue<VALUE_TYPE, RESPONSE_TYPE>
-        extends JLPCSynchronousRequest<RESPONSE_TYPE, ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>> {
-    final public static GetValue req = new GetValue();
+abstract public class ScalarJidA<VALUE_TYPE, RESPONSE_TYPE>
+        extends JidA {
+    /**
+     * Create a ScalaA.
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public ScalarJidA(final Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
-     * Send a synchronous request.
+     * Returns the value held by this component.
      *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @return The value held by this component.
      */
-    @Override
-    protected RESPONSE_TYPE call(ScalarJidA<VALUE_TYPE, RESPONSE_TYPE> targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
+    abstract protected RESPONSE_TYPE getValue();
+
+    /**
+     * Assign a value.
+     *
+     * @param request The MakeValue request.
+     * @throws Exception Any uncaught exception raised.
+     */
+    abstract protected void setValue(VALUE_TYPE request) throws Exception;
 }

@@ -37,7 +37,7 @@ public class FloatJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<Float> getValueReq = (GetValue<Float>) GetValue.req;
+    public static final GetValue<Float, Float> getValueReq = (GetValue<Float, Float>) GetValue.req;
 
     /**
      * Returns the SetValue request.

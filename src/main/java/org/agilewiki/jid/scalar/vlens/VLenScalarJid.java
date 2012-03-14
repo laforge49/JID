@@ -29,12 +29,12 @@ import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.ScalarJid;
+import org.agilewiki.jid.scalar.ScalarJidC;
 
 /**
  * A JID component that holds a variable-length value, or null.
  */
-abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJid<RESPONSE_TYPE> {
+abstract public class VLenScalarJid<VALUE_TYPE, RESPONSE_TYPE> extends ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> {
 
     /**
      * Holds the value, or null.

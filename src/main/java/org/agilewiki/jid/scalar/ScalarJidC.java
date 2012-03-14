@@ -31,7 +31,7 @@ import org.agilewiki.jid.JidC;
 /**
  * A JID component that holds a value.
  */
-abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
+abstract public class ScalarJidC<VALUE_TYPE, RESPONSE_TYPE> extends JidC {
 
     /**
      * Bind request classes.
@@ -43,10 +43,10 @@ abstract public class ScalarJid<RESPONSE_TYPE> extends JidC {
         super.bindery();
 
         thisActor.bind(GetValue.class.getName(),
-                new SynchronousMethodBinding<GetValue<RESPONSE_TYPE>, RESPONSE_TYPE>() {
+                new SynchronousMethodBinding<GetValue<VALUE_TYPE, RESPONSE_TYPE>, RESPONSE_TYPE>() {
                     @Override
                     public RESPONSE_TYPE synchronousProcessRequest(Internals internals,
-                                                                   GetValue<RESPONSE_TYPE> request)
+                                                                   GetValue<VALUE_TYPE, RESPONSE_TYPE> request)
                             throws Exception {
                         return getValue();
                     }

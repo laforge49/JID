@@ -37,7 +37,7 @@ public class BooleanJid
     /**
      * The GetValue request.
      */
-    public static final GetValue<Boolean> getValueReq = (GetValue<Boolean>) GetValue.req;
+    public static final GetValue<Boolean, Boolean> getValueReq = (GetValue<Boolean, Boolean>) GetValue.req;
 
     /**
      * Returns the SetValue request.
