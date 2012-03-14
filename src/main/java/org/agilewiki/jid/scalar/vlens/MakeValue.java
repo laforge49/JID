@@ -23,24 +23,26 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jid.scalar.ScalarJidA;
 
 /**
  * Assigns a value or creates an actor if there was no previous value.
  * Returns true if successful.
  */
-public class MakeValue extends SynchronousRequest<Boolean> {
+public class MakeValue<SET_TYPE, RESPONSE_TYPE>
+        extends JLPCSynchronousRequest<Boolean, ScalarJidA<SET_TYPE, RESPONSE_TYPE>> {
     /**
      * The value (or actor type).
      */
-    private Object value;
+    private SET_TYPE value;
 
     /**
      * Returns the value (or actor type).
      *
      * @return The value (or actor type).
      */
-    public Object getValue() {
+    public SET_TYPE getValue() {
         return value;
     }
 
@@ -49,7 +51,7 @@ public class MakeValue extends SynchronousRequest<Boolean> {
      *
      * @param value The value (or actor type).
      */
-    public MakeValue(Object value) {
+    public MakeValue(SET_TYPE value) {
         if (value == null)
             throw new IllegalArgumentException("value may not be null");
         this.value = value;

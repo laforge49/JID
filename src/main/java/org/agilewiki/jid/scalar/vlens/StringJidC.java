@@ -46,8 +46,8 @@ public class StringJidC
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(String value) {
-        return new MakeValue(value);
+    public static final MakeValue<String, String> makeValueReq(String value) {
+        return new MakeValue<String, String>(value);
     }
 
     /**
@@ -80,15 +80,14 @@ public class StringJidC
     /**
      * Assign a value unless one is already present.
      *
-     * @param request The MakeValue request.
+     * @param v The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(MakeValue request) throws Exception {
+    protected Boolean makeValue(String v) throws Exception {
         if (len > -1)
             return false;
-        String v = (String) request.getValue();
         int c = v.length() * 2;
         if (len > -1)
             c -= len;

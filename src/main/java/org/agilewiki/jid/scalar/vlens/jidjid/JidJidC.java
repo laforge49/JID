@@ -51,8 +51,8 @@ public class JidJidC
      * @param actorType The actor type.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(String actorType) {
-        return new MakeValue(actorType);
+    public static final MakeValue<String, Actor> makeValueReq(String actorType) {
+        return new MakeValue<String, Actor>(actorType);
     }
 
     /**
@@ -109,16 +109,15 @@ public class JidJidC
     /**
      * Assign a value unless one is already present.
      *
-     * @param request The MakeValue request.
+     * @param jidType The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(MakeValue request)
+    protected Boolean makeValue(String jidType)
             throws Exception {
         if (len > -1)
             return false;
-        String jidType = (String) request.getValue();
         setValue(jidType);
         return true;
     }

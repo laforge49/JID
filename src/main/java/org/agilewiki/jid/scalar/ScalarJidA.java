@@ -33,7 +33,7 @@ import org.agilewiki.jid.JidA;
 abstract public class ScalarJidA<SET_TYPE, RESPONSE_TYPE>
         extends JidA {
     /**
-     * Create a ScalaA.
+     * Create a ScalarJidA.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */

@@ -23,19 +23,18 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.ScalarJidC;
+import org.agilewiki.jid.scalar.ScalarJidA;
 
 /**
  * A JID component that holds a variable-length value, or null.
  */
-abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
-        extends ScalarJidC<SET_TYPE, RESPONSE_TYPE> {
+abstract public class VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
+        extends ScalarJidA<SET_TYPE, RESPONSE_TYPE> {
 
     /**
      * Holds the value, or null.
@@ -48,32 +47,31 @@ abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
     protected int len = -1;
 
     /**
-     * Bind request classes.
+     * Create a VLenScalarJidA.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    protected VLenScalarJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(Clear.class.getName(),
-                new VoidSynchronousMethodBinding<Clear>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals, Clear request)
-                            throws Exception {
-                        clear();
-                    }
-                });
-
-        thisActor.bind(MakeValue.class.getName(),
-                new SynchronousMethodBinding<MakeValue<SET_TYPE, RESPONSE_TYPE>, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals,
-                                                             MakeValue<SET_TYPE, RESPONSE_TYPE> request)
-                            throws Exception {
-                        return makeValue(request.getValue());
-                    }
-                });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof Clear) {
+            clear();
+            rp.processResponse(null);
+        } else if (request instanceof MakeValue) {
+            makeValue(((MakeValue<SET_TYPE, RESPONSE_TYPE>) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

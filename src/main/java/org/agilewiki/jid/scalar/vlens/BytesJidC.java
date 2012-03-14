@@ -44,8 +44,8 @@ public class BytesJidC
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue makeValueReq(byte[] value) {
-        return new MakeValue(value);
+    public static final MakeValue<byte[], byte[]> makeValueReq(byte[] value) {
+        return new MakeValue<byte[], byte[]>(value);
     }
 
     /**
@@ -78,15 +78,14 @@ public class BytesJidC
     /**
      * Assign a value unless one is already present.
      *
-     * @param request The MakeValue request.
+     * @param v The MakeValue request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(MakeValue request) throws Exception {
+    protected Boolean makeValue(byte[] v) throws Exception {
         if (len > -1)
             return false;
-        byte[] v = (byte[]) request.getValue();
         int c = v.length;
         if (len > -1)
             c -= len;

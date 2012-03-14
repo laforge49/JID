@@ -61,7 +61,7 @@ public class JidJidCTest extends TestCase {
             assertEquals(4, sl);
             SetValue sjvj = JidJidC.setValueReq(JidFactories.JID_CTYPE);
             sjvj.send(future, jidJid2);
-            MakeValue mjvj = JidJidC.makeValueReq(JidFactories.JID_CTYPE);
+            MakeValue<String, Actor> mjvj = JidJidC.makeValueReq(JidFactories.JID_CTYPE);
             boolean made = mjvj.send(future, jidJid2);
             assertEquals(false, made);
             Actor jidJid2a = JidJidC.getValueReq.send(future, jidJid2);
@@ -96,7 +96,7 @@ public class JidJidCTest extends TestCase {
             Actor jidJid3 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid3);
             assertEquals(4, sl);
-            MakeValue mjvjj = JidJidC.makeValueReq(JidFactories.JID_JID_CTYPE);
+            MakeValue<String, Actor> mjvjj = JidJidC.makeValueReq(JidFactories.JID_JID_CTYPE);
             made = mjvjj.send(future, jidJid3);
             assertEquals(true, made);
             made = mjvjj.send(future, jidJid3);
