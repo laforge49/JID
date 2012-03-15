@@ -23,10 +23,11 @@
  */
 package org.agilewiki.jid.scalar.flens;
 
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
@@ -35,11 +36,6 @@ import org.agilewiki.jid.scalar.SetValue;
 public class LongJidC
         extends FLenScalarJidC<Long> {
     /**
-     * The GetValue request.
-     */
-    public static final GetValue<Long, Long> getValueReq = (GetValue<Long, Long>) GetValue.req;
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.
@@ -47,6 +43,38 @@ public class LongJidC
      */
     public static final SetValue setValueReq(Long value) {
         return new SetValue(value);
+    }
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetLong.class.getName(),
+                new SynchronousMethodBinding<GetLong, Long>() {
+                    @Override
+                    public Long synchronousProcessRequest(Internals internals,
+                                                          GetLong request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+/*
+        thisActor.bind(SetValue.class.getName(),
+                new VoidSynchronousMethodBinding<SetValue<Long, Long>>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetValue<Long, Long> request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
+*/
     }
 
     /**

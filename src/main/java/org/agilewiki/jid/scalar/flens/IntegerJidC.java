@@ -46,16 +46,6 @@ public class IntegerJidC
     }
 
     /**
-     * Create the value.
-     *
-     * @return The default value
-     */
-    @Override
-    protected Integer newValue() {
-        return new Integer(0);
-    }
-
-    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -85,6 +75,16 @@ public class IntegerJidC
                     }
                 });
 */
+    }
+
+    /**
+     * Create the value.
+     *
+     * @return The default value
+     */
+    @Override
+    protected Integer newValue() {
+        return new Integer(0);
     }
 
     /**

@@ -38,11 +38,11 @@ public class LongATest extends TestCase {
             sl = GetSerializedLength.req.send(future, float3);
             assertEquals(8, sl);
 
-            long v = LongJidA.getValueReq.send(future, long1);
+            long v = GetLong.req.send(future, long1);
             assertEquals(0L, v);
-            v = LongJidA.getValueReq.send(future, long2);
+            v = GetLong.req.send(future, long2);
             assertEquals(1L, v);
-            v = LongJidA.getValueReq.send(future, float3);
+            v = GetLong.req.send(future, float3);
             assertEquals(1L, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class LongATest extends TestCase {
             SetValue sjvl = JidJidC.setValueReq(JidFactories.LONG_JID_ATYPE);
             sjvl.send(future, jidJid1);
             LongJidA rpa = (LongJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = LongJidA.getValueReq.send(future, rpa);
+            v = GetLong.req.send(future, rpa);
             assertEquals(0L, v);
             LongJidA.setValueReq(-1000000000000L).send(future, rpa);
             rpa = (LongJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = LongJidA.getValueReq.send(future, rpa);
+            v = GetLong.req.send(future, rpa);
             assertEquals(-1000000000000L, v);
 
         } catch (Exception e) {
