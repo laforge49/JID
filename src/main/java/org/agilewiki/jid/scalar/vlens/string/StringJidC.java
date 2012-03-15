@@ -29,7 +29,6 @@ import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
 /**
@@ -38,16 +37,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 public class StringJidC
         extends VLenScalarJidC<String, String, String>
         implements ComparableKey<String> {
-    /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue<String, String, String> makeValueReq(String value) {
-        return new MakeValue<String, String, String>(value);
-    }
-
     /**
      * Bind request classes.
      *
@@ -74,6 +63,16 @@ public class StringJidC
                                                           SetString request)
                             throws Exception {
                         setValue(request.getValue());
+                    }
+                });
+
+        thisActor.bind(MakeString.class.getName(),
+                new SynchronousMethodBinding<MakeString, Boolean>() {
+                    @Override
+                    public Boolean synchronousProcessRequest(Internals internals,
+                                                             MakeString request)
+                            throws Exception {
+                        return makeValue(request.getValue());
                     }
                 });
     }

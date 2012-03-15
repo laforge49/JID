@@ -28,7 +28,6 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 
 /**
@@ -37,16 +36,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 public class StringJidA
         extends VLenScalarJidA<String, String, String>
         implements ComparableKey<String> {
-    /**
-     * Returns the MakeValue request.
-     *
-     * @param value The value.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue<String, String, String> makeValueReq(String value) {
-        return new MakeValue<String, String, String>(value);
-    }
-
     /**
      * Create a StringJidA.
      *
@@ -71,6 +60,8 @@ public class StringJidA
         else if (request instanceof SetString) {
             setValue(((SetString) request).getValue());
             rp.processResponse(null);
+        } else if (request instanceof MakeString) {
+            rp.processResponse(makeValue(((MakeString) request).getValue()));
         } else super.processRequest(request, rp);
     }
 

@@ -49,8 +49,8 @@ public class StringCTest extends TestCase {
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(GetString.req.send(future, rpa));
-            assertTrue(StringJidC.makeValueReq("").send(future, rpa));
-            assertFalse(StringJidC.makeValueReq("Hello?").send(future, rpa));
+            assertTrue((new MakeString("")).send(future, rpa));
+            assertFalse((new MakeString("Hello?")).send(future, rpa));
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertEquals("", GetString.req.send(future, rpa));
             (new SetString("bye")).send(future, rpa);
