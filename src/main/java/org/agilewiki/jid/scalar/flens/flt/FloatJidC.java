@@ -21,55 +21,49 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.flt;
 
-import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
 
 /**
- * A JID actor that holds a float.
+ * A JID component that holds a float.
  */
-public class FloatJidA
-        extends FLenScalarJidA<Float> {
+public class FloatJidC
+        extends FLenScalarJidC<Float> {
     /**
-     * Returns the SetValue request.
+     * Bind request classes.
      *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Float value) {
-        return new SetValue(value);
-    }
-
-    /**
-     * Create a FloatJidA.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public FloatJidA(Mailbox mailbox) {
-        super(mailbox);
-    }
-
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetFloat)
-            rp.processResponse(getValue());
-        else if (request instanceof SetValue) {
-            setValue(((SetValue<Float, Float>) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetFloat.class.getName(),
+                new SynchronousMethodBinding<GetFloat, Float>() {
+                    @Override
+                    public Float synchronousProcessRequest(Internals internals,
+                                                           GetFloat request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+        thisActor.bind(SetFloat.class.getName(),
+                new VoidSynchronousMethodBinding<SetFloat>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetFloat request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
     }
 
     /**

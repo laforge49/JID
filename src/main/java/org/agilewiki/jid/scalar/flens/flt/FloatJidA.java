@@ -21,60 +21,45 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.flt;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
- * A JID component that holds a float.
+ * A JID actor that holds a float.
  */
-public class FloatJidC
-        extends FLenScalarJidC<Float> {
+public class FloatJidA
+        extends FLenScalarJidA<Float> {
     /**
-     * Returns the SetValue request.
+     * Create a FloatJidA.
      *
-     * @param value The value.
-     * @return The SetValue request.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    public static final SetValue setValueReq(Float value) {
-        return new SetValue(value);
+    public FloatJidA(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Bind request classes.
+     * The application method for processing requests sent to the actor.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetFloat.class.getName(),
-                new SynchronousMethodBinding<GetFloat, Float>() {
-                    @Override
-                    public Float synchronousProcessRequest(Internals internals,
-                                                           GetFloat request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<Float, Float>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<Float, Float> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-*/
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetFloat)
+            rp.processResponse(getValue());
+        else if (request instanceof SetFloat) {
+            setValue(((SetFloat) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

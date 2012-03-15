@@ -21,15 +21,39 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Returns a value.
+ * Assigns a value.
  */
-public class GetFloat extends JLPCSynchronousRequest<Float, FloatJidA> {
-    final public static GetFloat req = new GetFloat();
+public class SetFloat
+        extends JLPCSynchronousRequest<Object, FloatJidA> {
+    /**
+     * The value.
+     */
+    private Float value;
+
+    /**
+     * Returns the value.
+     *
+     * @return The value.
+     */
+    public Float getValue() {
+        return value;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param value The value.
+     */
+    public SetFloat(Float value) {
+        if (value == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.value = value;
+    }
 
     /**
      * Send a synchronous request.
@@ -39,8 +63,9 @@ public class GetFloat extends JLPCSynchronousRequest<Float, FloatJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Float call(FloatJidA targetActor)
+    protected Object call(FloatJidA targetActor)
             throws Exception {
-        return targetActor.getValue();
+        targetActor.setValue(value);
+        return null;
     }
 }
