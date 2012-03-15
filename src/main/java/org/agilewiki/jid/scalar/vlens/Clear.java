@@ -28,8 +28,8 @@ import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 /**
  * Clears the container.
  */
-final public class Clear<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
-        extends JLPCSynchronousRequest<Object, VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>> {
+final public class Clear
+        extends JLPCSynchronousRequest<Object, VLenScalarJidA<Object, Object, Object>> {
     public final static Clear req = new Clear();
 
     /**
@@ -40,7 +40,7 @@ final public class Clear<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> targetActor)
+    protected Object call(VLenScalarJidA<Object, Object, Object> targetActor)
             throws Exception {
         targetActor.clear();
         return null;
