@@ -21,60 +21,45 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.integer;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
- * A JID component that holds an integer.
+ * A JID actor that holds an integer.
  */
-public class IntegerJidC
-        extends FLenScalarJidC<Integer> {
+public class IntegerJidA
+        extends FLenScalarJidA<Integer> {
     /**
-     * Returns the SetValue request.
+     * Create a IntegerJidA.
      *
-     * @param value The value.
-     * @return The SetValue request.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    public static final SetValue setValueReq(Integer value) {
-        return new SetValue(value);
+    public IntegerJidA(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Bind request classes.
+     * The application method for processing requests sent to the actor.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetInteger.class.getName(),
-                new SynchronousMethodBinding<GetInteger, Integer>() {
-                    @Override
-                    public Integer synchronousProcessRequest(Internals internals,
-                                                             GetInteger request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<Integer, Integer>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<Integer, Integer> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-*/
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetInteger)
+            rp.processResponse(getValue());
+        else if (request instanceof SetInteger) {
+            setValue(((SetInteger) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

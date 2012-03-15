@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.integer;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.Actor;
@@ -16,7 +16,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
-public class IntegerATest extends TestCase {
+public class IntegerCTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -25,11 +25,11 @@ public class IntegerATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_ATYPE);
-            IntegerJidA int1 = (IntegerJidA) newIntegerJid.send(future, factory).thisActor();
-            IntegerJidA int2 = (IntegerJidA) (new CopyJID()).send(future, int1);
-            IntegerJidA.setValueReq(1).send(future, int2);
-            IntegerJidA int3 = (IntegerJidA) (new CopyJID()).send(future, int2);
+            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_CTYPE);
+            Actor int1 = newIntegerJid.send(future, factory).thisActor();
+            Actor int2 = (new CopyJID()).send(future, int1);
+            (new SetInteger(1)).send(future, int2);
+            Actor int3 = (new CopyJID()).send(future, int2);
 
             int sl = GetSerializedLength.req.send(future, int1);
             assertEquals(4, sl);
@@ -47,13 +47,13 @@ public class IntegerATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvi = JidJidC.setValueReq(JidFactories.INTEGER_JID_ATYPE);
+            SetValue sjvi = JidJidC.setValueReq(JidFactories.INTEGER_JID_CTYPE);
             sjvi.send(future, jidJid1);
-            IntegerJidA rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = GetInteger.req.send(future, rpa);
             assertEquals(0, v);
-            IntegerJidA.setValueReq(-1).send(future, rpa);
-            rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            (new SetInteger(-1)).send(future, rpa);
+            rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = GetInteger.req.send(future, rpa);
             assertEquals(-1, v);
 

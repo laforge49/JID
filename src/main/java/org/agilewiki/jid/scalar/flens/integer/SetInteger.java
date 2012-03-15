@@ -21,15 +21,39 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Returns a value.
+ * Assigns a value.
  */
-public class GetInteger extends JLPCSynchronousRequest<Integer, IntegerJidA> {
-    final public static GetInteger req = new GetInteger();
+public class SetInteger
+        extends JLPCSynchronousRequest<Object, IntegerJidA> {
+    /**
+     * The value.
+     */
+    private Integer value;
+
+    /**
+     * Returns the value.
+     *
+     * @return The value.
+     */
+    public Integer getValue() {
+        return value;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param value The value.
+     */
+    public SetInteger(Integer value) {
+        if (value == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.value = value;
+    }
 
     /**
      * Send a synchronous request.
@@ -39,8 +63,9 @@ public class GetInteger extends JLPCSynchronousRequest<Integer, IntegerJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Integer call(IntegerJidA targetActor)
+    protected Object call(IntegerJidA targetActor)
             throws Exception {
-        return targetActor.getValue();
+        targetActor.setValue(value);
+        return null;
     }
 }
