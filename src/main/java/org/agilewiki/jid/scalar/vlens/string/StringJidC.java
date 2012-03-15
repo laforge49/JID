@@ -25,10 +25,10 @@ package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
@@ -46,16 +46,6 @@ public class StringJidC
      */
     public static final MakeValue<String, String, String> makeValueReq(String value) {
         return new MakeValue<String, String, String>(value);
-    }
-
-    /**
-     * Returns the SetValue request.
-     *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(String value) {
-        return new SetValue(value);
     }
 
     /**
@@ -77,17 +67,15 @@ public class StringJidC
                     }
                 });
 
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<String, String>>() {
+        thisActor.bind(SetString.class.getName(),
+                new VoidSynchronousMethodBinding<SetString>() {
                     @Override
                     public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<String, String> request)
+                                                          SetString request)
                             throws Exception {
                         setValue(request.getValue());
                     }
                 });
-*/
     }
 
     /**

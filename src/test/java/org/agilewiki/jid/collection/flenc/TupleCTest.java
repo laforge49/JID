@@ -16,7 +16,7 @@ import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
-import org.agilewiki.jid.scalar.vlens.string.StringJidC;
+import org.agilewiki.jid.scalar.vlens.string.SetString;
 
 public class TupleCTest extends TestCase {
     public void test() {
@@ -35,9 +35,9 @@ public class TupleCTest extends TestCase {
             assertNull(GetString.req.send(future, e0));
             Actor e1 = iget1.send(future, t0);
             assertNull(GetString.req.send(future, e1));
-            StringJidC.setValueReq("Apples").send(future, e0);
+            (new SetString("Apples")).send(future, e0);
             assertEquals("Apples", GetString.req.send(future, e0));
-            StringJidC.setValueReq("Oranges").send(future, e1);
+            (new SetString("Oranges")).send(future, e1);
             assertEquals("Oranges", GetString.req.send(future, e1));
             Actor t1 = (new CopyJID()).send(future, t0);
             Actor f0 = (new ResolvePathname("0")).send(future, t1);
@@ -47,7 +47,7 @@ public class TupleCTest extends TestCase {
 
             NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
-            StringJidC.setValueReq("Peaches").send(future, string1);
+            (new SetString("Peaches")).send(future, string1);
             byte[] sb = GetBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);
             Actor f1b = (new ResolvePathname("1")).send(future, t1);

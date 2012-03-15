@@ -29,7 +29,7 @@ public class StringATest extends TestCase {
             NewJID newStringJid = new NewJID(JidFactories.STRING_JID_ATYPE);
             StringJidA string1 = (StringJidA) newStringJid.send(future, factory).thisActor();
             StringJidA string2 = (StringJidA) (new CopyJID()).send(future, string1);
-            StringJidA.setValueReq("abc").send(future, string2);
+            (new SetString("abc")).send(future, string2);
             StringJidA string3 = (StringJidA) (new CopyJID()).send(future, string2);
 
             int sl = GetSerializedLength.req.send(future, string1);
@@ -53,7 +53,7 @@ public class StringATest extends TestCase {
             assertFalse(StringJidA.makeValueReq("Hello?").send(future, rpa));
             rpa = (StringJidA) (new ResolvePathname("0")).send(future, jidJid1);
             assertEquals("", GetString.req.send(future, rpa));
-            StringJidA.setValueReq("bye").send(future, rpa);
+            (new SetString("bye")).send(future, rpa);
             assertEquals("bye", GetString.req.send(future, rpa));
             sl = GetSerializedLength.req.send(future, rpa);
             assertEquals(10, sl);
