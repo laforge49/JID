@@ -15,6 +15,7 @@ import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.scalar.vlens.GetString;
 import org.agilewiki.jid.scalar.vlens.StringJidC;
 
 public class TupleCTest extends TestCase {
@@ -31,18 +32,18 @@ public class TupleCTest extends TestCase {
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
             Actor e0 = iget0.send(future, t0);
-            assertNull(StringJidC.getValueReq.send(future, e0));
+            assertNull(GetString.req.send(future, e0));
             Actor e1 = iget1.send(future, t0);
-            assertNull(StringJidC.getValueReq.send(future, e1));
+            assertNull(GetString.req.send(future, e1));
             StringJidC.setValueReq("Apples").send(future, e0);
-            assertEquals("Apples", StringJidC.getValueReq.send(future, e0));
+            assertEquals("Apples", GetString.req.send(future, e0));
             StringJidC.setValueReq("Oranges").send(future, e1);
-            assertEquals("Oranges", StringJidC.getValueReq.send(future, e1));
+            assertEquals("Oranges", GetString.req.send(future, e1));
             Actor t1 = (new CopyJID()).send(future, t0);
             Actor f0 = (new ResolvePathname("0")).send(future, t1);
-            assertEquals("Apples", StringJidC.getValueReq.send(future, f0));
+            assertEquals("Apples", GetString.req.send(future, f0));
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
-            assertEquals("Oranges", StringJidC.getValueReq.send(future, f1));
+            assertEquals("Oranges", GetString.req.send(future, f1));
 
             NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
@@ -50,7 +51,7 @@ public class TupleCTest extends TestCase {
             byte[] sb = GetBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);
             Actor f1b = (new ResolvePathname("1")).send(future, t1);
-            assertEquals("Peaches", StringJidC.getValueReq.send(future, f1b));
+            assertEquals("Peaches", GetString.req.send(future, f1b));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -12,6 +12,7 @@ import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.Clear;
+import org.agilewiki.jid.scalar.vlens.GetString;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.StringJidC;
 
@@ -54,7 +55,7 @@ public class JidJidCTest extends TestCase {
             byte[] sb = GetBytes.req.send(future, string1);
             (new SetBytes(JidFactories.STRING_JID_CTYPE, sb)).send(future, jidJid1);
             Actor sj = JidJidC.getValueReq.send(future, jidJid1);
-            assertEquals("abc", StringJidC.getValueReq.send(future, sj));
+            assertEquals("abc", GetString.req.send(future, sj));
 
             Actor jidJid2 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid2);

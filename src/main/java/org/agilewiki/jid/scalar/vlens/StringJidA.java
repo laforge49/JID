@@ -23,8 +23,8 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
@@ -33,8 +33,8 @@ import org.agilewiki.jid.scalar.SetValue;
 /**
  * A JID component that holds a String.
  */
-public class StringJidC
-        extends VLenScalarJidC<String, String, String>
+public class StringJidA
+        extends VLenScalarJidA<String, String, String>
         implements ComparableKey<String> {
     /**
      * Returns the MakeValue request.
@@ -57,35 +57,30 @@ public class StringJidC
     }
 
     /**
-     * Bind request classes.
+     * Create a StringJidA.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public StringJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetString.class.getName(),
-                new SynchronousMethodBinding<GetString, String>() {
-                    @Override
-                    public String synchronousProcessRequest(Internals internals,
-                                                            GetString request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<String, String>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<String, String> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-*/
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetString)
+            rp.processResponse(getValue());
+        else if (request instanceof SetValue) {
+            setValue(((SetValue<String, String>) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**
