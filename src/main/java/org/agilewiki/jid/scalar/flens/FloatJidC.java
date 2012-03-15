@@ -23,10 +23,11 @@
  */
 package org.agilewiki.jid.scalar.flens;
 
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
@@ -35,11 +36,6 @@ import org.agilewiki.jid.scalar.SetValue;
 public class FloatJidC
         extends FLenScalarJidC<Float> {
     /**
-     * The GetValue request.
-     */
-    public static final GetValue<Float, Float> getValueReq = (GetValue<Float, Float>) GetValue.req;
-
-    /**
      * Returns the SetValue request.
      *
      * @param value The value.
@@ -47,6 +43,38 @@ public class FloatJidC
      */
     public static final SetValue setValueReq(Float value) {
         return new SetValue(value);
+    }
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetFloat.class.getName(),
+                new SynchronousMethodBinding<GetFloat, Float>() {
+                    @Override
+                    public Float synchronousProcessRequest(Internals internals,
+                                                           GetFloat request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+/*
+        thisActor.bind(SetValue.class.getName(),
+                new VoidSynchronousMethodBinding<SetValue<Float, Float>>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetValue<Float, Float> request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
+*/
     }
 
     /**

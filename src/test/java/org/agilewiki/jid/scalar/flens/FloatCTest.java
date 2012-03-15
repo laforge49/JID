@@ -38,11 +38,11 @@ public class FloatCTest extends TestCase {
             sl = GetSerializedLength.req.send(future, float3);
             assertEquals(4, sl);
 
-            float v = FloatJidC.getValueReq.send(future, float1);
+            float v = GetFloat.req.send(future, float1);
             assertEquals(0.f, v);
-            v = FloatJidC.getValueReq.send(future, float2);
+            v = GetFloat.req.send(future, float2);
             assertEquals(1.f, v);
-            v = FloatJidC.getValueReq.send(future, float3);
+            v = GetFloat.req.send(future, float3);
             assertEquals(1.f, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class FloatCTest extends TestCase {
             SetValue sjvf = JidJidC.setValueReq(JidFactories.FLOAT_JID_CTYPE);
             sjvf.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = FloatJidC.getValueReq.send(future, rpa);
+            v = GetFloat.req.send(future, rpa);
             assertEquals(0.f, v);
             FloatJidC.setValueReq(-1.f).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = FloatJidC.getValueReq.send(future, rpa);
+            v = GetFloat.req.send(future, rpa);
             assertEquals(-1.f, v);
 
         } catch (Exception e) {

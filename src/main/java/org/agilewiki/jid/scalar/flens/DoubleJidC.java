@@ -46,16 +46,6 @@ public class DoubleJidC
     }
 
     /**
-     * Create the value.
-     *
-     * @return The default value
-     */
-    @Override
-    protected Double newValue() {
-        return new Double(0.D);
-    }
-
-    /**
      * Bind request classes.
      *
      * @throws Exception Any exceptions thrown while binding.
@@ -85,6 +75,16 @@ public class DoubleJidC
                     }
                 });
 */
+    }
+
+    /**
+     * Create the value.
+     *
+     * @return The default value
+     */
+    @Override
+    protected Double newValue() {
+        return new Double(0.D);
     }
 
     /**
