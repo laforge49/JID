@@ -21,10 +21,9 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens.dbl;
+package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
-import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
 
 /**
  * Assigns a value.

@@ -29,7 +29,6 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
-import org.agilewiki.jid.scalar.flens.dbl.SetBoolean;
 
 /**
  * A JID actor that holds a boolean.
