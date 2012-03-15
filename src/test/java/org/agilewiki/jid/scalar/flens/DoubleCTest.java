@@ -38,11 +38,11 @@ public class DoubleCTest extends TestCase {
             sl = GetSerializedLength.req.send(future, double3);
             assertEquals(8, sl);
 
-            double v = DoubleJidC.getValueReq.send(future, double1);
+            double v = GetDouble.req.send(future, double1);
             assertEquals(0.D, v);
-            v = DoubleJidC.getValueReq.send(future, double2);
+            v = GetDouble.req.send(future, double2);
             assertEquals(1.D, v);
-            v = DoubleJidC.getValueReq.send(future, double3);
+            v = GetDouble.req.send(future, double3);
             assertEquals(1.D, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class DoubleCTest extends TestCase {
             SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_CTYPE);
             sjvl.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidC.getValueReq.send(future, rpa);
+            v = GetDouble.req.send(future, rpa);
             assertEquals(0.D, v);
             DoubleJidC.setValueReq(-1.D).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidC.getValueReq.send(future, rpa);
+            v = GetDouble.req.send(future, rpa);
             assertEquals(-1.D, v);
 
         } catch (Exception e) {

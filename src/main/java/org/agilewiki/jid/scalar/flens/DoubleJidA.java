@@ -24,10 +24,10 @@
 package org.agilewiki.jid.scalar.flens;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
@@ -35,11 +35,6 @@ import org.agilewiki.jid.scalar.SetValue;
  */
 public class DoubleJidA
         extends FLenScalarJidA<Double> {
-    /**
-     * The GetValue request.
-     */
-    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
-
     /**
      * Returns the SetValue request.
      *
@@ -57,6 +52,24 @@ public class DoubleJidA
      */
     public DoubleJidA(Mailbox mailbox) {
         super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetDouble)
+            rp.processResponse(getValue());
+        else if (request instanceof SetValue) {
+            setValue(((SetValue<Double, Double>) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

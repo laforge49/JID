@@ -38,11 +38,11 @@ public class DoubleATest extends TestCase {
             sl = GetSerializedLength.req.send(future, double3);
             assertEquals(8, sl);
 
-            double v = DoubleJidA.getValueReq.send(future, double1);
+            double v = GetDouble.req.send(future, double1);
             assertEquals(0.D, v);
-            v = DoubleJidA.getValueReq.send(future, double2);
+            v = GetDouble.req.send(future, double2);
             assertEquals(1.D, v);
-            v = DoubleJidA.getValueReq.send(future, double3);
+            v = GetDouble.req.send(future, double3);
             assertEquals(1.D, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class DoubleATest extends TestCase {
             SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_ATYPE);
             sjvl.send(future, jidJid1);
             DoubleJidA rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidA.getValueReq.send(future, rpa);
+            v = GetDouble.req.send(future, rpa);
             assertEquals(0.D, v);
             DoubleJidA.setValueReq(-1.D).send(future, rpa);
             rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = DoubleJidA.getValueReq.send(future, rpa);
+            v = GetDouble.req.send(future, rpa);
             assertEquals(-1.D, v);
 
         } catch (Exception e) {

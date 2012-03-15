@@ -23,10 +23,11 @@
  */
 package org.agilewiki.jid.scalar.flens;
 
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
 
 /**
@@ -34,11 +35,6 @@ import org.agilewiki.jid.scalar.SetValue;
  */
 public class DoubleJidC
         extends FLenScalarJidC<Double> {
-    /**
-     * The GetValue request.
-     */
-    public static final GetValue<Double, Double> getValueReq = (GetValue<Double, Double>) GetValue.req;
-
     /**
      * Returns the SetValue request.
      *
@@ -57,6 +53,38 @@ public class DoubleJidC
     @Override
     protected Double newValue() {
         return new Double(0.D);
+    }
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetDouble.class.getName(),
+                new SynchronousMethodBinding<GetDouble, Double>() {
+                    @Override
+                    public Double synchronousProcessRequest(Internals internals,
+                                                            GetDouble request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+/*
+        thisActor.bind(SetValue.class.getName(),
+                new VoidSynchronousMethodBinding<SetValue<Double, Double>>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetValue<Double, Double> request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
+*/
     }
 
     /**
