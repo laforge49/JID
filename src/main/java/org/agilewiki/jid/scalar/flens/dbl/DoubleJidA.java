@@ -21,20 +21,21 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.dbl;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
- * A JID component that holds a double.
+ * A JID actor that holds a double.
  */
-public class DoubleJidC
-        extends FLenScalarJidC<Double> {
+public class DoubleJidA
+        extends FLenScalarJidA<Double> {
     /**
      * Returns the SetValue request.
      *
@@ -46,35 +47,30 @@ public class DoubleJidC
     }
 
     /**
-     * Bind request classes.
+     * Create a DoubleJidA.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public DoubleJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetDouble.class.getName(),
-                new SynchronousMethodBinding<GetDouble, Double>() {
-                    @Override
-                    public Double synchronousProcessRequest(Internals internals,
-                                                            GetDouble request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<Double, Double>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<Double, Double> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-*/
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetDouble)
+            rp.processResponse(getValue());
+        else if (request instanceof SetValue) {
+            setValue(((SetValue<Double, Double>) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

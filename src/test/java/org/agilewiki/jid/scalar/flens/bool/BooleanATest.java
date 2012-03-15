@@ -14,6 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.SetBoolean;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class BooleanATest extends TestCase {

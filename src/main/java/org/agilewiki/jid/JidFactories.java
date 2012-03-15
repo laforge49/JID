@@ -31,6 +31,8 @@ import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.*;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidC;
+import org.agilewiki.jid.scalar.flens.dbl.DoubleJidA;
+import org.agilewiki.jid.scalar.flens.dbl.DoubleJidC;
 import org.agilewiki.jid.scalar.vlens.BytesJidC;
 import org.agilewiki.jid.scalar.vlens.StringJidA;
 import org.agilewiki.jid.scalar.vlens.StringJidC;

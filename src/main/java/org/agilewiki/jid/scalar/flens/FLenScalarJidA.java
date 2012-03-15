@@ -75,7 +75,7 @@ abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(RESPONSE_TYPE v) throws Exception {
+    public void setValue(RESPONSE_TYPE v) throws Exception {
         if (v.equals(value))
             return;
         value = v;

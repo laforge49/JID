@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.dbl;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.Actor;
@@ -16,7 +16,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
-public class DoubleCTest extends TestCase {
+public class DoubleATest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -25,11 +25,11 @@ public class DoubleCTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newDoubleJid = new NewJID(JidFactories.DOUBLE_JID_CTYPE);
-            Actor double1 = newDoubleJid.send(future, factory).thisActor();
-            Actor double2 = (new CopyJID()).send(future, double1);
-            DoubleJidC.setValueReq(1.D).send(future, double2);
-            Actor double3 = (new CopyJID()).send(future, double2);
+            NewJID newDoubleJid = new NewJID(JidFactories.DOUBLE_JID_ATYPE);
+            DoubleJidA double1 = (DoubleJidA) newDoubleJid.send(future, factory).thisActor();
+            DoubleJidA double2 = (DoubleJidA) (new CopyJID()).send(future, double1);
+            DoubleJidA.setValueReq(1.D).send(future, double2);
+            DoubleJidA double3 = (DoubleJidA) (new CopyJID()).send(future, double2);
 
             int sl = GetSerializedLength.req.send(future, double1);
             assertEquals(8, sl);
@@ -47,13 +47,13 @@ public class DoubleCTest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_CTYPE);
+            SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_ATYPE);
             sjvl.send(future, jidJid1);
-            Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            DoubleJidA rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetDouble.req.send(future, rpa);
             assertEquals(0.D, v);
-            DoubleJidC.setValueReq(-1.D).send(future, rpa);
-            rpa = (new ResolvePathname("0")).send(future, jidJid1);
+            DoubleJidA.setValueReq(-1.D).send(future, rpa);
+            rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetDouble.req.send(future, rpa);
             assertEquals(-1.D, v);
 
