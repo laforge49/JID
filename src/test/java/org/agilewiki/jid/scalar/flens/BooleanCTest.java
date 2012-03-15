@@ -38,19 +38,19 @@ public class BooleanCTest extends TestCase {
             sl = GetSerializedLength.req.send(future, boolean3);
             assertEquals(1, sl);
 
-            assertFalse(BooleanJidC.getValueReq.send(future, boolean1));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean2));
-            assertTrue(BooleanJidC.getValueReq.send(future, boolean3));
+            assertFalse(GetBoolean.req.send(future, boolean1));
+            assertTrue(GetBoolean.req.send(future, boolean2));
+            assertTrue(GetBoolean.req.send(future, boolean3));
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
             SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
             sjvb.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertFalse(BooleanJidC.getValueReq.send(future, rpa));
+            assertFalse(GetBoolean.req.send(future, rpa));
             BooleanJidC.setValueReq(true).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
-            assertTrue(BooleanJidC.getValueReq.send(future, rpa));
+            assertTrue(GetBoolean.req.send(future, rpa));
 
         } catch (Exception e) {
             e.printStackTrace();
