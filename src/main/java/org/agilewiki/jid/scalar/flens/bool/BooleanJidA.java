@@ -21,30 +21,20 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
  * A JID actor that holds a boolean.
  */
 public class BooleanJidA
         extends FLenScalarJidA<Boolean> {
-    /**
-     * Returns the SetValue request.
-     *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Boolean value) {
-        return new SetValue(value);
-    }
-
     /**
      * Create a BooleanJidA.
      *
@@ -66,8 +56,8 @@ public class BooleanJidA
             throws Exception {
         if (request instanceof GetBoolean)
             rp.processResponse(getValue());
-        else if (request instanceof SetValue) {
-            setValue(((SetValue<Boolean, Boolean>) request).getValue());
+        else if (request instanceof SetBoolean) {
+            setValue(((SetBoolean) request).getValue());
             rp.processResponse(null);
         } else super.processRequest(request, rp);
     }

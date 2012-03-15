@@ -21,30 +21,21 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
 
 /**
  * A JID component that holds a boolean.
  */
 public class BooleanJidC
         extends FLenScalarJidC<Boolean> {
-    /**
-     * Returns the SetValue request.
-     *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Boolean value) {
-        return new SetValue(value);
-    }
-
     /**
      * Bind request classes.
      *
@@ -64,17 +55,15 @@ public class BooleanJidC
                     }
                 });
 
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<Boolean, Boolean>>() {
+        thisActor.bind(SetBoolean.class.getName(),
+                new VoidSynchronousMethodBinding<SetBoolean>() {
                     @Override
                     public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<Boolean, Boolean> request)
+                                                          SetBoolean request)
                             throws Exception {
                         setValue(request.getValue());
                     }
                 });
-*/
     }
 
     /**

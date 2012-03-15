@@ -21,15 +21,39 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Returns a value.
+ * Assigns a value.
  */
-public class GetBoolean extends JLPCSynchronousRequest<Boolean, BooleanJidA> {
-    final public static GetBoolean req = new GetBoolean();
+public class SetBoolean
+        extends JLPCSynchronousRequest<Object, BooleanJidA> {
+    /**
+     * The value.
+     */
+    private Boolean value;
+
+    /**
+     * Returns the value.
+     *
+     * @return The value.
+     */
+    public Boolean getValue() {
+        return value;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param value The value.
+     */
+    public SetBoolean(Boolean value) {
+        if (value == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.value = value;
+    }
 
     /**
      * Send a synchronous request.
@@ -39,8 +63,9 @@ public class GetBoolean extends JLPCSynchronousRequest<Boolean, BooleanJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BooleanJidA targetActor)
+    protected Object call(BooleanJidA targetActor)
             throws Exception {
-        return targetActor.getValue();
+        targetActor.setValue(value);
+        return null;
     }
 }

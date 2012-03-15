@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.bool;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.Actor;
@@ -28,7 +28,7 @@ public class BooleanCTest extends TestCase {
             NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_CTYPE);
             Actor boolean1 = newBooleanJid.send(future, factory).thisActor();
             Actor boolean2 = (new CopyJID()).send(future, boolean1);
-            BooleanJidC.setValueReq(true).send(future, boolean2);
+            (new SetBoolean(true)).send(future, boolean2);
             Actor boolean3 = (new CopyJID()).send(future, boolean2);
 
             int sl = GetSerializedLength.req.send(future, boolean1);
@@ -48,7 +48,7 @@ public class BooleanCTest extends TestCase {
             sjvb.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(GetBoolean.req.send(future, rpa));
-            BooleanJidC.setValueReq(true).send(future, rpa);
+            (new SetBoolean(true)).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertTrue(GetBoolean.req.send(future, rpa));
 
