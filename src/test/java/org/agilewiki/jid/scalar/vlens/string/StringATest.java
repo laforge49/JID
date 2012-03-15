@@ -1,4 +1,4 @@
-package org.agilewiki.jid.scalar.vlens;
+package org.agilewiki.jid.scalar.vlens.string;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.Actor;
@@ -14,6 +14,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
 public class StringATest extends TestCase {

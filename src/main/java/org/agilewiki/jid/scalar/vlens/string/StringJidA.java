@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens;
+package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
@@ -29,6 +29,8 @@ import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlens.MakeValue;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 
 /**
  * A JID component that holds a String.

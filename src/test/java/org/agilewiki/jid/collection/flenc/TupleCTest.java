@@ -15,8 +15,8 @@ import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.vlens.GetString;
-import org.agilewiki.jid.scalar.vlens.StringJidC;
+import org.agilewiki.jid.scalar.vlens.string.GetString;
+import org.agilewiki.jid.scalar.vlens.string.StringJidC;
 
 public class TupleCTest extends TestCase {
     public void test() {

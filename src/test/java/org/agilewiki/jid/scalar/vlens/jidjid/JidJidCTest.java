@@ -12,9 +12,9 @@ import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.Clear;
-import org.agilewiki.jid.scalar.vlens.GetString;
 import org.agilewiki.jid.scalar.vlens.MakeValue;
-import org.agilewiki.jid.scalar.vlens.StringJidC;
+import org.agilewiki.jid.scalar.vlens.string.GetString;
+import org.agilewiki.jid.scalar.vlens.string.StringJidC;
 
 public class JidJidCTest extends TestCase {
     public void test() {

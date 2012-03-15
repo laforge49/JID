@@ -38,10 +38,10 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidA;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidC;
 import org.agilewiki.jid.scalar.flens.lng.LongJidA;
 import org.agilewiki.jid.scalar.flens.lng.LongJidC;
-import org.agilewiki.jid.scalar.vlens.BytesJidC;
-import org.agilewiki.jid.scalar.vlens.StringJidA;
-import org.agilewiki.jid.scalar.vlens.StringJidC;
+import org.agilewiki.jid.scalar.vlens.bytes.BytesJidC;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
+import org.agilewiki.jid.scalar.vlens.string.StringJidA;
+import org.agilewiki.jid.scalar.vlens.string.StringJidC;
 
 import java.util.ArrayList;
 

@@ -21,29 +21,33 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens;
+package org.agilewiki.jid.scalar.vlens.bytes;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid.scalar.GetValue;
 import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.vlens.MakeValue;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
 /**
- * A JID component that holds a String.
+ * A JID component that holds a byte array.
  */
-public class StringJidC
-        extends VLenScalarJidC<String, String, String>
-        implements ComparableKey<String> {
+public class BytesJidC
+        extends VLenScalarJidC<byte[], byte[], byte[]> {
+    /**
+     * The GetValue request.
+     */
+    public static final GetValue<byte[], byte[]> getValueReq = (GetValue<byte[], byte[]>) GetValue.req;
+
     /**
      * Returns the MakeValue request.
      *
      * @param value The value.
      * @return The MakeValue request.
      */
-    public static final MakeValue<String, String, String> makeValueReq(String value) {
-        return new MakeValue<String, String, String>(value);
+    public static final MakeValue<byte[], byte[], byte[]> makeValueReq(byte[] value) {
+        return new MakeValue<byte[], byte[], byte[]>(value);
     }
 
     /**
@@ -52,40 +56,8 @@ public class StringJidC
      * @param value The value.
      * @return The SetValue request.
      */
-    public static final SetValue setValueReq(String value) {
+    public static final SetValue setValueReq(byte[] value) {
         return new SetValue(value);
-    }
-
-    /**
-     * Bind request classes.
-     *
-     * @throws Exception Any exceptions thrown while binding.
-     */
-    @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetString.class.getName(),
-                new SynchronousMethodBinding<GetString, String>() {
-                    @Override
-                    public String synchronousProcessRequest(Internals internals,
-                                                            GetString request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<String, String>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<String, String> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-*/
     }
 
     /**
@@ -95,8 +67,8 @@ public class StringJidC
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(String v) throws Exception {
-        int c = v.length() * 2;
+    protected void setValue(byte[] v) throws Exception {
+        int c = v.length;
         if (len > -1)
             c -= len;
         value = v;
@@ -113,10 +85,10 @@ public class StringJidC
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(String v) throws Exception {
+    protected Boolean makeValue(byte[] v) throws Exception {
         if (len > -1)
             return false;
-        int c = v.length() * 2;
+        int c = v.length;
         if (len > -1)
             c -= len;
         value = v;
@@ -131,14 +103,14 @@ public class StringJidC
      *
      * @return The value held by this component, or null.
      */
-    public String getValue() {
+    public byte[] getValue() {
         if (len == -1)
             return null;
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
-        value = readableBytes.readString(len);
+        value = readableBytes.readBytes(len);
         return value;
     }
 
@@ -149,20 +121,9 @@ public class StringJidC
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
+        saveLen(appendableBytes);
         if (len == -1)
-            saveLen(appendableBytes);
-        else
-            appendableBytes.writeString(value);
-    }
-
-    /**
-     * Compares the key or value;
-     *
-     * @param o The comparison value.
-     * @return The result of a compareTo(o).
-     */
-    @Override
-    public int compareKeyTo(String o) {
-        return value.compareTo(o);
+            return;
+        appendableBytes.writeBytes(value);
     }
 }
