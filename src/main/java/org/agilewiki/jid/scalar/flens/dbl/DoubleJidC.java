@@ -25,10 +25,10 @@ package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
 
 /**
@@ -36,16 +36,6 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
  */
 public class DoubleJidC
         extends FLenScalarJidC<Double> {
-    /**
-     * Returns the SetValue request.
-     *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Double value) {
-        return new SetValue(value);
-    }
-
     /**
      * Bind request classes.
      *
@@ -65,17 +55,15 @@ public class DoubleJidC
                     }
                 });
 
-/*
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<Double, Double>>() {
+        thisActor.bind(SetDouble.class.getName(),
+                new VoidSynchronousMethodBinding<SetDouble>() {
                     @Override
                     public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<Double, Double> request)
+                                                          SetDouble request)
                             throws Exception {
                         setValue(request.getValue());
                     }
                 });
-*/
     }
 
     /**

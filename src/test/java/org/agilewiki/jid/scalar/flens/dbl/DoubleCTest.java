@@ -28,7 +28,7 @@ public class DoubleCTest extends TestCase {
             NewJID newDoubleJid = new NewJID(JidFactories.DOUBLE_JID_CTYPE);
             Actor double1 = newDoubleJid.send(future, factory).thisActor();
             Actor double2 = (new CopyJID()).send(future, double1);
-            DoubleJidC.setValueReq(1.D).send(future, double2);
+            (new SetDouble(1.D)).send(future, double2);
             Actor double3 = (new CopyJID()).send(future, double2);
 
             int sl = GetSerializedLength.req.send(future, double1);
@@ -52,7 +52,7 @@ public class DoubleCTest extends TestCase {
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = GetDouble.req.send(future, rpa);
             assertEquals(0.D, v);
-            DoubleJidC.setValueReq(-1.D).send(future, rpa);
+            (new SetDouble(-1.D)).send(future, rpa);
             rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = GetDouble.req.send(future, rpa);
             assertEquals(-1.D, v);

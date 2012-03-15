@@ -28,7 +28,6 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
@@ -36,16 +35,6 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
  */
 public class DoubleJidA
         extends FLenScalarJidA<Double> {
-    /**
-     * Returns the SetValue request.
-     *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Double value) {
-        return new SetValue(value);
-    }
-
     /**
      * Create a DoubleJidA.
      *
@@ -67,8 +56,8 @@ public class DoubleJidA
             throws Exception {
         if (request instanceof GetDouble)
             rp.processResponse(getValue());
-        else if (request instanceof SetValue) {
-            setValue(((SetValue<Double, Double>) request).getValue());
+        else if (request instanceof SetDouble) {
+            setValue(((SetDouble) request).getValue());
             rp.processResponse(null);
         } else super.processRequest(request, rp);
     }
