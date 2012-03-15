@@ -21,55 +21,49 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens;
+package org.agilewiki.jid.scalar.flens.lng;
 
-import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.SetValue;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
 
 /**
- * A JID actor that holds a long.
+ * A JID component that holds a long.
  */
-public class LongJidA
-        extends FLenScalarJidA<Long> {
+public class LongJidC
+        extends FLenScalarJidC<Long> {
     /**
-     * Returns the SetValue request.
+     * Bind request classes.
      *
-     * @param value The value.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(Long value) {
-        return new SetValue(value);
-    }
-
-    /**
-     * Create a LongJidA.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public LongJidA(Mailbox mailbox) {
-        super(mailbox);
-    }
-
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetLong)
-            rp.processResponse(getValue());
-        else if (request instanceof SetValue) {
-            setValue(((SetValue<Long, Long>) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(GetLong.class.getName(),
+                new SynchronousMethodBinding<GetLong, Long>() {
+                    @Override
+                    public Long synchronousProcessRequest(Internals internals,
+                                                          GetLong request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+        thisActor.bind(SetLong.class.getName(),
+                new VoidSynchronousMethodBinding<SetLong>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetLong request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
     }
 
     /**
