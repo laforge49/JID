@@ -38,11 +38,11 @@ public class IntegerATest extends TestCase {
             sl = GetSerializedLength.req.send(future, int3);
             assertEquals(4, sl);
 
-            int v = IntegerJidA.getValueReq.send(future, int1);
+            int v = GetInteger.req.send(future, int1);
             assertEquals(0, v);
-            v = IntegerJidA.getValueReq.send(future, int2);
+            v = GetInteger.req.send(future, int2);
             assertEquals(1, v);
-            v = IntegerJidA.getValueReq.send(future, int3);
+            v = GetInteger.req.send(future, int3);
             assertEquals(1, v);
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
@@ -50,11 +50,11 @@ public class IntegerATest extends TestCase {
             SetValue sjvi = JidJidC.setValueReq(JidFactories.INTEGER_JID_ATYPE);
             sjvi.send(future, jidJid1);
             IntegerJidA rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = IntegerJidA.getValueReq.send(future, rpa);
+            v = GetInteger.req.send(future, rpa);
             assertEquals(0, v);
             IntegerJidA.setValueReq(-1).send(future, rpa);
             rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
-            v = IntegerJidA.getValueReq.send(future, rpa);
+            v = GetInteger.req.send(future, rpa);
             assertEquals(-1, v);
 
         } catch (Exception e) {
