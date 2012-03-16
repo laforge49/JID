@@ -17,7 +17,7 @@ import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 
-public class BytesCTest extends TestCase {
+public class BytesATest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -26,7 +26,7 @@ public class BytesCTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newBytesJid = new NewJID(JidFactories.BYTES_JID_CTYPE);
+            NewJID newBytesJid = new NewJID(JidFactories.BYTES_JID_ATYPE);
             Actor bytes1 = newBytesJid.send(future, factory).thisActor();
             Actor bytes2 = (new CopyJID()).send(future, bytes1);
             (new SetBytes(new byte[3])).send(future, bytes2);
@@ -45,7 +45,7 @@ public class BytesCTest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvbs = JidJidC.setValueReq(JidFactories.BYTES_JID_CTYPE);
+            SetValue sjvbs = JidJidC.setValueReq(JidFactories.BYTES_JID_ATYPE);
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(GetBytes.req.send(future, rpa));

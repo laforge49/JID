@@ -23,56 +23,44 @@
  */
 package org.agilewiki.jid.scalar.vlens.bytes;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 
 /**
  * A JID component that holds a byte array.
  */
-public class BytesJidC
-        extends VLenScalarJidC<byte[], byte[], byte[]> {
+public class BytesJidA
+        extends VLenScalarJidA<byte[], byte[], byte[]> {
     /**
-     * Bind request classes.
+     * Create a StringJidA.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public BytesJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetBytes.class.getName(),
-                new SynchronousMethodBinding<GetBytes, byte[]>() {
-                    @Override
-                    public byte[] synchronousProcessRequest(Internals internals,
-                                                            GetBytes request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-        thisActor.bind(SetBytes.class.getName(),
-                new VoidSynchronousMethodBinding<SetBytes>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetBytes request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-
-        thisActor.bind(MakeBytes.class.getName(),
-                new SynchronousMethodBinding<MakeBytes, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals,
-                                                             MakeBytes request)
-                            throws Exception {
-                        return makeValue(request.getValue());
-                    }
-                });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetBytes)
+            rp.processResponse(getValue());
+        else if (request instanceof SetBytes) {
+            setValue(((SetBytes) request).getValue());
+            rp.processResponse(null);
+        } else if (request instanceof MakeBytes) {
+            rp.processResponse(makeValue(((MakeBytes) request).getValue()));
+        } else super.processRequest(request, rp);
     }
 
     /**

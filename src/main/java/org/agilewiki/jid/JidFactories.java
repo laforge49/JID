@@ -38,6 +38,7 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidA;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidC;
 import org.agilewiki.jid.scalar.flens.lng.LongJidA;
 import org.agilewiki.jid.scalar.flens.lng.LongJidC;
+import org.agilewiki.jid.scalar.vlens.bytes.BytesJidA;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidC;
 import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 import org.agilewiki.jid.scalar.vlens.string.StringJidA;
@@ -132,6 +133,11 @@ final public class JidFactories extends Component {
     public final static String BYTES_JID_CTYPE = "BYTES_JIDc";
 
     /**
+     * The name of the BytesJid component.
+     */
+    public final static String BYTES_JID_ATYPE = "BYTES_JIDa";
+
+    /**
      * The name of the TupleJid component.
      */
     public final static String TUPLE_JID_CTYPE = "TUPLE_JIDc";
@@ -173,6 +179,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
         (new DefineActorType(STRING_JID_ATYPE, StringJidA.class)).call(thisActor);
         (new DefineActorType(BYTES_JID_CTYPE, BytesJidC.class)).call(thisActor);
+        (new DefineActorType(BYTES_JID_ATYPE, BytesJidA.class)).call(thisActor);
 
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
     }
