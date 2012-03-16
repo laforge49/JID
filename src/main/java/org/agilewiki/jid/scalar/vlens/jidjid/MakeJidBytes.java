@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 /**
  * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
  */
-final public class MakeBytes extends SynchronousRequest<Boolean> {
+final public class MakeJidBytes extends SynchronousRequest<Boolean> {
     /**
      * An actor type name.
      */
@@ -45,7 +45,7 @@ final public class MakeBytes extends SynchronousRequest<Boolean> {
      * @param actorType An actor type name.
      * @param bytes     The serialized data.
      */
-    public MakeBytes(String actorType, byte[] bytes) {
+    public MakeJidBytes(String actorType, byte[] bytes) {
         this.actorType = actorType;
         this.bytes = bytes;
     }

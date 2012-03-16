@@ -69,17 +69,17 @@ public class JidJidC
     public void bindery() throws Exception {
         super.bindery();
 
-        thisActor.bind(SetBytes.class.getName(), new VoidSynchronousMethodBinding<SetBytes>() {
+        thisActor.bind(SetJidBytes.class.getName(), new VoidSynchronousMethodBinding<SetJidBytes>() {
             @Override
-            public void synchronousProcessRequest(Internals internals, SetBytes request)
+            public void synchronousProcessRequest(Internals internals, SetJidBytes request)
                     throws Exception {
                 setBytes(request);
             }
         });
 
-        thisActor.bind(MakeBytes.class.getName(), new SynchronousMethodBinding<MakeBytes, Boolean>() {
+        thisActor.bind(MakeJidBytes.class.getName(), new SynchronousMethodBinding<MakeJidBytes, Boolean>() {
             @Override
-            public Boolean synchronousProcessRequest(Internals internals, MakeBytes request)
+            public Boolean synchronousProcessRequest(Internals internals, MakeJidBytes request)
                     throws Exception {
                 return makeBytes(internals, request);
             }
@@ -145,7 +145,7 @@ public class JidJidC
      * @param request The SetBytes request.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(SetBytes request)
+    protected void setBytes(SetJidBytes request)
             throws Exception {
         if (len > -1)
             clear();
@@ -162,7 +162,7 @@ public class JidJidC
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeBytes(Internals internals, MakeBytes request)
+    protected Boolean makeBytes(Internals internals, MakeJidBytes request)
             throws Exception {
         if (len > -1)
             return false;

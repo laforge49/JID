@@ -53,7 +53,7 @@ public class JidJidCTest extends TestCase {
             Actor string1 = newStringJid.send(future, factory).thisActor();
             (new SetString("abc")).send(future, string1);
             byte[] sb = GetBytes.req.send(future, string1);
-            (new SetBytes(JidFactories.STRING_JID_CTYPE, sb)).send(future, jidJid1);
+            (new SetJidBytes(JidFactories.STRING_JID_CTYPE, sb)).send(future, jidJid1);
             Actor sj = JidJidC.getValueReq.send(future, jidJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
