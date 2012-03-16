@@ -21,38 +21,52 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens.string;
+package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Assigns a value if not already present.
+ * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
  */
-public class MakeString
-        extends JLPCSynchronousRequest<Boolean, StringJidA> {
+final public class MakeActorBytes
+        extends JLPCSynchronousRequest<Boolean, ActorJidA> {
     /**
-     * The value.
+     * An actor type name.
      */
-    private String value;
+    private String actorType;
 
     /**
-     * Returns the value.
-     *
-     * @return The value.
+     * Holds the serialized data.
      */
-    public String getValue() {
-        return value;
+    private byte[] bytes;
+
+    /**
+     * Create the request.
+     *
+     * @param actorType An actor type name.
+     * @param bytes     The serialized data.
+     */
+    public MakeActorBytes(String actorType, byte[] bytes) {
+        this.actorType = actorType;
+        this.bytes = bytes;
     }
 
     /**
-     * Creates the request.
+     * Returns an actor type name.
      *
-     * @param value The value.
+     * @return An actor type name.
      */
-    public MakeString(String value) {
-        if (value == null)
-            throw new IllegalArgumentException("value may not be null");
-        this.value = value;
+    public String getActorType() {
+        return actorType;
+    }
+
+    /**
+     * Returns the serialized data.
+     *
+     * @return The serialized data.
+     */
+    public byte[] getBytes() {
+        return bytes;
     }
 
     /**
@@ -63,8 +77,8 @@ public class MakeString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(StringJidA targetActor)
+    protected Boolean call(ActorJidA targetActor)
             throws Exception {
-        return targetActor.makeValue(value);
+        return targetActor.makeJidBytes(actorType, bytes);
     }
 }

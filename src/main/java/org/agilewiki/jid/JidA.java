@@ -170,7 +170,7 @@ public class JidA extends JLPCActor implements Jid {
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public JidA resolvePathname(String pathname) throws Exception {
+    public Actor resolvePathname(String pathname) throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);
         return this;

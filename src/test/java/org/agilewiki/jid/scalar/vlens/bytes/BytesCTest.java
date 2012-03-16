@@ -13,9 +13,8 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.SetValue;
 import org.agilewiki.jid.scalar.vlens.Clear;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
+import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
 public class BytesCTest extends TestCase {
     public void test() {
@@ -43,9 +42,9 @@ public class BytesCTest extends TestCase {
             assertEquals(3, GetBytes.req.send(future, bytes2).length);
             assertEquals(3, GetBytes.req.send(future, bytes3).length);
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvbs = JidJidC.setValueReq(JidFactories.BYTES_JID_CTYPE);
+            SetActor sjvbs = new SetActor(JidFactories.BYTES_JID_CTYPE);
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(GetBytes.req.send(future, rpa));

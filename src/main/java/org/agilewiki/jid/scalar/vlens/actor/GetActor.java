@@ -21,39 +21,16 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens.string;
+package org.agilewiki.jid.scalar.vlens.actor;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Assigns a value if not already present.
+ * Returns a value.
  */
-public class MakeString
-        extends JLPCSynchronousRequest<Boolean, StringJidA> {
-    /**
-     * The value.
-     */
-    private String value;
-
-    /**
-     * Returns the value.
-     *
-     * @return The value.
-     */
-    public String getValue() {
-        return value;
-    }
-
-    /**
-     * Creates the request.
-     *
-     * @param value The value.
-     */
-    public MakeString(String value) {
-        if (value == null)
-            throw new IllegalArgumentException("value may not be null");
-        this.value = value;
-    }
+public class GetActor extends JLPCSynchronousRequest<Actor, ActorJidA> {
+    final public static GetActor req = new GetActor();
 
     /**
      * Send a synchronous request.
@@ -63,8 +40,8 @@ public class MakeString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(StringJidA targetActor)
+    protected Actor call(ActorJidA targetActor)
             throws Exception {
-        return targetActor.makeValue(value);
+        return targetActor.getValue();
     }
 }

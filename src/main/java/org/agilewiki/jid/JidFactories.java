@@ -38,9 +38,10 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidA;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidC;
 import org.agilewiki.jid.scalar.flens.lng.LongJidA;
 import org.agilewiki.jid.scalar.flens.lng.LongJidC;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidA;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidC;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidA;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidC;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
 import org.agilewiki.jid.scalar.vlens.string.StringJidA;
 import org.agilewiki.jid.scalar.vlens.string.StringJidC;
 
@@ -115,7 +116,12 @@ final public class JidFactories extends Component {
     /**
      * The name of the JidJid component.
      */
-    public final static String JID_JID_CTYPE = "JID_JIDc";
+    public final static String ACTOR_JID_CTYPE = "ACTOR_JIDc";
+
+    /**
+     * The name of the JidJid component.
+     */
+    public final static String ACTOR_JID_ATYPE = "ACTOR_JIDa";
 
     /**
      * The name of the String component.
@@ -175,7 +181,8 @@ final public class JidFactories extends Component {
         (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
         (new DefineActorType(DOUBLE_JID_ATYPE, DoubleJidA.class)).call(thisActor);
 
-        (new DefineActorType(JID_JID_CTYPE, JidJidC.class)).call(thisActor);
+        (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
+        (new DefineActorType(ACTOR_JID_ATYPE, ActorJidA.class)).call(thisActor);
         (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
         (new DefineActorType(STRING_JID_ATYPE, StringJidA.class)).call(thisActor);
         (new DefineActorType(BYTES_JID_CTYPE, BytesJidC.class)).call(thisActor);

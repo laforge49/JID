@@ -21,14 +21,15 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens.jidjid;
+package org.agilewiki.jid.scalar.vlens.actor;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
+ * Creates a JID actor and loads its serialized data.
  */
-final public class MakeJidBytes extends SynchronousRequest<Boolean> {
+final public class SetActorBytes
+        extends JLPCSynchronousRequest<Object, ActorJidA> {
     /**
      * An actor type name.
      */
@@ -45,7 +46,7 @@ final public class MakeJidBytes extends SynchronousRequest<Boolean> {
      * @param actorType An actor type name.
      * @param bytes     The serialized data.
      */
-    public MakeJidBytes(String actorType, byte[] bytes) {
+    public SetActorBytes(String actorType, byte[] bytes) {
         this.actorType = actorType;
         this.bytes = bytes;
     }
@@ -66,5 +67,19 @@ final public class MakeJidBytes extends SynchronousRequest<Boolean> {
      */
     public byte[] getBytes() {
         return bytes;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Boolean call(ActorJidA targetActor)
+            throws Exception {
+        targetActor.setJidBytes(actorType, bytes);
+        return null;
     }
 }

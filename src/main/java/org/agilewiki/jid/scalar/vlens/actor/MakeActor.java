@@ -21,50 +21,50 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens.jidjid;
+package org.agilewiki.jid.scalar.vlens.actor;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
- * Creates a JID actor and loads its serialized data.
+ * Assigns a value if not already present.
  */
-final public class SetJidBytes extends SynchronousRequest<Object> {
+public class MakeActor
+        extends JLPCSynchronousRequest<Boolean, ActorJidA> {
     /**
-     * An actor type name.
+     * The actor type.
      */
     private String actorType;
 
     /**
-     * Holds the serialized data.
-     */
-    private byte[] bytes;
-
-    /**
-     * Create the request.
+     * Returns the actor type.
      *
-     * @param actorType An actor type name.
-     * @param bytes     The serialized data.
+     * @return The actor type.
      */
-    public SetJidBytes(String actorType, byte[] bytes) {
-        this.actorType = actorType;
-        this.bytes = bytes;
-    }
-
-    /**
-     * Returns an actor type name.
-     *
-     * @return An actor type name.
-     */
-    public String getActorType() {
+    public String getValue() {
         return actorType;
     }
 
     /**
-     * Returns the serialized data.
+     * Creates the request.
      *
-     * @return The serialized data.
+     * @param actorType The actor type.
      */
-    public byte[] getBytes() {
-        return bytes;
+    public MakeActor(String actorType) {
+        if (actorType == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.actorType = actorType;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Boolean call(ActorJidA targetActor)
+            throws Exception {
+        return targetActor.makeValue(actorType);
     }
 }

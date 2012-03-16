@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens.jidjid;
+package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
@@ -29,59 +29,61 @@ import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.GetValue;
-import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.MakeValue;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
 /**
  * A JID component that holds a JID actor.
  */
-public class JidJidC
+public class ActorJidC
         extends VLenScalarJidC<Jid, String, Actor>
         implements ComparableKey<Object> {
-    /**
-     * The GetValue request.
-     */
-    public static final GetValue<String, Actor> getValueReq = (GetValue<String, Actor>) GetValue.req;
-
-    /**
-     * Returns the MakeValue request.
-     *
-     * @param actorType The actor type.
-     * @return The MakeValue request.
-     */
-    public static final MakeValue<Jid, String, Actor> makeValueReq(String actorType) {
-        return new MakeValue<Jid, String, Actor>(actorType);
-    }
-
-    /**
-     * Returns the SetValue request.
-     *
-     * @param actorType The actor type.
-     * @return The SetValue request.
-     */
-    public static final SetValue setValueReq(String actorType) {
-        return new SetValue(actorType);
-    }
-
     @Override
     public void bindery() throws Exception {
         super.bindery();
 
-        thisActor.bind(SetJidBytes.class.getName(), new VoidSynchronousMethodBinding<SetJidBytes>() {
+        thisActor.bind(GetActor.class.getName(),
+                new SynchronousMethodBinding<GetActor, Actor>() {
+                    @Override
+                    public Actor synchronousProcessRequest(Internals internals,
+                                                           GetActor request)
+                            throws Exception {
+                        return getValue();
+                    }
+                });
+
+        thisActor.bind(SetActor.class.getName(),
+                new VoidSynchronousMethodBinding<SetActor>() {
+                    @Override
+                    public void synchronousProcessRequest(Internals internals,
+                                                          SetActor request)
+                            throws Exception {
+                        setValue(request.getValue());
+                    }
+                });
+
+        thisActor.bind(MakeActor.class.getName(),
+                new SynchronousMethodBinding<MakeActor, Boolean>() {
+                    @Override
+                    public Boolean synchronousProcessRequest(Internals internals,
+                                                             MakeActor request)
+                            throws Exception {
+                        return makeValue(request.getValue());
+                    }
+                });
+
+        thisActor.bind(SetActorBytes.class.getName(), new VoidSynchronousMethodBinding<SetActorBytes>() {
             @Override
-            public void synchronousProcessRequest(Internals internals, SetJidBytes request)
+            public void synchronousProcessRequest(Internals internals, SetActorBytes request)
                     throws Exception {
-                setBytes(request);
+                setJidBytes(request.getActorType(), request.getBytes());
             }
         });
 
-        thisActor.bind(MakeJidBytes.class.getName(), new SynchronousMethodBinding<MakeJidBytes, Boolean>() {
+        thisActor.bind(MakeActorBytes.class.getName(), new SynchronousMethodBinding<MakeActorBytes, Boolean>() {
             @Override
-            public Boolean synchronousProcessRequest(Internals internals, MakeJidBytes request)
+            public Boolean synchronousProcessRequest(Internals internals, MakeActorBytes request)
                     throws Exception {
-                return makeBytes(internals, request);
+                return makeJidBytes(request.getActorType(), request.getBytes());
             }
         });
     }
@@ -142,33 +144,30 @@ public class JidJidC
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param request The SetBytes request.
+     * @param actorType An actor type name.
+     * @param bytes     The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(SetJidBytes request)
+    protected void setJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
             clear();
-        String jidType = request.getActorType();
-        byte[] bytes = request.getBytes();
-        setBytes(jidType, bytes);
+        setBytes(actorType, bytes);
     }
 
     /**
      * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
      *
-     * @param internals The actor's internals.
-     * @param request   The MakeValue request.
+     * @param actorType An actor type name.
+     * @param bytes     The serialized data.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeBytes(Internals internals, MakeJidBytes request)
+    protected Boolean makeJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
             return false;
-        String jidType = request.getActorType();
-        byte[] bytes = request.getBytes();
-        setBytes(jidType, bytes);
+        setBytes(actorType, bytes);
         return true;
     }
 

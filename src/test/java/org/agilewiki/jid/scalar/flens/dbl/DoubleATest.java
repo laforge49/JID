@@ -13,8 +13,7 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
+import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
 public class DoubleATest extends TestCase {
     public void test() {
@@ -45,9 +44,9 @@ public class DoubleATest extends TestCase {
             v = GetDouble.req.send(future, double3);
             assertEquals(1.D, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvl = JidJidC.setValueReq(JidFactories.DOUBLE_JID_ATYPE);
+            SetActor sjvl = new SetActor(JidFactories.DOUBLE_JID_ATYPE);
             sjvl.send(future, jidJid1);
             DoubleJidA rpa = (DoubleJidA) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetDouble.req.send(future, rpa);

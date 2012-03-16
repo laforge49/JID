@@ -13,8 +13,7 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
+import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
 public class BooleanCTest extends TestCase {
     public void test() {
@@ -42,9 +41,9 @@ public class BooleanCTest extends TestCase {
             assertTrue(GetBoolean.req.send(future, boolean2));
             assertTrue(GetBoolean.req.send(future, boolean3));
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvb = JidJidC.setValueReq(JidFactories.BOOLEAN_JID_CTYPE);
+            SetActor sjvb = new SetActor(JidFactories.BOOLEAN_JID_CTYPE);
             sjvb.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             assertFalse(GetBoolean.req.send(future, rpa));

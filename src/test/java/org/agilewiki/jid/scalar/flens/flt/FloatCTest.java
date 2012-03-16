@@ -13,8 +13,7 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.SetValue;
-import org.agilewiki.jid.scalar.vlens.jidjid.JidJidC;
+import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
 public class FloatCTest extends TestCase {
     public void test() {
@@ -45,9 +44,9 @@ public class FloatCTest extends TestCase {
             v = GetFloat.req.send(future, float3);
             assertEquals(1.f, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.JID_JID_CTYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetValue sjvf = JidJidC.setValueReq(JidFactories.FLOAT_JID_CTYPE);
+            SetActor sjvf = new SetActor(JidFactories.FLOAT_JID_CTYPE);
             sjvf.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);
             v = GetFloat.req.send(future, rpa);
