@@ -23,45 +23,12 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.JidC;
 
 /**
  * A JID component that holds a value.
  */
 abstract public class ScalarJidC<SET_TYPE, RESPONSE_TYPE> extends JidC {
-
-    /**
-     * Bind request classes.
-     *
-     * @throws Exception Any exceptions thrown while binding.
-     */
-    @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetValue.class.getName(),
-                new SynchronousMethodBinding<GetValue<SET_TYPE, RESPONSE_TYPE>, RESPONSE_TYPE>() {
-                    @Override
-                    public RESPONSE_TYPE synchronousProcessRequest(Internals internals,
-                                                                   GetValue<SET_TYPE, RESPONSE_TYPE> request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-        thisActor.bind(SetValue.class.getName(),
-                new VoidSynchronousMethodBinding<SetValue<SET_TYPE, RESPONSE_TYPE>>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetValue<SET_TYPE, RESPONSE_TYPE> request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
-    }
 
     /**
      * Assign a value.

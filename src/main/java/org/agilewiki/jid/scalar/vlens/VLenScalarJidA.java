@@ -68,9 +68,6 @@ abstract public class VLenScalarJidA<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
         if (request instanceof Clear) {
             clear();
             rp.processResponse(null);
-        } else if (request instanceof MakeValue) {
-            rp.processResponse(makeValue(((MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>) request)
-                    .getValue()));
         } else super.processRequest(request, rp);
     }
 

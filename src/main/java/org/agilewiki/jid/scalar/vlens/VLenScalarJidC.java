@@ -24,7 +24,6 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -62,16 +61,6 @@ abstract public class VLenScalarJidC<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
                     public void synchronousProcessRequest(Internals internals, Clear request)
                             throws Exception {
                         clear();
-                    }
-                });
-
-        thisActor.bind(MakeValue.class.getName(),
-                new SynchronousMethodBinding<MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals,
-                                                             MakeValue<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE> request)
-                            throws Exception {
-                        return makeValue(request.getValue());
                     }
                 });
     }
