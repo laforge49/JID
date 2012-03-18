@@ -30,7 +30,7 @@ import org.agilewiki.jactor.components.Component;
 /**
  * Base class for defining array types of tuples.
  */
-abstract public class ActorTypes extends Component {
+abstract public class ActorTypesC extends Component {
 
     /**
      * Returns an array of actor types.

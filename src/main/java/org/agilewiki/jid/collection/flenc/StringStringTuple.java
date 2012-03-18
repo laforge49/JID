@@ -28,7 +28,7 @@ import org.agilewiki.jid.JidFactories;
 /**
  * Defines (String, String) tuples.
  */
-public class StringStringTuple extends ActorTypes {
+public class StringStringTuple extends ActorTypesC {
     private static final String[] ats = new String[2];
 
     static {
