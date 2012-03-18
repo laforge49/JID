@@ -53,7 +53,7 @@ public class TupleJidC
             throws Exception {
         if (actorTypes != null)
             return;
-        actorTypes = GetActorTypes.req.call(thisActor.getParent());
+        actorTypes = GetActorTypes.req.call(thisActor);
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = readable();
@@ -69,7 +69,7 @@ public class TupleJidC
                     thisActor.getMailbox(),
                     thisActor.getParent(),
                     readableBytes,
-                    this)).call(thisActor.getParent());
+                    this)).call(thisActor);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
@@ -93,7 +93,7 @@ public class TupleJidC
                 actorType,
                 thisActor.getMailbox(),
                 thisActor.getParent(),
-                bytes, this)).call(thisActor.getParent());
+                bytes, this)).call(thisActor);
         Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
