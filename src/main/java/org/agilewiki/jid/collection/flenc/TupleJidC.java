@@ -50,14 +50,14 @@ public class TupleJidC
     protected Jid[] tuple;
 
     /**
-     * Opening is called when a Open initialization request is processed,
-     * but before the actor is marked as active.
+     * Perform lazy initialization.
      *
-     * @param internals The actor's internals.
-     * @throws Exception Any exceptions thrown during the open.
+     * @throws Exception Any exceptions thrown during initialization.
      */
-    @Override
-    public void opening(Internals internals) throws Exception {
+    private void initialize()
+            throws Exception {
+        if (actorTypes != null)
+            return;
         actorTypes = GetActorTypes.req.call(thisActor.getParent());
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
@@ -109,6 +109,17 @@ public class TupleJidC
     }
 
     /**
+     * Returns the selected element.
+     *
+     * @param ndx Selects the element.
+     * @return The actor held by the selected element.
+     */
+    private Actor iGet(int ndx)
+            throws Exception {
+        return get(ndx).thisActor();
+    }
+
+    /**
      * Creates a JID actor and loads its serialized data.
      *
      * @param internals The actor's internals.
@@ -118,6 +129,7 @@ public class TupleJidC
      */
     public void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
+        initialize();
         String actorType = actorTypes[i];
         Jid elementJid = (new NewJID(
                 actorType,
@@ -136,7 +148,9 @@ public class TupleJidC
      * @return The minimum size of the byte array needed to serialize the persistent data.
      */
     @Override
-    public int getSerializedLength() {
+    public int getSerializedLength()
+            throws Exception {
+        initialize();
         return Util.INT_LENGTH + len;
     }
 
@@ -145,7 +159,9 @@ public class TupleJidC
      *
      * @return The size of the collection.
      */
-    protected int size() {
+    protected int size()
+            throws Exception {
+        initialize();
         return actorTypes.length;
     }
 
@@ -155,7 +171,8 @@ public class TupleJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected Jid get(int i) {
+    protected Jid get(int i) throws Exception {
+        initialize();
         return tuple[i];
     }
 
@@ -165,7 +182,8 @@ public class TupleJidC
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
     @Override
-    protected void serialize(AppendableBytes appendableBytes) {
+    protected void serialize(AppendableBytes appendableBytes)
+            throws Exception {
         saveLen(appendableBytes);
         int i = 0;
         while (i < size()) {
@@ -193,7 +211,8 @@ public class TupleJidC
      * @param o The comparison value.
      * @return The result of a compareTo(o) using element 0.
      */
-    public int compareKeyTo(Object o) {
+    public int compareKeyTo(Object o)
+            throws Exception {
         ComparableKey<Object> e0 = (ComparableKey<Object>) get(0);
         return e0.compareKeyTo(o);
     }

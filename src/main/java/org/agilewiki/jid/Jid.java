@@ -58,14 +58,16 @@ public interface Jid {
      *
      * @return The minimum size of the byte array needed to serialize the persistent data.
      */
-    public int getSerializedLength();
+    public int getSerializedLength()
+            throws Exception;
 
     /**
      * Saves the persistent data in a byte array.
      *
      * @param appendableBytes Holds the byte array and offset.
      */
-    public void save(AppendableBytes appendableBytes);
+    public void save(AppendableBytes appendableBytes)
+            throws Exception;
 
     /**
      * Load the serialized data into the JID.

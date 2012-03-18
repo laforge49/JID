@@ -110,7 +110,8 @@ public class JidA extends JLPCActor implements Jid {
      *
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(AppendableBytes appendableBytes) {
+    protected void serialize(AppendableBytes appendableBytes)
+            throws Exception {
     }
 
     /**
@@ -119,7 +120,8 @@ public class JidA extends JLPCActor implements Jid {
      * @param appendableBytes Holds the byte array and offset.
      */
     @Override
-    public void save(AppendableBytes appendableBytes) {
+    public void save(AppendableBytes appendableBytes)
+            throws Exception {
         if (isSerialized()) {
             byte[] bs = appendableBytes.getBytes();
             int off = appendableBytes.getOffset();
@@ -144,7 +146,8 @@ public class JidA extends JLPCActor implements Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    final byte[] getBytes() {
+    final byte[] getBytes()
+            throws Exception {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
         save(appendableBytes);
@@ -174,23 +177,6 @@ public class JidA extends JLPCActor implements Jid {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);
         return this;
-    }
-
-    @Override
-    final public boolean equals(Object v) {
-        if (v == null)
-            return false;
-        if (!v.getClass().equals(getClass()))
-            return false;
-        JidA jidA = (JidA) v;
-        if (jidA.getSerializedLength() != getSerializedLength())
-            return false;
-        return Arrays.equals(jidA.getBytes(), getBytes());
-    }
-
-    @Override
-    final public int hashCode() {
-        return getBytes().hashCode();
     }
 
     /**

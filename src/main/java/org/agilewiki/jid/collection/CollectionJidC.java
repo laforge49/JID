@@ -47,7 +47,8 @@ abstract public class CollectionJidC
      *
      * @return The size of the collection.
      */
-    abstract protected int size();
+    abstract protected int size()
+            throws Exception;
 
     /**
      * Returns the ith JID component.
@@ -55,7 +56,8 @@ abstract public class CollectionJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    abstract protected Jid get(int i);
+    abstract protected Jid get(int i)
+            throws Exception;
 
     /**
      * Process a change in the persistent data.
@@ -64,7 +66,8 @@ abstract public class CollectionJidC
      * @throws Exception Any uncaught exception which occurred while processing the change.
      */
     @Override
-    public void change(int lengthChange) throws Exception {
+    public void change(int lengthChange)
+            throws Exception {
         len += lengthChange;
         super.change(lengthChange);
     }

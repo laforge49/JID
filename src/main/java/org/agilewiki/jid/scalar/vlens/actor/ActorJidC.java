@@ -233,7 +233,8 @@ public class ActorJidC
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
     @Override
-    protected void serialize(AppendableBytes appendableBytes) {
+    protected void serialize(AppendableBytes appendableBytes)
+            throws Exception {
         saveLen(appendableBytes);
         if (len == -1)
             return;
@@ -274,7 +275,7 @@ public class ActorJidC
      * @return The result of a compareTo(o).
      */
     @Override
-    public int compareKeyTo(Object o) {
+    public int compareKeyTo(Object o) throws Exception {
         ComparableKey<Object> v = (ComparableKey<Object>) value;
         return v.compareKeyTo(o);
     }

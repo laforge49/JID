@@ -203,7 +203,8 @@ public class JidC extends Component implements Jid {
      * @return The minimum size of the byte array needed to serialize the persistent data.
      */
     @Override
-    public int getSerializedLength() {
+    public int getSerializedLength()
+            throws Exception {
         return 0;
     }
 
@@ -221,7 +222,8 @@ public class JidC extends Component implements Jid {
      *
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
-    protected void serialize(AppendableBytes appendableBytes) {
+    protected void serialize(AppendableBytes appendableBytes)
+            throws Exception {
     }
 
     /**
@@ -230,7 +232,8 @@ public class JidC extends Component implements Jid {
      * @param appendableBytes Holds the byte array and offset.
      */
     @Override
-    final public void save(AppendableBytes appendableBytes) {
+    final public void save(AppendableBytes appendableBytes)
+            throws Exception {
         if (isSerialized()) {
             byte[] bs = appendableBytes.getBytes();
             int off = appendableBytes.getOffset();
@@ -255,7 +258,8 @@ public class JidC extends Component implements Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    final private byte[] getBytes() {
+    final private byte[] getBytes()
+            throws Exception {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
         save(appendableBytes);
@@ -323,22 +327,5 @@ public class JidC extends Component implements Jid {
     public void change(int lengthChange)
             throws Exception {
         changed(lengthChange);
-    }
-
-    @Override
-    final public boolean equals(Object v) {
-        if (v == null)
-            return false;
-        if (!v.getClass().equals(getClass()))
-            return false;
-        JidC jid = (JidC) v;
-        if (jid.getSerializedLength() != getSerializedLength())
-            return false;
-        return Arrays.equals(jid.getBytes(), getBytes());
-    }
-
-    @Override
-    final public int hashCode() {
-        return getBytes().hashCode();
     }
 }

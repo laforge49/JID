@@ -141,7 +141,8 @@ public class ListJidC
      * @param appendableBytes The wrapped byte array into which the persistent data is to be serialized.
      */
     @Override
-    protected void serialize(AppendableBytes appendableBytes) {
+    protected void serialize(AppendableBytes appendableBytes)
+            throws Exception {
         saveLen(appendableBytes);
         appendableBytes.writeInt(size());
         int i = 0;
