@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * Returns the ith element of a collection.
  */
-public class IGet extends SynchronousRequest<Actor> {
+public class IGet extends JLPCSynchronousRequest<Actor, CollectionJidA> {
     /**
      * The index of the desired element.
      */
@@ -51,5 +51,18 @@ public class IGet extends SynchronousRequest<Actor> {
      */
     public IGet(int i) {
         this.i = i;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Actor call(CollectionJidA targetActor)
+            throws Exception {
+        return targetActor.iGet(i);
     }
 }

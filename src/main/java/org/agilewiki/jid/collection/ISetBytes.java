@@ -23,12 +23,12 @@
  */
 package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
  * Creates a JID actor in place of the ith element of the collection and loads its serialized data.
  */
-public class ISetBytes extends SynchronousRequest<Object> {
+public class ISetBytes extends JLPCSynchronousRequest<Object, CollectionJidA> {
     /**
      * The index of the desired element.
      */
@@ -66,5 +66,19 @@ public class ISetBytes extends SynchronousRequest<Object> {
      */
     public byte[] getBytes() {
         return bytes;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Object call(CollectionJidA targetActor)
+            throws Exception {
+        targetActor.iSetBytes(i, bytes);
+        return null;
     }
 }

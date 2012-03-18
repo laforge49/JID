@@ -85,7 +85,7 @@ public class TupleJidC
      * @throws Exception Any exceptions thrown while processing the request.
      */
     @Override
-    public void iSetBytes(Internals internals, int i, byte[] bytes)
+    protected void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
         initialize();
         String actorType = actorTypes[i];

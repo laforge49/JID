@@ -24,21 +24,29 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
 
 /**
  * A collection of JID actors.
  */
-abstract public class CollectionJidC
-        extends JidC {
+abstract public class CollectionJidA
+        extends JidA {
 
     /**
      * The size of the serialized data (exclusive of its length header).
      */
     protected int len;
+
+    /**
+     * Create a CollectionJidA
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    protected CollectionJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
      * Skip over the length at the beginning of the serialized data.
@@ -109,7 +117,7 @@ abstract public class CollectionJidC
     public Actor resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
-            return thisActor;
+            return this;
         }
         int s = pathname.indexOf("/");
         if (s == -1)
@@ -145,38 +153,29 @@ abstract public class CollectionJidC
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param internals The actor's internals.
-     * @param i         The index of the desired element.
-     * @param bytes     Holds the serialized data.
+     * @param i     The index of the desired element.
+     * @param bytes Holds the serialized data.
      * @throws Exception Any exceptions thrown while processing the request.
      */
-    abstract protected void iSetBytes(Internals internals, int i, byte[] bytes)
+    abstract protected void iSetBytes(int i, byte[] bytes)
             throws Exception;
 
     /**
-     * Bind request classes.
+     * The application method for processing requests sent to the actor.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, Actor>() {
-            @Override
-            public Actor synchronousProcessRequest(Internals internals, IGet request)
-                    throws Exception {
-                int ndx = request.getI();
-                return get(ndx).thisActor();
-            }
-        });
-
-        thisActor.bind(ISetBytes.class.getName(), new VoidSynchronousMethodBinding<ISetBytes>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, ISetBytes request)
-                    throws Exception {
-                iSetBytes(internals, request.getI(), request.getBytes());
-            }
-        });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof IGet) {
+            rp.processResponse(iGet(((IGet) request).getI()));
+        } else if (request instanceof ISetBytes) {
+            ISetBytes iSetBytes = (ISetBytes) request;
+            iSetBytes(iSetBytes.getI(), iSetBytes.getBytes());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 }
