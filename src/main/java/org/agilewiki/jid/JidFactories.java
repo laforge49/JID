@@ -26,6 +26,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
+import org.agilewiki.jid.collection.flenc.TupleJidA;
 import org.agilewiki.jid.collection.flenc.TupleJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
@@ -119,7 +120,7 @@ final public class JidFactories extends Component {
     public final static String ACTOR_JID_CTYPE = "ACTOR_JIDc";
 
     /**
-     * The name of the JidJid component.
+     * The name of the JidJid actor.
      */
     public final static String ACTOR_JID_ATYPE = "ACTOR_JIDa";
 
@@ -129,7 +130,7 @@ final public class JidFactories extends Component {
     public final static String STRING_JID_CTYPE = "STRING_JIDc";
 
     /**
-     * The name of the String component.
+     * The name of the String actor.
      */
     public final static String STRING_JID_ATYPE = "STRING_JIDa";
 
@@ -139,7 +140,7 @@ final public class JidFactories extends Component {
     public final static String BYTES_JID_CTYPE = "BYTES_JIDc";
 
     /**
-     * The name of the BytesJid component.
+     * The name of the BytesJid actor.
      */
     public final static String BYTES_JID_ATYPE = "BYTES_JIDa";
 
@@ -147,6 +148,11 @@ final public class JidFactories extends Component {
      * The name of the TupleJid component.
      */
     public final static String TUPLE_JID_CTYPE = "TUPLE_JIDc";
+
+    /**
+     * The name of the TupleJid actor.
+     */
+    public final static String TUPLE_JID_ATYPE = "TUPLE_JIDa";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -189,5 +195,6 @@ final public class JidFactories extends Component {
         (new DefineActorType(BYTES_JID_ATYPE, BytesJidA.class)).call(thisActor);
 
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
+        (new DefineActorType(TUPLE_JID_ATYPE, TupleJidA.class)).call(thisActor);
     }
 }
