@@ -92,7 +92,7 @@ public class JidA extends JLPCActor implements Jid {
      * @return The minimum size of the byte array needed to serialize the persistent data.
      */
     @Override
-    public int getSerializedLength() {
+    public int getSerializedLength() throws Exception {
         return 0;
     }
 
