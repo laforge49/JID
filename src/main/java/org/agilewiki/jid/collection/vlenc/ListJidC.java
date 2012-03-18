@@ -24,6 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
@@ -164,5 +165,27 @@ public class ListJidC
             throws Exception {
         deserialize();
         return super.resolvePathname(pathname);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param internals The actor's internals.
+     * @param i         The index of the desired element.
+     * @param bytes     Holds the serialized data.
+     * @throws Exception Any exceptions thrown while processing the request.
+     */
+    @Override
+    public void iSetBytes(Internals internals, int i, byte[] bytes)
+            throws Exception {
+        Jid elementJid = (new NewJID(
+                elementsType,
+                thisActor.getMailbox(),
+                thisActor.getParent(),
+                bytes, this)).call(thisActor.getParent());
+        Jid oldElementJid = get(i);
+        oldElementJid.setContainerJid(null);
+        list.set(i, elementJid);
+        change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 }

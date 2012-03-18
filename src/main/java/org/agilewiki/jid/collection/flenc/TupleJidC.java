@@ -23,14 +23,9 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJidC;
-import org.agilewiki.jid.collection.IGet;
-import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 
 /**
@@ -82,44 +77,6 @@ public class TupleJidC
     }
 
     /**
-     * Bind request classes.
-     *
-     * @throws Exception Any exceptions thrown while binding.
-     */
-    @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, Actor>() {
-            @Override
-            public Actor synchronousProcessRequest(Internals internals, IGet request)
-                    throws Exception {
-                int ndx = request.getI();
-                return get(ndx).thisActor();
-            }
-        });
-
-        thisActor.bind(ISetBytes.class.getName(), new VoidSynchronousMethodBinding<ISetBytes>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, ISetBytes request)
-                    throws Exception {
-                iSetBytes(internals, request.getI(), request.getBytes());
-            }
-        });
-    }
-
-    /**
-     * Returns the selected element.
-     *
-     * @param ndx Selects the element.
-     * @return The actor held by the selected element.
-     */
-    private Actor iGet(int ndx)
-            throws Exception {
-        return get(ndx).thisActor();
-    }
-
-    /**
      * Creates a JID actor and loads its serialized data.
      *
      * @param internals The actor's internals.
@@ -127,6 +84,7 @@ public class TupleJidC
      * @param bytes     Holds the serialized data.
      * @throws Exception Any exceptions thrown while processing the request.
      */
+    @Override
     public void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
         initialize();

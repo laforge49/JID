@@ -1,6 +1,9 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.*;
 
 /**
@@ -103,5 +106,54 @@ abstract public class CollectionJidC
         if (s == pathname.length())
             return jid.thisActor();
         return jid.resolvePathname(pathname.substring(s + 1));
+    }
+
+    /**
+     * Returns the selected element.
+     *
+     * @param ndx Selects the element.
+     * @return The actor held by the selected element.
+     */
+    protected Actor iGet(int ndx)
+            throws Exception {
+        return get(ndx).thisActor();
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param internals The actor's internals.
+     * @param i         The index of the desired element.
+     * @param bytes     Holds the serialized data.
+     * @throws Exception Any exceptions thrown while processing the request.
+     */
+    abstract public void iSetBytes(Internals internals, int i, byte[] bytes)
+            throws Exception;
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, Actor>() {
+            @Override
+            public Actor synchronousProcessRequest(Internals internals, IGet request)
+                    throws Exception {
+                int ndx = request.getI();
+                return get(ndx).thisActor();
+            }
+        });
+
+        thisActor.bind(ISetBytes.class.getName(), new VoidSynchronousMethodBinding<ISetBytes>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, ISetBytes request)
+                    throws Exception {
+                iSetBytes(internals, request.getI(), request.getBytes());
+            }
+        });
     }
 }
