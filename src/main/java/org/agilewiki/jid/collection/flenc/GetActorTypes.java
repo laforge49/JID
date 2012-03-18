@@ -23,11 +23,24 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentRequest;
+import org.agilewiki.jactor.bind.JLPCConcurrentRequest;
 
 /**
  * Returns an array of actor types.
  */
-public class GetActorTypes extends ConcurrentRequest<String[]> {
+public class GetActorTypes extends JLPCConcurrentRequest<String[], ActorTypes> {
     public final static GetActorTypes req = new GetActorTypes();
+
+    /**
+     * Send a concurrent request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    public String[] call(ActorTypes targetActor)
+            throws Exception {
+        return targetActor.getActorTypes();
+    }
 }

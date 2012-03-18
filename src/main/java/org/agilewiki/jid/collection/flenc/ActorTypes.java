@@ -23,25 +23,14 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jid.JidFactories;
-
 /**
- * Defines (String, String) tuples.
+ * Interface for defining actor types.
  */
-public class StringStringTuple extends ActorTypesC {
-    private static final String[] ats = new String[2];
-
-    static {
-        ats[0] = JidFactories.STRING_JID_CTYPE;
-        ats[1] = JidFactories.STRING_JID_CTYPE;
-    }
-
+public interface ActorTypes {
     /**
      * Returns an array of actor types.
      *
-     * @return An array of actor types.
+     * @return The array of actor types.
      */
-    protected String[] ats() {
-        return ats;
-    }
+    public String[] getActorTypes();
 }

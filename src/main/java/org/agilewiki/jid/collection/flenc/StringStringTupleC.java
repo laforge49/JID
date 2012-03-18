@@ -23,47 +23,25 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jid.JidFactories;
 
 /**
- * Base Component for defining array types of tuples.
+ * Defines (String, String) tuples.
  */
-abstract public class ActorTypesC extends Component implements ActorTypes {
+public class StringStringTupleC extends ActorTypesC {
+    private static final String[] ats = new String[2];
+
+    static {
+        ats[0] = JidFactories.STRING_JID_CTYPE;
+        ats[1] = JidFactories.STRING_JID_CTYPE;
+    }
 
     /**
      * Returns an array of actor types.
      *
      * @return An array of actor types.
      */
-    abstract protected String[] ats();
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return The array of actor types.
-     */
-    public String[] getActorTypes() {
-        return ats();
-    }
-
-    /**
-     * Bind request classes.
-     *
-     * @throws Exception Any exceptions thrown while binding.
-     */
-    @Override
-    public void bindery() throws Exception {
-        thisActor.bind(
-                GetActorTypes.class.getName(),
-                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
-                    @Override
-                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                             GetActorTypes request)
-                            throws Exception {
-                        return getActorTypes();
-                    }
-                });
+    protected String[] ats() {
+        return ats;
     }
 }
