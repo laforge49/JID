@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.vlens.string;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
@@ -42,5 +43,15 @@ public class GetString extends JLPCSynchronousRequest<String, StringJidA> {
     protected String call(StringJidA targetActor)
             throws Exception {
         return targetActor.getValue();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof StringJidA;
     }
 }

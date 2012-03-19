@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.flens.lng;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
@@ -67,5 +68,15 @@ public class SetLong
             throws Exception {
         targetActor.setValue(value);
         return null;
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof LongJidA;
     }
 }

@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.vlens.actor;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
@@ -81,5 +82,15 @@ final public class SetActorBytes
             throws Exception {
         targetActor.setJidBytes(actorType, bytes);
         return null;
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ActorJidA;
     }
 }

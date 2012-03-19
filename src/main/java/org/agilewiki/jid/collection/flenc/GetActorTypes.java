@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCConcurrentRequest;
 
 /**
@@ -42,5 +43,15 @@ public class GetActorTypes extends JLPCConcurrentRequest<String[], ActorTypes> {
     public String[] call(ActorTypes targetActor)
             throws Exception {
         return targetActor.getActorTypes();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ActorTypes;
     }
 }

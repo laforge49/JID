@@ -23,6 +23,7 @@
  */
 package org.agilewiki.jid.scalar.flens.flt;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 
 /**
@@ -42,5 +43,15 @@ public class GetFloat extends JLPCSynchronousRequest<Float, FloatJidA> {
     protected Float call(FloatJidA targetActor)
             throws Exception {
         return targetActor.getValue();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof FloatJidA;
     }
 }

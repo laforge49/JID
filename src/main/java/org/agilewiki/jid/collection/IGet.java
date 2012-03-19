@@ -65,4 +65,14 @@ public class IGet extends JLPCSynchronousRequest<Actor, CollectionJidA> {
             throws Exception {
         return targetActor.iGet(i);
     }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof CollectionJidA;
+    }
 }
