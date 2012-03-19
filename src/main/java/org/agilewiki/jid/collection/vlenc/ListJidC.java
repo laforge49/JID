@@ -25,6 +25,8 @@ package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
@@ -121,8 +123,8 @@ public class ListJidC
         skipLen(readableBytes);
         int count = readableBytes.readInt();
         list = new ArrayList<Jid>(count);
-        int limit = len + readableBytes.getOffset();
-        while (readableBytes.getOffset() < limit) {
+        int i = 0;
+        while (i < count) {
             NewJID newJid = new NewJID(
                     elementsType,
                     thisActor.getMailbox(),
@@ -131,8 +133,8 @@ public class ListJidC
                     this);
             Jid elementJid = newJid.call(thisActor.getParent());
             len += elementJid.getSerializedLength();
-            elementJid.setContainerJid(this);
             list.add(elementJid);
+            i += 1;
         }
     }
 
@@ -182,10 +184,114 @@ public class ListJidC
                 elementsType,
                 thisActor.getMailbox(),
                 thisActor.getParent(),
-                bytes, this)).call(thisActor.getParent());
+                bytes,
+                this)).call(thisActor.getParent());
         Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
+    }
+
+    /**
+     * Bind request classes.
+     *
+     * @throws Exception Any exceptions thrown while binding.
+     */
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(Size.class.getName(), new SynchronousMethodBinding<Size, Integer>() {
+            @Override
+            public Integer synchronousProcessRequest(Internals internals, Size request) throws Exception {
+                return size();
+            }
+        });
+
+        thisActor.bind(IAddBytes.class.getName(), new VoidSynchronousMethodBinding<IAddBytes>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, IAddBytes request)
+                    throws Exception {
+                iAddBytes(request.getI(), request.getBytes());
+            }
+        });
+
+        thisActor.bind(IAdd.class.getName(), new VoidSynchronousMethodBinding<IAdd>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, IAdd request)
+                    throws Exception {
+                iAdd(request.getI());
+            }
+        });
+
+        thisActor.bind(IRemove.class.getName(), new VoidSynchronousMethodBinding<IRemove>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, IRemove request)
+                    throws Exception {
+                iRemove(request.getI());
+            }
+        });
+
+        thisActor.bind(Empty.class.getName(), new VoidSynchronousMethodBinding<Empty>() {
+            @Override
+            public void synchronousProcessRequest(Internals internals, Empty request)
+                    throws Exception {
+                empty();
+            }
+        });
+    }
+
+    public void iAddBytes(int i, byte[] bytes)
+            throws Exception {
+        if (i < 0)
+            i = list.size() + 1 - i;
+        Jid jid = (new NewJID(
+                elementsType,
+                thisActor.getMailbox(),
+                thisActor.getParent(),
+                bytes,
+                this)).call(thisActor.getParent());
+        int c = jid.getSerializedLength();
+        list.add(i, jid);
+        change(c);
+    }
+
+    public void iAdd(int i)
+            throws Exception {
+        if (i < 0)
+            i = list.size() + 1 - i;
+        Jid jid = (new NewJID(
+                elementsType,
+                thisActor.getMailbox(),
+                thisActor.getParent(),
+                (byte[]) null,
+                this)).call(thisActor.getParent());
+        int c = jid.getSerializedLength();
+        list.add(i, jid);
+        change(c);
+    }
+
+    public void empty()
+            throws Exception {
+        int c = 0;
+        int i = 0;
+        int s = list.size();
+        while (i < s) {
+            Jid jid = get(i);
+            jid.setContainerJid(null);
+            c -= jid.getSerializedLength();
+            i += 1;
+        }
+        list.clear();
+        change(c);
+    }
+
+    public void iRemove(int i)
+            throws Exception {
+        Jid jid = get(i);
+        jid.setContainerJid(null);
+        int c = -jid.getSerializedLength();
+        list.remove(i);
+        change(c);
     }
 }

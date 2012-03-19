@@ -28,10 +28,11 @@ import org.agilewiki.jactor.bind.SynchronousRequest;
 /**
  * Creates a JID, loads its bytes and inserts it in the ith position.
  * If i < 0, the new JID is placed at position size + 1 - i.
+ * (If i == -1, the element is added to the end of the list.)
  */
 public class IAddBytes extends SynchronousRequest<Object> {
     /**
-     * The index of the desired element.
+     * The insertion index of the new element.
      */
     private int i;
 
@@ -41,9 +42,9 @@ public class IAddBytes extends SynchronousRequest<Object> {
     private byte[] bytes;
 
     /**
-     * Returns the index of the desired element.
+     * Returns the insertion index of the new element.
      *
-     * @return The index of the desired element.
+     * @return The insertion index of the new element.
      */
     public int getI() {
         return i;
@@ -61,7 +62,7 @@ public class IAddBytes extends SynchronousRequest<Object> {
     /**
      * Create the request.
      *
-     * @param i     The index of the desired element.
+     * @param i     The insertion index of the new element.
      * @param bytes Holds the serialized data.
      */
     public IAddBytes(int i, byte[] bytes) {
