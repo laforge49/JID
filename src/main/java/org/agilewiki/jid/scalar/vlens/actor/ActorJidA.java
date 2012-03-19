@@ -118,7 +118,7 @@ public class ActorJidA
     protected void setValue(String jidType)
             throws Exception {
         NewJID na = new NewJID(jidType, getMailbox(), getParent(), (byte[]) null, this);
-        value = na.call(getParent());
+        value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -165,7 +165,7 @@ public class ActorJidA
     protected void setBytes(String jidType, byte[] bytes)
             throws Exception {
         NewJID na = new NewJID(jidType, getMailbox(), getParent(), bytes, this);
-        value = na.call(getParent());
+        value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -207,7 +207,7 @@ public class ActorJidA
         value = (new NewJID(
                 actorType,
                 getMailbox(),
-                getParent(), readableBytes, this)).call(getParent());
+                getParent(), readableBytes, this)).call(this);
         return value;
     }
 
