@@ -56,7 +56,9 @@ public class ListJidC
      *
      * @return The size of the collection.
      */
-    protected int size() {
+    protected int size()
+            throws Exception {
+        deserialize();
         return list.size();
     }
 
@@ -66,7 +68,9 @@ public class ListJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected Jid get(int i) {
+    protected Jid get(int i)
+            throws Exception {
+        deserialize();
         return list.get(i);
     }
 
@@ -244,7 +248,7 @@ public class ListJidC
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
         if (i < 0)
-            i = list.size() + 1 - i;
+            i = size() + 1 - i;
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
@@ -259,7 +263,7 @@ public class ListJidC
     public void iAdd(int i)
             throws Exception {
         if (i < 0)
-            i = list.size() + 1 - i;
+            i = size() + 1 - i;
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
@@ -275,7 +279,7 @@ public class ListJidC
             throws Exception {
         int c = 0;
         int i = 0;
-        int s = list.size();
+        int s = size();
         while (i < s) {
             Jid jid = get(i);
             jid.setContainerJid(null);
