@@ -23,9 +23,9 @@
  */
 package org.agilewiki.jid.jidFactory;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.bind.ConcurrentRequest;
-import org.agilewiki.jactor.bind.JBActor;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 
@@ -46,7 +46,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
     /**
      * The parent actor to which unrecognized requests are forwarded, or null.
      */
-    private JBActor parent;
+    private Actor parent;
 
     /**
      * Holds the serialized data.
@@ -128,7 +128,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
      * @param mailbox   A mailbox which may be shared with other actors, or null.
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      */
-    public NewJID(String actorType, Mailbox mailbox, JBActor parent) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent) {
         this(actorType, mailbox, parent, (byte[]) null, null);
     }
 
@@ -140,7 +140,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
      * @param parent    The parent actor to which unrecognized requests are forwarded, or null.
      * @param bytes     Holds the serialized data.
      */
-    public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes) {
         this(actorType, mailbox, parent, bytes, null);
     }
 
@@ -153,7 +153,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
      * @param bytes     Holds the serialized data.
      * @param container The container of the new Jid.
      */
-    public NewJID(String actorType, Mailbox mailbox, JBActor parent, byte[] bytes, Jid container) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes, Jid container) {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
@@ -174,7 +174,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
      * @param readableBytes Holds the serialized data.
      * @param container     The container of the new Jid.
      */
-    public NewJID(String actorType, Mailbox mailbox, JBActor parent, ReadableBytes readableBytes, Jid container) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, ReadableBytes readableBytes, Jid container) {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
@@ -205,7 +205,7 @@ final public class NewJID extends ConcurrentRequest<Jid> {
      *
      * @return The parent actor to which unrecognized requests are forwarded, or null.
      */
-    public JBActor getParent() {
+    public Actor getParent() {
         return parent;
     }
 
