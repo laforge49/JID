@@ -145,12 +145,11 @@ abstract public class CollectionJidC
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param internals The actor's internals.
-     * @param i         The index of the desired element.
-     * @param bytes     Holds the serialized data.
+     * @param i     The index of the desired element.
+     * @param bytes Holds the serialized data.
      * @throws Exception Any exceptions thrown while processing the request.
      */
-    abstract protected void iSetBytes(Internals internals, int i, byte[] bytes)
+    abstract protected void iSetBytes(int i, byte[] bytes)
             throws Exception;
 
     /**
@@ -175,7 +174,7 @@ abstract public class CollectionJidC
             @Override
             public void synchronousProcessRequest(Internals internals, ISetBytes request)
                     throws Exception {
-                iSetBytes(internals, request.getI(), request.getBytes());
+                iSetBytes(request.getI(), request.getBytes());
             }
         });
     }

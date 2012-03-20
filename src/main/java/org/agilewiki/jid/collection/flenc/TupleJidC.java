@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJidC;
 import org.agilewiki.jid.jidFactory.NewJID;
@@ -79,13 +78,12 @@ public class TupleJidC
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param internals The actor's internals.
-     * @param i         The index of the desired element.
-     * @param bytes     Holds the serialized data.
+     * @param i     The index of the desired element.
+     * @param bytes Holds the serialized data.
      * @throws Exception Any exceptions thrown while processing the request.
      */
     @Override
-    protected void iSetBytes(Internals internals, int i, byte[] bytes)
+    protected void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
         String actorType = actorTypes[i];

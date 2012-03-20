@@ -28,6 +28,7 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jid.collection.flenc.TupleJidA;
 import org.agilewiki.jid.collection.flenc.TupleJidC;
+import org.agilewiki.jid.collection.vlenc.ListJidA;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
@@ -161,6 +162,11 @@ final public class JidFactories extends Component {
     public final static String LIST_JID_CTYPE = "LIST_JIDc";
 
     /**
+     * The name of the ListJid actor.
+     */
+    public final static String LIST_JID_ATYPE = "LIST_JIDa";
+
+    /**
      * Returns a list of Includes for inclusion in the actor.
      *
      * @return A list of classes for inclusion in the actor.
@@ -203,5 +209,6 @@ final public class JidFactories extends Component {
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
         (new DefineActorType(TUPLE_JID_ATYPE, TupleJidA.class)).call(thisActor);
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
+        (new DefineActorType(LIST_JID_ATYPE, ListJidA.class)).call(thisActor);
     }
 }

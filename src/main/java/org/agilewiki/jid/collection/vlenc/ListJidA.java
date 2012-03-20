@@ -24,14 +24,13 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.collection.CollectionJidC;
+import org.agilewiki.jid.collection.CollectionJidA;
 import org.agilewiki.jid.jidFactory.NewJID;
 
 import java.util.ArrayList;
@@ -39,8 +38,8 @@ import java.util.ArrayList;
 /**
  * Holds an ArrayList of JID actors, all of the same type.
  */
-public class ListJidC
-        extends CollectionJidC {
+public class ListJidA
+        extends CollectionJidA {
     /**
      * Actor type of the elements.
      */
@@ -50,6 +49,15 @@ public class ListJidC
      * A list of JID actors.
      */
     private ArrayList<Jid> list;
+
+    /**
+     * Create a ListJidA
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public ListJidA(Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
      * Returns the size of the collection.
@@ -106,7 +114,7 @@ public class ListJidC
             throws Exception {
         if (elementsType != null)
             return;
-        elementsType = GetActorsType.req.call(thisActor);
+        elementsType = GetActorsType.req.call(this);
     }
 
     /**
@@ -118,7 +126,7 @@ public class ListJidC
             throws Exception {
         if (list != null)
             return;
-        elementsType = GetActorsType.req.call(thisActor);
+        elementsType = GetActorsType.req.call(this);
         if (!isSerialized()) {
             list = new ArrayList<Jid>();
             return;
@@ -132,11 +140,11 @@ public class ListJidC
         while (i < count) {
             NewJID newJid = new NewJID(
                     elementsType,
-                    thisActor.getMailbox(),
-                    thisActor.getParent(),
+                    getMailbox(),
+                    getParent(),
                     readableBytes,
                     this);
-            Jid elementJid = newJid.call(thisActor);
+            Jid elementJid = newJid.call(this);
             list.add(elementJid);
             i += 1;
         }
@@ -186,10 +194,10 @@ public class ListJidC
         initialize();
         Jid elementJid = (new NewJID(
                 elementsType,
-                thisActor.getMailbox(),
-                thisActor.getParent(),
+                getMailbox(),
+                getParent(),
                 bytes,
-                this)).call(thisActor);
+                this)).call(this);
         Jid oldElementJid = get(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
@@ -197,52 +205,33 @@ public class ListJidC
     }
 
     /**
-     * Bind request classes.
+     * The application method for processing requests sent to the actor.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(Size.class.getName(), new SynchronousMethodBinding<Size, Integer>() {
-            @Override
-            public Integer synchronousProcessRequest(Internals internals, Size request) throws Exception {
-                return size();
-            }
-        });
-
-        thisActor.bind(IAddBytes.class.getName(), new VoidSynchronousMethodBinding<IAddBytes>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, IAddBytes request)
-                    throws Exception {
-                iAddBytes(request.getI(), request.getBytes());
-            }
-        });
-
-        thisActor.bind(IAdd.class.getName(), new VoidSynchronousMethodBinding<IAdd>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, IAdd request)
-                    throws Exception {
-                iAdd(request.getI());
-            }
-        });
-
-        thisActor.bind(IRemove.class.getName(), new VoidSynchronousMethodBinding<IRemove>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, IRemove request)
-                    throws Exception {
-                iRemove(request.getI());
-            }
-        });
-
-        thisActor.bind(Empty.class.getName(), new VoidSynchronousMethodBinding<Empty>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, Empty request)
-                    throws Exception {
-                empty();
-            }
-        });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof Size) {
+            rp.processResponse(size());
+        } else if (request instanceof Empty) {
+            empty();
+            rp.processResponse(null);
+        } else if (request instanceof IAddBytes) {
+            IAddBytes iAddBytes = (IAddBytes) request;
+            iAddBytes(iAddBytes.getI(), iAddBytes.getBytes());
+            rp.processResponse(null);
+        } else if (request instanceof IAdd) {
+            IAdd iAdd = (IAdd) request;
+            iAdd(iAdd.getI());
+            rp.processResponse(null);
+        } else if (request instanceof IRemove) {
+            IRemove iRemove = (IRemove) request;
+            iRemove(iRemove.getI());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     public void iAddBytes(int i, byte[] bytes)
@@ -252,10 +241,10 @@ public class ListJidC
             i = size() + 1 + i;
         Jid jid = (new NewJID(
                 elementsType,
-                thisActor.getMailbox(),
-                thisActor.getParent(),
+                getMailbox(),
+                getParent(),
                 bytes,
-                this)).call(thisActor);
+                this)).call(this);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);
@@ -268,10 +257,10 @@ public class ListJidC
             i = size() + 1 + i;
         Jid jid = (new NewJID(
                 elementsType,
-                thisActor.getMailbox(),
-                thisActor.getParent(),
+                getMailbox(),
+                getParent(),
                 (byte[]) null,
-                this)).call(thisActor);
+                this)).call(this);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);
