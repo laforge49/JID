@@ -9,7 +9,7 @@ import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.CopyJID;
-import org.agilewiki.jid.GetBytes;
+import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
@@ -48,7 +48,7 @@ public class TupleATest extends TestCase {
             NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
             Actor string1 = newStringJid.send(future, factory).thisActor();
             (new SetString("Peaches")).send(future, string1);
-            byte[] sb = GetBytes.req.send(future, string1);
+            byte[] sb = GetSerializedBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);
             Actor f1b = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Peaches", GetString.req.send(future, f1b));

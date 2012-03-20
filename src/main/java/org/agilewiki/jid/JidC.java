@@ -114,9 +114,9 @@ public class JidC extends Component implements Jid {
             }
         });
 
-        thisActor.bind(GetBytes.class.getName(), new SynchronousMethodBinding<GetBytes, byte[]>() {
+        thisActor.bind(GetSerializedBytes.class.getName(), new SynchronousMethodBinding<GetSerializedBytes, byte[]>() {
             @Override
-            public byte[] synchronousProcessRequest(Internals internals, GetBytes request) throws Exception {
+            public byte[] synchronousProcessRequest(Internals internals, GetSerializedBytes request) throws Exception {
                 return getBytes();
             }
         });
@@ -184,7 +184,7 @@ public class JidC extends Component implements Jid {
                             rp.processResponse(false);
                             return;
                         }
-                        GetBytes.req.send(internals, jcActor, new RP<byte[]>() {
+                        GetSerializedBytes.req.send(internals, jcActor, new RP<byte[]>() {
                             @Override
                             public void processResponse(byte[] response) throws Exception {
                                 boolean eq = Arrays.equals(response, getBytes());

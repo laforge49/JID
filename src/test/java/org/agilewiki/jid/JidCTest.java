@@ -73,7 +73,7 @@ public class JidCTest extends TestCase {
             JCActor a = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidC.class)).call(a);
             Open.req.call(a);
-            byte[] bytes = GetBytes.req.send(future, a);
+            byte[] bytes = GetSerializedBytes.req.send(future, a);
             int l = bytes.length;
             System.err.println(l);
             assertEquals(l, 0);

@@ -70,7 +70,7 @@ public class JidATest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             JidA a = new JidA(mailboxFactory.createMailbox());
-            byte[] bytes = GetBytes.req.send(future, a);
+            byte[] bytes = GetSerializedBytes.req.send(future, a);
             int l = bytes.length;
             System.err.println(l);
             assertEquals(l, 0);

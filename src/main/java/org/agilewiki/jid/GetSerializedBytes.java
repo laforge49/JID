@@ -29,9 +29,9 @@ import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
 /**
  * Returns a byte array holding the serialized persistent data.
  */
-final public class GetBytes extends
+final public class GetSerializedBytes extends
         JLPCSynchronousRequest<byte[], JidA> {
-    public final static GetBytes req = new GetBytes();
+    public final static GetSerializedBytes req = new GetSerializedBytes();
 
     /**
      * Send a synchronous request.

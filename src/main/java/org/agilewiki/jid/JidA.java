@@ -193,7 +193,7 @@ public class JidA extends JLPCActor implements Jid {
             rp.processResponse(getSerializedLength());
         else if (request instanceof ResolvePathname)
             rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
-        else if (request instanceof GetBytes)
+        else if (request instanceof GetSerializedBytes)
             rp.processResponse(getBytes());
         else if (request instanceof Save) {
             save(((Save) request).getAppendableBytes());
@@ -233,7 +233,7 @@ public class JidA extends JLPCActor implements Jid {
                     rp.processResponse(false);
                     return;
                 }
-                send(jidA, GetBytes.req, new RP<byte[]>() {
+                send(jidA, GetSerializedBytes.req, new RP<byte[]>() {
                     @Override
                     public void processResponse(byte[] response) throws Exception {
                         boolean eq = Arrays.equals(response, getBytes());
