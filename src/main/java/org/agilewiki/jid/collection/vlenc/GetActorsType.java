@@ -23,20 +23,36 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.bind.JLPCConcurrentRequest;
 
 /**
- * Defines collection of Strings.
+ * Returns the actor type of the elements.
  */
-public class StringElements extends ElementsType {
-    private static final String at = JidFactories.STRING_JID_CTYPE;
+public class GetActorsType extends JLPCConcurrentRequest<String, ActorsType> {
+    public final static GetActorsType req = new GetActorsType();
 
     /**
-     * Returns an actor type.
+     * Send a concurrent request.
      *
-     * @return An actor type.
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
-    protected String at() {
-        return at;
+    @Override
+    public String call(ActorsType targetActor)
+            throws Exception {
+        return targetActor.getActorsType();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    @Override
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ActorsType;
     }
 }

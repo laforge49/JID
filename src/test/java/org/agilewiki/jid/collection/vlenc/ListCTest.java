@@ -21,7 +21,7 @@ public class ListCTest extends TestCase {
         try {
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            (new Include(StringElements.class)).call(factory);
+            (new Include(StringJCActorsTypeC.class)).call(factory);
             Open.req.call(factory);
             JAFuture future = new JAFuture();
             NewJID newListJid = new NewJID(JidFactories.LIST_JID_CTYPE);

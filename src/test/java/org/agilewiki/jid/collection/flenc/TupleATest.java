@@ -25,7 +25,7 @@ public class TupleATest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            (new Include(StringStringTupleC.class)).call(factory);
+            (new Include(StringJCStringJCActorTypesC.class)).call(factory);
             Open.req.call(factory);
             NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_ATYPE);
             Actor t0 = newTupleJid.send(future, factory).thisActor();

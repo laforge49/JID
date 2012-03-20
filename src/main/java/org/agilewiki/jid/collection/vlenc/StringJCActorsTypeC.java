@@ -23,11 +23,20 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.bind.ConcurrentRequest;
+import org.agilewiki.jid.JidFactories;
 
 /**
- * Returns the actor type of the elements.
+ * Defines collection of Strings.
  */
-public class GetElementsType extends ConcurrentRequest<String> {
-    public final static GetElementsType req = new GetElementsType();
+public class StringJCActorsTypeC extends ActorsTypeC {
+    private static final String actorsType = JidFactories.STRING_JID_CTYPE;
+
+    /**
+     * Returns an actor type.
+     *
+     * @return An actor type.
+     */
+    public String getActorsType() {
+        return actorsType;
+    }
 }

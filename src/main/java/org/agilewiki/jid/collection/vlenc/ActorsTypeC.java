@@ -21,27 +21,34 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc;
+package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
+import org.agilewiki.jactor.bind.RequestReceiver;
+import org.agilewiki.jactor.components.Component;
 
 /**
- * Defines (String, String) tuples.
+ * Base class for defining the elements type of a variable length collection.
  */
-public class StringStringTupleC extends ActorTypesC {
-    private static final String[] ats = new String[2];
-
-    static {
-        ats[0] = JidFactories.STRING_JID_CTYPE;
-        ats[1] = JidFactories.STRING_JID_CTYPE;
-    }
-
+abstract public class ActorsTypeC
+        extends Component
+        implements ActorsType {
     /**
-     * Returns an array of actor types.
+     * Bind request classes.
      *
-     * @return An array of actor types.
+     * @throws Exception Any exceptions thrown while binding.
      */
-    protected String[] ats() {
-        return ats;
+    @Override
+    public void bindery() throws Exception {
+        thisActor.bind(
+                GetActorsType.class.getName(),
+                new ConcurrentMethodBinding<GetActorsType, String>() {
+                    @Override
+                    public String concurrentProcessRequest(RequestReceiver requestReceiver,
+                                                           GetActorsType request)
+                            throws Exception {
+                        return getActorsType();
+                    }
+                });
     }
 }

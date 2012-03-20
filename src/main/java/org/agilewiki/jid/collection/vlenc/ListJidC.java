@@ -58,7 +58,7 @@ public class ListJidC
      */
     protected int size()
             throws Exception {
-        deserialize();
+        initialize();
         return list.size();
     }
 
@@ -70,7 +70,7 @@ public class ListJidC
      */
     protected Jid get(int i)
             throws Exception {
-        deserialize();
+        initialize();
         return list.get(i);
     }
 
@@ -106,18 +106,19 @@ public class ListJidC
             throws Exception {
         if (elementsType != null)
             return;
-        elementsType = GetElementsType.req.call(thisActor);
+        elementsType = GetActorsType.req.call(thisActor);
     }
 
     /**
-     * Deserialize if serialized data is available.
+     * Perform lazy initialization.
      *
-     * @throws Exception Any exceptions thrown during the open.
+     * @throws Exception Any exceptions thrown during initialization.
      */
-    protected void deserialize()
+    protected void initialize()
             throws Exception {
         if (list != null)
             return;
+        elementsType = GetActorsType.req.call(thisActor);
         if (!isSerialized()) {
             list = new ArrayList<Jid>();
             return;
@@ -169,7 +170,7 @@ public class ListJidC
     @Override
     public Actor resolvePathname(String pathname)
             throws Exception {
-        deserialize();
+        initialize();
         return super.resolvePathname(pathname);
     }
 
@@ -184,6 +185,7 @@ public class ListJidC
     @Override
     protected void iSetBytes(Internals internals, int i, byte[] bytes)
             throws Exception {
+        initialize();
         Jid elementJid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
@@ -247,7 +249,7 @@ public class ListJidC
 
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
-        deserialize();
+        initialize();
         if (i < 0)
             i = size() + 1 - i;
         Jid jid = (new NewJID(
@@ -263,7 +265,7 @@ public class ListJidC
 
     public void iAdd(int i)
             throws Exception {
-        deserialize();
+        initialize();
         if (i < 0)
             i = size() + 1 - i;
         Jid jid = (new NewJID(
