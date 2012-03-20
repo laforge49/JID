@@ -247,6 +247,7 @@ public class ListJidC
 
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
+        deserialize();
         if (i < 0)
             i = size() + 1 - i;
         Jid jid = (new NewJID(
@@ -262,6 +263,7 @@ public class ListJidC
 
     public void iAdd(int i)
             throws Exception {
+        deserialize();
         if (i < 0)
             i = size() + 1 - i;
         Jid jid = (new NewJID(
