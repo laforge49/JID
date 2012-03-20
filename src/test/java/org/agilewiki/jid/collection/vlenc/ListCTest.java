@@ -12,6 +12,7 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 
@@ -47,7 +48,15 @@ public class ListCTest extends TestCase {
             (new IAddBytes(-1, s0bs)).send(future, l2);
             l2sl = GetSerializedLength.req.send(future, l2);
             assertEquals(20, l2sl);
-            System.out.println(l2sl);
+            (new ISetBytes(0, s0bs)).send(future, l2);
+            l2sl = GetSerializedLength.req.send(future, l2);
+            assertEquals(24, l2sl);
+            (new IRemove(0)).send(future, l2);
+            l2sl = GetSerializedLength.req.send(future, l2);
+            assertEquals(16, l2sl);
+            Empty.req.send(future, l2);
+            l2sl = GetSerializedLength.req.send(future, l2);
+            assertEquals(8, l2sl);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
