@@ -21,28 +21,39 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc;
+package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Defines (StringJidC, StringJidC) tuples.
+ * Base class for defining the elements type of a variable length collection.
  */
-public class StringJCStringJCActorTypesC extends ActorTypesC {
-    private static final String[] actorTypes = new String[2];
-
-    static {
-        actorTypes[0] = JidFactories.STRING_JID_CTYPE;
-        actorTypes[1] = JidFactories.STRING_JID_CTYPE;
+abstract public class ActorsTypeA
+        extends JLPCActor
+        implements ActorsType {
+    /**
+     * Create a ActorsTypeA
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public ActorsTypeA(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Returns an array of actor types.
+     * The application method for processing requests sent to the actor.
      *
-     * @return An array of actor types.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public String[] getActorTypes() {
-        return actorTypes;
+    protected void processRequest(Object request, RP rp) throws Exception {
+        if (request instanceof GetActorsType)
+            rp.processResponse(getActorsType());
+        else
+            throw new UnsupportedOperationException();
     }
 }

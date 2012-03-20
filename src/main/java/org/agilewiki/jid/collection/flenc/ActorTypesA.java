@@ -31,14 +31,6 @@ import org.agilewiki.jactor.lpc.JLPCActor;
  * Base Actor for defining array types of tuples.
  */
 abstract public class ActorTypesA extends JLPCActor implements ActorTypes {
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return An array of actor types.
-     */
-    abstract protected String[] ats();
-
     /**
      * Create a LiteActor
      *
@@ -46,15 +38,6 @@ abstract public class ActorTypesA extends JLPCActor implements ActorTypes {
      */
     public ActorTypesA(Mailbox mailbox) {
         super(mailbox);
-    }
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return The array of actor types.
-     */
-    public String[] getActorTypes() {
-        return ats();
     }
 
     /**
@@ -67,7 +50,7 @@ abstract public class ActorTypesA extends JLPCActor implements ActorTypes {
     @Override
     protected void processRequest(Object request, RP rp) throws Exception {
         if (request instanceof GetActorTypes)
-            rp.processResponse(getActorType());
+            rp.processResponse(getActorTypes());
         else
             throw new UnsupportedOperationException();
     }

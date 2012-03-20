@@ -31,23 +31,6 @@ import org.agilewiki.jactor.components.Component;
  * Base Component for defining array types of tuples.
  */
 abstract public class ActorTypesC extends Component implements ActorTypes {
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return An array of actor types.
-     */
-    abstract protected String[] ats();
-
-    /**
-     * Returns an array of actor types.
-     *
-     * @return The array of actor types.
-     */
-    public String[] getActorTypes() {
-        return ats();
-    }
-
     /**
      * Bind request classes.
      *

@@ -32,5 +32,5 @@ public interface ActorsType {
      *
      * @return An actor type.
      */
-    String getActorsType();
+    public String getActorsType();
 }
