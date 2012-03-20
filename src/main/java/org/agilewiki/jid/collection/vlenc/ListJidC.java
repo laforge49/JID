@@ -137,7 +137,6 @@ public class ListJidC
                     readableBytes,
                     this);
             Jid elementJid = newJid.call(thisActor.getParent());
-            len += elementJid.getSerializedLength();
             list.add(elementJid);
             i += 1;
         }
