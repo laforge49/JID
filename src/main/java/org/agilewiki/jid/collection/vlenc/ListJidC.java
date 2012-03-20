@@ -251,7 +251,7 @@ public class ListJidC
             throws Exception {
         initialize();
         if (i < 0)
-            i = size() + 1 - i;
+            i = size() + 1 + i;
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
@@ -267,7 +267,7 @@ public class ListJidC
             throws Exception {
         initialize();
         if (i < 0)
-            i = size() + 1 - i;
+            i = size() + 1 + i;
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),

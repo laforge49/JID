@@ -44,7 +44,9 @@ public class ListCTest extends TestCase {
             assertEquals(8, s0sl);
             byte[] s0bs = GetSerializedBytes.req.send(future, s0);
             assertEquals(8, s0bs.length);
-            System.out.println(s0sl);
+            (new IAddBytes(-1, s0bs)).send(future, l2);
+            l2sl = GetSerializedLength.req.send(future, l2);
+            System.out.println(l2sl);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
