@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
  */
 final public class MakeActorBytes
-        extends JLPCSynchronousRequest<Boolean, ActorJidA> {
+        extends SynchronousRequest<Boolean, ActorJidA> {
     /**
      * An actor type name.
      */

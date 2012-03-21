@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetBoolean
-        extends JLPCSynchronousRequest<Object, BooleanJidA> {
+        extends SynchronousRequest<Object, BooleanJidA> {
     /**
      * The value.
      */

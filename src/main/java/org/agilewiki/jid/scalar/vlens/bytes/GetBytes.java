@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetBytes extends JLPCSynchronousRequest<byte[], BytesJidA> {
+public class GetBytes extends SynchronousRequest<byte[], BytesJidA> {
     final public static GetBytes req = new GetBytes();
 
     /**

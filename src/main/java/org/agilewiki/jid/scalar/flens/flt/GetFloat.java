@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetFloat extends JLPCSynchronousRequest<Float, FloatJidA> {
+public class GetFloat extends SynchronousRequest<Float, FloatJidA> {
     final public static GetFloat req = new GetFloat();
 
     /**

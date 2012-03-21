@@ -24,13 +24,13 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a byte array holding the serialized persistent data.
  */
 final public class GetSerializedBytes extends
-        JLPCSynchronousRequest<byte[], JidA> {
+        SynchronousRequest<byte[], JidA> {
     public final static GetSerializedBytes req = new GetSerializedBytes();
 
     /**

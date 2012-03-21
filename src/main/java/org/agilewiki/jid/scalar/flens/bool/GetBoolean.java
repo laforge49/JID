@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
 public class GetBoolean
-        extends JLPCSynchronousRequest<Boolean, BooleanJidA> {
+        extends SynchronousRequest<Boolean, BooleanJidA> {
     final public static GetBoolean req = new GetBoolean();
 
     /**

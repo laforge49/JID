@@ -24,13 +24,13 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the JID actor identified by the pathname.
  */
 final public class ResolvePathname
-        extends JLPCSynchronousRequest<Actor, JidA> {
+        extends SynchronousRequest<Actor, JidA> {
     /**
      * The pathname of a JID.
      */

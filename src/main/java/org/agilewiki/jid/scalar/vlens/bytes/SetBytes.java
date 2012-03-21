@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetBytes
-        extends JLPCSynchronousRequest<Object, BytesJidA> {
+        extends SynchronousRequest<Object, BytesJidA> {
     /**
      * The value.
      */

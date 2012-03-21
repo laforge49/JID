@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Clears the container.
  */
 final public class Clear
-        extends JLPCSynchronousRequest<Object, VLenScalarJidA<Object, Object, Object>> {
+        extends SynchronousRequest<Object, VLenScalarJidA<Object, Object, Object>> {
     public final static Clear req = new Clear();
 
     /**

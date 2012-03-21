@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetActor extends JLPCSynchronousRequest<Actor, ActorJidA> {
+public class GetActor extends SynchronousRequest<Actor, ActorJidA> {
     final public static GetActor req = new GetActor();
 
     /**

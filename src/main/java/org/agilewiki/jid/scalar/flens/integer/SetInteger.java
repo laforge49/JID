@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetInteger
-        extends JLPCSynchronousRequest<Object, IntegerJidA> {
+        extends SynchronousRequest<Object, IntegerJidA> {
     /**
      * The value.
      */

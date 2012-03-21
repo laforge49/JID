@@ -24,7 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
  * </p>
  */
 final public class GetSerializedLength
-        extends JLPCSynchronousRequest<Integer, JidA> {
+        extends SynchronousRequest<Integer, JidA> {
     public final static GetSerializedLength req = new GetSerializedLength();
 
     /**

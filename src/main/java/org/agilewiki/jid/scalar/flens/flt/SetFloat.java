@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetFloat
-        extends JLPCSynchronousRequest<Object, FloatJidA> {
+        extends SynchronousRequest<Object, FloatJidA> {
     /**
      * The value.
      */

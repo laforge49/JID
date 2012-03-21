@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetString extends JLPCSynchronousRequest<String, StringJidA> {
+public class GetString extends SynchronousRequest<String, StringJidA> {
     final public static GetString req = new GetString();
 
     /**

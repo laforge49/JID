@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetActor
-        extends JLPCSynchronousRequest<Object, ActorJidA> {
+        extends SynchronousRequest<Object, ActorJidA> {
     /**
      * The actor type.
      */

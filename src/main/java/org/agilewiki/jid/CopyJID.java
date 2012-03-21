@@ -25,13 +25,13 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a copy of the JID.
  */
 final public class CopyJID
-        extends JLPCSynchronousRequest<Actor, JidA> {
+        extends SynchronousRequest<Actor, JidA> {
     /**
      * A mailbox which may be shared with other actors.
      */

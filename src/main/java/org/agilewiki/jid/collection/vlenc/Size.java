@@ -23,11 +23,22 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the size of the collection.
  */
-public class Size extends SynchronousRequest<Integer> {
+public class Size extends SynchronousRequest<Integer, ListJidA> {
     public final static Size req = new Size();
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ListJidA;
+    }
 }

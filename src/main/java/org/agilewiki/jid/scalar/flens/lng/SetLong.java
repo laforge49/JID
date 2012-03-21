@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetLong
-        extends JLPCSynchronousRequest<Object, LongJidA> {
+        extends SynchronousRequest<Object, LongJidA> {
     /**
      * The value.
      */

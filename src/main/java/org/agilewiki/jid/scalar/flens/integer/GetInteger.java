@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetInteger extends JLPCSynchronousRequest<Integer, IntegerJidA> {
+public class GetInteger extends SynchronousRequest<Integer, IntegerJidA> {
     final public static GetInteger req = new GetInteger();
 
     /**

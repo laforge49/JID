@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetDouble
-        extends JLPCSynchronousRequest<Object, DoubleJidA> {
+        extends SynchronousRequest<Object, DoubleJidA> {
     /**
      * The value.
      */

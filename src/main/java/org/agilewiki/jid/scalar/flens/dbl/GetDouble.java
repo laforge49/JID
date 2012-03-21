@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetDouble extends JLPCSynchronousRequest<Double, DoubleJidA> {
+public class GetDouble extends SynchronousRequest<Double, DoubleJidA> {
     final public static GetDouble req = new GetDouble();
 
     /**

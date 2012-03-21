@@ -24,12 +24,12 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetLong extends JLPCSynchronousRequest<Long, LongJidA> {
+public class GetLong extends SynchronousRequest<Long, LongJidA> {
     final public static GetLong req = new GetLong();
 
     /**

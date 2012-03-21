@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the ith element of a collection.
  */
-public class IGet extends JLPCSynchronousRequest<Actor, CollectionJidA> {
+public class IGet extends SynchronousRequest<Actor, CollectionJidA> {
     /**
      * The index of the desired element.
      */

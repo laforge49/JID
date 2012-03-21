@@ -24,13 +24,13 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value if not already present.
  */
 public class MakeString
-        extends JLPCSynchronousRequest<Boolean, StringJidA> {
+        extends SynchronousRequest<Boolean, StringJidA> {
     /**
      * The value.
      */

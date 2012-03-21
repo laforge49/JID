@@ -23,14 +23,15 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.bind.SynchronousRequest;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Creates a JID and inserts it in the ith position.
  * If i < 0, the new JID is placed at position size + 1 - i.
  * (If i == -1, the element is added to the end of the list.)
  */
-public class IAdd extends SynchronousRequest<Object> {
+public class IAdd extends SynchronousRequest<Object, ListJidA> {
     /**
      * The insertion index of the new element.
      */
@@ -52,5 +53,15 @@ public class IAdd extends SynchronousRequest<Object> {
      */
     public IAdd(int i) {
         this.i = i;
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ListJidA;
     }
 }

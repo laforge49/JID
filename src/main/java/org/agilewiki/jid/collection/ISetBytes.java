@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Creates a JID actor in place of the ith element of the collection and loads its serialized data.
  */
-public class ISetBytes extends JLPCSynchronousRequest<Object, CollectionJidA> {
+public class ISetBytes extends SynchronousRequest<Object, CollectionJidA> {
     /**
      * The index of the desired element.
      */
