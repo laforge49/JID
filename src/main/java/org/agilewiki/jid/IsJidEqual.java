@@ -24,7 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.Request;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns true when the persistent content are equal.
