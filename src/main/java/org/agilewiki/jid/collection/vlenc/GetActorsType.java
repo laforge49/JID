@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.ConcurrentRequest;
+import org.agilewiki.jactor.lpc.ConcurrentRequest;
 
 /**
  * Returns the actor type of the elements.

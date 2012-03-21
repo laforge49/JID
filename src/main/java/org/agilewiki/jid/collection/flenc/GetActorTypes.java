@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.ConcurrentRequest;
+import org.agilewiki.jactor.lpc.ConcurrentRequest;
 
 /**
  * Returns an array of actor types.
