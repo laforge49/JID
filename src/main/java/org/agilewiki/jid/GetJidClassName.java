@@ -23,11 +23,11 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.ConcurrentRequest;
+import org.agilewiki.jactor.bind.JBConcurrentRequest;
 
 /**
  * Returns the class name of the Jid component.
  */
-final public class GetJidClassName extends ConcurrentRequest<String> {
+final public class GetJidClassName extends JBConcurrentRequest<String> {
     final public static GetJidClassName req = new GetJidClassName();
 }

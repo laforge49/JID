@@ -25,14 +25,14 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.bind.ConcurrentRequest;
+import org.agilewiki.jactor.bind.JBConcurrentRequest;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 
 /**
  * Creates a JID actor and loads its serialized data.
  */
-final public class NewJID extends ConcurrentRequest<Jid> {
+final public class NewJID extends JBConcurrentRequest<Jid> {
     /**
      * An actor type name.
      */

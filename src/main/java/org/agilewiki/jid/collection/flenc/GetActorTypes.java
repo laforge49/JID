@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JLPCConcurrentRequest;
+import org.agilewiki.jactor.ConcurrentRequest;
 
 /**
  * Returns an array of actor types.
  */
-public class GetActorTypes extends JLPCConcurrentRequest<String[], ActorTypes> {
+public class GetActorTypes extends ConcurrentRequest<String[], ActorTypes> {
     public final static GetActorTypes req = new GetActorTypes();
 
     /**
