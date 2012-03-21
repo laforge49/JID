@@ -23,11 +23,11 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.InitializationRequest;
+import org.agilewiki.jactor.bind.JBInitializationRequest;
 
 /**
  * Returns the JID component.
  */
-final public class GetJIDComponent extends InitializationRequest<JidC> {
+final public class GetJIDComponent extends JBInitializationRequest<JidC> {
     public final static GetJIDComponent req = new GetJIDComponent();
 }

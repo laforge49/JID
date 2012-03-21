@@ -23,12 +23,12 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.bind.InitializationRequest;
+import org.agilewiki.jactor.bind.JBInitializationRequest;
 
 /**
  * Load serialized data into a JID.
  */
-final public class PutBytes extends InitializationRequest<Object> {
+final public class PutBytes extends JBInitializationRequest<Object> {
     /**
      * The serialized data.
      */
