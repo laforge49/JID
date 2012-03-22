@@ -49,7 +49,7 @@ public class ListJidC
     /**
      * A list of JID actors.
      */
-    private ArrayList<Jid> list;
+    protected ArrayList<Jid> list;
 
     /**
      * Returns the size of the collection.
@@ -245,6 +245,11 @@ public class ListJidC
         });
     }
 
+    /**
+     * Creates a JID, loads its bytes and inserts it in the ith position.
+     * If i < 0, the new JID is placed at position size + 1 - i.
+     * (If i == -1, the element is added to the end of the list.)
+     */
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
@@ -261,6 +266,11 @@ public class ListJidC
         change(c);
     }
 
+    /**
+     * Creates a JID and inserts it in the ith position.
+     * If i < 0, the new JID is placed at position size + 1 - i.
+     * (If i == -1, the element is added to the end of the list.)
+     */
     public void iAdd(int i)
             throws Exception {
         initialize();
@@ -277,6 +287,9 @@ public class ListJidC
         change(c);
     }
 
+    /**
+     * Empty a collection.
+     */
     public void empty()
             throws Exception {
         int c = 0;
@@ -292,6 +305,10 @@ public class ListJidC
         change(c);
     }
 
+    /**
+     * Removes a JID from the ith position.
+     * If i < 0, the new JID is removed from position size + 1 - i.
+     */
     public void iRemove(int i)
             throws Exception {
         Jid jid = get(i);
