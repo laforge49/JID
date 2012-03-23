@@ -93,7 +93,7 @@ public class TupleJidA
      * @throws Exception Any exceptions thrown while processing the request.
      */
     @Override
-    protected void iSetBytes(int i, byte[] bytes)
+    public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
         String actorType = actorTypes[i];
@@ -125,7 +125,7 @@ public class TupleJidA
      *
      * @return The size of the collection.
      */
-    protected int size()
+    public int size()
             throws Exception {
         initialize();
         return actorTypes.length;
@@ -137,7 +137,7 @@ public class TupleJidA
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected Jid get(int i) throws Exception {
+    public Jid get(int i) throws Exception {
         initialize();
         return tuple[i];
     }

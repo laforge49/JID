@@ -55,7 +55,7 @@ public class ListJidC
      *
      * @return The size of the collection.
      */
-    protected int size()
+    public int size()
             throws Exception {
         initialize();
         return list.size();
@@ -67,7 +67,7 @@ public class ListJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    protected Jid get(int i)
+    public Jid get(int i)
             throws Exception {
         initialize();
         return list.get(i);
@@ -180,7 +180,7 @@ public class ListJidC
      * @throws Exception Any exceptions thrown while processing the request.
      */
     @Override
-    protected void iSetBytes(int i, byte[] bytes)
+    public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
         Jid elementJid = (new NewJID(

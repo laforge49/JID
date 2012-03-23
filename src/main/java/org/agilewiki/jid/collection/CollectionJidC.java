@@ -33,7 +33,8 @@ import org.agilewiki.jid.*;
  * A collection of JID actors.
  */
 abstract public class CollectionJidC
-        extends JidC {
+        extends JidC
+        implements Collection {
 
     /**
      * The size of the serialized data (exclusive of its length header).
@@ -67,23 +68,6 @@ abstract public class CollectionJidC
     protected void saveLen(AppendableBytes appendableBytes) {
         appendableBytes.writeInt(len);
     }
-
-    /**
-     * Returns the size of the collection.
-     *
-     * @return The size of the collection.
-     */
-    abstract protected int size()
-            throws Exception;
-
-    /**
-     * Returns the ith JID component.
-     *
-     * @param i The index of the element of interest.
-     * @return The ith JID component.
-     */
-    abstract protected Jid get(int i)
-            throws Exception;
 
     /**
      * Process a change in the persistent data.
@@ -137,20 +121,11 @@ abstract public class CollectionJidC
      * @param ndx Selects the element.
      * @return The actor held by the selected element.
      */
-    protected Actor iGet(int ndx)
+    @Override
+    public Actor iGet(int ndx)
             throws Exception {
         return get(ndx).thisActor();
     }
-
-    /**
-     * Creates a JID actor and loads its serialized data.
-     *
-     * @param i     The index of the desired element.
-     * @param bytes Holds the serialized data.
-     * @throws Exception Any exceptions thrown while processing the request.
-     */
-    abstract protected void iSetBytes(int i, byte[] bytes)
-            throws Exception;
 
     /**
      * Bind request classes.
