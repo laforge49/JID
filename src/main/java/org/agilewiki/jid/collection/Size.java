@@ -30,8 +30,21 @@ import org.agilewiki.jid.collection.vlenc.ListJidA;
 /**
  * Returns the size of the collection.
  */
-public class Size extends SynchronousRequest<Integer, ListJidA> {
+public class Size extends SynchronousRequest<Integer, Collection> {
     public final static Size req = new Size();
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Integer call(Collection targetActor)
+            throws Exception {
+        return targetActor.size();
+    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

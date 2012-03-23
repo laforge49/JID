@@ -72,6 +72,20 @@ public class IAddBytes extends SynchronousRequest<Object, ListJidA> {
     }
 
     /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Object call(ListJidA targetActor)
+            throws Exception {
+        targetActor.iAddBytes(i, bytes);
+        return null;
+    }
+
+    /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
      *
      * @param targetActor The actor to be called.

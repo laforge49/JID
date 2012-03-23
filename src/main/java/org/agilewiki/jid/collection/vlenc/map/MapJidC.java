@@ -1,7 +1,9 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.scalar.Scalar;
@@ -50,5 +52,30 @@ public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
         Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.get(0);
         e0.setValue(key);
         return true;
+    }
+
+    /**
+     * Resolves a JID pathname, returning a JID actor or null.
+     *
+     * @param pathname A JID pathname.
+     * @return A JID actor or null.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
+     */
+    @Override
+    public Actor resolvePathname(String pathname)
+            throws Exception {
+        if (pathname.length() == 0) {
+            return thisActor;
+        }
+        int s = pathname.indexOf("/");
+        if (s == -1)
+            s = pathname.length();
+        if (s == 0)
+            throw new IllegalArgumentException("pathname " + pathname);
+        String ns = pathname.substring(0, s);
+        Jid jid = get(0); //todo
+        if (s == pathname.length())
+            return jid.thisActor();
+        return jid.resolvePathname(pathname.substring(s + 1));
     }
 }
