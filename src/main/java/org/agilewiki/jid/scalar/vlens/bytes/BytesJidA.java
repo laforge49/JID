@@ -70,7 +70,7 @@ public class BytesJidA
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(byte[] v) throws Exception {
+    public void setValue(byte[] v) throws Exception {
         int c = v.length;
         if (len > -1)
             c -= len;

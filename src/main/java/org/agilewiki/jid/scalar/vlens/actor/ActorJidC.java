@@ -131,7 +131,7 @@ public class ActorJidC
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(String jidType)
+    public void setValue(String jidType)
             throws Exception {
         NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), (byte[]) null, this);
         value = na.call(thisActor);
@@ -194,7 +194,7 @@ public class ActorJidC
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    protected Actor getValue()
+    public Actor getValue()
             throws Exception {
         Jid v = get();
         if (v == null)

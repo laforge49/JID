@@ -28,23 +28,7 @@ import org.agilewiki.jid.JidC;
 /**
  * A JID component that holds a value.
  */
-abstract public class ScalarJidC<SET_TYPE, RESPONSE_TYPE> extends JidC {
-
-    /**
-     * Assign a value.
-     *
-     * @param request The MakeValue request.
-     * @throws Exception Any uncaught exception raised.
-     */
-    abstract protected void setValue(SET_TYPE request)
-            throws Exception;
-
-    /**
-     * Returns the value held by this component.
-     *
-     * @return The value held by this component.
-     * @throws Exception Any uncaught exception raised during deserialization.
-     */
-    abstract protected RESPONSE_TYPE getValue()
-            throws Exception;
+abstract public class ScalarJidC<SET_TYPE, RESPONSE_TYPE>
+        extends JidC
+        implements Scalar<SET_TYPE, RESPONSE_TYPE> {
 }

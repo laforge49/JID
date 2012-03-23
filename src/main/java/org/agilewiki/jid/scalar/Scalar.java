@@ -23,21 +23,26 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidA;
-
 /**
- * A Jid actor that hold a single value.
+ * A JID component that holds a value.
  */
-abstract public class ScalarJidA<SET_TYPE, RESPONSE_TYPE>
-        extends JidA
-        implements Scalar<SET_TYPE, RESPONSE_TYPE> {
+public interface Scalar<SET_TYPE, RESPONSE_TYPE> {
+
     /**
-     * Create a ScalarJidA.
+     * Assign a value.
      *
-     * @param mailbox A mailbox which may be shared with other actors.
+     * @param request The MakeValue request.
+     * @throws Exception Any uncaught exception raised.
      */
-    public ScalarJidA(final Mailbox mailbox) {
-        super(mailbox);
-    }
+    public void setValue(SET_TYPE request)
+            throws Exception;
+
+    /**
+     * Returns the value held by this component.
+     *
+     * @return The value held by this component.
+     * @throws Exception Any uncaught exception raised during deserialization.
+     */
+    public RESPONSE_TYPE getValue()
+            throws Exception;
 }

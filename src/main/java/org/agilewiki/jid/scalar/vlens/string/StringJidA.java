@@ -72,7 +72,7 @@ public class StringJidA
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void setValue(String v) throws Exception {
+    public void setValue(String v) throws Exception {
         int c = v.length() * 2;
         if (len > -1)
             c -= len;
