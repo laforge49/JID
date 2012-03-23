@@ -161,6 +161,13 @@ abstract public class CollectionJidC
     public void bindery() throws Exception {
         super.bindery();
 
+        thisActor.bind(Size.class.getName(), new SynchronousMethodBinding<Size, Integer>() {
+            @Override
+            public Integer synchronousProcessRequest(Internals internals, Size request) throws Exception {
+                return size();
+            }
+        });
+
         thisActor.bind(IGet.class.getName(), new SynchronousMethodBinding<IGet, Actor>() {
             @Override
             public Actor synchronousProcessRequest(Internals internals, IGet request)

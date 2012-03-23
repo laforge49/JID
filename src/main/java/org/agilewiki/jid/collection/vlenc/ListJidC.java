@@ -25,7 +25,6 @@ package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.Jid;
@@ -204,13 +203,6 @@ public class ListJidC
     @Override
     public void bindery() throws Exception {
         super.bindery();
-
-        thisActor.bind(Size.class.getName(), new SynchronousMethodBinding<Size, Integer>() {
-            @Override
-            public Integer synchronousProcessRequest(Internals internals, Size request) throws Exception {
-                return size();
-            }
-        });
 
         thisActor.bind(IAddBytes.class.getName(), new VoidSynchronousMethodBinding<IAddBytes>() {
             @Override

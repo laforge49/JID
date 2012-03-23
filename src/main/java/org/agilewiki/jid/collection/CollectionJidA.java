@@ -170,7 +170,9 @@ abstract public class CollectionJidA
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof IGet) {
+        if (request instanceof Size) {
+            rp.processResponse(size());
+        } else if (request instanceof IGet) {
             rp.processResponse(iGet(((IGet) request).getI()));
         } else if (request instanceof ISetBytes) {
             ISetBytes iSetBytes = (ISetBytes) request;

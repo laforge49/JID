@@ -214,9 +214,7 @@ public class ListJidA
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof Size) {
-            rp.processResponse(size());
-        } else if (request instanceof Empty) {
+        if (request instanceof Empty) {
             empty();
             rp.processResponse(null);
         } else if (request instanceof IAddBytes) {
