@@ -1,11 +1,10 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.ComparableKey;
-import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.collection.IGet;
+import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
+import org.agilewiki.jid.scalar.Scalar;
 
 /**
  * Holds a map.
@@ -47,10 +46,9 @@ public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
             return false;
         i = -i - 1;
         iAdd(i);
-        Jid t = get(i);
-        Actor ta = t.thisActor();
-        Actor e0a = (new IGet(0)).call(sourceInternals, ta);
-        //todo set the key
+        Collection t = (Collection) get(i);
+        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.get(0);
+        e0.setValue(key);
         return true;
     }
 }
