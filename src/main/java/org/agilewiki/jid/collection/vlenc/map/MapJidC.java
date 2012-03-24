@@ -29,13 +29,17 @@ import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.Collection;
+import org.agilewiki.jid.collection.flenc.ActorTypes;
+import org.agilewiki.jid.collection.vlenc.GetActorsType;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.scalar.Scalar;
 
 /**
  * Holds a map.
  */
-abstract public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
+abstract public class MapJidC<KEY_TYPE extends Comparable>
+        extends ListJidC
+        implements ActorTypes {
     /**
      * Returns the actor type of the key.
      *
@@ -51,6 +55,29 @@ abstract public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
     final protected String getActorsType()
             throws Exception {
         return JidFactories.ACTOR_JID_ATYPE;
+    }
+
+    /**
+     * Returns the array of actor types used to define the key/value tuples.
+     *
+     * @return The array of actor types.
+     */
+    final public String[] getActorTypes()
+            throws Exception {
+        String[] actorTypes = new String[2];
+        actorTypes[0] = getKeyType();
+        actorTypes[1] = getActorsType();
+        return actorTypes;
+    }
+
+    /**
+     * Returns the actor type of the values in the map.
+     *
+     * @return The actor type of the values in the list.
+     */
+    protected String getValuesType()
+            throws Exception {
+        return GetActorsType.req.call(thisActor);
     }
 
     /**

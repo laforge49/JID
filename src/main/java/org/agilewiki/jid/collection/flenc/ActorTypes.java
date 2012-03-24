@@ -32,5 +32,5 @@ public interface ActorTypes {
      *
      * @return The array of actor types.
      */
-    public String[] getActorTypes();
+    public String[] getActorTypes() throws Exception;
 }

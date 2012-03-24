@@ -5,7 +5,7 @@ import org.agilewiki.jid.collection.vlenc.map.KMake;
 /**
  * Create a keyed entry.
  */
-public class StingKMake extends KMake<String> {
+final public class StingKMake extends KMake<String> {
     /**
      * Create the request.
      *

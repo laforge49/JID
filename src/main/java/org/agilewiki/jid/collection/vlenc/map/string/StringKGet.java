@@ -5,7 +5,7 @@ import org.agilewiki.jid.collection.vlenc.map.KGet;
 /**
  * Returns the value assigned to a given key.
  */
-public class StringKGet extends KGet<String> {
+final public class StringKGet extends KGet<String> {
     /**
      * Create the request.
      *

@@ -29,7 +29,7 @@ import org.agilewiki.jid.collection.vlenc.map.MapJidC;
 /**
  * Holds a map.
  */
-public class StringMapJidC extends MapJidC<String> {
+final public class StringMapJidC extends MapJidC<String> {
     /**
      * Returns the actor type of the key.
      *
