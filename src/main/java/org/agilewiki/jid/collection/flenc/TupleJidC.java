@@ -92,7 +92,7 @@ public class TupleJidC
                 thisActor.getMailbox(),
                 thisActor.getParent(),
                 bytes, this)).call(thisActor);
-        Jid oldElementJid = get(i);
+        Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -127,7 +127,7 @@ public class TupleJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public Jid get(int i) throws Exception {
+    public Jid iGetJid(int i) throws Exception {
         initialize();
         return tuple[i];
     }
@@ -143,7 +143,7 @@ public class TupleJidC
         saveLen(appendableBytes);
         int i = 0;
         while (i < size()) {
-            get(i).save(appendableBytes);
+            iGetJid(i).save(appendableBytes);
             i += 1;
         }
     }
@@ -169,7 +169,7 @@ public class TupleJidC
      */
     public int compareKeyTo(Object o)
             throws Exception {
-        ComparableKey<Object> e0 = (ComparableKey<Object>) get(0);
+        ComparableKey<Object> e0 = (ComparableKey<Object>) iGetJid(0);
         return e0.compareKeyTo(o);
     }
 }

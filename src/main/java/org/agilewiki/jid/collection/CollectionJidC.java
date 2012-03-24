@@ -109,7 +109,7 @@ abstract public class CollectionJidC
         }
         if (n < 0 || n >= size())
             throw new IllegalArgumentException("pathname " + pathname);
-        Jid jid = get(n);
+        Jid jid = iGetJid(n);
         if (s == pathname.length())
             return jid.thisActor();
         return jid.resolvePathname(pathname.substring(s + 1));
@@ -124,7 +124,7 @@ abstract public class CollectionJidC
     @Override
     public Actor iGet(int ndx)
             throws Exception {
-        return get(ndx).thisActor();
+        return iGetJid(ndx).thisActor();
     }
 
     /**
@@ -148,7 +148,7 @@ abstract public class CollectionJidC
             public Actor synchronousProcessRequest(Internals internals, IGet request)
                     throws Exception {
                 int ndx = request.getI();
-                return get(ndx).thisActor();
+                return iGetJid(ndx).thisActor();
             }
         });
 

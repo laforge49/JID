@@ -22,7 +22,7 @@ public interface Collection {
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public Jid get(int i)
+    public Jid iGetJid(int i)
             throws Exception;
 
     /**

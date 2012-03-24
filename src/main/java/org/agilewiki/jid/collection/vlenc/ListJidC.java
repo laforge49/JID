@@ -67,7 +67,7 @@ public class ListJidC
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public Jid get(int i)
+    public Jid iGetJid(int i)
             throws Exception {
         initialize();
         return list.get(i);
@@ -150,7 +150,7 @@ public class ListJidC
         appendableBytes.writeInt(size());
         int i = 0;
         while (i < size()) {
-            get(i).save(appendableBytes);
+            iGetJid(i).save(appendableBytes);
             i += 1;
         }
     }
@@ -186,7 +186,7 @@ public class ListJidC
                 thisActor.getParent(),
                 bytes,
                 this)).call(thisActor);
-        Jid oldElementJid = get(i);
+        Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -285,7 +285,7 @@ public class ListJidC
         int i = 0;
         int s = size();
         while (i < s) {
-            Jid jid = get(i);
+            Jid jid = iGetJid(i);
             jid.setContainerJid(null);
             c -= jid.getSerializedLength();
             i += 1;
@@ -300,7 +300,7 @@ public class ListJidC
      */
     public void iRemove(int i)
             throws Exception {
-        Jid jid = get(i);
+        Jid jid = iGetJid(i);
         jid.setContainerJid(null);
         int c = -jid.getSerializedLength();
         list.remove(i);

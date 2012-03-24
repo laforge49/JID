@@ -57,4 +57,14 @@ final public class StringMapJidC extends MapJidC<String> {
     protected String getKeyType() {
         return JidFactories.STRING_JID_ATYPE;
     }
+
+    /**
+     * Converts a string to a key.
+     *
+     * @param skey The string to be converted.
+     * @return The key.
+     */
+    String stringToKey(String skey) {
+        return skey;
+    }
 }

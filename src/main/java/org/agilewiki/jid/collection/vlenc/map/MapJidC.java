@@ -46,7 +46,13 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      */
     abstract protected String getKeyType();
 
-    abstract KEY_TYPE stringToKey(String key);
+    /**
+     * Converts a string to a key.
+     *
+     * @param skey The string to be converted.
+     * @return The key.
+     */
+    abstract KEY_TYPE stringToKey(String skey);
 
     /**
      * Returns the actor type of all the elements in the list.
@@ -117,8 +123,8 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
             return false;
         i = -i - 1;
         iAdd(i);
-        Collection t = (Collection) get(i);
-        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.get(0);
+        Collection t = (Collection) iGetJid(i);
+        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.iGetJid(0);
         e0.setValue(key);
         return true;
     }
@@ -129,13 +135,13 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return The jid assigned to the key, or null.
      */
-    final protected Jid get(KEY_TYPE key)
+    final protected Jid kGetJid(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) get(i);
-        return t.get(1);
+        Collection t = (Collection) iGetJid(i);
+        return t.iGetJid(1);
     }
 
     /**
@@ -146,7 +152,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      */
     final protected Actor kGet(KEY_TYPE key)
             throws Exception {
-        Jid jid = get(key);
+        Jid jid = kGetJid(key);
         if (jid == null)
             return null;
         return jid.thisActor();
@@ -171,7 +177,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
         if (s == 0)
             throw new IllegalArgumentException("pathname " + pathname);
         String ns = pathname.substring(0, s);
-        Jid jid = get(stringToKey(ns));
+        Jid jid = kGetJid(stringToKey(ns));
         if (jid == null)
             return null;
         if (s == pathname.length())
