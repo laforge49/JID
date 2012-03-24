@@ -96,16 +96,8 @@ public class ListJidC
         readableBytes.skip(Util.INT_LENGTH + len);
     }
 
-    /**
-     * Load the elements type.
-     *
-     * @throws Exception Any exceptions thrown during the open.
-     */
-    protected void loadElementsType()
-            throws Exception {
-        if (elementsType != null)
-            return;
-        elementsType = GetActorsType.req.call(thisActor);
+    protected String getActorsType() throws Exception {
+        return GetActorsType.req.call(thisActor);
     }
 
     /**
@@ -122,7 +114,6 @@ public class ListJidC
             list = new ArrayList<Jid>();
             return;
         }
-        loadElementsType();
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();

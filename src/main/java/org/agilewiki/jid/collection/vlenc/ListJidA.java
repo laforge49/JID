@@ -106,18 +106,6 @@ public class ListJidA
     }
 
     /**
-     * Load the elements type.
-     *
-     * @throws Exception Any exceptions thrown during the open.
-     */
-    protected void loadElementsType()
-            throws Exception {
-        if (elementsType != null)
-            return;
-        elementsType = GetActorsType.req.call(this);
-    }
-
-    /**
      * Perform lazy initialization.
      *
      * @throws Exception Any exceptions thrown during initialization.
@@ -131,7 +119,6 @@ public class ListJidA
             list = new ArrayList<Jid>();
             return;
         }
-        loadElementsType();
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();
