@@ -21,21 +21,40 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc.map.string;
+package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.collection.vlenc.map.MapJidC;
 
 /**
- * Holds a map.
+ * Holds a map with String keys.
  */
 final public class StringMapJidC extends MapJidC<String> {
+    /**
+     * Create a KMake request.
+     *
+     * @param key The key.
+     * @return The KMake request.
+     */
+    public static KMake<String> newKMake(String key) {
+        return new KMake<String>(key);
+    }
+
+    /**
+     * Create a KGet request.
+     *
+     * @param key The key.
+     * @return The KGet request.
+     */
+    public static KGet<String> newKGet(String key) {
+        return new KGet<String>(key);
+    }
+
     /**
      * Returns the actor type of the key.
      *
      * @return The actor type of the key.
      */
-    final protected String getKeyType() {
+    protected String getKeyType() {
         return JidFactories.STRING_JID_ATYPE;
     }
 }
