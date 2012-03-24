@@ -23,33 +23,8 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JBSynchronousRequest;
-
 /**
- * Returns the value assigned to a given key.
+ * Defines the actor type of the values of a map.
  */
-public class KGet<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Actor> {
-    /**
-     * The key.
-     */
-    protected KEY_TYPE key;
-
-    /**
-     * Returns the key.
-     *
-     * @return The key.
-     */
-    public KEY_TYPE getKey() {
-        return key;
-    }
-
-    /**
-     * Create the request.
-     *
-     * @param key The key.
-     */
-    public KGet(KEY_TYPE key) {
-        this.key = key;
-    }
+public interface ValuesType {
 }

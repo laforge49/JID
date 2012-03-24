@@ -96,7 +96,13 @@ public class ListJidC
         readableBytes.skip(Util.INT_LENGTH + len);
     }
 
-    protected String getActorsType() throws Exception {
+    /**
+     * Returns the actor type of all the elements in the list.
+     *
+     * @return The actor type of all the elements in the list.
+     */
+    protected String getActorsType()
+            throws Exception {
         return GetActorsType.req.call(thisActor);
     }
 
@@ -109,7 +115,7 @@ public class ListJidC
             throws Exception {
         if (list != null)
             return;
-        elementsType = GetActorsType.req.call(thisActor);
+        elementsType = getActorsType();
         if (!isSerialized()) {
             list = new ArrayList<Jid>();
             return;

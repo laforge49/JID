@@ -106,6 +106,16 @@ public class ListJidA
     }
 
     /**
+     * Returns the actor type of all the elements in the list.
+     *
+     * @return The actor type of all the elements in the list.
+     */
+    protected String getActorsType()
+            throws Exception {
+        return GetActorsType.req.call(this);
+    }
+
+    /**
      * Perform lazy initialization.
      *
      * @throws Exception Any exceptions thrown during initialization.
@@ -114,7 +124,7 @@ public class ListJidA
             throws Exception {
         if (list != null)
             return;
-        elementsType = GetActorsType.req.call(this);
+        elementsType = getActorsType();
         if (!isSerialized()) {
             list = new ArrayList<Jid>();
             return;

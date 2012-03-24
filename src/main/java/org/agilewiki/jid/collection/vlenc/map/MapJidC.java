@@ -1,9 +1,33 @@
+/*
+ * Copyright 2012 Bill La Forge
+ *
+ * This file is part of AgileWiki and is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License (LGPL) as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This code is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ * or navigate to the following url http://www.gnu.org/licenses/lgpl-2.1.txt
+ *
+ * Note however that only Scala, Java and JavaScript files are being covered by LGPL.
+ * All other files are covered by the Common Public License (CPL).
+ * A copy of this license is also included and can be
+ * found as well at http://www.opensource.org/licenses/cpl1.0.txt
+ */
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.scalar.Scalar;
@@ -11,14 +35,31 @@ import org.agilewiki.jid.scalar.Scalar;
 /**
  * Holds a map.
  */
-public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
+abstract public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
+    /**
+     * Returns the actor type of the key.
+     *
+     * @return The actor type of the key.
+     */
+    abstract protected String getKeyType();
+
+    /**
+     * Returns the actor type of all the elements in the list.
+     *
+     * @return The actor type of all the elements in the list.
+     */
+    final protected String getActorsType()
+            throws Exception {
+        return JidFactories.ACTOR_JID_ATYPE;
+    }
+
     /**
      * Locate the tuple with a matching first element.
      *
      * @param key The key which matches to the tuple's first element.
      * @return The index or - (insertion point + 1).
      */
-    protected int search(KEY_TYPE key) throws Exception {
+    final protected int search(KEY_TYPE key) throws Exception {
         int low = 0;
         int high = size() - 1;
         while (low <= high) {
@@ -41,7 +82,7 @@ public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
      * @param key Used to match the first element of the tuples.
      * @return True if a new tuple was created.
      */
-    protected Boolean kMake(Internals sourceInternals, KEY_TYPE key)
+    final protected Boolean kMake(Internals sourceInternals, KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i > -1)
@@ -62,7 +103,7 @@ public class MapJidC<KEY_TYPE extends Comparable> extends ListJidC {
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname)
+    final public Actor resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return thisActor;

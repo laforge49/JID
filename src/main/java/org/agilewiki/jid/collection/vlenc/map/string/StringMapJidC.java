@@ -21,35 +21,21 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc.map;
+package org.agilewiki.jid.collection.vlenc.map.string;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JBSynchronousRequest;
+import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.collection.vlenc.map.MapJidC;
 
 /**
- * Returns the value assigned to a given key.
+ * Holds a map.
  */
-public class KGet<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Actor> {
+public class StringMapJidC extends MapJidC<String> {
     /**
-     * The key.
-     */
-    protected KEY_TYPE key;
-
-    /**
-     * Returns the key.
+     * Returns the actor type of the key.
      *
-     * @return The key.
+     * @return The actor type of the key.
      */
-    public KEY_TYPE getKey() {
-        return key;
-    }
-
-    /**
-     * Create the request.
-     *
-     * @param key The key.
-     */
-    public KGet(KEY_TYPE key) {
-        this.key = key;
+    final protected String getKeyType() {
+        return JidFactories.STRING_JID_ATYPE;
     }
 }
