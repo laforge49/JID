@@ -10,6 +10,7 @@ import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.scalar.vlens.string.StringJidA;
 
 public class StringStringJAMapJidCTest extends TestCase {
     public void test() {
@@ -23,6 +24,10 @@ public class StringStringJAMapJidCTest extends TestCase {
             Actor m = newMapJid.send(future, factory).thisActor();
             assertNull(StringMapJidC.newKGet("a").send(future, m));
             assertTrue(StringMapJidC.newKMake("b").send(future, m));
+            assertNull(StringMapJidC.newKGet("a").send(future, m));
+            Actor value = StringMapJidC.newKGet("b").send(future, m);
+            assertTrue(value instanceof StringJidA);
+            assertNull(StringMapJidC.newKGet("c").send(future, m));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
