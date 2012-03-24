@@ -30,6 +30,8 @@ import org.agilewiki.jid.collection.flenc.TupleJidA;
 import org.agilewiki.jid.collection.flenc.TupleJidC;
 import org.agilewiki.jid.collection.vlenc.ListJidA;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
+import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
+import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidC;
@@ -167,6 +169,16 @@ final public class JidFactories extends Component {
     public final static String LIST_JID_ATYPE = "LIST_JIDa";
 
     /**
+     * The name of the ListJid component.
+     */
+    public final static String STRING_MAP_JID_CTYPE = "STRING_MAP_JIDc";
+
+    /**
+     * The name of the ListJid component.
+     */
+    public final static String STRING_STRINGJA_MAP_JID_CTYPE = "STRING_STRINGa_MAP_JIDc";
+
+    /**
      * Returns a list of Includes for inclusion in the actor.
      *
      * @return A list of classes for inclusion in the actor.
@@ -210,5 +222,8 @@ final public class JidFactories extends Component {
         (new DefineActorType(TUPLE_JID_ATYPE, TupleJidA.class)).call(thisActor);
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
         (new DefineActorType(LIST_JID_ATYPE, ListJidA.class)).call(thisActor);
+
+        (new DefineActorType(STRING_MAP_JID_CTYPE, StringMapJidC.class)).call(thisActor);
+        (new DefineActorType(STRING_STRINGJA_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);
     }
 }

@@ -21,21 +21,24 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc.map;
+package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.collection.vlenc.map.KGet;
+import org.agilewiki.jid.collection.vlenc.map.KMake;
+import org.agilewiki.jid.collection.vlenc.map.MapJidC;
 
 /**
  * Holds a map with String keys.
  */
-final public class StringMapJidC extends MapJidC<String> {
+public class StringMapJidC extends MapJidC<String> {
     /**
      * Create a KMake request.
      *
      * @param key The key.
      * @return The KMake request.
      */
-    public static KMake<String> newKMake(String key) {
+    final public static KMake<String> newKMake(String key) {
         return new KMake<String>(key);
     }
 
@@ -45,7 +48,7 @@ final public class StringMapJidC extends MapJidC<String> {
      * @param key The key.
      * @return The KGet request.
      */
-    public static KGet<String> newKGet(String key) {
+    final public static KGet<String> newKGet(String key) {
         return new KGet<String>(key);
     }
 
@@ -54,7 +57,7 @@ final public class StringMapJidC extends MapJidC<String> {
      *
      * @return The actor type of the key.
      */
-    protected String getKeyType() {
+    final protected String getKeyType() {
         return JidFactories.STRING_JID_ATYPE;
     }
 
@@ -64,7 +67,7 @@ final public class StringMapJidC extends MapJidC<String> {
      * @param skey The string to be converted.
      * @return The key.
      */
-    String stringToKey(String skey) {
+    final protected String stringToKey(String skey) {
         return skey;
     }
 }

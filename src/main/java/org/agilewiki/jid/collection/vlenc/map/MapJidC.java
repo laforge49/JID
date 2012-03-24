@@ -54,7 +54,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      * @param skey The string to be converted.
      * @return The key.
      */
-    abstract KEY_TYPE stringToKey(String skey);
+    abstract protected KEY_TYPE stringToKey(String skey);
 
     /**
      * Returns the actor type of all the elements in the list.
