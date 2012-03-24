@@ -129,7 +129,7 @@ public class ListJidC
             NewJID newJid = new NewJID(
                     elementsType,
                     thisActor.getMailbox(),
-                    thisActor.getParent(),
+                    thisActor,
                     readableBytes,
                     this);
             Jid elementJid = newJid.call(thisActor);
@@ -183,7 +183,7 @@ public class ListJidC
         Jid elementJid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
-                thisActor.getParent(),
+                thisActor,
                 bytes,
                 this)).call(thisActor);
         Jid oldElementJid = iGetJid(i);
@@ -247,7 +247,7 @@ public class ListJidC
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
-                thisActor.getParent(),
+                thisActor,
                 bytes,
                 this)).call(thisActor);
         int c = jid.getSerializedLength();
@@ -268,7 +268,7 @@ public class ListJidC
         Jid jid = (new NewJID(
                 elementsType,
                 thisActor.getMailbox(),
-                thisActor.getParent(),
+                thisActor,
                 (byte[]) null,
                 this)).call(thisActor);
         int c = jid.getSerializedLength();

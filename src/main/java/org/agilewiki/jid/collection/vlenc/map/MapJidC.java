@@ -24,13 +24,16 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
 import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.ActorTypes;
+import org.agilewiki.jid.collection.flenc.GetActorTypes;
 import org.agilewiki.jid.collection.vlenc.GetActorsType;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.scalar.Scalar;
@@ -63,7 +66,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      */
     final protected String getActorsType()
             throws Exception {
-        return JidFactories.ACTOR_JID_ATYPE;
+        return JidFactories.TUPLE_JID_ATYPE;
     }
 
     /**
@@ -121,6 +124,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
     @Override
     final public Boolean kMake(KEY_TYPE key)
             throws Exception {
+        initialize();
         int i = search(key);
         if (i > -1)
             return false;
@@ -141,6 +145,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
     @Override
     final public Jid kGetJid(KEY_TYPE key)
             throws Exception {
+        initialize();
         int i = search(key);
         if (i < 0)
             return null;
@@ -166,6 +171,17 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
     @Override
     public void bindery() throws Exception {
         super.bindery();
+
+        thisActor.bind(
+                GetActorTypes.class.getName(),
+                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
+                    @Override
+                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
+                                                             GetActorTypes request)
+                            throws Exception {
+                        return getActorTypes();
+                    }
+                });
 
         thisActor.bind(KMake.class.getName(), new SynchronousMethodBinding<KMake<KEY_TYPE>, Boolean>() {
             @Override
@@ -194,6 +210,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
     @Override
     final public Actor resolvePathname(String pathname)
             throws Exception {
+        initialize();
         if (pathname.length() == 0) {
             return thisActor;
         }

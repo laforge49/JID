@@ -138,7 +138,7 @@ public class ListJidA
             NewJID newJid = new NewJID(
                     elementsType,
                     getMailbox(),
-                    getParent(),
+                    this,
                     readableBytes,
                     this);
             Jid elementJid = newJid.call(this);
@@ -192,7 +192,7 @@ public class ListJidA
         Jid elementJid = (new NewJID(
                 elementsType,
                 getMailbox(),
-                getParent(),
+                this,
                 bytes,
                 this)).call(this);
         Jid oldElementJid = iGetJid(i);
@@ -237,7 +237,7 @@ public class ListJidA
         Jid jid = (new NewJID(
                 elementsType,
                 getMailbox(),
-                getParent(),
+                this,
                 bytes,
                 this)).call(this);
         int c = jid.getSerializedLength();
@@ -253,7 +253,7 @@ public class ListJidA
         Jid jid = (new NewJID(
                 elementsType,
                 getMailbox(),
-                getParent(),
+                this,
                 (byte[]) null,
                 this)).call(this);
         int c = jid.getSerializedLength();
