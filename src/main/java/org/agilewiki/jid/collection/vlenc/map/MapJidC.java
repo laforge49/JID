@@ -24,6 +24,8 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.bind.Internals;
+import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidFactories;
@@ -159,6 +161,27 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
         if (jid == null)
             return null;
         return jid.thisActor();
+    }
+
+    @Override
+    public void bindery() throws Exception {
+        super.bindery();
+
+        thisActor.bind(KMake.class.getName(), new SynchronousMethodBinding<KMake<KEY_TYPE>, Boolean>() {
+            @Override
+            public Boolean synchronousProcessRequest(Internals internals, KMake<KEY_TYPE> request)
+                    throws Exception {
+                return kMake(request.getKey());
+            }
+        });
+
+        thisActor.bind(KGet.class.getName(), new SynchronousMethodBinding<KGet<KEY_TYPE>, Actor>() {
+            @Override
+            public Actor synchronousProcessRequest(Internals internals, KGet<KEY_TYPE> request)
+                    throws Exception {
+                return kGet(request.getKey());
+            }
+        });
     }
 
     /**
