@@ -38,7 +38,7 @@ import org.agilewiki.jid.scalar.Scalar;
  */
 abstract public class MapJidC<KEY_TYPE extends Comparable>
         extends ListJidC
-        implements ActorTypes {
+        implements ActorTypes, Map<KEY_TYPE> {
     /**
      * Returns the actor type of the key.
      *
@@ -73,7 +73,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
             throws Exception {
         String[] actorTypes = new String[2];
         actorTypes[0] = getKeyType();
-        actorTypes[1] = getActorsType();
+        actorTypes[1] = getValuesType();
         return actorTypes;
     }
 
@@ -116,7 +116,8 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      * @param key Used to match the first element of the tuples.
      * @return True if a new tuple was created.
      */
-    final protected Boolean kMake(KEY_TYPE key)
+    @Override
+    final public Boolean kMake(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i > -1)
@@ -135,7 +136,8 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return The jid assigned to the key, or null.
      */
-    final protected Jid kGetJid(KEY_TYPE key)
+    @Override
+    final public Jid kGetJid(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i < 0)
@@ -150,7 +152,8 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return The actor assigned to the key, or null.
      */
-    final protected Actor kGet(KEY_TYPE key)
+    @Override
+    final public Actor kGet(KEY_TYPE key)
             throws Exception {
         Jid jid = kGetJid(key);
         if (jid == null)

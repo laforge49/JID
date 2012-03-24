@@ -21,31 +21,42 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar;
+package org.agilewiki.jid.collection.vlenc.map;
 
+import org.agilewiki.jactor.Actor;
 import org.agilewiki.jid.Jid;
+import org.agilewiki.jid.collection.Collection;
 
 /**
- * A JID component that holds a value.
+ * Holds a map.
  */
-public interface Scalar<SET_TYPE, RESPONSE_TYPE>
-        extends Jid {
+public interface Map<KEY_TYPE>
+        extends Collection {
 
     /**
-     * Assign a value.
+     * Add a tuple to the map unless there is a tuple with a matching first element.
      *
-     * @param request The MakeValue request.
-     * @throws Exception Any uncaught exception raised.
+     * @param key Used to match the first element of the tuples.
+     * @return True if a new tuple was created.
      */
-    public void setValue(SET_TYPE request)
+    public Boolean kMake(KEY_TYPE key)
             throws Exception;
 
     /**
-     * Returns the value held by this component.
+     * Returns the JID value associated with the key.
      *
-     * @return The value held by this component.
-     * @throws Exception Any uncaught exception raised during deserialization.
+     * @param key The key.
+     * @return The jid assigned to the key, or null.
      */
-    public RESPONSE_TYPE getValue()
+    public Jid kGetJid(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Returns the Actor value associated with the key.
+     *
+     * @param key The key.
+     * @return The actor assigned to the key, or null.
+     */
+    public Actor kGet(KEY_TYPE key)
             throws Exception;
 }
