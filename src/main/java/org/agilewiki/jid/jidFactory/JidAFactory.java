@@ -1,10 +1,11 @@
-package org.agilewiki.jid;
+package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.components.factory.ActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.Jid;
+import org.agilewiki.jid.JidA;
+import org.agilewiki.jid.ReadableBytes;
 
 /**
  * Creates a JidA.
@@ -63,20 +64,5 @@ public class JidAFactory extends JidFactory implements ActorFactory {
         if (container != null)
             jidA.setContainerJid(container);
         return jidA;
-    }
-
-    /**
-     * Create and configure an actor.
-     *
-     * @param mailbox The mailbox of the new actor.
-     * @param parent  The parent of the new actor.
-     * @return The new actor.
-     */
-    @Override
-    final public JLPCActor newActor(Mailbox mailbox, Actor parent) throws Exception {
-        JLPCActor a = instantiateActor(mailbox);
-        a.setActorType(actorType);
-        a.setParent(parent);
-        return a;
     }
 }

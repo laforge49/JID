@@ -33,6 +33,7 @@ import org.agilewiki.jid.collection.vlenc.ListJidAFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
+import org.agilewiki.jid.jidFactory.JidAFactory;
 import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidAFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidC;

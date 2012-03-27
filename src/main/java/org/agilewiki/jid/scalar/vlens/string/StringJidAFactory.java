@@ -1,7 +1,7 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
  * Creates a StringJidA.

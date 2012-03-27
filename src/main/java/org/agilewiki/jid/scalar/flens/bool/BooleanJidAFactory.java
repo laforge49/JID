@@ -1,7 +1,7 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
  * Creates a BooleanJidA.

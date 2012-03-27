@@ -30,8 +30,7 @@ import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.Factory;
-import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jactor.components.factory.*;
 import org.agilewiki.jid.GetJIDComponent;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidA;
@@ -62,6 +61,16 @@ final public class JidsFactory extends Component {
      */
     @Override
     public void bindery() throws Exception {
+
+        thisActor.bind(GetJidFactory.class.getName(), new ConcurrentMethodBinding<GetJidFactory, JidFactory>() {
+            @Override
+            public JidFactory concurrentProcessRequest(RequestReceiver requestReceiver, GetJidFactory request) throws Exception {
+                ActorFactory actorFactory = (new GetActorFactory(request.getActorType())).call(thisActor);
+                if (actorFactory instanceof JidFactory)
+                    return (JidFactory) actorFactory;
+                return new JidCFactory((JCActorFactory) actorFactory);
+            }
+        });
 
         thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, Jid>() {
             @Override

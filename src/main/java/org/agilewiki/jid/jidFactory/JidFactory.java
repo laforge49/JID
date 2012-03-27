@@ -55,4 +55,15 @@ abstract public class JidFactory {
             throws Exception {
         return newJID(mailbox, parent, container, readableBytes).thisActor();
     }
+
+    /**
+     * Create and configure an actor.
+     *
+     * @param mailbox The mailbox of the new actor.
+     * @param parent  The parent of the new actor.
+     * @return The new actor.
+     */
+    final public Actor newActor(Mailbox mailbox, Actor parent) throws Exception {
+        return newJID(mailbox, parent, null, null).thisActor();
+    }
 }

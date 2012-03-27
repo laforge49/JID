@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid;
+package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
@@ -29,7 +29,10 @@ import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.ActorFactory;
 import org.agilewiki.jactor.components.factory.JCActorFactory;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.GetJIDComponent;
+import org.agilewiki.jid.Jid;
+import org.agilewiki.jid.JidC;
+import org.agilewiki.jid.ReadableBytes;
 
 /**
  * Create a JidC actor.
@@ -79,17 +82,5 @@ public class JidCFactory extends JidFactory implements ActorFactory {
             jidC.setContainerJid(container);
         Open.req.call(jcActor);
         return jidC;
-    }
-
-    /**
-     * Create and configure an actor.
-     *
-     * @param mailbox The mailbox of the new actor.
-     * @param parent  The parent of the new actor.
-     * @return The new actor.
-     */
-    @Override
-    final public JCActor newActor(Mailbox mailbox, Actor parent) throws Exception {
-        return newJID(mailbox, parent, null, null).thisActor();
     }
 }
