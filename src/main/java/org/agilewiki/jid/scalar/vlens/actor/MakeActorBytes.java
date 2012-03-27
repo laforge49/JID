@@ -25,6 +25,7 @@ package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
@@ -35,6 +36,11 @@ final public class MakeActorBytes
      * An actor type name.
      */
     private String actorType;
+
+    /**
+     * The jid factory.
+     */
+    private JidFactory jidFactory;
 
     /**
      * Holds the serialized data.
@@ -48,7 +54,22 @@ final public class MakeActorBytes
      * @param bytes     The serialized data.
      */
     public MakeActorBytes(String actorType, byte[] bytes) {
+        if (actorType == null)
+            throw new IllegalArgumentException("value may not be null");
         this.actorType = actorType;
+        this.bytes = bytes;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param jidFactory The jid factory.
+     * @param bytes      The serialized data.
+     */
+    public MakeActorBytes(JidFactory jidFactory, byte[] bytes) {
+        if (jidFactory == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.jidFactory = jidFactory;
         this.bytes = bytes;
     }
 
@@ -59,6 +80,15 @@ final public class MakeActorBytes
      */
     public String getActorType() {
         return actorType;
+    }
+
+    /**
+     * Returns the jid factory.
+     *
+     * @return The jid factory.
+     */
+    public JidFactory getJidFactory() {
+        return jidFactory;
     }
 
     /**
@@ -80,7 +110,10 @@ final public class MakeActorBytes
     @Override
     protected Boolean call(ActorJidA targetActor)
             throws Exception {
-        return targetActor.makeJidBytes(actorType, bytes);
+        if (actorType != null)
+            return targetActor.makeJidBytes(actorType, bytes);
+        else
+            return targetActor.makeJidBytes(jidFactory, bytes);
     }
 
     /**

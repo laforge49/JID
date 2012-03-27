@@ -60,7 +60,7 @@ public class ActorJidC
                             throws Exception {
                         String actorType = request.getValue();
                         if (actorType != null)
-                            setValue(request.getValue());
+                            setValue(actorType);
                         else
                             setValue(request.getJidFactory());
                     }
@@ -74,7 +74,7 @@ public class ActorJidC
                             throws Exception {
                         String actorType = request.getValue();
                         if (actorType != null)
-                            return makeValue(request.getValue());
+                            return makeValue(actorType);
                         else
                             return makeValue(request.getJidFactory());
                     }
@@ -84,7 +84,11 @@ public class ActorJidC
             @Override
             public void synchronousProcessRequest(Internals internals, SetActorBytes request)
                     throws Exception {
-                setJidBytes(request.getActorType(), request.getBytes());
+                String actorType = request.getActorType();
+                if (actorType != null)
+                    setJidBytes(actorType, request.getBytes());
+                else
+                    setJidBytes(request.getJidFactory(), request.getBytes());
             }
         });
 
@@ -92,7 +96,11 @@ public class ActorJidC
             @Override
             public Boolean synchronousProcessRequest(Internals internals, MakeActorBytes request)
                     throws Exception {
-                return makeJidBytes(request.getActorType(), request.getBytes());
+                String actorType = request.getActorType();
+                if (actorType != null)
+                    return makeJidBytes(actorType, request.getBytes());
+                else
+                    return makeJidBytes(request.getJidFactory(), request.getBytes());
             }
         });
     }
@@ -222,6 +230,52 @@ public class ActorJidC
         NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes, this);
         value = na.call(thisActor);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
+        change(l);
+        serializedBytes = null;
+        serializedOffset = -1;
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void setJidBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        if (len > -1)
+            clear();
+        setBytes(jidFactory, bytes);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        if (len > -1)
+            return false;
+        setBytes(jidFactory, bytes);
+        return true;
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void setBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        value = jidFactory.newJID(thisActor.getMailbox(), thisActor().getParent(), this);
+        int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
         serializedOffset = -1;

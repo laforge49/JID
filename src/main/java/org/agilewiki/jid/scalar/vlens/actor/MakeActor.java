@@ -92,7 +92,10 @@ public class MakeActor
     @Override
     protected Boolean call(ActorJidA targetActor)
             throws Exception {
-        return targetActor.makeValue(actorType);
+        if (actorType != null)
+            return targetActor.makeValue(actorType);
+        else
+            return targetActor.makeValue(jidFactory);
     }
 
     /**

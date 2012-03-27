@@ -92,7 +92,10 @@ public class SetActor
     @Override
     protected Object call(ActorJidA targetActor)
             throws Exception {
-        targetActor.setValue(actorType);
+        if (actorType != null)
+            targetActor.setValue(actorType);
+        else
+            targetActor.setValue(jidFactory);
         return null;
     }
 

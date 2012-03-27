@@ -74,12 +74,20 @@ public class ActorJidA
             else
                 rp.processResponse(makeValue(makeActor.getJidFactory()));
         } else if (request instanceof SetActorBytes) {
-            setJidBytes(((SetActorBytes) request).getActorType(), ((SetActorBytes) request).getBytes());
+            SetActorBytes setActorBytes = (SetActorBytes) request;
+            String actorType = setActorBytes.getActorType();
+            if (actorType != null)
+                setJidBytes(actorType, setActorBytes.getBytes());
+            else
+                setJidBytes(setActorBytes.getJidFactory(), setActorBytes.getBytes());
             rp.processResponse(null);
         } else if (request instanceof MakeActorBytes) {
-            rp.processResponse(makeJidBytes(
-                    ((MakeActorBytes) request).getActorType(),
-                    ((MakeActorBytes) request).getBytes()));
+            MakeActorBytes makeActorBytes = (MakeActorBytes) request;
+            String actorType = makeActorBytes.getActorType();
+            if (actorType != null)
+                rp.processResponse(makeJidBytes(actorType, makeActorBytes.getBytes()));
+            else
+                rp.processResponse(makeJidBytes(makeActorBytes.getJidFactory(), makeActorBytes.getBytes()));
         } else super.processRequest(request, rp);
     }
 
@@ -208,6 +216,52 @@ public class ActorJidA
         NewJID na = new NewJID(jidType, getMailbox(), getParent(), bytes, this);
         value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
+        change(l);
+        serializedBytes = null;
+        serializedOffset = -1;
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void setJidBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        if (len > -1)
+            clear();
+        setBytes(jidFactory, bytes);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        if (len > -1)
+            return false;
+        setBytes(jidFactory, bytes);
+        return true;
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected void setBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this);
+        int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
         serializedOffset = -1;
