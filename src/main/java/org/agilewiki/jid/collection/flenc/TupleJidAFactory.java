@@ -1,6 +1,7 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
@@ -9,11 +10,9 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 public class TupleJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
-     *
-     * @param actorType The name of the actor type.
      */
-    public TupleJidAFactory(String actorType) {
-        super(actorType);
+    public TupleJidAFactory() {
+        actorType = JidFactories.TUPLE_JID_ATYPE;
     }
 
     /**

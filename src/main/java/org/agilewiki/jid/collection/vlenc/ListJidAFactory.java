@@ -1,6 +1,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
@@ -9,11 +10,9 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 public class ListJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
-     *
-     * @param actorType The name of the actor type.
      */
-    public ListJidAFactory(String actorType) {
-        super(actorType);
+    public ListJidAFactory() {
+        actorType = JidFactories.LIST_JID_ATYPE;
     }
 
     /**

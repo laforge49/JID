@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
@@ -9,11 +10,9 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 public class IntegerJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
-     *
-     * @param actorType The name of the actor type.
      */
-    public IntegerJidAFactory(String actorType) {
-        super(actorType);
+    public IntegerJidAFactory() {
+        actorType = JidFactories.INTEGER_JID_ATYPE;
     }
 
     /**

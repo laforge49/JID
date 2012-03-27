@@ -24,7 +24,7 @@ public class ActorJidATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            ActorJidAFactory actorJidAFactory = new ActorJidAFactory(JidFactories.ACTOR_JID_ATYPE);
+            ActorJidAFactory actorJidAFactory = new ActorJidAFactory();
             Actor jidJid1 = actorJidAFactory.newActor(factory.getMailbox(), factory);
             int sl = GetSerializedLength.req.send(future, jidJid1);
             assertEquals(4, sl);
@@ -48,7 +48,7 @@ public class ActorJidATest extends TestCase {
             rpa = (new ResolvePathname("0")).send(future, jidJid11);
             assertNull(rpa);
 
-            StringJidAFactory stringJidAFactory = new StringJidAFactory(JidFactories.STRING_JID_ATYPE);
+            StringJidAFactory stringJidAFactory = new StringJidAFactory();
             Actor string1 = stringJidAFactory.newActor(factory.getMailbox(), factory);
             (new SetString("abc")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);

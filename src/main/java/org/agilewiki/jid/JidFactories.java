@@ -200,30 +200,30 @@ final public class JidFactories extends Component {
     @Override
     public void bindery() throws Exception {
         (new DefineActorType(JID_CTYPE, JidC.class)).call(thisActor);
-        (new RegisterActorFactory(new JidAFactory(JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new JidAFactory())).call(thisActor);
 
         (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new BooleanJidAFactory(BOOLEAN_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new BooleanJidAFactory())).call(thisActor);
         (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new IntegerJidAFactory(INTEGER_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new IntegerJidAFactory())).call(thisActor);
         (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new LongJidAFactory(LONG_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new LongJidAFactory())).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new FloatJidAFactory(FLOAT_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new FloatJidAFactory())).call(thisActor);
         (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new DoubleJidAFactory(DOUBLE_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new DoubleJidAFactory())).call(thisActor);
 
         (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new ActorJidAFactory(ACTOR_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new ActorJidAFactory())).call(thisActor);
         (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new StringJidAFactory(STRING_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new StringJidAFactory())).call(thisActor);
         (new DefineActorType(BYTES_JID_CTYPE, BytesJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new BytesJidAFactory(BYTES_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new BytesJidAFactory())).call(thisActor);
 
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new TupleJidAFactory(TUPLE_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new TupleJidAFactory())).call(thisActor);
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new ListJidAFactory(LIST_JID_ATYPE))).call(thisActor);
+        (new RegisterActorFactory(new ListJidAFactory())).call(thisActor);
 
         (new DefineActorType(STRING_MAP_JID_CTYPE, StringMapJidC.class)).call(thisActor);
         (new DefineActorType(STRING_STRINGJA_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);

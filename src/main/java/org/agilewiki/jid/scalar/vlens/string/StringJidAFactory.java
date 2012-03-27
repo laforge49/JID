@@ -1,6 +1,7 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
@@ -9,11 +10,9 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 public class StringJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
-     *
-     * @param actorType The name of the actor type.
      */
-    public StringJidAFactory(String actorType) {
-        super(actorType);
+    public StringJidAFactory() {
+        actorType = JidFactories.STRING_JID_ATYPE;
     }
 
     /**

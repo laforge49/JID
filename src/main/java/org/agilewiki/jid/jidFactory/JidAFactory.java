@@ -5,6 +5,7 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.components.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidA;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
 
 /**
@@ -18,11 +19,9 @@ public class JidAFactory extends JidFactory implements ActorFactory {
 
     /**
      * Create a JLPCActorFactory.
-     *
-     * @param actorType The name of the actor type.
      */
-    public JidAFactory(String actorType) {
-        this.actorType = actorType;
+    public JidAFactory() {
+        actorType = JidFactories.JID_ATYPE;
     }
 
     /**
