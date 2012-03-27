@@ -26,28 +26,29 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
-import org.agilewiki.jid.collection.flenc.TupleJidA;
+import org.agilewiki.jactor.components.factory.RegisterJLPCActorFactory;
+import org.agilewiki.jid.collection.flenc.TupleJidAFactory;
 import org.agilewiki.jid.collection.flenc.TupleJidC;
-import org.agilewiki.jid.collection.vlenc.ListJidA;
+import org.agilewiki.jid.collection.vlenc.ListJidAFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.scalar.flens.bool.BooleanJidA;
+import org.agilewiki.jid.scalar.flens.bool.BooleanJidAFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidC;
-import org.agilewiki.jid.scalar.flens.dbl.DoubleJidA;
+import org.agilewiki.jid.scalar.flens.dbl.DoubleJidAFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidC;
-import org.agilewiki.jid.scalar.flens.flt.FloatJidA;
+import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidC;
-import org.agilewiki.jid.scalar.flens.integer.IntegerJidA;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidAFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidC;
-import org.agilewiki.jid.scalar.flens.lng.LongJidA;
+import org.agilewiki.jid.scalar.flens.lng.LongJidAFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidC;
-import org.agilewiki.jid.scalar.vlens.actor.ActorJidA;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidAFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidC;
-import org.agilewiki.jid.scalar.vlens.bytes.BytesJidA;
+import org.agilewiki.jid.scalar.vlens.bytes.BytesJidAFactory;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidC;
-import org.agilewiki.jid.scalar.vlens.string.StringJidA;
+import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidC;
 
 import java.util.ArrayList;
@@ -198,30 +199,30 @@ final public class JidFactories extends Component {
     @Override
     public void bindery() throws Exception {
         (new DefineActorType(JID_CTYPE, JidC.class)).call(thisActor);
-        (new DefineActorType(JID_ATYPE, JidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new JidAFactory(JID_ATYPE))).call(thisActor);
 
         (new DefineActorType(BOOLEAN_JID_CTYPE, BooleanJidC.class)).call(thisActor);
-        (new DefineActorType(BOOLEAN_JID_ATYPE, BooleanJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new BooleanJidAFactory(BOOLEAN_JID_ATYPE))).call(thisActor);
         (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
-        (new DefineActorType(INTEGER_JID_ATYPE, IntegerJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new IntegerJidAFactory(INTEGER_JID_ATYPE))).call(thisActor);
         (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
-        (new DefineActorType(LONG_JID_ATYPE, LongJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new LongJidAFactory(LONG_JID_ATYPE))).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
-        (new DefineActorType(FLOAT_JID_ATYPE, FloatJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new FloatJidAFactory(FLOAT_JID_ATYPE))).call(thisActor);
         (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
-        (new DefineActorType(DOUBLE_JID_ATYPE, DoubleJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new DoubleJidAFactory(DOUBLE_JID_ATYPE))).call(thisActor);
 
         (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
-        (new DefineActorType(ACTOR_JID_ATYPE, ActorJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new ActorJidAFactory(ACTOR_JID_ATYPE))).call(thisActor);
         (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
-        (new DefineActorType(STRING_JID_ATYPE, StringJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new StringJidAFactory(STRING_JID_ATYPE))).call(thisActor);
         (new DefineActorType(BYTES_JID_CTYPE, BytesJidC.class)).call(thisActor);
-        (new DefineActorType(BYTES_JID_ATYPE, BytesJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new BytesJidAFactory(BYTES_JID_ATYPE))).call(thisActor);
 
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
-        (new DefineActorType(TUPLE_JID_ATYPE, TupleJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new TupleJidAFactory(TUPLE_JID_ATYPE))).call(thisActor);
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
-        (new DefineActorType(LIST_JID_ATYPE, ListJidA.class)).call(thisActor);
+        (new RegisterJLPCActorFactory(new ListJidAFactory(LIST_JID_ATYPE))).call(thisActor);
 
         (new DefineActorType(STRING_MAP_JID_CTYPE, StringMapJidC.class)).call(thisActor);
         (new DefineActorType(STRING_STRINGJA_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);
