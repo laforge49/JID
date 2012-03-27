@@ -26,7 +26,7 @@ package org.agilewiki.jid.jidFactory;
 import org.agilewiki.jactor.bind.JBConcurrentRequest;
 
 /**
- * Returns the actor factory for a given actor type.
+ * Returns the jid factory for a given actor type.
  */
 public class GetJidFactory extends JBConcurrentRequest<JidFactory> {
     /**
