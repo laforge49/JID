@@ -13,6 +13,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
+import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
 
 public class ActorJidATest extends TestCase {
     public void test() {
@@ -23,8 +24,8 @@ public class ActorJidATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_ATYPE);
-            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
+            ActorJidAFactory actorJidAFactory = new ActorJidAFactory(JidFactories.ACTOR_JID_ATYPE);
+            Actor jidJid1 = actorJidAFactory.newActor(factory.getMailbox(), factory);
             int sl = GetSerializedLength.req.send(future, jidJid1);
             assertEquals(4, sl);
             Clear.req.send(future, jidJid1);
@@ -47,14 +48,15 @@ public class ActorJidATest extends TestCase {
             rpa = (new ResolvePathname("0")).send(future, jidJid11);
             assertNull(rpa);
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
-            Actor string1 = newStringJid.send(future, factory).thisActor();
+            StringJidAFactory stringJidAFactory = new StringJidAFactory(JidFactories.STRING_JID_ATYPE);
+            Actor string1 = stringJidAFactory.newActor(factory.getMailbox(), factory);
             (new SetString("abc")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);
-            (new SetActorBytes(JidFactories.STRING_JID_CTYPE, sb)).send(future, jidJid1);
+            (new SetActorBytes(stringJidAFactory, sb)).send(future, jidJid1);
             Actor sj = GetActor.req.send(future, jidJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_ATYPE);
             Actor jidJid2 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
