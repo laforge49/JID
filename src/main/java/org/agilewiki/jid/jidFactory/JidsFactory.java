@@ -40,9 +40,9 @@ import org.agilewiki.jid.ReadableBytes;
 import java.util.ArrayList;
 
 /**
- * Creates a JID actor and loads its serialized data.
+ * A component to create JID actors and load their serialized data.
  */
-final public class JidFactory extends Component {
+final public class JidsFactory extends Component {
     /**
      * Returns a list of Includes for inclusion in the actor.
      *

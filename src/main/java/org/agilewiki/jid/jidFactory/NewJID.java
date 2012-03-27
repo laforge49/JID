@@ -30,7 +30,7 @@ import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 
 /**
- * Creates a JID actor and loads its serialized data.
+ * A request to create a JID actor and loads its serialized data.
  */
 final public class NewJID extends JBConcurrentRequest<Jid> {
     /**

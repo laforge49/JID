@@ -33,7 +33,7 @@ import org.agilewiki.jid.collection.vlenc.ListJidAFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidAFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidC;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidAFactory;
@@ -187,7 +187,7 @@ final public class JidFactories extends Component {
     @Override
     public ArrayList<Include> includes() {
         ArrayList<Include> rv = new ArrayList<Include>();
-        rv.add(new Include(JidFactory.class));
+        rv.add(new Include(JidsFactory.class));
         return rv;
     }
 
