@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a IntegerJidA.
  */
-public class IntegerJidAFactory extends JLPCActorFactory {
+public class IntegerJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class IntegerJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected IntegerJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new IntegerJidA(mailbox);
     }

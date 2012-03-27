@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a StringJidA.
  */
-public class StringJidAFactory extends JLPCActorFactory {
+public class StringJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class StringJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected StringJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new StringJidA(mailbox);
     }

@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a BytesJidA.
  */
-public class BytesJidAFactory extends JLPCActorFactory {
+public class BytesJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class BytesJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected BytesJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new BytesJidA(mailbox);
     }

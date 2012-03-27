@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a BooleanJidA.
  */
-public class BooleanJidAFactory extends JLPCActorFactory {
+public class BooleanJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class BooleanJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
+    final protected BooleanJidA instantiateActor(Mailbox mailbox) throws Exception {
         return new BooleanJidA(mailbox);
     }
 }

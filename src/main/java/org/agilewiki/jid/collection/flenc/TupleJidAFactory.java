@@ -1,13 +1,12 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a TupleJidA.
  */
-public class TupleJidAFactory extends JLPCActorFactory {
+public class TupleJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class TupleJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected TupleJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new TupleJidA(mailbox);
     }

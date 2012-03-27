@@ -21,17 +21,44 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.jidFactory;
+package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jactor.bind.Open;
+import org.agilewiki.jactor.components.JCActor;
+import org.agilewiki.jactor.components.factory.ActorFactory;
+import org.agilewiki.jactor.components.factory.JCActorFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Creates a Jid actor.
+ * Create a JidC actor.
  */
-abstract public class JidFactory {
+public class JidCFactory extends JidFactory implements ActorFactory {
+    /**
+     * The actor factory.
+     */
+    private JCActorFactory jcActorFactory;
+
+    /**
+     * Create a JidFactory.
+     *
+     * @param jcActorFactory The actor factory.
+     */
+    public JidCFactory(JCActorFactory jcActorFactory) {
+        this.jcActorFactory = jcActorFactory;
+    }
+
+    /**
+     * Returns the actor type.
+     *
+     * @return The actor type.
+     */
+    @Override
+    final public String getActorType() {
+        return jcActorFactory.getActorType();
+    }
+
     /**
      * Create and configure an actor.
      *
@@ -41,8 +68,18 @@ abstract public class JidFactory {
      * @param container     The container of the new Jid.
      * @return The new actor.
      */
-    abstract public Jid newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
-            throws Exception;
+    @Override
+    public JidC newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+            throws Exception {
+        JCActor jcActor = jcActorFactory.newActor(mailbox, parent);
+        JidC jidC = GetJIDComponent.req.call(jcActor);
+        if (readableBytes != null)
+            jidC.load(readableBytes);
+        if (container != null)
+            jidC.setContainerJid(container);
+        Open.req.call(jcActor);
+        return jidC;
+    }
 
     /**
      * Create and configure an actor.
@@ -51,8 +88,8 @@ abstract public class JidFactory {
      * @param parent  The parent of the new actor.
      * @return The new actor.
      */
-    public Actor newActor(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
-            throws Exception {
-        return newJID(mailbox, parent, container, readableBytes).thisActor();
+    @Override
+    final public JCActor newActor(Mailbox mailbox, Actor parent) throws Exception {
+        return newJID(mailbox, parent, null, null).thisActor();
     }
 }

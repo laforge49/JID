@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a DoubleJidA.
  */
-public class DoubleJidAFactory extends JLPCActorFactory {
+public class DoubleJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class DoubleJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
+    final protected DoubleJidA instantiateActor(Mailbox mailbox) throws Exception {
         return new DoubleJidA(mailbox);
     }
 }

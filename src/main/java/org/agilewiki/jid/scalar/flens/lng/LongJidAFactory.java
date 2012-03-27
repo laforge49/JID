@@ -1,13 +1,12 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a LongJidA.
  */
-public class LongJidAFactory extends JLPCActorFactory {
+public class LongJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class LongJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected LongJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new LongJidA(mailbox);
     }

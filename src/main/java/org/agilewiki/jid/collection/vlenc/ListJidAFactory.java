@@ -1,13 +1,12 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.JLPCActorFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidAFactory;
 
 /**
  * Creates a ListJidA.
  */
-public class ListJidAFactory extends JLPCActorFactory {
+public class ListJidAFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      *
@@ -24,7 +23,7 @@ public class ListJidAFactory extends JLPCActorFactory {
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox)
+    final protected ListJidA instantiateActor(Mailbox mailbox)
             throws Exception {
         return new ListJidA(mailbox);
     }
