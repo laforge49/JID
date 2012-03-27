@@ -25,6 +25,7 @@ package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Assigns a value if not already present.
@@ -37,12 +38,26 @@ public class MakeActor
     private String actorType;
 
     /**
+     * The jid factory.
+     */
+    private JidFactory jidFactory;
+
+    /**
      * Returns the actor type.
      *
      * @return The actor type.
      */
     public String getValue() {
         return actorType;
+    }
+
+    /**
+     * Returns the jid factory.
+     *
+     * @return The jid factory.
+     */
+    public JidFactory getJidFactory() {
+        return jidFactory;
     }
 
     /**
@@ -54,6 +69,17 @@ public class MakeActor
         if (actorType == null)
             throw new IllegalArgumentException("value may not be null");
         this.actorType = actorType;
+    }
+
+    /**
+     * Creates the request.
+     *
+     * @param jidFactory The jid factory.
+     */
+    public MakeActor(JidFactory jidFactory) {
+        if (jidFactory == null)
+            throw new IllegalArgumentException("value may not be null");
+        this.jidFactory = jidFactory;
     }
 
     /**

@@ -72,7 +72,11 @@ public class ActorJidC
                     public Boolean synchronousProcessRequest(Internals internals,
                                                              MakeActor request)
                             throws Exception {
-                        return makeValue(request.getValue());
+                        String actorType = request.getValue();
+                        if (actorType != null)
+                            return makeValue(request.getValue());
+                        else
+                            return makeValue(request.getJidFactory());
                     }
                 });
 
@@ -126,6 +130,21 @@ public class ActorJidC
         if (len > -1)
             return false;
         setValue(jidType);
+        return true;
+    }
+
+    /**
+     * Assign a value unless one is already present.
+     *
+     * @param jidFactory The actor type.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected Boolean makeValue(JidFactory jidFactory)
+            throws Exception {
+        if (len > -1)
+            return false;
+        setValue(jidFactory);
         return true;
     }
 

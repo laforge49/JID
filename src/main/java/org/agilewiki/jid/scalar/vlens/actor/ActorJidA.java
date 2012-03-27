@@ -67,7 +67,12 @@ public class ActorJidA
                 setValue(setActor.getJidFactory());
             rp.processResponse(null);
         } else if (request instanceof MakeActor) {
-            rp.processResponse(makeValue(((MakeActor) request).getValue()));
+            MakeActor makeActor = (MakeActor) request;
+            String actorType = makeActor.getValue();
+            if (actorType != null)
+                rp.processResponse(makeValue(actorType));
+            else
+                rp.processResponse(makeValue(makeActor.getJidFactory()));
         } else if (request instanceof SetActorBytes) {
             setJidBytes(((SetActorBytes) request).getActorType(), ((SetActorBytes) request).getBytes());
             rp.processResponse(null);
@@ -111,6 +116,21 @@ public class ActorJidA
         if (len > -1)
             return false;
         setValue(jidType);
+        return true;
+    }
+
+    /**
+     * Assign a value unless one is already present.
+     *
+     * @param jidFactory The actor type.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    protected Boolean makeValue(JidFactory jidFactory)
+            throws Exception {
+        if (len > -1)
+            return false;
+        setValue(jidFactory);
         return true;
     }
 
