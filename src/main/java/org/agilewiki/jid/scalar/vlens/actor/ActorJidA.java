@@ -27,6 +27,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 
@@ -58,7 +59,12 @@ public class ActorJidA
         if (request instanceof GetActor)
             rp.processResponse(getValue());
         else if (request instanceof SetActor) {
-            setValue(((SetActor) request).getValue());
+            SetActor setActor = (SetActor) request;
+            String actorType = setActor.getValue();
+            if (actorType != null)
+                setValue(actorType);
+            else
+                setValue(setActor.getJidFactory());
             rp.processResponse(null);
         } else if (request instanceof MakeActor) {
             rp.processResponse(makeValue(((MakeActor) request).getValue()));
@@ -120,6 +126,21 @@ public class ActorJidA
         NewJID na = new NewJID(jidType, getMailbox(), getParent(), (byte[]) null, this);
         value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
+        change(l);
+        serializedBytes = null;
+        serializedOffset = -1;
+    }
+
+    /**
+     * Assign a value.
+     *
+     * @param jidFactory The actor type.
+     * @throws Exception Any uncaught exception raised.
+     */
+    public void setValue(JidFactory jidFactory)
+            throws Exception {
+        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this);
+        int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
         serializedOffset = -1;

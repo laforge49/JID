@@ -28,6 +28,7 @@ import org.agilewiki.jactor.bind.Internals;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
 import org.agilewiki.jid.*;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
 
@@ -57,7 +58,11 @@ public class ActorJidC
                     public void synchronousProcessRequest(Internals internals,
                                                           SetActor request)
                             throws Exception {
-                        setValue(request.getValue());
+                        String actorType = request.getValue();
+                        if (actorType != null)
+                            setValue(request.getValue());
+                        else
+                            setValue(request.getJidFactory());
                     }
                 });
 
@@ -136,6 +141,21 @@ public class ActorJidC
         NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), (byte[]) null, this);
         value = na.call(thisActor);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
+        change(l);
+        serializedBytes = null;
+        serializedOffset = -1;
+    }
+
+    /**
+     * Assign a value.
+     *
+     * @param jidFactory The actor type.
+     * @throws Exception Any uncaught exception raised.
+     */
+    public void setValue(JidFactory jidFactory)
+            throws Exception {
+        value = jidFactory.newJID(thisActor.getMailbox(), thisActor().getParent(), this);
+        int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
         serializedOffset = -1;

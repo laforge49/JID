@@ -37,8 +37,8 @@ abstract public class JidFactory {
      *
      * @param mailbox       The mailbox of the new actor.
      * @param parent        The parent of the new actor.
-     * @param readableBytes Holds the serialized data.
      * @param container     The container of the new Jid.
+     * @param readableBytes Holds the serialized data.
      * @return The new actor.
      */
     abstract public Jid newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
@@ -47,11 +47,31 @@ abstract public class JidFactory {
     /**
      * Create and configure an actor.
      *
+     * @param mailbox   The mailbox of the new actor.
+     * @param parent    The parent of the new actor.
+     * @param container The container of the new Jid.
+     * @return The new actor.
+     */
+    final public Jid newJID(Mailbox mailbox, Actor parent, Jid container)
+            throws Exception {
+        return newJID(mailbox, parent, container, null);
+    }
+
+    /**
+     * Returns the actor type.
+     *
+     * @return The actor type.
+     */
+    abstract public String getActorType();
+
+    /**
+     * Create and configure an actor.
+     *
      * @param mailbox The mailbox of the new actor.
      * @param parent  The parent of the new actor.
      * @return The new actor.
      */
-    public Actor newActor(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+    final public Actor newActor(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
             throws Exception {
         return newJID(mailbox, parent, container, readableBytes).thisActor();
     }
