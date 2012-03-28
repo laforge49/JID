@@ -29,7 +29,7 @@ import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 /**
  * Defines (StringJidC, StringJidC) tuples.
  */
-public class StringJStringJActorTypes extends TupleFactoriesC {
+public class StringStringTupleFactories extends TupleFactoriesC {
     private JidFactory[] tupleFactories;
 
     private JidFactory[] tupleFactories()

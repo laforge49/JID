@@ -28,13 +28,13 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
  * A JID actor that holds a String.
  */
 public class StringJid
-        extends VLenScalarJidA<String, String, String>
+        extends VLenScalarJid<String, String, String>
         implements ComparableKey<String> {
     /**
      * Create a StringJid.

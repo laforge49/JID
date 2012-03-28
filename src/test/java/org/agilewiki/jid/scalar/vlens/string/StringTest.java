@@ -14,9 +14,10 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
-public class StringATest extends TestCase {
+public class StringTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -42,8 +43,7 @@ public class StringATest extends TestCase {
             assertEquals("abc", GetString.req.send(future, string2));
             assertEquals("abc", GetString.req.send(future, string3));
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
-            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
             SetActor sjvbs = new SetActor(JidFactories.STRING_JID_TYPE);
             sjvbs.send(future, jidJid1);
             StringJid rpa = (StringJid) (new ResolvePathname("0")).send(future, jidJid1);

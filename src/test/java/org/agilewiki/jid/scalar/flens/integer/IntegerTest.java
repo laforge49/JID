@@ -13,9 +13,10 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
-public class IntegerATest extends TestCase {
+public class IntegerTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -44,8 +45,7 @@ public class IntegerATest extends TestCase {
             v = GetInteger.req.send(future, int3);
             assertEquals(1, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
-            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
             SetActor sjvi = new SetActor(JidFactories.INTEGER_JID_TYPE);
             sjvi.send(future, jidJid1);
             IntegerJid rpa = (IntegerJid) (new ResolvePathname("0")).send(future, jidJid1);

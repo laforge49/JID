@@ -21,26 +21,23 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc;
+package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidA;
 
 /**
- * Defines collection of Strings.
+ * A Jid actor that hold a single value.
  */
-public class StringJActorsType extends ActorsTypeC {
-    private JidFactory jidFactory;
-
+abstract public class ScalarJid<SET_TYPE, RESPONSE_TYPE>
+        extends JidA
+        implements Scalar<SET_TYPE, RESPONSE_TYPE> {
     /**
-     * Returns a JidFactory.
+     * Create a ScalarJidA.
      *
-     * @return A JidFactory.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    public JidFactory getValueFactory()
-            throws Exception {
-        if (jidFactory == null)
-            jidFactory = new StringJidFactory();
-        return jidFactory;
+    public ScalarJid(final Mailbox mailbox) {
+        super(mailbox);
     }
 }

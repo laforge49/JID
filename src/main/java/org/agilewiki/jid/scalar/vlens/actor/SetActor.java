@@ -31,7 +31,7 @@ import org.agilewiki.jid.jidFactory.JidFactory;
  * Assigns a value.
  */
 public class SetActor
-        extends SynchronousRequest<Object, ActorJidA> {
+        extends SynchronousRequest<Object, ActorJid> {
     /**
      * The actor type.
      */
@@ -90,7 +90,7 @@ public class SetActor
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ActorJidA targetActor)
+    protected Object call(ActorJid targetActor)
             throws Exception {
         if (actorType != null)
             targetActor.setValue(actorType);
@@ -106,6 +106,6 @@ public class SetActor
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJidA;
+        return targetActor instanceof ActorJid;
     }
 }

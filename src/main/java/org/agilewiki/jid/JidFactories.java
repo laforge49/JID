@@ -40,8 +40,7 @@ import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
-import org.agilewiki.jid.scalar.vlens.actor.ActorJidAFactory;
-import org.agilewiki.jid.scalar.vlens.actor.ActorJidC;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -89,14 +88,9 @@ final public class JidFactories extends Component {
     public final static String DOUBLE_JID_TYPE = "DOUBLE_JID";
 
     /**
-     * The name of the JidJid component.
-     */
-    public final static String ACTOR_JID_CTYPE = "ACTOR_JIDc";
-
-    /**
      * The name of the JidJid actor.
      */
-    public final static String ACTOR_JID_ATYPE = "ACTOR_JIDa";
+    public final static String ACTOR_JID_TYPE = "ACTOR_JID";
 
     /**
      * The name of the String actor.
@@ -136,7 +130,7 @@ final public class JidFactories extends Component {
     /**
      * The name of the ListJid component.
      */
-    public final static String STRING_STRINGJA_MAP_JID_CTYPE = "STRING_STRINGa_MAP_JIDc";
+    public final static String STRING_STRING_MAP_JID_CTYPE = "STRING_STRING_MAP_JIDc";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -166,8 +160,7 @@ final public class JidFactories extends Component {
         (new RegisterActorFactory(new FloatJidAFactory())).call(thisActor);
         (new RegisterActorFactory(new DoubleJidFactory())).call(thisActor);
 
-        (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new ActorJidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new ActorJidFactory())).call(thisActor);
         (new RegisterActorFactory(new StringJidFactory())).call(thisActor);
         (new RegisterActorFactory(new BytesJidFactory())).call(thisActor);
 
@@ -177,6 +170,6 @@ final public class JidFactories extends Component {
         (new RegisterActorFactory(new ListJidAFactory())).call(thisActor);
 
         (new DefineActorType(STRING_MAP_JID_CTYPE, StringMapJidC.class)).call(thisActor);
-        (new DefineActorType(STRING_STRINGJA_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);
+        (new DefineActorType(STRING_STRING_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);
     }
 }

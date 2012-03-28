@@ -5,14 +5,14 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
- * Creates a ActorJidA.
+ * Creates a ActorJid.
  */
-public class ActorJidAFactory extends JidAFactory {
+public class ActorJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public ActorJidAFactory() {
-        actorType = JidFactories.ACTOR_JID_ATYPE;
+    public ActorJidFactory() {
+        actorType = JidFactories.ACTOR_JID_TYPE;
     }
 
     /**
@@ -22,8 +22,8 @@ public class ActorJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected ActorJidA instantiateActor(Mailbox mailbox)
+    final protected ActorJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new ActorJidA(mailbox);
+        return new ActorJid(mailbox);
     }
 }

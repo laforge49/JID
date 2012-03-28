@@ -13,9 +13,10 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
-public class LongATest extends TestCase {
+public class LongTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -44,8 +45,7 @@ public class LongATest extends TestCase {
             v = GetLong.req.send(future, float3);
             assertEquals(1L, v);
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
-            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
             SetActor sjvl = new SetActor(JidFactories.LONG_JID_TYPE);
             sjvl.send(future, jidJid1);
             LongJid rpa = (LongJid) (new ResolvePathname("0")).send(future, jidJid1);

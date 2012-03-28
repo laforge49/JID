@@ -22,7 +22,7 @@ public class ListATest extends TestCase {
         try {
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            (new Include(StringJActorsType.class)).call(factory);
+            (new Include(StringActorsType.class)).call(factory);
             Open.req.call(factory);
             JAFuture future = new JAFuture();
             NewJID newListJid = new NewJID(JidFactories.LIST_JID_ATYPE);

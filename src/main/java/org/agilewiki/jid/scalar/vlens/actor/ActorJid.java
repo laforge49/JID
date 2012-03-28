@@ -24,85 +24,71 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.scalar.vlens.VLenScalarJidC;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
- * A JID component that holds a JID actor.
+ * A JID actor that holds a JID actor.
  */
-public class ActorJidC
-        extends VLenScalarJidC<Jid, String, Actor>
+public class ActorJid
+        extends VLenScalarJid<Jid, String, Actor>
         implements ComparableKey<Object> {
+    /**
+     * Create an actor jid.
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public ActorJid(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetActor.class.getName(),
-                new SynchronousMethodBinding<GetActor, Actor>() {
-                    @Override
-                    public Actor synchronousProcessRequest(Internals internals,
-                                                           GetActor request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-        thisActor.bind(SetActor.class.getName(),
-                new VoidSynchronousMethodBinding<SetActor>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetActor request)
-                            throws Exception {
-                        String actorType = request.getValue();
-                        if (actorType != null)
-                            setValue(actorType);
-                        else
-                            setValue(request.getJidFactory());
-                    }
-                });
-
-        thisActor.bind(MakeActor.class.getName(),
-                new SynchronousMethodBinding<MakeActor, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals,
-                                                             MakeActor request)
-                            throws Exception {
-                        String actorType = request.getValue();
-                        if (actorType != null)
-                            return makeValue(actorType);
-                        else
-                            return makeValue(request.getJidFactory());
-                    }
-                });
-
-        thisActor.bind(SetActorBytes.class.getName(), new VoidSynchronousMethodBinding<SetActorBytes>() {
-            @Override
-            public void synchronousProcessRequest(Internals internals, SetActorBytes request)
-                    throws Exception {
-                String actorType = request.getActorType();
-                if (actorType != null)
-                    setJidBytes(actorType, request.getBytes());
-                else
-                    setJidBytes(request.getJidFactory(), request.getBytes());
-            }
-        });
-
-        thisActor.bind(MakeActorBytes.class.getName(), new SynchronousMethodBinding<MakeActorBytes, Boolean>() {
-            @Override
-            public Boolean synchronousProcessRequest(Internals internals, MakeActorBytes request)
-                    throws Exception {
-                String actorType = request.getActorType();
-                if (actorType != null)
-                    return makeJidBytes(actorType, request.getBytes());
-                else
-                    return makeJidBytes(request.getJidFactory(), request.getBytes());
-            }
-        });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetActor)
+            rp.processResponse(getValue());
+        else if (request instanceof SetActor) {
+            SetActor setActor = (SetActor) request;
+            String actorType = setActor.getValue();
+            if (actorType != null)
+                setValue(actorType);
+            else
+                setValue(setActor.getJidFactory());
+            rp.processResponse(null);
+        } else if (request instanceof MakeActor) {
+            MakeActor makeActor = (MakeActor) request;
+            String actorType = makeActor.getValue();
+            if (actorType != null)
+                rp.processResponse(makeValue(actorType));
+            else
+                rp.processResponse(makeValue(makeActor.getJidFactory()));
+        } else if (request instanceof SetActorBytes) {
+            SetActorBytes setActorBytes = (SetActorBytes) request;
+            String actorType = setActorBytes.getActorType();
+            if (actorType != null)
+                setJidBytes(actorType, setActorBytes.getBytes());
+            else
+                setJidBytes(setActorBytes.getJidFactory(), setActorBytes.getBytes());
+            rp.processResponse(null);
+        } else if (request instanceof MakeActorBytes) {
+            MakeActorBytes makeActorBytes = (MakeActorBytes) request;
+            String actorType = makeActorBytes.getActorType();
+            if (actorType != null)
+                rp.processResponse(makeJidBytes(actorType, makeActorBytes.getBytes()));
+            else
+                rp.processResponse(makeJidBytes(makeActorBytes.getJidFactory(), makeActorBytes.getBytes()));
+        } else super.processRequest(request, rp);
     }
 
     /**
@@ -165,8 +151,8 @@ public class ActorJidC
     @Override
     public void setValue(String jidType)
             throws Exception {
-        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), (byte[]) null, this);
-        value = na.call(thisActor);
+        NewJID na = new NewJID(jidType, getMailbox(), getParent(), (byte[]) null, this);
+        value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -181,7 +167,7 @@ public class ActorJidC
      */
     public void setValue(JidFactory jidFactory)
             throws Exception {
-        value = jidFactory.newJID(thisActor.getMailbox(), thisActor().getParent(), this);
+        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -227,8 +213,8 @@ public class ActorJidC
      */
     protected void setBytes(String jidType, byte[] bytes)
             throws Exception {
-        NewJID na = new NewJID(jidType, thisActor.getMailbox(), thisActor.getParent(), bytes, this);
-        value = na.call(thisActor);
+        NewJID na = new NewJID(jidType, getMailbox(), getParent(), bytes, this);
+        value = na.call(this);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -274,7 +260,7 @@ public class ActorJidC
      */
     protected void setBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
-        value = jidFactory.newJID(thisActor.getMailbox(), thisActor().getParent(), this, bytes);
+        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this, bytes);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -315,8 +301,8 @@ public class ActorJidC
         String actorType = readableBytes.readString();
         value = (new NewJID(
                 actorType,
-                thisActor.getMailbox(),
-                thisActor.getParent(), readableBytes, this)).call(thisActor);
+                getMailbox(),
+                getParent(), readableBytes, this)).call(this);
         return value;
     }
 
@@ -347,7 +333,7 @@ public class ActorJidC
     public Actor resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
-            return thisActor;
+            return this;
         }
         if (pathname.equals("0")) {
             return getValue();
@@ -368,7 +354,8 @@ public class ActorJidC
      * @return The result of a compareTo(o).
      */
     @Override
-    public int compareKeyTo(Object o) throws Exception {
+    public int compareKeyTo(Object o)
+            throws Exception {
         ComparableKey<Object> v = (ComparableKey<Object>) value;
         return v.compareKeyTo(o);
     }

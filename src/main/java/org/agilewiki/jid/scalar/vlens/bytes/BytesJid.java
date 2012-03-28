@@ -27,13 +27,13 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
+import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
  * A JID component that holds a byte array.
  */
 public class BytesJid
-        extends VLenScalarJidA<byte[], byte[], byte[]> {
+        extends VLenScalarJid<byte[], byte[], byte[]> {
     /**
      * Create a StringJid.
      *

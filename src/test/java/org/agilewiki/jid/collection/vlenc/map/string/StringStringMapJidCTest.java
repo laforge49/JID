@@ -12,7 +12,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.StringJid;
 
-public class StringStringJAMapJidCTest extends TestCase {
+public class StringStringMapJidCTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -20,7 +20,7 @@ public class StringStringJAMapJidCTest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
             JAFuture future = new JAFuture();
-            NewJID newMapJid = new NewJID(JidFactories.STRING_STRINGJA_MAP_JID_CTYPE);
+            NewJID newMapJid = new NewJID(JidFactories.STRING_STRING_MAP_JID_CTYPE);
             Actor m = newMapJid.send(future, factory).thisActor();
             assertNull(StringMapJidC.newKGet("a").send(future, m));
             assertTrue(StringMapJidC.newKMake("b").send(future, m));

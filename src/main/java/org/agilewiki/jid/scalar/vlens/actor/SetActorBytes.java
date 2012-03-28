@@ -31,7 +31,7 @@ import org.agilewiki.jid.jidFactory.JidFactory;
  * Creates a JID actor and loads its serialized data.
  */
 final public class SetActorBytes
-        extends SynchronousRequest<Object, ActorJidA> {
+        extends SynchronousRequest<Object, ActorJid> {
     /**
      * An actor type name.
      */
@@ -108,7 +108,7 @@ final public class SetActorBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(ActorJidA targetActor)
+    protected Boolean call(ActorJid targetActor)
             throws Exception {
         if (actorType != null)
             targetActor.setJidBytes(actorType, bytes);
@@ -124,6 +124,6 @@ final public class SetActorBytes
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJidA;
+        return targetActor instanceof ActorJid;
     }
 }

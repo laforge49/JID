@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Clears the container.
  */
 final public class Clear
-        extends SynchronousRequest<Object, VLenScalarJidA<Object, Object, Object>> {
+        extends SynchronousRequest<Object, VLenScalarJid<Object, Object, Object>> {
     public final static Clear req = new Clear();
 
     /**
@@ -41,7 +41,7 @@ final public class Clear
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(VLenScalarJidA<Object, Object, Object> targetActor)
+    protected Object call(VLenScalarJid<Object, Object, Object> targetActor)
             throws Exception {
         targetActor.clear();
         return null;
@@ -54,6 +54,6 @@ final public class Clear
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof VLenScalarJidA;
+        return targetActor instanceof VLenScalarJid;
     }
 }

@@ -31,7 +31,7 @@ import org.agilewiki.jid.jidFactory.JidFactory;
  * Assigns a value if not already present.
  */
 public class MakeActor
-        extends SynchronousRequest<Boolean, ActorJidA> {
+        extends SynchronousRequest<Boolean, ActorJid> {
     /**
      * The actor type.
      */
@@ -90,7 +90,7 @@ public class MakeActor
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(ActorJidA targetActor)
+    protected Boolean call(ActorJid targetActor)
             throws Exception {
         if (actorType != null)
             return targetActor.makeValue(actorType);
@@ -105,6 +105,6 @@ public class MakeActor
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJidA;
+        return targetActor instanceof ActorJid;
     }
 }

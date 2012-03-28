@@ -15,7 +15,7 @@ import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
-public class ActorJidATest extends TestCase {
+public class ActorJidTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -24,7 +24,7 @@ public class ActorJidATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            ActorJidAFactory actorJidAFactory = new ActorJidAFactory();
+            ActorJidFactory actorJidAFactory = new ActorJidFactory();
             Actor jidJid1 = actorJidAFactory.newActor(factory.getMailbox(), factory);
             int sl = GetSerializedLength.req.send(future, jidJid1);
             assertEquals(4, sl);
@@ -56,7 +56,7 @@ public class ActorJidATest extends TestCase {
             Actor sj = GetActor.req.send(future, jidJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_ATYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_TYPE);
             Actor jidJid2 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
@@ -97,7 +97,7 @@ public class ActorJidATest extends TestCase {
             Actor jidJid3 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid3);
             assertEquals(4, sl);
-            MakeActor mjvjj = new MakeActor(JidFactories.ACTOR_JID_ATYPE);
+            MakeActor mjvjj = new MakeActor(JidFactories.ACTOR_JID_TYPE);
             made = mjvjj.send(future, jidJid3);
             assertEquals(true, made);
             made = mjvjj.send(future, jidJid3);
@@ -107,7 +107,7 @@ public class ActorJidATest extends TestCase {
             sl = GetSerializedLength.req.send(future, jidJid3a);
             assertEquals(4, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
-            assertEquals(32, sl);
+            assertEquals(30, sl);
             made = mjvj.send(future, jidJid3a);
             assertEquals(true, made);
             made = mjvj.send(future, jidJid3a);
@@ -119,7 +119,7 @@ public class ActorJidATest extends TestCase {
             sl = GetSerializedLength.req.send(future, jidJid3a);
             assertEquals(16, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
-            assertEquals(44, sl);
+            assertEquals(42, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid3);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid3);
@@ -134,14 +134,14 @@ public class ActorJidATest extends TestCase {
             sl = GetSerializedLength.req.send(future, jidJid3a);
             assertEquals(4, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
-            assertEquals(32, sl);
+            assertEquals(30, sl);
             jidJid3b = GetActor.req.send(future, jidJid3a);
             assertNull(jidJid2a);
             Actor jidJid3aa = GetActor.req.send(future, jidJid3);
             assertEquals(jidJid3a, jidJid3aa);
             assertNotNull(jidJid33);
             sl = GetSerializedLength.req.send(future, jidJid33);
-            assertEquals(44, sl);
+            assertEquals(42, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid33);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid33);

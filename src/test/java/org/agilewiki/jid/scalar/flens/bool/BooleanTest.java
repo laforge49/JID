@@ -13,9 +13,10 @@ import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
-public class BooleanATest extends TestCase {
+public class BooleanTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -41,8 +42,7 @@ public class BooleanATest extends TestCase {
             assertTrue(GetBoolean.req.send(future, boolean2));
             assertTrue(GetBoolean.req.send(future, boolean3));
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
-            Actor jidJid1 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
             SetActor sjvb = new SetActor(JidFactories.BOOLEAN_JID_TYPE);
             sjvb.send(future, jidJid1);
             BooleanJid rpa = (BooleanJid) (new ResolvePathname("0")).send(future, jidJid1);
