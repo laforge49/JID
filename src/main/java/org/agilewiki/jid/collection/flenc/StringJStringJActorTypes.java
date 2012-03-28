@@ -23,14 +23,13 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.GetJidFactory;
 import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Defines (StringJidC, StringJidC) tuples.
  */
-public class StringJCStringJCActorTypesC extends TupleFactoriesC {
+public class StringJStringJActorTypes extends TupleFactoriesC {
     private JidFactory[] tupleFactories;
 
     private JidFactory[] tupleFactories()
@@ -38,7 +37,7 @@ public class StringJCStringJCActorTypesC extends TupleFactoriesC {
         if (tupleFactories != null)
             return tupleFactories;
         tupleFactories = new JidFactory[2];
-        JidFactory jf = (new GetJidFactory(JidFactories.STRING_JID_CTYPE)).call(thisActor);
+        JidFactory jf = new StringJidFactory();
         tupleFactories[0] = jf;
         tupleFactories[1] = jf;
         return tupleFactories;

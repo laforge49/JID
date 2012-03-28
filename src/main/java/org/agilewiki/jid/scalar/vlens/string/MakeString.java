@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value if not already present.
  */
 public class MakeString
-        extends SynchronousRequest<Boolean, StringJidA> {
+        extends SynchronousRequest<Boolean, StringJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class MakeString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(StringJidA targetActor)
+    protected Boolean call(StringJid targetActor)
             throws Exception {
         return targetActor.makeValue(value);
     }
@@ -76,6 +76,6 @@ public class MakeString
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof StringJidA;
+        return targetActor instanceof StringJid;
     }
 }

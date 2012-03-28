@@ -17,6 +17,7 @@ import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 public class TupleATest extends TestCase {
     public void test() {
@@ -25,7 +26,7 @@ public class TupleATest extends TestCase {
             JAFuture future = new JAFuture();
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            (new Include(StringJCStringJCActorTypesC.class)).call(factory);
+            (new Include(StringJStringJActorTypes.class)).call(factory);
             Open.req.call(factory);
             NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_ATYPE);
             Actor t0 = newTupleJid.send(future, factory).thisActor();
@@ -45,8 +46,7 @@ public class TupleATest extends TestCase {
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", GetString.req.send(future, f1));
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_CTYPE);
-            Actor string1 = newStringJid.send(future, factory).thisActor();
+            Actor string1 = (new StringJidFactory()).newActor(factory.getMailbox(), factory);
             (new SetString("Peaches")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);

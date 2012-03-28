@@ -25,11 +25,11 @@ public class StringATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_ATYPE);
-            StringJidA string1 = (StringJidA) newStringJid.send(future, factory).thisActor();
-            StringJidA string2 = (StringJidA) (new CopyJID()).send(future, string1);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
+            StringJid string1 = (StringJid) newStringJid.send(future, factory).thisActor();
+            StringJid string2 = (StringJid) (new CopyJID()).send(future, string1);
             (new SetString("abc")).send(future, string2);
-            StringJidA string3 = (StringJidA) (new CopyJID()).send(future, string2);
+            StringJid string3 = (StringJid) (new CopyJID()).send(future, string2);
 
             int sl = GetSerializedLength.req.send(future, string1);
             assertEquals(4, sl);
@@ -44,13 +44,13 @@ public class StringATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetActor sjvbs = new SetActor(JidFactories.STRING_JID_ATYPE);
+            SetActor sjvbs = new SetActor(JidFactories.STRING_JID_TYPE);
             sjvbs.send(future, jidJid1);
-            StringJidA rpa = (StringJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            StringJid rpa = (StringJid) (new ResolvePathname("0")).send(future, jidJid1);
             assertNull(GetString.req.send(future, rpa));
             assertTrue((new MakeString("")).send(future, rpa));
             assertFalse((new MakeString("Hello?")).send(future, rpa));
-            rpa = (StringJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            rpa = (StringJid) (new ResolvePathname("0")).send(future, jidJid1);
             assertEquals("", GetString.req.send(future, rpa));
             (new SetString("bye")).send(future, rpa);
             assertEquals("bye", GetString.req.send(future, rpa));

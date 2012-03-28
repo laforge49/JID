@@ -23,14 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.GetJidFactory;
 import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Defines collection of Strings.
  */
-public class StringJCActorsTypeC extends ActorsTypeC {
+public class StringJActorsType extends ActorsTypeC {
     private JidFactory jidFactory;
 
     /**
@@ -41,7 +40,7 @@ public class StringJCActorsTypeC extends ActorsTypeC {
     public JidFactory getValueFactory()
             throws Exception {
         if (jidFactory == null)
-            jidFactory = (new GetJidFactory(JidFactories.STRING_JID_CTYPE)).call(thisActor);
+            jidFactory = new StringJidFactory();
         return jidFactory;
     }
 }

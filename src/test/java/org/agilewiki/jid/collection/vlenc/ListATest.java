@@ -22,7 +22,7 @@ public class ListATest extends TestCase {
         try {
             JCActor factory = new JCActor(mailboxFactory.createMailbox());
             (new Include(JidFactories.class)).call(factory);
-            (new Include(StringJCActorsTypeC.class)).call(factory);
+            (new Include(StringJActorsType.class)).call(factory);
             Open.req.call(factory);
             JAFuture future = new JAFuture();
             NewJID newListJid = new NewJID(JidFactories.LIST_JID_ATYPE);
@@ -38,7 +38,7 @@ public class ListATest extends TestCase {
             Actor l2 = (new CopyJID()).send(future, l1);
             int l2sl = GetSerializedLength.req.send(future, l2);
             assertEquals(12, l2sl);
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_ATYPE);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
             Actor s0 = newStringJid.send(future, factory).thisActor();
             (new SetString("Hi")).send(future, s0);
             int s0sl = GetSerializedLength.req.send(future, s0);

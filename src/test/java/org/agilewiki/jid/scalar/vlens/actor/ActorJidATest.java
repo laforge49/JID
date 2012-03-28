@@ -13,7 +13,7 @@ import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
-import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 public class ActorJidATest extends TestCase {
     public void test() {
@@ -48,7 +48,7 @@ public class ActorJidATest extends TestCase {
             rpa = (new ResolvePathname("0")).send(future, jidJid11);
             assertNull(rpa);
 
-            StringJidAFactory stringJidAFactory = new StringJidAFactory();
+            StringJidFactory stringJidAFactory = new StringJidFactory();
             Actor string1 = stringJidAFactory.newActor(factory.getMailbox(), factory);
             (new SetString("abc")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);

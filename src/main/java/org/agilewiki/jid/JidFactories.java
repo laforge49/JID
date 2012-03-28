@@ -43,8 +43,7 @@ import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidAFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidC;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidC;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 import java.util.ArrayList;
 
@@ -100,14 +99,9 @@ final public class JidFactories extends Component {
     public final static String ACTOR_JID_ATYPE = "ACTOR_JIDa";
 
     /**
-     * The name of the String component.
-     */
-    public final static String STRING_JID_CTYPE = "STRING_JIDc";
-
-    /**
      * The name of the String actor.
      */
-    public final static String STRING_JID_ATYPE = "STRING_JIDa";
+    public final static String STRING_JID_TYPE = "STRING_JID";
 
     /**
      * The name of the BytesJid actor.
@@ -174,8 +168,7 @@ final public class JidFactories extends Component {
 
         (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
         (new RegisterActorFactory(new ActorJidAFactory())).call(thisActor);
-        (new DefineActorType(STRING_JID_CTYPE, StringJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new StringJidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new StringJidFactory())).call(thisActor);
         (new RegisterActorFactory(new BytesJidFactory())).call(thisActor);
 
         (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);

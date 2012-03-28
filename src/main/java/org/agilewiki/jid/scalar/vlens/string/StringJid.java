@@ -31,17 +31,17 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJidA;
 
 /**
- * A JID component that holds a String.
+ * A JID actor that holds a String.
  */
-public class StringJidA
+public class StringJid
         extends VLenScalarJidA<String, String, String>
         implements ComparableKey<String> {
     /**
-     * Create a StringJidA.
+     * Create a StringJid.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public StringJidA(Mailbox mailbox) {
+    public StringJid(Mailbox mailbox) {
         super(mailbox);
     }
 

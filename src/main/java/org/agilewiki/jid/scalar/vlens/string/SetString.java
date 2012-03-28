@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetString
-        extends SynchronousRequest<Object, StringJidA> {
+        extends SynchronousRequest<Object, StringJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(StringJidA targetActor)
+    protected Object call(StringJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetString
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof StringJidA;
+        return targetActor instanceof StringJid;
     }
 }

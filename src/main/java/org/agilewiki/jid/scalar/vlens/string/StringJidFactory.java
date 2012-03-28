@@ -5,14 +5,14 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
- * Creates a StringJidA.
+ * Creates a StringJid.
  */
-public class StringJidAFactory extends JidAFactory {
+public class StringJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public StringJidAFactory() {
-        actorType = JidFactories.STRING_JID_ATYPE;
+    public StringJidFactory() {
+        actorType = JidFactories.STRING_JID_TYPE;
     }
 
     /**
@@ -22,8 +22,8 @@ public class StringJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected StringJidA instantiateActor(Mailbox mailbox)
+    final protected StringJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new StringJidA(mailbox);
+        return new StringJid(mailbox);
     }
 }

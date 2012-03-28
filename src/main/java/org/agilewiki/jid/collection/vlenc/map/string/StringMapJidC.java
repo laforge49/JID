@@ -27,7 +27,7 @@ import org.agilewiki.jid.collection.vlenc.map.KGet;
 import org.agilewiki.jid.collection.vlenc.map.KMake;
 import org.agilewiki.jid.collection.vlenc.map.MapJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Holds a map with String keys.
@@ -59,7 +59,7 @@ public class StringMapJidC extends MapJidC<String> {
      * @return The JidFactory for the key.
      */
     final protected JidFactory getKeyFactory() {
-        return new StringJidAFactory();
+        return new StringJidFactory();
     }
 
     /**

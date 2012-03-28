@@ -1,7 +1,7 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Holds a map with String keys and StringJidA values.
@@ -14,6 +14,6 @@ final public class StringStringJAMapJidC extends StringMapJidC {
      */
     protected JidFactory getValueFactory()
             throws Exception {
-        return new StringJidAFactory();
+        return new StringJidFactory();
     }
 }
