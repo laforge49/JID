@@ -12,7 +12,7 @@ public class FloatJidAFactory extends JidAFactory {
      * Create a JLPCActorFactory.
      */
     public FloatJidAFactory() {
-        actorType = JidFactories.FLOAT_JID_ATYPE;
+        actorType = JidFactories.FLOAT_JID_TYPE;
     }
 
     /**
@@ -22,8 +22,8 @@ public class FloatJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected FloatJidA instantiateActor(Mailbox mailbox)
+    final protected FloatJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new FloatJidA(mailbox);
+        return new FloatJid(mailbox);
     }
 }

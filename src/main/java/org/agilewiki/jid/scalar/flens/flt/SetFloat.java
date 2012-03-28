@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetFloat
-        extends SynchronousRequest<Object, FloatJidA> {
+        extends SynchronousRequest<Object, FloatJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetFloat
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(FloatJidA targetActor)
+    protected Object call(FloatJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetFloat
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof FloatJidA;
+        return targetActor instanceof FloatJid;
     }
 }

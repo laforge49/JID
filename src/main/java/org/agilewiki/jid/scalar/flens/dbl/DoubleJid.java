@@ -36,7 +36,7 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 public class DoubleJid
         extends FLenScalarJidA<Double> {
     /**
-     * Create a DoubleJidA.
+     * Create a DoubleJid.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */

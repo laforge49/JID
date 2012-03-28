@@ -24,9 +24,9 @@ public class FloatATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newFloatJid = new NewJID(JidFactories.FLOAT_JID_ATYPE);
-            FloatJidA float1 = (FloatJidA) newFloatJid.send(future, factory).thisActor();
-            FloatJidA float2 = (FloatJidA) (new CopyJID()).send(future, float1);
+            NewJID newFloatJid = new NewJID(JidFactories.FLOAT_JID_TYPE);
+            FloatJid float1 = (FloatJid) newFloatJid.send(future, factory).thisActor();
+            FloatJid float2 = (FloatJid) (new CopyJID()).send(future, float1);
             (new SetFloat(1.0f)).send(future, float2);
             Actor float3 = (new CopyJID()).send(future, float2);
 
@@ -46,13 +46,13 @@ public class FloatATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetActor sjvf = new SetActor(JidFactories.FLOAT_JID_ATYPE);
+            SetActor sjvf = new SetActor(JidFactories.FLOAT_JID_TYPE);
             sjvf.send(future, jidJid1);
-            FloatJidA rpa = (FloatJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            FloatJid rpa = (FloatJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetFloat.req.send(future, rpa);
             assertEquals(0.f, v);
             (new SetFloat(-1.0f)).send(future, rpa);
-            rpa = (FloatJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            rpa = (FloatJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetFloat.req.send(future, rpa);
             assertEquals(-1.f, v);
 

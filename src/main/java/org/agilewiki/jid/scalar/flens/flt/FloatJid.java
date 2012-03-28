@@ -33,14 +33,14 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 /**
  * A JID actor that holds a float.
  */
-public class FloatJidA
+public class FloatJid
         extends FLenScalarJidA<Float> {
     /**
-     * Create a FloatJidA.
+     * Create a FloatJid.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public FloatJidA(Mailbox mailbox) {
+    public FloatJid(Mailbox mailbox) {
         super(mailbox);
     }
 

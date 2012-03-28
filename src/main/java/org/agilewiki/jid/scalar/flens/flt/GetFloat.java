@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Returns a value.
  */
-public class GetFloat extends SynchronousRequest<Float, FloatJidA> {
+public class GetFloat extends SynchronousRequest<Float, FloatJid> {
     final public static GetFloat req = new GetFloat();
 
     /**
@@ -40,7 +40,7 @@ public class GetFloat extends SynchronousRequest<Float, FloatJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Float call(FloatJidA targetActor)
+    protected Float call(FloatJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }
@@ -52,6 +52,6 @@ public class GetFloat extends SynchronousRequest<Float, FloatJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof FloatJidA;
+        return targetActor instanceof FloatJid;
     }
 }

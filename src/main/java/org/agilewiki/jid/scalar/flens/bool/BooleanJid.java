@@ -36,7 +36,7 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 public class BooleanJid
         extends FLenScalarJidA<Boolean> {
     /**
-     * Create a BooleanJidA.
+     * Create a BooleanJid.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
