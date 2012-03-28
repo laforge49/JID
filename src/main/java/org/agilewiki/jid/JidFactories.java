@@ -36,8 +36,7 @@ import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
-import org.agilewiki.jid.scalar.flens.dbl.DoubleJidAFactory;
-import org.agilewiki.jid.scalar.flens.dbl.DoubleJidC;
+import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidC;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidAFactory;
@@ -105,14 +104,9 @@ final public class JidFactories extends Component {
     public final static String FLOAT_JID_ATYPE = "FLOAT_JIDa";
 
     /**
-     * The name of the DoubleJid component.
-     */
-    public final static String DOUBLE_JID_CTYPE = "DOUBLE_JIDc";
-
-    /**
      * The name of the DoubleJid actor.
      */
-    public final static String DOUBLE_JID_ATYPE = "DOUBLE_JIDa";
+    public final static String DOUBLE_JID_TYPE = "DOUBLE_JID";
 
     /**
      * The name of the JidJid component.
@@ -203,8 +197,7 @@ final public class JidFactories extends Component {
         (new RegisterActorFactory(new LongJidAFactory())).call(thisActor);
         (new DefineActorType(FLOAT_JID_CTYPE, FloatJidC.class)).call(thisActor);
         (new RegisterActorFactory(new FloatJidAFactory())).call(thisActor);
-        (new DefineActorType(DOUBLE_JID_CTYPE, DoubleJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new DoubleJidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new DoubleJidFactory())).call(thisActor);
 
         (new DefineActorType(ACTOR_JID_CTYPE, ActorJidC.class)).call(thisActor);
         (new RegisterActorFactory(new ActorJidAFactory())).call(thisActor);

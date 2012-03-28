@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Returns a value.
  */
-public class GetDouble extends SynchronousRequest<Double, DoubleJidA> {
+public class GetDouble extends SynchronousRequest<Double, DoubleJid> {
     final public static GetDouble req = new GetDouble();
 
     /**
@@ -40,7 +40,7 @@ public class GetDouble extends SynchronousRequest<Double, DoubleJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Double call(DoubleJidA targetActor)
+    protected Double call(DoubleJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }
@@ -52,6 +52,6 @@ public class GetDouble extends SynchronousRequest<Double, DoubleJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof DoubleJidA;
+        return targetActor instanceof DoubleJid;
     }
 }

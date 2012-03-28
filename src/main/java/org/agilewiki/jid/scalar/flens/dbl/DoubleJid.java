@@ -33,14 +33,14 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 /**
  * A JID actor that holds a double.
  */
-public class DoubleJidA
+public class DoubleJid
         extends FLenScalarJidA<Double> {
     /**
      * Create a DoubleJidA.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public DoubleJidA(Mailbox mailbox) {
+    public DoubleJid(Mailbox mailbox) {
         super(mailbox);
     }
 

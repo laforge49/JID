@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetDouble
-        extends SynchronousRequest<Object, DoubleJidA> {
+        extends SynchronousRequest<Object, DoubleJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetDouble
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(DoubleJidA targetActor)
+    protected Object call(DoubleJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetDouble
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof DoubleJidA;
+        return targetActor instanceof DoubleJid;
     }
 }

@@ -7,12 +7,12 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 /**
  * Creates a DoubleJidA.
  */
-public class DoubleJidAFactory extends JidAFactory {
+public class DoubleJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public DoubleJidAFactory() {
-        actorType = JidFactories.DOUBLE_JID_ATYPE;
+    public DoubleJidFactory() {
+        actorType = JidFactories.DOUBLE_JID_TYPE;
     }
 
     /**
@@ -22,7 +22,7 @@ public class DoubleJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected DoubleJidA instantiateActor(Mailbox mailbox) throws Exception {
-        return new DoubleJidA(mailbox);
+    final protected DoubleJid instantiateActor(Mailbox mailbox) throws Exception {
+        return new DoubleJid(mailbox);
     }
 }
