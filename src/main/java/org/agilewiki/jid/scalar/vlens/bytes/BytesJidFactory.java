@@ -7,12 +7,12 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 /**
  * Creates a BytesJidA.
  */
-public class BytesJidAFactory extends JidAFactory {
+public class BytesJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public BytesJidAFactory() {
-        actorType = JidFactories.BYTES_JID_ATYPE;
+    public BytesJidFactory() {
+        actorType = JidFactories.BYTES_JID_TYPE;
     }
 
     /**
@@ -22,8 +22,8 @@ public class BytesJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected BytesJidA instantiateActor(Mailbox mailbox)
+    final protected BytesJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new BytesJidA(mailbox);
+        return new BytesJid(mailbox);
     }
 }

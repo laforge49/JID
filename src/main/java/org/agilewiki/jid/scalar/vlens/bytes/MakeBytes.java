@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class MakeBytes
-        extends SynchronousRequest<Boolean, BytesJidA> {
+        extends SynchronousRequest<Boolean, BytesJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class MakeBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BytesJidA targetActor)
+    protected Boolean call(BytesJid targetActor)
             throws Exception {
         return targetActor.makeValue(value);
     }
@@ -76,6 +76,6 @@ public class MakeBytes
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof BytesJidA;
+        return targetActor instanceof BytesJid;
     }
 }

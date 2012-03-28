@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetBytes
-        extends SynchronousRequest<Object, BytesJidA> {
+        extends SynchronousRequest<Object, BytesJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BytesJidA targetActor)
+    protected Boolean call(BytesJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetBytes
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof BytesJidA;
+        return targetActor instanceof BytesJid;
     }
 }

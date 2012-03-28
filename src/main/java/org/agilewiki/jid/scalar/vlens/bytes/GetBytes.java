@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Returns a value.
  */
-public class GetBytes extends SynchronousRequest<byte[], BytesJidA> {
+public class GetBytes extends SynchronousRequest<byte[], BytesJid> {
     final public static GetBytes req = new GetBytes();
 
     /**
@@ -40,7 +40,7 @@ public class GetBytes extends SynchronousRequest<byte[], BytesJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected byte[] call(BytesJidA targetActor)
+    protected byte[] call(BytesJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }
@@ -52,6 +52,6 @@ public class GetBytes extends SynchronousRequest<byte[], BytesJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof BytesJidA;
+        return targetActor instanceof BytesJid;
     }
 }
