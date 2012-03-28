@@ -24,25 +24,34 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.GetJidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Defines (StringJidC, StringJidC) tuples.
  */
-public class StringJCStringJCActorTypesC extends ActorTypesC {
-    private static final String[] actorTypes = new String[2];
+public class StringJCStringJCActorTypesC extends TupleFactoriesC {
+    private JidFactory[] tupleFactories;
 
-    static {
-        actorTypes[0] = JidFactories.STRING_JID_CTYPE;
-        actorTypes[1] = JidFactories.STRING_JID_CTYPE;
+    private JidFactory[] tupleFactories()
+            throws Exception {
+        if (tupleFactories != null)
+            return tupleFactories;
+        tupleFactories = new JidFactory[2];
+        JidFactory jf = (new GetJidFactory(JidFactories.STRING_JID_CTYPE)).call(thisActor);
+        tupleFactories[0] = jf;
+        tupleFactories[1] = jf;
+        return tupleFactories;
     }
 
     /**
-     * Returns an array of actor types.
+     * Returns an array of JidFactory.
      *
-     * @return An array of actor types.
+     * @return An array of JidFactory.
      */
     @Override
-    public String[] getActorTypes() {
-        return actorTypes;
+    public JidFactory[] getTupleFactories()
+            throws Exception {
+        return tupleFactories();
     }
 }

@@ -30,12 +30,13 @@ import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.bind.SynchronousMethodBinding;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.Collection;
-import org.agilewiki.jid.collection.flenc.ActorTypes;
-import org.agilewiki.jid.collection.flenc.GetActorTypes;
-import org.agilewiki.jid.collection.vlenc.GetActorsType;
+import org.agilewiki.jid.collection.flenc.GetTupleFactories;
+import org.agilewiki.jid.collection.flenc.TupleFactories;
+import org.agilewiki.jid.collection.flenc.TupleJidAFactory;
+import org.agilewiki.jid.collection.vlenc.GetValueFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.Scalar;
 
 /**
@@ -43,13 +44,15 @@ import org.agilewiki.jid.scalar.Scalar;
  */
 abstract public class MapJidC<KEY_TYPE extends Comparable>
         extends ListJidC
-        implements ActorTypes, Map<KEY_TYPE> {
+        implements TupleFactories, Map<KEY_TYPE> {
+    private JidFactory[] tupleFactories;
+
     /**
-     * Returns the actor type of the key.
+     * Returns the JidFactory for the key.
      *
-     * @return The actor type of the key.
+     * @return The JidFactory for the key.
      */
-    abstract protected String getKeyType();
+    abstract protected JidFactory getKeyFactory();
 
     /**
      * Converts a string to a key.
@@ -64,9 +67,10 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      *
      * @return The actor type of all the elements in the list.
      */
-    final protected String getActorsType()
+    @Override
+    final protected JidFactory getListFactory()
             throws Exception {
-        return JidFactories.TUPLE_JID_ATYPE;
+        return new TupleJidAFactory();
     }
 
     /**
@@ -74,22 +78,25 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      *
      * @return The array of actor types.
      */
-    final public String[] getActorTypes()
+    @Override
+    final public JidFactory[] getTupleFactories()
             throws Exception {
-        String[] actorTypes = new String[2];
-        actorTypes[0] = getKeyType();
-        actorTypes[1] = getValuesType();
-        return actorTypes;
+        if (tupleFactories != null)
+            return tupleFactories;
+        tupleFactories = new JidFactory[2];
+        tupleFactories[0] = getKeyFactory();
+        tupleFactories[1] = getValueFactory();
+        return tupleFactories;
     }
 
     /**
-     * Returns the actor type of the values in the map.
+     * Returns the JidFactory for the values in the map.
      *
      * @return The actor type of the values in the list.
      */
-    protected String getValuesType()
+    protected JidFactory getValueFactory()
             throws Exception {
-        return GetActorsType.req.call(thisActor);
+        return GetValueFactory.req.call(thisActor);
     }
 
     /**
@@ -173,13 +180,13 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
         super.bindery();
 
         thisActor.bind(
-                GetActorTypes.class.getName(),
-                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
+                GetTupleFactories.class.getName(),
+                new ConcurrentMethodBinding<GetTupleFactories, JidFactory[]>() {
                     @Override
-                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                             GetActorTypes request)
+                    public JidFactory[] concurrentProcessRequest(RequestReceiver requestReceiver,
+                                                                 GetTupleFactories request)
                             throws Exception {
-                        return getActorTypes();
+                        return getTupleFactories();
                     }
                 });
 

@@ -23,14 +23,17 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
+import org.agilewiki.jid.jidFactory.JidFactory;
+
 /**
- * Interface for defining the elements type of a variable length collection.
+ * Interface for defining the factory of the elements of a variable length collection.
  */
-public interface ActorsType {
+public interface ValueFactory {
     /**
-     * Returns an actor type.
+     * Returns a JidFactory.
      *
-     * @return An actor type.
+     * @return A JidFactory.
      */
-    public String getActorsType();
+    public JidFactory getValueFactory()
+            throws Exception;
 }

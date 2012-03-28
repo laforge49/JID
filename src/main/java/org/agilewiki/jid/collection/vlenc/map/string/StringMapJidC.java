@@ -23,10 +23,11 @@
  */
 package org.agilewiki.jid.collection.vlenc.map.string;
 
-import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.map.KGet;
 import org.agilewiki.jid.collection.vlenc.map.KMake;
 import org.agilewiki.jid.collection.vlenc.map.MapJidC;
+import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.scalar.vlens.string.StringJidAFactory;
 
 /**
  * Holds a map with String keys.
@@ -53,12 +54,12 @@ public class StringMapJidC extends MapJidC<String> {
     }
 
     /**
-     * Returns the actor type of the key.
+     * Returns the JidFactory for the key.
      *
-     * @return The actor type of the key.
+     * @return The JidFactory for the key.
      */
-    final protected String getKeyType() {
-        return JidFactories.STRING_JID_ATYPE;
+    final protected JidFactory getKeyFactory() {
+        return new StringJidAFactory();
     }
 
     /**

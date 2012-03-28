@@ -23,35 +23,31 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.RP;
-import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
+import org.agilewiki.jactor.bind.RequestReceiver;
+import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Base Actor for defining array types of tuples.
+ * Base Component for defining array types of tuples.
  */
-abstract public class ActorTypesA extends JLPCActor implements ActorTypes {
+abstract public class TupleFactoriesC extends Component implements TupleFactories {
     /**
-     * Create a LiteActor
+     * Bind request classes.
      *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public ActorTypesA(Mailbox mailbox) {
-        super(mailbox);
-    }
-
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @throws Exception Any exceptions thrown while binding.
      */
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request instanceof GetActorTypes)
-            rp.processResponse(getActorTypes());
-        else
-            throw new UnsupportedOperationException();
+    public void bindery() throws Exception {
+        thisActor.bind(
+                GetTupleFactories.class.getName(),
+                new ConcurrentMethodBinding<GetTupleFactories, JidFactory[]>() {
+                    @Override
+                    public JidFactory[] concurrentProcessRequest(RequestReceiver requestReceiver,
+                                                                 GetTupleFactories request)
+                            throws Exception {
+                        return getTupleFactories();
+                    }
+                });
     }
 }

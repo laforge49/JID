@@ -26,7 +26,7 @@ package org.agilewiki.jid.collection.flenc;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJidA;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Holds a fixed-size array of JID actors of various types.
@@ -37,7 +37,7 @@ public class TupleJidA
     /**
      * An array of actor types, one for each element in the tuple.
      */
-    protected String[] actorTypes;
+    protected JidFactory[] tupleFactories;
 
     /**
      * A tuple of actors.
@@ -60,9 +60,9 @@ public class TupleJidA
      */
     private void initialize()
             throws Exception {
-        if (actorTypes != null)
+        if (tupleFactories != null)
             return;
-        actorTypes = GetActorTypes.req.call(this);
+        tupleFactories = GetTupleFactories.req.call(this);
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = readable();
@@ -72,13 +72,7 @@ public class TupleJidA
         int i = 0;
         len = 0;
         while (i < size()) {
-            String actorType = actorTypes[i];
-            Jid elementJid = (new NewJID(
-                    actorType,
-                    getMailbox(),
-                    getParent(),
-                    readableBytes,
-                    this)).call(this);
+            Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
@@ -96,12 +90,7 @@ public class TupleJidA
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        String actorType = actorTypes[i];
-        Jid elementJid = (new NewJID(
-                actorType,
-                getMailbox(),
-                getParent(),
-                bytes, this)).call(this);
+        Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, bytes);
         Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
@@ -128,7 +117,7 @@ public class TupleJidA
     public int size()
             throws Exception {
         initialize();
-        return actorTypes.length;
+        return tupleFactories.length;
     }
 
     /**

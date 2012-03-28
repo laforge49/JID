@@ -23,30 +23,36 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Base Component for defining array types of tuples.
+ * Returns an array of actor types.
  */
-abstract public class ActorTypesC extends Component implements ActorTypes {
+public class GetTupleFactories extends ConcurrentRequest<JidFactory[], TupleFactories> {
+    public final static GetTupleFactories req = new GetTupleFactories();
+
     /**
-     * Bind request classes.
+     * Send a concurrent request.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        thisActor.bind(
-                GetActorTypes.class.getName(),
-                new ConcurrentMethodBinding<GetActorTypes, String[]>() {
-                    @Override
-                    public String[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                             GetActorTypes request)
-                            throws Exception {
-                        return getActorTypes();
-                    }
-                });
+    public JidFactory[] call(TupleFactories targetActor)
+            throws Exception {
+        return targetActor.getTupleFactories();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof TupleFactories;
     }
 }

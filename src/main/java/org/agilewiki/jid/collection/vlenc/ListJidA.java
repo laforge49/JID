@@ -31,7 +31,7 @@ import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid.collection.CollectionJidA;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class ListJidA
     /**
      * Actor type of the elements.
      */
-    private String elementsType;
+    private JidFactory elementsFactory;
 
     /**
      * A list of JID actors.
@@ -106,13 +106,13 @@ public class ListJidA
     }
 
     /**
-     * Returns the actor type of all the elements in the list.
+     * Returns the JidFactory for all the elements in the list.
      *
-     * @return The actor type of all the elements in the list.
+     * @return The JidFactory for of all the elements in the list.
      */
-    protected String getActorsType()
+    protected JidFactory getListFactory()
             throws Exception {
-        return GetActorsType.req.call(this);
+        return GetValueFactory.req.call(this);
     }
 
     /**
@@ -124,7 +124,7 @@ public class ListJidA
             throws Exception {
         if (list != null)
             return;
-        elementsType = getActorsType();
+        elementsFactory = getListFactory();
         if (!isSerialized()) {
             list = new ArrayList<Jid>();
             return;
@@ -135,13 +135,7 @@ public class ListJidA
         list = new ArrayList<Jid>(count);
         int i = 0;
         while (i < count) {
-            NewJID newJid = new NewJID(
-                    elementsType,
-                    getMailbox(),
-                    this,
-                    readableBytes,
-                    this);
-            Jid elementJid = newJid.call(this);
+            Jid elementJid = elementsFactory.newJID(getMailbox(), this, this, readableBytes);
             list.add(elementJid);
             i += 1;
         }
@@ -189,12 +183,7 @@ public class ListJidA
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        Jid elementJid = (new NewJID(
-                elementsType,
-                getMailbox(),
-                this,
-                bytes,
-                this)).call(this);
+        Jid elementJid = elementsFactory.newJID(getMailbox(), this, this, bytes);
         Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
@@ -234,12 +223,7 @@ public class ListJidA
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        Jid jid = (new NewJID(
-                elementsType,
-                getMailbox(),
-                this,
-                bytes,
-                this)).call(this);
+        Jid jid = elementsFactory.newJID(getMailbox(), this, this, bytes);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);
@@ -250,12 +234,7 @@ public class ListJidA
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        Jid jid = (new NewJID(
-                elementsType,
-                getMailbox(),
-                this,
-                (byte[]) null,
-                this)).call(this);
+        Jid jid = elementsFactory.newJID(getMailbox(), this, this);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);

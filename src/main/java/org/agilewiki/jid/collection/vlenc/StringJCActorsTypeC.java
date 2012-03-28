@@ -24,19 +24,24 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.GetJidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Defines collection of Strings.
  */
 public class StringJCActorsTypeC extends ActorsTypeC {
-    private static final String actorsType = JidFactories.STRING_JID_CTYPE;
+    private JidFactory jidFactory;
 
     /**
-     * Returns an actor type.
+     * Returns a JidFactory.
      *
-     * @return An actor type.
+     * @return A JidFactory.
      */
-    public String getActorsType() {
-        return actorsType;
+    public JidFactory getValueFactory()
+            throws Exception {
+        if (jidFactory == null)
+            jidFactory = (new GetJidFactory(JidFactories.STRING_JID_CTYPE)).call(thisActor);
+        return jidFactory;
     }
 }

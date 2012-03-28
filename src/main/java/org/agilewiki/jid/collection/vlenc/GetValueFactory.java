@@ -21,16 +21,39 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc;
+package org.agilewiki.jid.collection.vlenc;
+
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Interface for defining actor types.
+ * Returns the JidFactory of the elements.
  */
-public interface ActorTypes {
+public class GetValueFactory extends ConcurrentRequest<JidFactory, ValueFactory> {
+    public final static GetValueFactory req = new GetValueFactory();
+
     /**
-     * Returns an array of actor types.
+     * Send a concurrent request.
      *
-     * @return The array of actor types.
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
-    public String[] getActorTypes() throws Exception;
+    @Override
+    public JidFactory call(ValueFactory targetActor)
+            throws Exception {
+        return targetActor.getValueFactory();
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    @Override
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof ValueFactory;
+    }
 }

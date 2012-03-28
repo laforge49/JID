@@ -23,35 +23,16 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Returns an array of actor types.
+ * Interface for defining actor types.
  */
-public class GetActorTypes extends ConcurrentRequest<String[], ActorTypes> {
-    public final static GetActorTypes req = new GetActorTypes();
-
+public interface TupleFactories {
     /**
-     * Send a concurrent request.
+     * Returns an array of actor types.
      *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @return The array of actor types.
      */
-    @Override
-    public String[] call(ActorTypes targetActor)
-            throws Exception {
-        return targetActor.getActorTypes();
-    }
-
-    /**
-     * Returns true when targetActor is an instanceof TARGET_TYPE
-     *
-     * @param targetActor The actor to be called.
-     * @return True when targetActor is an instanceof TARGET_TYPE.
-     */
-    protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorTypes;
-    }
+    public JidFactory[] getTupleFactories() throws Exception;
 }

@@ -21,38 +21,37 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc;
+package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Returns the actor type of the elements.
+ * Base Actor for defining array types of tuples.
  */
-public class GetActorsType extends ConcurrentRequest<String, ActorsType> {
-    public final static GetActorsType req = new GetActorsType();
-
+abstract public class TupleFactoriesA extends JLPCActor implements TupleFactories {
     /**
-     * Send a concurrent request.
+     * Create a LiteActor
      *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    @Override
-    public String call(ActorsType targetActor)
-            throws Exception {
-        return targetActor.getActorsType();
+    public TupleFactoriesA(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Returns true when targetActor is an instanceof TARGET_TYPE
+     * The application method for processing requests sent to the actor.
      *
-     * @param targetActor The actor to be called.
-     * @return True when targetActor is an instanceof TARGET_TYPE.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorsType;
+    protected void processRequest(Object request, RP rp) throws Exception {
+        if (request instanceof GetTupleFactories)
+            rp.processResponse(getTupleFactories());
+        else
+            throw new UnsupportedOperationException();
     }
 }

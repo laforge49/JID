@@ -26,13 +26,14 @@ package org.agilewiki.jid.collection.vlenc;
 import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Base class for defining the elements type of a variable length collection.
  */
 abstract public class ActorsTypeC
         extends Component
-        implements ActorsType {
+        implements ValueFactory {
     /**
      * Bind request classes.
      *
@@ -41,13 +42,13 @@ abstract public class ActorsTypeC
     @Override
     public void bindery() throws Exception {
         thisActor.bind(
-                GetActorsType.class.getName(),
-                new ConcurrentMethodBinding<GetActorsType, String>() {
+                GetValueFactory.class.getName(),
+                new ConcurrentMethodBinding<GetValueFactory, JidFactory>() {
                     @Override
-                    public String concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                           GetActorsType request)
+                    public JidFactory concurrentProcessRequest(RequestReceiver requestReceiver,
+                                                               GetValueFactory request)
                             throws Exception {
-                        return getActorsType();
+                        return getValueFactory();
                     }
                 });
     }

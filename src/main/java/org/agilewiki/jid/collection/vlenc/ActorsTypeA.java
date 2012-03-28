@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.JLPCActor;
  */
 abstract public class ActorsTypeA
         extends JLPCActor
-        implements ActorsType {
+        implements ValueFactory {
     /**
      * Create a ActorsTypeA
      *
@@ -51,8 +51,8 @@ abstract public class ActorsTypeA
      */
     @Override
     protected void processRequest(Object request, RP rp) throws Exception {
-        if (request instanceof GetActorsType)
-            rp.processResponse(getActorsType());
+        if (request instanceof GetValueFactory)
+            rp.processResponse(getValueFactory());
         else
             throw new UnsupportedOperationException();
     }
