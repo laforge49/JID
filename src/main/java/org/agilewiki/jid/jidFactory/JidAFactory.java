@@ -21,7 +21,7 @@ public class JidAFactory extends JidFactory implements ActorFactory {
      * Create a JLPCActorFactory.
      */
     public JidAFactory() {
-        actorType = JidFactories.JID_ATYPE;
+        actorType = JidFactories.JID_TYPE;
     }
 
     /**

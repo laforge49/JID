@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Returns a value.
  */
 public class GetBoolean
-        extends SynchronousRequest<Boolean, BooleanJidA> {
+        extends SynchronousRequest<Boolean, BooleanJid> {
     final public static GetBoolean req = new GetBoolean();
 
     /**
@@ -41,7 +41,7 @@ public class GetBoolean
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BooleanJidA targetActor)
+    protected Boolean call(BooleanJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }
@@ -53,6 +53,6 @@ public class GetBoolean
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof BooleanJidA;
+        return targetActor instanceof BooleanJid;
     }
 }

@@ -23,47 +23,43 @@
  */
 package org.agilewiki.jid.scalar.flens.bool;
 
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
-import org.agilewiki.jactor.bind.VoidSynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidC;
+import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
- * A JID component that holds a boolean.
+ * A JID actor that holds a boolean.
  */
-public class BooleanJidC
-        extends FLenScalarJidC<Boolean> {
+public class BooleanJid
+        extends FLenScalarJidA<Boolean> {
     /**
-     * Bind request classes.
+     * Create a BooleanJidA.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public BooleanJid(final Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(GetBoolean.class.getName(),
-                new SynchronousMethodBinding<GetBoolean, Boolean>() {
-                    @Override
-                    public Boolean synchronousProcessRequest(Internals internals,
-                                                             GetBoolean request)
-                            throws Exception {
-                        return getValue();
-                    }
-                });
-
-        thisActor.bind(SetBoolean.class.getName(),
-                new VoidSynchronousMethodBinding<SetBoolean>() {
-                    @Override
-                    public void synchronousProcessRequest(Internals internals,
-                                                          SetBoolean request)
-                            throws Exception {
-                        setValue(request.getValue());
-                    }
-                });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetBoolean)
+            rp.processResponse(getValue());
+        else if (request instanceof SetBoolean) {
+            setValue(((SetBoolean) request).getValue());
+            rp.processResponse(null);
+        } else super.processRequest(request, rp);
     }
 
     /**

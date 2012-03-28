@@ -7,12 +7,12 @@ import org.agilewiki.jid.jidFactory.JidAFactory;
 /**
  * Creates a BooleanJidA.
  */
-public class BooleanJidAFactory extends JidAFactory {
+public class BooleanJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public BooleanJidAFactory() {
-        actorType = JidFactories.BOOLEAN_JID_ATYPE;
+    public BooleanJidFactory() {
+        actorType = JidFactories.BOOLEAN_JID_TYPE;
     }
 
     /**
@@ -22,7 +22,7 @@ public class BooleanJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected BooleanJidA instantiateActor(Mailbox mailbox) throws Exception {
-        return new BooleanJidA(mailbox);
+    final protected BooleanJid instantiateActor(Mailbox mailbox) throws Exception {
+        return new BooleanJid(mailbox);
     }
 }

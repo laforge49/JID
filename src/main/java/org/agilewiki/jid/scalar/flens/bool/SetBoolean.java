@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetBoolean
-        extends SynchronousRequest<Object, BooleanJidA> {
+        extends SynchronousRequest<Object, BooleanJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetBoolean
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(BooleanJidA targetActor)
+    protected Object call(BooleanJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetBoolean
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof BooleanJidA;
+        return targetActor instanceof BooleanJid;
     }
 }
