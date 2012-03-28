@@ -38,10 +38,8 @@ import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
-import org.agilewiki.jid.scalar.flens.integer.IntegerJidAFactory;
-import org.agilewiki.jid.scalar.flens.integer.IntegerJidC;
-import org.agilewiki.jid.scalar.flens.lng.LongJidAFactory;
-import org.agilewiki.jid.scalar.flens.lng.LongJidC;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
+import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidAFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidC;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidAFactory;
@@ -73,24 +71,14 @@ final public class JidFactories extends Component {
     public final static String BOOLEAN_JID_TYPE = "BOOLEAN_JID";
 
     /**
-     * The name of the IntegerJid component.
-     */
-    public final static String INTEGER_JID_CTYPE = "INT_JIDc";
-
-    /**
      * The name of the IntegerJid actor.
      */
-    public final static String INTEGER_JID_ATYPE = "INT_JIDa";
-
-    /**
-     * The name of the LongJid component.
-     */
-    public final static String LONG_JID_CTYPE = "LONG_JIDc";
+    public final static String INTEGER_JID_TYPE = "INT_JID";
 
     /**
      * The name of the LongJid actor.
      */
-    public final static String LONG_JID_ATYPE = "LONG_JIDa";
+    public final static String LONG_JID_TYPE = "LONG_JID";
 
     /**
      * The name of the FloatJid actor.
@@ -185,10 +173,8 @@ final public class JidFactories extends Component {
         (new RegisterActorFactory(new JidAFactory())).call(thisActor);
 
         (new RegisterActorFactory(new BooleanJidFactory())).call(thisActor);
-        (new DefineActorType(INTEGER_JID_CTYPE, IntegerJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new IntegerJidAFactory())).call(thisActor);
-        (new DefineActorType(LONG_JID_CTYPE, LongJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new LongJidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new IntegerJidFactory())).call(thisActor);
+        (new RegisterActorFactory(new LongJidFactory())).call(thisActor);
         (new RegisterActorFactory(new FloatJidAFactory())).call(thisActor);
         (new RegisterActorFactory(new DoubleJidFactory())).call(thisActor);
 

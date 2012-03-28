@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Returns a value.
  */
-public class GetLong extends SynchronousRequest<Long, LongJidA> {
+public class GetLong extends SynchronousRequest<Long, LongJid> {
     final public static GetLong req = new GetLong();
 
     /**
@@ -40,7 +40,7 @@ public class GetLong extends SynchronousRequest<Long, LongJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Long call(LongJidA targetActor)
+    protected Long call(LongJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }
@@ -52,6 +52,6 @@ public class GetLong extends SynchronousRequest<Long, LongJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof LongJidA;
+        return targetActor instanceof LongJid;
     }
 }

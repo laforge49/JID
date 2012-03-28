@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.flens.lng;
+package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
@@ -31,16 +31,16 @@ import org.agilewiki.jid.Util;
 import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 
 /**
- * A JID actor that holds a long.
+ * A JID actor that holds an integer.
  */
-public class LongJidA
-        extends FLenScalarJidA<Long> {
+public class IntegerJid
+        extends FLenScalarJidA<Integer> {
     /**
-     * Create a LongJidA.
+     * Create a IntegerJid.
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public LongJidA(Mailbox mailbox) {
+    public IntegerJid(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -54,10 +54,10 @@ public class LongJidA
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof GetLong)
+        if (request instanceof GetInteger)
             rp.processResponse(getValue());
-        else if (request instanceof SetLong) {
-            setValue(((SetLong) request).getValue());
+        else if (request instanceof SetInteger) {
+            setValue(((SetInteger) request).getValue());
             rp.processResponse(null);
         } else super.processRequest(request, rp);
     }
@@ -68,8 +68,8 @@ public class LongJidA
      * @return The default value
      */
     @Override
-    protected Long newValue() {
-        return new Long(0L);
+    protected Integer newValue() {
+        return new Integer(0);
     }
 
     /**
@@ -77,11 +77,11 @@ public class LongJidA
      *
      * @return The value held by this component.
      */
-    public Long getValue() {
+    public Integer getValue() {
         if (value != null)
             return value;
         ReadableBytes readableBytes = readable();
-        value = readableBytes.readLong();
+        value = readableBytes.readInt();
         return value;
     }
 
@@ -92,7 +92,7 @@ public class LongJidA
      */
     @Override
     public int getSerializedLength() {
-        return Util.LONG_LENGTH;
+        return Util.INT_LENGTH;
     }
 
     /**
@@ -102,6 +102,6 @@ public class LongJidA
      */
     @Override
     protected void serialize(AppendableBytes appendableBytes) {
-        appendableBytes.writeLong(value);
+        appendableBytes.writeInt(value);
     }
 }

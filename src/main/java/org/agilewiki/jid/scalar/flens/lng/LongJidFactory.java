@@ -1,18 +1,18 @@
-package org.agilewiki.jid.scalar.flens.integer;
+package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
- * Creates a IntegerJidA.
+ * Creates a LongJidA.
  */
-public class IntegerJidAFactory extends JidAFactory {
+public class LongJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public IntegerJidAFactory() {
-        actorType = JidFactories.INTEGER_JID_ATYPE;
+    public LongJidFactory() {
+        actorType = JidFactories.LONG_JID_TYPE;
     }
 
     /**
@@ -22,8 +22,8 @@ public class IntegerJidAFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected IntegerJidA instantiateActor(Mailbox mailbox)
+    final protected LongJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new IntegerJidA(mailbox);
+        return new LongJid(mailbox);
     }
 }

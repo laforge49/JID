@@ -24,11 +24,11 @@ public class LongATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newLongJid = new NewJID(JidFactories.LONG_JID_ATYPE);
-            LongJidA long1 = (LongJidA) newLongJid.send(future, factory).thisActor();
-            LongJidA long2 = (LongJidA) (new CopyJID()).send(future, long1);
+            NewJID newLongJid = new NewJID(JidFactories.LONG_JID_TYPE);
+            LongJid long1 = (LongJid) newLongJid.send(future, factory).thisActor();
+            LongJid long2 = (LongJid) (new CopyJID()).send(future, long1);
             (new SetLong(1L)).send(future, long2);
-            LongJidA float3 = (LongJidA) (new CopyJID()).send(future, long2);
+            LongJid float3 = (LongJid) (new CopyJID()).send(future, long2);
 
             int sl = GetSerializedLength.req.send(future, long1);
             assertEquals(8, sl);
@@ -46,13 +46,13 @@ public class LongATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetActor sjvl = new SetActor(JidFactories.LONG_JID_ATYPE);
+            SetActor sjvl = new SetActor(JidFactories.LONG_JID_TYPE);
             sjvl.send(future, jidJid1);
-            LongJidA rpa = (LongJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            LongJid rpa = (LongJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetLong.req.send(future, rpa);
             assertEquals(0L, v);
             (new SetLong(-1000000000000L)).send(future, rpa);
-            rpa = (LongJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            rpa = (LongJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetLong.req.send(future, rpa);
             assertEquals(-1000000000000L, v);
 

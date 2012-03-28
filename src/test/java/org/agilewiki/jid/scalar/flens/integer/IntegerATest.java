@@ -24,11 +24,11 @@ public class IntegerATest extends TestCase {
             (new Include(JidFactories.class)).call(factory);
             Open.req.call(factory);
 
-            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_ATYPE);
-            IntegerJidA int1 = (IntegerJidA) newIntegerJid.send(future, factory).thisActor();
-            IntegerJidA int2 = (IntegerJidA) (new CopyJID()).send(future, int1);
+            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_TYPE);
+            IntegerJid int1 = (IntegerJid) newIntegerJid.send(future, factory).thisActor();
+            IntegerJid int2 = (IntegerJid) (new CopyJID()).send(future, int1);
             (new SetInteger(1)).send(future, int2);
-            IntegerJidA int3 = (IntegerJidA) (new CopyJID()).send(future, int2);
+            IntegerJid int3 = (IntegerJid) (new CopyJID()).send(future, int2);
 
             int sl = GetSerializedLength.req.send(future, int1);
             assertEquals(4, sl);
@@ -46,13 +46,13 @@ public class IntegerATest extends TestCase {
 
             NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_CTYPE);
             Actor jidJid1 = newJidJid.send(future, factory).thisActor();
-            SetActor sjvi = new SetActor(JidFactories.INTEGER_JID_ATYPE);
+            SetActor sjvi = new SetActor(JidFactories.INTEGER_JID_TYPE);
             sjvi.send(future, jidJid1);
-            IntegerJidA rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            IntegerJid rpa = (IntegerJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetInteger.req.send(future, rpa);
             assertEquals(0, v);
             (new SetInteger(-1)).send(future, rpa);
-            rpa = (IntegerJidA) (new ResolvePathname("0")).send(future, jidJid1);
+            rpa = (IntegerJid) (new ResolvePathname("0")).send(future, jidJid1);
             v = GetInteger.req.send(future, rpa);
             assertEquals(-1, v);
 

@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Assigns a value.
  */
 public class SetInteger
-        extends SynchronousRequest<Object, IntegerJidA> {
+        extends SynchronousRequest<Object, IntegerJid> {
     /**
      * The value.
      */
@@ -64,7 +64,7 @@ public class SetInteger
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(IntegerJidA targetActor)
+    protected Object call(IntegerJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;
@@ -77,6 +77,6 @@ public class SetInteger
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof IntegerJidA;
+        return targetActor instanceof IntegerJid;
     }
 }
