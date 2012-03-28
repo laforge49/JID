@@ -23,14 +23,24 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Defines (StringJidC, StringJidC) tuples.
  */
-public class StringStringTupleFactories extends TupleFactoriesC {
+public class StringStringTupleFactories extends BaseTupleFactories {
     private JidFactory[] tupleFactories;
+
+    /**
+     * Create a LiteActor
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public StringStringTupleFactories(Mailbox mailbox) {
+        super(mailbox);
+    }
 
     private JidFactory[] tupleFactories()
             throws Exception {

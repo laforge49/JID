@@ -216,7 +216,7 @@ public class JidA extends JLPCActor implements Jid {
         Mailbox mb = m;
         if (mb == null)
             mb = getMailbox();
-        return (new NewJID(getActorType(), m, getBytes())).call(getParent()).thisActor();
+        return (new NewJID(getActorType(), m, getParent(), getBytes())).call(getParent()).thisActor();
     }
 
     final public void isJidEqual(Actor actor, final RP rp)

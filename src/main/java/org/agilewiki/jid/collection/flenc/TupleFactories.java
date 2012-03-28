@@ -26,13 +26,15 @@ package org.agilewiki.jid.collection.flenc;
 import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Interface for defining actor types.
+ * Array of Jid factories for tuples.
  */
 public interface TupleFactories {
+
     /**
-     * Returns an array of actor types.
+     * Returns an array of JidFactory.
      *
-     * @return The array of actor types.
+     * @return An array of JidFactory.
      */
-    public JidFactory[] getTupleFactories() throws Exception;
+    public JidFactory[] getTupleFactories()
+            throws Exception;
 }

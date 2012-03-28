@@ -33,7 +33,7 @@ import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.GetTupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleFactories;
-import org.agilewiki.jid.collection.flenc.TupleJidAFactory;
+import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.GetValueFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.jidFactory.JidFactory;
@@ -70,7 +70,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
     @Override
     final protected JidFactory getListFactory()
             throws Exception {
-        return new TupleJidAFactory();
+        return new TupleJidFactory();
     }
 
     /**

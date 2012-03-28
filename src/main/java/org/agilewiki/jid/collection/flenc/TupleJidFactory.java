@@ -23,31 +23,30 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
- * Base Component for defining array types of tuples.
+ * Creates a TupleJid.
  */
-abstract public class TupleFactoriesC extends Component implements TupleFactories {
+public class TupleJidFactory extends JidAFactory {
     /**
-     * Bind request classes.
+     * Create a JLPCActorFactory.
+     */
+    public TupleJidFactory() {
+        actorType = JidFactories.TUPLE_JID_TYPE;
+    }
+
+    /**
+     * Create a JLPCActor.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @param mailbox The mailbox of the new actor.
+     * @return The new actor.
      */
     @Override
-    public void bindery() throws Exception {
-        thisActor.bind(
-                GetTupleFactories.class.getName(),
-                new ConcurrentMethodBinding<GetTupleFactories, JidFactory[]>() {
-                    @Override
-                    public JidFactory[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                                 GetTupleFactories request)
-                            throws Exception {
-                        return getTupleFactories();
-                    }
-                });
+    final protected TupleJid instantiateActor(Mailbox mailbox)
+            throws Exception {
+        return new TupleJid(mailbox);
     }
 }

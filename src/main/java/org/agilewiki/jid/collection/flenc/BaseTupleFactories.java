@@ -28,15 +28,17 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Base Actor for defining array types of tuples.
+ * Base Actor for defining Jid factories for tuples.
  */
-abstract public class TupleFactoriesA extends JLPCActor implements TupleFactories {
+abstract public class BaseTupleFactories
+        extends JLPCActor
+        implements TupleFactories {
     /**
      * Create a LiteActor
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public TupleFactoriesA(Mailbox mailbox) {
+    public BaseTupleFactories(Mailbox mailbox) {
         super(mailbox);
     }
 

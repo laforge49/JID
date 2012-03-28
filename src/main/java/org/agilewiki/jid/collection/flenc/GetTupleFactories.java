@@ -28,7 +28,7 @@ import org.agilewiki.jactor.lpc.ConcurrentRequest;
 import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Returns an array of actor types.
+ * Returns an array of Jid factories for tuples.
  */
 public class GetTupleFactories extends ConcurrentRequest<JidFactory[], TupleFactories> {
     public final static GetTupleFactories req = new GetTupleFactories();

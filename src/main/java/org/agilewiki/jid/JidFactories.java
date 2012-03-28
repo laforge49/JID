@@ -27,8 +27,7 @@ import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jactor.components.factory.RegisterActorFactory;
-import org.agilewiki.jid.collection.flenc.TupleJidAFactory;
-import org.agilewiki.jid.collection.flenc.TupleJidC;
+import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidAFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
@@ -103,14 +102,9 @@ final public class JidFactories extends Component {
     public final static String BYTES_JID_TYPE = "BYTES_JID";
 
     /**
-     * The name of the TupleJid component.
-     */
-    public final static String TUPLE_JID_CTYPE = "TUPLE_JIDc";
-
-    /**
      * The name of the TupleJid actor.
      */
-    public final static String TUPLE_JID_ATYPE = "TUPLE_JIDa";
+    public final static String TUPLE_JID_TYPE = "TUPLE_JID";
 
     /**
      * The name of the ListJid component.
@@ -164,8 +158,7 @@ final public class JidFactories extends Component {
         (new RegisterActorFactory(new StringJidFactory())).call(thisActor);
         (new RegisterActorFactory(new BytesJidFactory())).call(thisActor);
 
-        (new DefineActorType(TUPLE_JID_CTYPE, TupleJidC.class)).call(thisActor);
-        (new RegisterActorFactory(new TupleJidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new TupleJidFactory())).call(thisActor);
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
         (new RegisterActorFactory(new ListJidAFactory())).call(thisActor);
 

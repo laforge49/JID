@@ -23,15 +23,16 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.collection.CollectionJidC;
+import org.agilewiki.jid.collection.CollectionJidA;
 import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Holds a fixed-size array of JID actors of various types.
  */
-public class TupleJidC
-        extends CollectionJidC
+public class TupleJid
+        extends CollectionJidA
         implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.
@@ -44,6 +45,15 @@ public class TupleJidC
     protected Jid[] tuple;
 
     /**
+     * Create a TupleJid
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public TupleJid(Mailbox mailbox) {
+        super(mailbox);
+    }
+
+    /**
      * Perform lazy initialization.
      *
      * @throws Exception Any exceptions thrown during initialization.
@@ -52,7 +62,7 @@ public class TupleJidC
             throws Exception {
         if (tupleFactories != null)
             return;
-        tupleFactories = GetTupleFactories.req.call(thisActor);
+        tupleFactories = GetTupleFactories.req.call(this);
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = readable();
@@ -62,11 +72,7 @@ public class TupleJidC
         int i = 0;
         len = 0;
         while (i < size()) {
-            Jid elementJid = tupleFactories[i].newJID(
-                    thisActor.getMailbox(),
-                    thisActor.getParent(),
-                    this,
-                    readableBytes);
+            Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
@@ -84,11 +90,7 @@ public class TupleJidC
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        Jid elementJid = tupleFactories[i].newJID(
-                thisActor.getMailbox(),
-                thisActor.getParent(),
-                this,
-                bytes);
+        Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, bytes);
         Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
