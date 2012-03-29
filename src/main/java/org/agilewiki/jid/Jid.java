@@ -11,7 +11,7 @@ import java.util.Arrays;
 /**
  * Base class for Incremental Deserialization Actors.
  */
-public class JidA extends JLPCActor implements _Jid {
+public class Jid extends JLPCActor implements _Jid {
     /**
      * The JID actor which holds this actor.
      */
@@ -32,7 +32,7 @@ public class JidA extends JLPCActor implements _Jid {
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public JidA(final Mailbox mailbox) {
+    public Jid(final Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -82,7 +82,7 @@ public class JidA extends JLPCActor implements _Jid {
     }
 
     @Override
-    public JidA thisActor() {
+    public Jid thisActor() {
         return this;
     }
 
@@ -221,11 +221,11 @@ public class JidA extends JLPCActor implements _Jid {
 
     final public void isJidEqual(Actor actor, final RP rp)
             throws Exception {
-        if (!(actor instanceof JidA)) {
+        if (!(actor instanceof Jid)) {
             rp.processResponse(false);
             return;
         }
-        final JidA jidA = (JidA) actor;
+        final Jid jidA = (Jid) actor;
         send(jidA, GetSerializedLength.req, new RP<Integer>() {
             @Override
             public void processResponse(Integer response) throws Exception {

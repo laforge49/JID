@@ -27,7 +27,7 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.collection.vlenc.map.KGet;
 import org.agilewiki.jid.collection.vlenc.map.KMake;
 import org.agilewiki.jid.collection.vlenc.map.MapJid;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
@@ -68,7 +68,7 @@ public class StringMapJid extends MapJid<String> {
      *
      * @return The JidFactory for the key.
      */
-    final protected JidFactory getKeyFactory() {
+    final protected _JidFactory getKeyFactory() {
         return new StringJidFactory();
     }
 

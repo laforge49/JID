@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * </p>
  */
 final public class GetSerializedLength
-        extends SynchronousRequest<Integer, JidA> {
+        extends SynchronousRequest<Integer, Jid> {
     public final static GetSerializedLength req = new GetSerializedLength();
 
     /**
@@ -43,7 +43,7 @@ final public class GetSerializedLength
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Integer call(JidA targetActor)
+    protected Integer call(Jid targetActor)
             throws Exception {
         return targetActor.getSerializedLength();
     }
@@ -55,6 +55,6 @@ final public class GetSerializedLength
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 }

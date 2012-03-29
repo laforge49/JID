@@ -25,14 +25,13 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.JBActor;
-import org.agilewiki.jactor.bind.Open;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.*;
-import org.agilewiki.jid.GetJIDComponent;
-import org.agilewiki.jid.JidA;
+import org.agilewiki.jactor.components.factory.ActorFactory;
+import org.agilewiki.jactor.components.factory.Factory;
+import org.agilewiki.jactor.components.factory.GetActorFactory;
+import org.agilewiki.jactor.components.factory.NewActor;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 
@@ -62,13 +61,11 @@ final public class JidsFactory extends Component {
     @Override
     public void bindery() throws Exception {
 
-        thisActor.bind(GetJidFactory.class.getName(), new ConcurrentMethodBinding<GetJidFactory, JidFactory>() {
+        thisActor.bind(GetJidFactory.class.getName(), new ConcurrentMethodBinding<GetJidFactory, _JidFactory>() {
             @Override
-            public JidFactory concurrentProcessRequest(RequestReceiver requestReceiver, GetJidFactory request) throws Exception {
+            public _JidFactory concurrentProcessRequest(RequestReceiver requestReceiver, GetJidFactory request) throws Exception {
                 ActorFactory actorFactory = (new GetActorFactory(request.getActorType())).call(thisActor);
-                if (actorFactory instanceof JidFactory)
-                    return (JidFactory) actorFactory;
-                return new JidCFactory((JCActorFactory) actorFactory);
+                return (_JidFactory) actorFactory;
             }
         });
 
@@ -82,23 +79,12 @@ final public class JidsFactory extends Component {
                         request.getActorType(),
                         request.getMailbox(),
                         request.getParent())).call(thisActor);
-                if (actor instanceof JidA) {
-                    _Jid jid = (_Jid) actor;
-                    if (readableBytes != null)
-                        jid.load(readableBytes);
-                    if (container != null)
-                        jid.setContainerJid(container);
-                    return jid;
-                } else {
-                    JBActor jBActor = (JBActor) actor;
-                    _Jid jid = GetJIDComponent.req.call(jBActor);
-                    if (readableBytes != null)
-                        jid.load(readableBytes);
-                    if (container != null)
-                        jid.setContainerJid(container);
-                    Open.req.call(jBActor);
-                    return jid;
-                }
+                _Jid jid = (_Jid) actor;
+                if (readableBytes != null)
+                    jid.load(readableBytes);
+                if (container != null)
+                    jid.setContainerJid(container);
+                return jid;
             }
         });
     }

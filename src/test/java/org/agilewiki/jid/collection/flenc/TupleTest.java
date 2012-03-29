@@ -43,7 +43,7 @@ import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
-public class TupleATest extends TestCase {
+public class TupleTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -65,9 +65,7 @@ public class TupleATest extends TestCase {
             assertEquals("Apples", GetString.req.send(future, e0));
             (new SetString("Oranges")).send(future, e1);
             assertEquals("Oranges", GetString.req.send(future, e1));
-            System.out.println(t0.getParent().getClass().getName());
             Actor t1 = (new CopyJID()).send(future, t0);
-            System.out.println(t1.getParent().getClass().getName());
             Actor f0 = (new ResolvePathname("0")).send(future, t1);
             assertEquals("Apples", GetString.req.send(future, f0));
             Actor f1 = (new ResolvePathname("1")).send(future, t1);

@@ -60,9 +60,9 @@ public class ActorJidTest extends TestCase {
             Actor jidJid2 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
-            SetActor sjvj = new SetActor(JidFactories.JID_CTYPE);
+            SetActor sjvj = new SetActor(JidFactories.JID_TYPE);
             sjvj.send(future, jidJid2);
-            MakeActor mjvj = new MakeActor(JidFactories.JID_CTYPE);
+            MakeActor mjvj = new MakeActor(JidFactories.JID_TYPE);
             boolean made = mjvj.send(future, jidJid2);
             assertEquals(false, made);
             Actor jidJid2a = GetActor.req.send(future, jidJid2);
@@ -70,7 +70,7 @@ public class ActorJidTest extends TestCase {
             sl = GetSerializedLength.req.send(future, jidJid2a);
             assertEquals(0, sl);
             sl = GetSerializedLength.req.send(future, jidJid2);
-            assertEquals(16, sl);
+            assertEquals(14, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid2);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid2);
@@ -85,7 +85,7 @@ public class ActorJidTest extends TestCase {
             assertNull(jidJid2a);
             assertNotNull(jidJid22);
             sl = GetSerializedLength.req.send(future, jidJid22);
-            assertEquals(16, sl);
+            assertEquals(14, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid22);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid22);
@@ -117,9 +117,9 @@ public class ActorJidTest extends TestCase {
             sl = GetSerializedLength.req.send(future, jidJid3b);
             assertEquals(0, sl);
             sl = GetSerializedLength.req.send(future, jidJid3a);
-            assertEquals(16, sl);
+            assertEquals(14, sl);
             sl = GetSerializedLength.req.send(future, jidJid3);
-            assertEquals(42, sl);
+            assertEquals(40, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid3);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid3);
@@ -141,14 +141,14 @@ public class ActorJidTest extends TestCase {
             assertEquals(jidJid3a, jidJid3aa);
             assertNotNull(jidJid33);
             sl = GetSerializedLength.req.send(future, jidJid33);
-            assertEquals(42, sl);
+            assertEquals(40, sl);
             rpa = (new ResolvePathname("")).send(future, jidJid33);
             assertNotNull(rpa);
             assertEquals(rpa, jidJid33);
             rpa = (new ResolvePathname("0")).send(future, jidJid33);
             assertNotNull(rpa);
             sl = GetSerializedLength.req.send(future, rpa);
-            assertEquals(16, sl);
+            assertEquals(14, sl);
             rpa = (new ResolvePathname("0/0")).send(future, jidJid33);
             assertNotNull(rpa);
             sl = GetSerializedLength.req.send(future, rpa);

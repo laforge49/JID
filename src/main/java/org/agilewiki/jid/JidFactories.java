@@ -25,7 +25,6 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.DefineActorType;
 import org.agilewiki.jactor.components.factory.RegisterActorFactory;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
@@ -50,11 +49,6 @@ import java.util.ArrayList;
  * </p>
  */
 final public class JidFactories extends Component {
-    /**
-     * The name of the JID component.
-     */
-    public final static String JID_CTYPE = "JIDc";
-
     /**
      * The name of the JID actor.
      */
@@ -139,7 +133,6 @@ final public class JidFactories extends Component {
      */
     @Override
     public void bindery() throws Exception {
-        (new DefineActorType(JID_CTYPE, JidC.class)).call(thisActor);
         (new RegisterActorFactory(new JidAFactory())).call(thisActor);
 
         (new RegisterActorFactory(new BooleanJidFactory())).call(thisActor);

@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * </p>
  */
 final public class Save
-        extends SynchronousRequest<Object, JidA> {
+        extends SynchronousRequest<Object, Jid> {
     /**
      * Where the persistent data is to be saved.
      */
@@ -64,7 +64,7 @@ final public class Save
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(JidA targetActor)
+    protected Object call(Jid targetActor)
             throws Exception {
         targetActor.save(appendableBytes);
         return null;
@@ -77,6 +77,6 @@ final public class Save
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 }

@@ -32,7 +32,7 @@ import org.agilewiki.jid.*;
  * A collection of JID actors.
  */
 abstract public class CollectionJid
-        extends JidA
+        extends Jid
         implements Collection {
 
     /**

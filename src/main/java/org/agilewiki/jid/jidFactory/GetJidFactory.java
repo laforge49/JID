@@ -28,7 +28,7 @@ import org.agilewiki.jactor.bind.JBConcurrentRequest;
 /**
  * Returns the jid factory for a given actor type.
  */
-public class GetJidFactory extends JBConcurrentRequest<JidFactory> {
+public class GetJidFactory extends JBConcurrentRequest<_JidFactory> {
     /**
      * An actor type name.
      */

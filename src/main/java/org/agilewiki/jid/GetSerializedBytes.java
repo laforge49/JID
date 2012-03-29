@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Returns a byte array holding the serialized persistent data.
  */
 final public class GetSerializedBytes extends
-        SynchronousRequest<byte[], JidA> {
+        SynchronousRequest<byte[], Jid> {
     public final static GetSerializedBytes req = new GetSerializedBytes();
 
     /**
@@ -41,7 +41,7 @@ final public class GetSerializedBytes extends
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected byte[] call(JidA targetActor)
+    protected byte[] call(Jid targetActor)
             throws Exception {
         return targetActor.getBytes();
     }
@@ -53,6 +53,6 @@ final public class GetSerializedBytes extends
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 }

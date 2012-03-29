@@ -31,7 +31,7 @@ import org.agilewiki.jid._Jid;
 /**
  * Creates a Jid actor.
  */
-abstract public class JidFactory {
+abstract public class _JidFactory {
     /**
      * Create and configure an actor.
      *

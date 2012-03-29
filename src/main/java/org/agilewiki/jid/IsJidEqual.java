@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Returns true when the persistent content are equal.
  */
-public class IsJidEqual extends Request<Boolean, JidA> {
+public class IsJidEqual extends Request<Boolean, Jid> {
     private Actor jidActor;
 
     /**
@@ -39,7 +39,7 @@ public class IsJidEqual extends Request<Boolean, JidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 
     /**

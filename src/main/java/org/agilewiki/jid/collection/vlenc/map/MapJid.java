@@ -34,7 +34,7 @@ import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.GetValueFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.Scalar;
 
 /**
@@ -44,7 +44,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
         implements TupleFactories, Map<KEY_TYPE> {
 
-    private JidFactory[] tupleFactories;
+    private _JidFactory[] tupleFactories;
 
     /**
      * Create a MapJid
@@ -60,7 +60,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The JidFactory for the key.
      */
-    abstract protected JidFactory getKeyFactory();
+    abstract protected _JidFactory getKeyFactory();
 
     /**
      * Converts a string to a key.
@@ -76,7 +76,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The actor type of all the elements in the list.
      */
     @Override
-    final protected JidFactory getListFactory()
+    final protected _JidFactory getListFactory()
             throws Exception {
         return new TupleJidFactory();
     }
@@ -87,11 +87,11 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The array of actor types.
      */
     @Override
-    final public JidFactory[] getTupleFactories()
+    final public _JidFactory[] getTupleFactories()
             throws Exception {
         if (tupleFactories != null)
             return tupleFactories;
-        tupleFactories = new JidFactory[2];
+        tupleFactories = new _JidFactory[2];
         tupleFactories[0] = getKeyFactory();
         tupleFactories[1] = getValueFactory();
         return tupleFactories;
@@ -102,7 +102,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The actor type of the values in the list.
      */
-    protected JidFactory getValueFactory()
+    protected _JidFactory getValueFactory()
             throws Exception {
         return GetValueFactory.req.call(this);
     }

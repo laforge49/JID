@@ -1,7 +1,7 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
@@ -22,7 +22,7 @@ final public class StringStringMapJid extends StringMapJid {
      *
      * @return The JidFactory for the values in the list.
      */
-    protected JidFactory getValueFactory()
+    protected _JidFactory getValueFactory()
             throws Exception {
         return new StringJidFactory();
     }

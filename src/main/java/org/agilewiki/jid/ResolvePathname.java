@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Returns the JID actor identified by the pathname.
  */
 final public class ResolvePathname
-        extends SynchronousRequest<Actor, JidA> {
+        extends SynchronousRequest<Actor, Jid> {
     /**
      * The pathname of a JID.
      */
@@ -62,7 +62,7 @@ final public class ResolvePathname
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(JidA targetActor)
+    protected Actor call(Jid targetActor)
             throws Exception {
         return targetActor.resolvePathname(pathname);
     }
@@ -74,6 +74,6 @@ final public class ResolvePathname
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 }

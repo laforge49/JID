@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Returns a copy of the JID.
  */
 final public class CopyJID
-        extends SynchronousRequest<Actor, JidA> {
+        extends SynchronousRequest<Actor, Jid> {
     /**
      * A mailbox which may be shared with other actors.
      */
@@ -69,7 +69,7 @@ final public class CopyJID
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(JidA targetActor)
+    protected Actor call(Jid targetActor)
             throws Exception {
         return targetActor.copyJID(mailbox);
     }
@@ -81,6 +81,6 @@ final public class CopyJID
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidA;
+        return targetActor instanceof Jid;
     }
 }

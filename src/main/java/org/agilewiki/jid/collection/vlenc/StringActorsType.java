@@ -23,21 +23,32 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Defines collection of Strings.
  */
-public class StringActorsType extends ActorsTypeC {
-    private JidFactory jidFactory;
+public class StringActorsType extends ActorsType {
+
+    private _JidFactory jidFactory;
+
+    /**
+     * Create a StringActorsType
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public StringActorsType(Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
      * Returns a JidFactory.
      *
      * @return A JidFactory.
      */
-    public JidFactory getValueFactory()
+    public _JidFactory getValueFactory()
             throws Exception {
         if (jidFactory == null)
             jidFactory = new StringJidFactory();

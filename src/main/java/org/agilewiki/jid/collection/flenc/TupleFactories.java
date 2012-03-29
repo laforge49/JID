@@ -23,7 +23,7 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.jidFactory._JidFactory;
 
 /**
  * Array of Jid factories for tuples.
@@ -35,6 +35,6 @@ public interface TupleFactories {
      *
      * @return An array of JidFactory.
      */
-    public JidFactory[] getTupleFactories()
+    public _JidFactory[] getTupleFactories()
             throws Exception;
 }
