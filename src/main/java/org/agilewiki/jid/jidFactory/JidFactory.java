@@ -11,7 +11,7 @@ import org.agilewiki.jid._Jid;
 /**
  * Creates a JidA.
  */
-public class JidAFactory extends _JidFactory implements ActorFactory {
+public class JidFactory extends _JidFactory implements ActorFactory {
     /**
      * The actor type.
      */
@@ -20,7 +20,7 @@ public class JidAFactory extends _JidFactory implements ActorFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public JidAFactory() {
+    public JidFactory() {
         actorType = JidFactories.JID_TYPE;
     }
 

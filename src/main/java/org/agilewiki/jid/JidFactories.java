@@ -30,7 +30,7 @@ import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.StringStringMapJidFactory;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
@@ -133,7 +133,7 @@ final public class JidFactories extends Component {
      */
     @Override
     public void bindery() throws Exception {
-        (new RegisterActorFactory(new JidAFactory())).call(thisActor);
+        (new RegisterActorFactory(new JidFactory())).call(thisActor);
 
         (new RegisterActorFactory(new BooleanJidFactory())).call(thisActor);
         (new RegisterActorFactory(new IntegerJidFactory())).call(thisActor);

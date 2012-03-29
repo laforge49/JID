@@ -2,12 +2,12 @@ package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a BooleanJidA.
  */
-public class BooleanJidFactory extends JidAFactory {
+public class BooleanJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */

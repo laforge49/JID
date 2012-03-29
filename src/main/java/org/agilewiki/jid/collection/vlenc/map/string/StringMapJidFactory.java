@@ -26,12 +26,12 @@ package org.agilewiki.jid.collection.vlenc.map.string;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.ListJid;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a StringMapJid.
  */
-public class StringMapJidFactory extends JidAFactory {
+public class StringMapJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */

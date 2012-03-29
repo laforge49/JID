@@ -2,12 +2,12 @@ package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a BytesJidA.
  */
-public class BytesJidFactory extends JidAFactory {
+public class BytesJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */

@@ -2,12 +2,12 @@ package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a IntegerJidA.
  */
-public class IntegerJidFactory extends JidAFactory {
+public class IntegerJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */

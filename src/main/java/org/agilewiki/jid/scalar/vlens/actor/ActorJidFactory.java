@@ -2,12 +2,12 @@ package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a ActorJid.
  */
-public class ActorJidFactory extends JidAFactory {
+public class ActorJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */

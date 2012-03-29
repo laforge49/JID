@@ -2,12 +2,12 @@ package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Creates a FloatJidA.
  */
-public class FloatJidAFactory extends JidAFactory {
+public class FloatJidAFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */
