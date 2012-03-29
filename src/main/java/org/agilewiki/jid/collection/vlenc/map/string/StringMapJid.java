@@ -23,16 +23,17 @@
  */
 package org.agilewiki.jid.collection.vlenc.map.string;
 
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.collection.vlenc.map.KGet;
 import org.agilewiki.jid.collection.vlenc.map.KMake;
-import org.agilewiki.jid.collection.vlenc.map.MapJidC;
+import org.agilewiki.jid.collection.vlenc.map.MapJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Holds a map with String keys.
  */
-public class StringMapJidC extends MapJidC<String> {
+public class StringMapJid extends MapJid<String> {
     /**
      * Create a KMake request.
      *
@@ -51,6 +52,15 @@ public class StringMapJidC extends MapJidC<String> {
      */
     final public static KGet<String> newKGet(String key) {
         return new KGet<String>(key);
+    }
+
+    /**
+     * Create a StringMapJid
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    public StringMapJid(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**

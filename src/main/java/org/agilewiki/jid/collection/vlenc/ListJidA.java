@@ -48,10 +48,10 @@ public class ListJidA
     /**
      * A list of JID actors.
      */
-    private ArrayList<Jid> list;
+    protected ArrayList<Jid> list;
 
     /**
-     * Create a ListJidA
+     * Create a ListJid
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */

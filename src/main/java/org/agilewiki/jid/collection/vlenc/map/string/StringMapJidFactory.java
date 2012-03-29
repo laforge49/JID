@@ -21,21 +21,22 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc;
+package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.collection.vlenc.ListJidA;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
- * Creates a ListJid.
+ * Creates a StringMapJid.
  */
-public class ListJidAFactory extends JidAFactory {
+public class StringMapJidFactory extends JidAFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public ListJidAFactory() {
-        actorType = JidFactories.LIST_JID_ATYPE;
+    public StringMapJidFactory() {
+        actorType = JidFactories.STRING_MAP_JID_TYPE;
     }
 
     /**
@@ -47,6 +48,6 @@ public class ListJidAFactory extends JidAFactory {
     @Override
     final protected ListJidA instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new ListJidA(mailbox);
+        return new StringMapJid(mailbox);
     }
 }

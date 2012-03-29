@@ -30,8 +30,8 @@ import org.agilewiki.jactor.components.factory.RegisterActorFactory;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidAFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidC;
-import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidC;
-import org.agilewiki.jid.collection.vlenc.map.string.StringStringJAMapJidC;
+import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.string.StringStringMapJidFactory;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 import org.agilewiki.jid.jidFactory.JidsFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
@@ -119,12 +119,12 @@ final public class JidFactories extends Component {
     /**
      * The name of the ListJid component.
      */
-    public final static String STRING_MAP_JID_CTYPE = "STRING_MAP_JIDc";
+    public final static String STRING_MAP_JID_TYPE = "STRING_MAP_JID";
 
     /**
      * The name of the ListJid component.
      */
-    public final static String STRING_STRING_MAP_JID_CTYPE = "STRING_STRING_MAP_JIDc";
+    public final static String STRING_STRING_MAP_JID_TYPE = "STRING_STRING_MAP_JID";
 
     /**
      * Returns a list of Includes for inclusion in the actor.
@@ -162,7 +162,7 @@ final public class JidFactories extends Component {
         (new DefineActorType(LIST_JID_CTYPE, ListJidC.class)).call(thisActor);
         (new RegisterActorFactory(new ListJidAFactory())).call(thisActor);
 
-        (new DefineActorType(STRING_MAP_JID_CTYPE, StringMapJidC.class)).call(thisActor);
-        (new DefineActorType(STRING_STRING_MAP_JID_CTYPE, StringStringJAMapJidC.class)).call(thisActor);
+        (new RegisterActorFactory(new StringMapJidFactory())).call(thisActor);
+        (new RegisterActorFactory(new StringStringMapJidFactory())).call(thisActor);
     }
 }

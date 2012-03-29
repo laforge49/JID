@@ -23,12 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.bind.JBSynchronousRequest;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Create a keyed entry.
  */
-public class KMake<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Boolean> {
+public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -50,5 +51,29 @@ public class KMake<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Boo
      */
     public KMake(KEY_TYPE key) {
         this.key = key;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Boolean call(Map<KEY_TYPE> targetActor)
+            throws Exception {
+        targetActor.kMake(key);
+        return null;
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof Map;
     }
 }

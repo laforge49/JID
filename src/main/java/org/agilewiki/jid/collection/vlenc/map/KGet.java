@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.JBSynchronousRequest;
+import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the value assigned to a given key.
  */
-public class KGet<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Actor> {
+public class KGet<KEY_TYPE extends Comparable> extends SynchronousRequest<Actor, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -51,5 +51,29 @@ public class KGet<KEY_TYPE extends Comparable> extends JBSynchronousRequest<Acto
      */
     public KGet(KEY_TYPE key) {
         this.key = key;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected Actor call(Map<KEY_TYPE> targetActor)
+            throws Exception {
+        targetActor.kGet(key);
+        return null;
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof Map;
     }
 }

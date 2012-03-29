@@ -24,10 +24,8 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.Internals;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.bind.SynchronousMethodBinding;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.collection.Collection;
@@ -35,17 +33,27 @@ import org.agilewiki.jid.collection.flenc.GetTupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.GetValueFactory;
-import org.agilewiki.jid.collection.vlenc.ListJidC;
+import org.agilewiki.jid.collection.vlenc.ListJidA;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.Scalar;
 
 /**
  * Holds a map.
  */
-abstract public class MapJidC<KEY_TYPE extends Comparable>
-        extends ListJidC
+abstract public class MapJid<KEY_TYPE extends Comparable>
+        extends ListJidA
         implements TupleFactories, Map<KEY_TYPE> {
+
     private JidFactory[] tupleFactories;
+
+    /**
+     * Create a MapJid
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
+     */
+    protected MapJid(Mailbox mailbox) {
+        super(mailbox);
+    }
 
     /**
      * Returns the JidFactory for the key.
@@ -96,7 +104,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
      */
     protected JidFactory getValueFactory()
             throws Exception {
-        return GetValueFactory.req.call(thisActor);
+        return GetValueFactory.req.call(this);
     }
 
     /**
@@ -175,36 +183,23 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
         return jid.thisActor();
     }
 
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
     @Override
-    public void bindery() throws Exception {
-        super.bindery();
-
-        thisActor.bind(
-                GetTupleFactories.class.getName(),
-                new ConcurrentMethodBinding<GetTupleFactories, JidFactory[]>() {
-                    @Override
-                    public JidFactory[] concurrentProcessRequest(RequestReceiver requestReceiver,
-                                                                 GetTupleFactories request)
-                            throws Exception {
-                        return getTupleFactories();
-                    }
-                });
-
-        thisActor.bind(KMake.class.getName(), new SynchronousMethodBinding<KMake<KEY_TYPE>, Boolean>() {
-            @Override
-            public Boolean synchronousProcessRequest(Internals internals, KMake<KEY_TYPE> request)
-                    throws Exception {
-                return kMake(request.getKey());
-            }
-        });
-
-        thisActor.bind(KGet.class.getName(), new SynchronousMethodBinding<KGet<KEY_TYPE>, Actor>() {
-            @Override
-            public Actor synchronousProcessRequest(Internals internals, KGet<KEY_TYPE> request)
-                    throws Exception {
-                return kGet(request.getKey());
-            }
-        });
+    protected void processRequest(Object request, RP rp)
+            throws Exception {
+        if (request instanceof GetTupleFactories) {
+            rp.processResponse(getTupleFactories());
+        } else if (request instanceof KMake) {
+            rp.processResponse(kMake(((KMake<KEY_TYPE>) request).getKey()));
+        } else if (request instanceof KGet) {
+            rp.processResponse(kGet(((KGet<KEY_TYPE>) request).getKey()));
+        } else super.processRequest(request, rp);
     }
 
     /**
@@ -219,7 +214,7 @@ abstract public class MapJidC<KEY_TYPE extends Comparable>
             throws Exception {
         initialize();
         if (pathname.length() == 0) {
-            return thisActor;
+            return this;
         }
         int s = pathname.indexOf("/");
         if (s == -1)
