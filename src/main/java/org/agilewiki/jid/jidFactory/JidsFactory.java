@@ -28,10 +28,10 @@ import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
 import org.agilewiki.jactor.bind.RequestReceiver;
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.ActorFactory;
 import org.agilewiki.jactor.components.factory.Factory;
-import org.agilewiki.jactor.components.factory.GetActorFactory;
-import org.agilewiki.jactor.components.factory.NewActor;
+import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jactor.factory.GetActorFactory;
+import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 

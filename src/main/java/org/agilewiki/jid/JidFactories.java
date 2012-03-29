@@ -25,7 +25,7 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.RegisterActorFactory;
+import org.agilewiki.jactor.factory.RegisterActorFactory;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidFactory;

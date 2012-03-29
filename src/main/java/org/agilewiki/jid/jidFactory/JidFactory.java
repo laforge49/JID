@@ -2,7 +2,7 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.components.factory.ActorFactory;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
