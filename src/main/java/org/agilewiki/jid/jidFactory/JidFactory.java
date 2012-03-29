@@ -25,8 +25,8 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid._Jid;
 
 /**
  * Creates a Jid actor.
@@ -41,7 +41,7 @@ abstract public class JidFactory {
      * @param readableBytes Holds the serialized data.
      * @return The new actor.
      */
-    abstract public Jid newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+    abstract public _Jid newJID(Mailbox mailbox, Actor parent, _Jid container, ReadableBytes readableBytes)
             throws Exception;
 
     /**
@@ -53,7 +53,7 @@ abstract public class JidFactory {
      * @param bytes     Holds the serialized data.
      * @return The new actor.
      */
-    public Jid newJID(Mailbox mailbox, Actor parent, Jid container, byte[] bytes)
+    public _Jid newJID(Mailbox mailbox, Actor parent, _Jid container, byte[] bytes)
             throws Exception {
         return newJID(mailbox, parent, container, new ReadableBytes(bytes, 0));
     }
@@ -66,7 +66,7 @@ abstract public class JidFactory {
      * @param container The container of the new Jid.
      * @return The new actor.
      */
-    final public Jid newJID(Mailbox mailbox, Actor parent, Jid container)
+    final public _Jid newJID(Mailbox mailbox, Actor parent, _Jid container)
             throws Exception {
         return newJID(mailbox, parent, container, (ReadableBytes) null);
     }
@@ -85,7 +85,7 @@ abstract public class JidFactory {
      * @param parent  The parent of the new actor.
      * @return The new actor.
      */
-    final public Actor newActor(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+    final public Actor newActor(Mailbox mailbox, Actor parent, _Jid container, ReadableBytes readableBytes)
             throws Exception {
         return newJID(mailbox, parent, container, readableBytes).thisActor();
     }

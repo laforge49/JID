@@ -3,10 +3,10 @@ package org.agilewiki.jid.jidFactory;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.components.factory.ActorFactory;
-import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidA;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid._Jid;
 
 /**
  * Creates a JidA.
@@ -53,7 +53,7 @@ public class JidAFactory extends JidFactory implements ActorFactory {
      * @param container     The container of the new Jid.
      * @return The new actor.
      */
-    final public Jid newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+    final public _Jid newJID(Mailbox mailbox, Actor parent, _Jid container, ReadableBytes readableBytes)
             throws Exception {
         JidA jidA = instantiateActor(mailbox);
         jidA.setActorType(actorType);

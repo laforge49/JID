@@ -16,7 +16,7 @@ import org.agilewiki.jid.collection.ISetBytes;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 
-public class ListATest extends TestCase {
+public class ListTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -25,7 +25,7 @@ public class ListATest extends TestCase {
             (new Include(StringActorsType.class)).call(factory);
             Open.req.call(factory);
             JAFuture future = new JAFuture();
-            NewJID newListJid = new NewJID(JidFactories.LIST_JID_ATYPE);
+            NewJID newListJid = new NewJID(JidFactories.LIST_JID_TYPE);
             Actor l0 = newListJid.send(future, factory).thisActor();
             int l0sl = GetSerializedLength.req.send(future, l0);
             assertEquals(8, l0sl);

@@ -32,9 +32,9 @@ import org.agilewiki.jactor.components.Component;
 import org.agilewiki.jactor.components.Include;
 import org.agilewiki.jactor.components.factory.*;
 import org.agilewiki.jid.GetJIDComponent;
-import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidA;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid._Jid;
 
 import java.util.ArrayList;
 
@@ -72,18 +72,18 @@ final public class JidsFactory extends Component {
             }
         });
 
-        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, Jid>() {
+        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, _Jid>() {
             @Override
-            public Jid concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
+            public _Jid concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
                     throws Exception {
-                Jid container = request.getContainer();
+                _Jid container = request.getContainer();
                 ReadableBytes readableBytes = request.getReadableBytes();
                 Actor actor = (new NewActor(
                         request.getActorType(),
                         request.getMailbox(),
                         request.getParent())).call(thisActor);
                 if (actor instanceof JidA) {
-                    Jid jid = (Jid) actor;
+                    _Jid jid = (_Jid) actor;
                     if (readableBytes != null)
                         jid.load(readableBytes);
                     if (container != null)
@@ -91,7 +91,7 @@ final public class JidsFactory extends Component {
                     return jid;
                 } else {
                     JBActor jBActor = (JBActor) actor;
-                    Jid jid = GetJIDComponent.req.call(jBActor);
+                    _Jid jid = GetJIDComponent.req.call(jBActor);
                     if (readableBytes != null)
                         jid.load(readableBytes);
                     if (container != null)

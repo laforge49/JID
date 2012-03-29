@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Creates a JID actor in place of the ith element of the collection and loads its serialized data.
  */
-public class ISetBytes extends SynchronousRequest<Object, CollectionJidA> {
+public class ISetBytes extends SynchronousRequest<Object, CollectionJid> {
     /**
      * The index of the desired element.
      */
@@ -77,7 +77,7 @@ public class ISetBytes extends SynchronousRequest<Object, CollectionJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(CollectionJidA targetActor)
+    protected Object call(CollectionJid targetActor)
             throws Exception {
         targetActor.iSetBytes(i, bytes);
         return null;
@@ -90,6 +90,6 @@ public class ISetBytes extends SynchronousRequest<Object, CollectionJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof CollectionJidA;
+        return targetActor instanceof CollectionJid;
     }
 }

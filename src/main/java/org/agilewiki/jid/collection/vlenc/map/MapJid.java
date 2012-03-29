@@ -27,13 +27,13 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.ComparableKey;
-import org.agilewiki.jid.Jid;
+import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.GetTupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.GetValueFactory;
-import org.agilewiki.jid.collection.vlenc.ListJidA;
+import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.Scalar;
 
@@ -41,7 +41,7 @@ import org.agilewiki.jid.scalar.Scalar;
  * Holds a map.
  */
 abstract public class MapJid<KEY_TYPE extends Comparable>
-        extends ListJidA
+        extends ListJid
         implements TupleFactories, Map<KEY_TYPE> {
 
     private JidFactory[] tupleFactories;
@@ -158,7 +158,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The jid assigned to the key, or null.
      */
     @Override
-    final public Jid kGetJid(KEY_TYPE key)
+    final public _Jid kGetJid(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = search(key);
@@ -177,7 +177,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     @Override
     final public Actor kGet(KEY_TYPE key)
             throws Exception {
-        Jid jid = kGetJid(key);
+        _Jid jid = kGetJid(key);
         if (jid == null)
             return null;
         return jid.thisActor();
@@ -222,7 +222,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         if (s == 0)
             throw new IllegalArgumentException("pathname " + pathname);
         String ns = pathname.substring(0, s);
-        Jid jid = kGetJid(stringToKey(ns));
+        _Jid jid = kGetJid(stringToKey(ns));
         if (jid == null)
             return null;
         if (s == pathname.length())

@@ -23,13 +23,13 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jid.Jid;
+import org.agilewiki.jid._Jid;
 
 /**
  * A JID component that holds a value.
  */
 public interface Scalar<SET_TYPE, RESPONSE_TYPE>
-        extends Jid {
+        extends _Jid {
 
     /**
      * Assign a value.

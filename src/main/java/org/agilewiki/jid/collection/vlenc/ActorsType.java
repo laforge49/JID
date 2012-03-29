@@ -24,29 +24,36 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidAFactory;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Creates a ListJid.
+ * Base class for defining the elements type of a variable length collection.
  */
-public class ListJidAFactory extends JidAFactory {
+abstract public class ActorsType
+        extends JLPCActor
+        implements ValueFactory {
     /**
-     * Create a JLPCActorFactory.
+     * Create a ActorsType
+     *
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    public ListJidAFactory() {
-        actorType = JidFactories.LIST_JID_ATYPE;
+    public ActorsType(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Create a JLPCActor.
+     * The application method for processing requests sent to the actor.
      *
-     * @param mailbox The mailbox of the new actor.
-     * @return The new actor.
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    final protected ListJidA instantiateActor(Mailbox mailbox)
-            throws Exception {
-        return new ListJidA(mailbox);
+    protected void processRequest(Object request, RP rp) throws Exception {
+        if (request instanceof GetValueFactory)
+            rp.processResponse(getValueFactory());
+        else
+            throw new UnsupportedOperationException();
     }
 }

@@ -11,11 +11,11 @@ import java.util.Arrays;
 /**
  * Base class for Incremental Deserialization Actors.
  */
-public class JidA extends JLPCActor implements Jid {
+public class JidA extends JLPCActor implements _Jid {
     /**
      * The JID actor which holds this actor.
      */
-    private Jid containerJid;
+    private _Jid containerJid;
 
     /**
      * Holds the serialized data.
@@ -77,7 +77,7 @@ public class JidA extends JLPCActor implements Jid {
      * @param containerJid The container, or null.
      */
     @Override
-    public void setContainerJid(Jid containerJid) {
+    public void setContainerJid(_Jid containerJid) {
         this.containerJid = containerJid;
     }
 

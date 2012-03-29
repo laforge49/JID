@@ -31,7 +31,7 @@ import org.agilewiki.jid.*;
 /**
  * A collection of JID actors.
  */
-abstract public class CollectionJidA
+abstract public class CollectionJid
         extends JidA
         implements Collection {
 
@@ -41,11 +41,11 @@ abstract public class CollectionJidA
     protected int len;
 
     /**
-     * Create a CollectionJidA
+     * Create a CollectionJid
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    protected CollectionJidA(Mailbox mailbox) {
+    protected CollectionJid(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -117,7 +117,7 @@ abstract public class CollectionJidA
         }
         if (n < 0 || n >= size())
             throw new IllegalArgumentException("pathname " + pathname);
-        Jid jid = iGetJid(n);
+        _Jid jid = iGetJid(n);
         if (s == pathname.length())
             return jid.thisActor();
         return jid.resolvePathname(pathname.substring(s + 1));

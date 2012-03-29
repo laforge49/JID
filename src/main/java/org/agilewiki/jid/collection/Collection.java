@@ -24,13 +24,13 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jid.Jid;
+import org.agilewiki.jid._Jid;
 
 /**
  * A collection of JID actors.
  */
 public interface Collection
-        extends Jid {
+        extends _Jid {
 
     /**
      * Returns the size of the collection.
@@ -46,7 +46,7 @@ public interface Collection
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public Jid iGetJid(int i)
+    public _Jid iGetJid(int i)
             throws Exception;
 
     /**

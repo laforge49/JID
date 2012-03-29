@@ -30,9 +30,9 @@ import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.components.factory.ActorFactory;
 import org.agilewiki.jactor.components.factory.JCActorFactory;
 import org.agilewiki.jid.GetJIDComponent;
-import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidC;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid._Jid;
 
 /**
  * Create a JidC actor.
@@ -72,7 +72,7 @@ public class JidCFactory extends JidFactory implements ActorFactory {
      * @return The new actor.
      */
     @Override
-    public JidC newJID(Mailbox mailbox, Actor parent, Jid container, ReadableBytes readableBytes)
+    public JidC newJID(Mailbox mailbox, Actor parent, _Jid container, ReadableBytes readableBytes)
             throws Exception {
         JCActor jcActor = jcActorFactory.newActor(mailbox, parent);
         JidC jidC = GetJIDComponent.req.call(jcActor);

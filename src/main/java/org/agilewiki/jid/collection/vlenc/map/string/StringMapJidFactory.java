@@ -25,7 +25,7 @@ package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.collection.vlenc.ListJidA;
+import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.jidFactory.JidAFactory;
 
 /**
@@ -46,7 +46,7 @@ public class StringMapJidFactory extends JidAFactory {
      * @return The new actor.
      */
     @Override
-    final protected ListJidA instantiateActor(Mailbox mailbox)
+    final protected ListJid instantiateActor(Mailbox mailbox)
             throws Exception {
         return new StringMapJid(mailbox);
     }

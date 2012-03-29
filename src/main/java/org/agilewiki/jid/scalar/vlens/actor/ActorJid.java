@@ -35,7 +35,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  * A JID actor that holds a JID actor.
  */
 public class ActorJid
-        extends VLenScalarJid<Jid, String, Actor>
+        extends VLenScalarJid<_Jid, String, Actor>
         implements ComparableKey<Object> {
     /**
      * Create an actor jid.
@@ -275,7 +275,7 @@ public class ActorJid
      */
     public Actor getValue()
             throws Exception {
-        Jid v = get();
+        _Jid v = get();
         if (v == null)
             return null;
         return value.thisActor();
@@ -287,7 +287,7 @@ public class ActorJid
      * @return The value held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    private Jid get()
+    private _Jid get()
             throws Exception {
         if (len == -1)
             return null;
@@ -339,7 +339,7 @@ public class ActorJid
             return getValue();
         }
         if (pathname.startsWith("0/")) {
-            Jid v = get();
+            _Jid v = get();
             if (v == null)
                 return null;
             return v.resolvePathname(pathname.substring(2));

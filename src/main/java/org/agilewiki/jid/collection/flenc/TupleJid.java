@@ -25,14 +25,14 @@ package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.collection.CollectionJidA;
+import org.agilewiki.jid.collection.CollectionJid;
 import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Holds a fixed-size array of JID actors of various types.
  */
 public class TupleJid
-        extends CollectionJidA
+        extends CollectionJid
         implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.
@@ -42,7 +42,7 @@ public class TupleJid
     /**
      * A tuple of actors.
      */
-    protected Jid[] tuple;
+    protected _Jid[] tuple;
 
     /**
      * Create a TupleJid
@@ -68,11 +68,11 @@ public class TupleJid
             readableBytes = readable();
             skipLen(readableBytes);
         }
-        tuple = new Jid[size()];
+        tuple = new _Jid[size()];
         int i = 0;
         len = 0;
         while (i < size()) {
-            Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
+            _Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
@@ -90,8 +90,8 @@ public class TupleJid
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, bytes);
-        Jid oldElementJid = iGetJid(i);
+        _Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, bytes);
+        _Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -126,7 +126,7 @@ public class TupleJid
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public Jid iGetJid(int i) throws Exception {
+    public _Jid iGetJid(int i) throws Exception {
         initialize();
         return tuple[i];
     }

@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Empty a collection.
  */
-public class Empty extends SynchronousRequest<Object, ListJidA> {
+public class Empty extends SynchronousRequest<Object, ListJid> {
     public final static Empty req = new Empty();
 
     /**
@@ -40,7 +40,7 @@ public class Empty extends SynchronousRequest<Object, ListJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ListJidA targetActor)
+    protected Object call(ListJid targetActor)
             throws Exception {
         targetActor.empty();
         return null;
@@ -53,6 +53,6 @@ public class Empty extends SynchronousRequest<Object, ListJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJidA;
+        return targetActor instanceof ListJid;
     }
 }

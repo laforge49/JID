@@ -30,7 +30,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * Removes a JID from the ith position.
  * If i < 0, the new JID is removed from position size + 1 - i.
  */
-public class IRemove extends SynchronousRequest<Object, ListJidA> {
+public class IRemove extends SynchronousRequest<Object, ListJid> {
     /**
      * The index of the desired element.
      */
@@ -62,7 +62,7 @@ public class IRemove extends SynchronousRequest<Object, ListJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ListJidA targetActor)
+    protected Object call(ListJid targetActor)
             throws Exception {
         targetActor.iRemove(i);
         return null;
@@ -75,6 +75,6 @@ public class IRemove extends SynchronousRequest<Object, ListJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJidA;
+        return targetActor instanceof ListJid;
     }
 }

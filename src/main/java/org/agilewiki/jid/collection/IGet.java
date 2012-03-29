@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
 /**
  * Returns the ith element of a collection.
  */
-public class IGet extends SynchronousRequest<Actor, CollectionJidA> {
+public class IGet extends SynchronousRequest<Actor, CollectionJid> {
     /**
      * The index of the desired element.
      */
@@ -61,7 +61,7 @@ public class IGet extends SynchronousRequest<Actor, CollectionJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(CollectionJidA targetActor)
+    protected Actor call(CollectionJid targetActor)
             throws Exception {
         return targetActor.iGet(i);
     }
@@ -73,6 +73,6 @@ public class IGet extends SynchronousRequest<Actor, CollectionJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof CollectionJidA;
+        return targetActor instanceof CollectionJid;
     }
 }

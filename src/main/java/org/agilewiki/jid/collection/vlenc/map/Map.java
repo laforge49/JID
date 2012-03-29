@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jid.Jid;
+import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 
 /**
@@ -48,7 +48,7 @@ public interface Map<KEY_TYPE>
      * @param key The key.
      * @return The jid assigned to the key, or null.
      */
-    public Jid kGetJid(KEY_TYPE key)
+    public _Jid kGetJid(KEY_TYPE key)
             throws Exception;
 
     /**

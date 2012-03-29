@@ -26,13 +26,13 @@ package org.agilewiki.jid.jidFactory;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.bind.JBConcurrentRequest;
-import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.ReadableBytes;
+import org.agilewiki.jid._Jid;
 
 /**
  * A request to create a JID actor and loads its serialized data.
  */
-final public class NewJID extends JBConcurrentRequest<Jid> {
+final public class NewJID extends JBConcurrentRequest<_Jid> {
     /**
      * An actor type name.
      */
@@ -56,7 +56,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
     /**
      * The container of the new Jid.
      */
-    private Jid container;
+    private _Jid container;
 
     /**
      * Create a NewJID request.
@@ -84,7 +84,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
      * @param bytes     Holds the serialized data.
      * @param container The container of the new Jid.
      */
-    public NewJID(String actorType, byte[] bytes, Jid container) {
+    public NewJID(String actorType, byte[] bytes, _Jid container) {
         this(actorType, null, null, bytes, container);
     }
 
@@ -117,7 +117,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
      * @param bytes     Holds the serialized data.
      * @param container The container of the new Jid.
      */
-    public NewJID(String actorType, Mailbox mailbox, byte[] bytes, Jid container) {
+    public NewJID(String actorType, Mailbox mailbox, byte[] bytes, _Jid container) {
         this(actorType, mailbox, null, bytes, container);
     }
 
@@ -153,7 +153,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
      * @param bytes     Holds the serialized data.
      * @param container The container of the new Jid.
      */
-    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes, Jid container) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, byte[] bytes, _Jid container) {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
@@ -174,7 +174,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
      * @param readableBytes Holds the serialized data.
      * @param container     The container of the new Jid.
      */
-    public NewJID(String actorType, Mailbox mailbox, Actor parent, ReadableBytes readableBytes, Jid container) {
+    public NewJID(String actorType, Mailbox mailbox, Actor parent, ReadableBytes readableBytes, _Jid container) {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
@@ -223,7 +223,7 @@ final public class NewJID extends JBConcurrentRequest<Jid> {
      *
      * @return The container.
      */
-    public Jid getContainer() {
+    public _Jid getContainer() {
         return container;
     }
 }

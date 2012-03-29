@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * If i < 0, the new JID is placed at position size + 1 - i.
  * (If i == -1, the element is added to the end of the list.)
  */
-public class IAddBytes extends SynchronousRequest<Object, ListJidA> {
+public class IAddBytes extends SynchronousRequest<Object, ListJid> {
     /**
      * The insertion index of the new element.
      */
@@ -79,7 +79,7 @@ public class IAddBytes extends SynchronousRequest<Object, ListJidA> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ListJidA targetActor)
+    protected Object call(ListJid targetActor)
             throws Exception {
         targetActor.iAddBytes(i, bytes);
         return null;
@@ -92,6 +92,6 @@ public class IAddBytes extends SynchronousRequest<Object, ListJidA> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJidA;
+        return targetActor instanceof ListJid;
     }
 }

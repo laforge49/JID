@@ -28,7 +28,7 @@ import org.agilewiki.jactor.Actor;
 /**
  * Incremental Deserialization / Reserialization.
  */
-public interface Jid {
+public interface _Jid {
 
     /**
      * Process a change in the persistent data.
@@ -44,7 +44,7 @@ public interface Jid {
      *
      * @param containerJid The container, or null.
      */
-    public void setContainerJid(Jid containerJid);
+    public void setContainerJid(_Jid containerJid);
 
     /**
      * Returns this actor.

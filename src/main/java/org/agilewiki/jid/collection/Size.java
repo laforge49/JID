@@ -25,7 +25,7 @@ package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
-import org.agilewiki.jid.collection.vlenc.ListJidA;
+import org.agilewiki.jid.collection.vlenc.ListJid;
 
 /**
  * Returns the size of the collection.
@@ -53,6 +53,6 @@ public class Size extends SynchronousRequest<Integer, Collection> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJidA;
+        return targetActor instanceof ListJid;
     }
 }
