@@ -5,9 +5,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
-import org.agilewiki.jactor.bind.Open;
-import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedBytes;
@@ -21,9 +18,8 @@ public class ListTest extends TestCase {
     public void test() {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
-            JCActor factory = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidFactories.class)).call(factory);
-            Open.req.call(factory);
+            Actor factory = new JidFactories(mailboxFactory.createMailbox());
+            factory.setParent(null);
             JLPCActor stf = new StringActorsType(factory.getMailbox());
             stf.setParent(factory);
             JAFuture future = new JAFuture();
@@ -40,7 +36,7 @@ public class ListTest extends TestCase {
             Actor l2 = (new CopyJID()).send(future, l1);
             int l2sl = GetSerializedLength.req.send(future, l2);
             assertEquals(12, l2sl);
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE);
+            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE, stf.getMailbox(), stf);
             Actor s0 = newStringJid.send(future, stf).thisActor();
             (new SetString("Hi")).send(future, s0);
             int s0sl = GetSerializedLength.req.send(future, s0);

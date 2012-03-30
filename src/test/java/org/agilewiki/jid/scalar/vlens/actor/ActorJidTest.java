@@ -5,9 +5,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
-import org.agilewiki.jactor.bind.Open;
-import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
@@ -20,9 +17,8 @@ public class ActorJidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            JCActor factory = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidFactories.class)).call(factory);
-            Open.req.call(factory);
+            Actor factory = new JidFactories(mailboxFactory.createMailbox());
+            factory.setParent(null);
 
             ActorJidFactory actorJidAFactory = new ActorJidFactory();
             Actor jidJid1 = actorJidAFactory.newActor(factory.getMailbox(), factory);
@@ -56,7 +52,7 @@ public class ActorJidTest extends TestCase {
             Actor sj = GetActor.req.send(future, jidJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_TYPE);
+            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_TYPE, factory.getMailbox(), factory);
             Actor jidJid2 = newJidJid.send(future, factory).thisActor();
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
