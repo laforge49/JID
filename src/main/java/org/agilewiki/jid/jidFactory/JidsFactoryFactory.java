@@ -23,57 +23,36 @@
  */
 package org.agilewiki.jid.jidFactory;
 
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.JLPCActorFactory;
+import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Returns the jid factory for a given actor type.
+ * Creates a JidsFactory.
  */
-public class GetJidFactory extends ConcurrentRequest<_JidFactory, JidsFactory> {
+public class JidsFactoryFactory extends JLPCActorFactory {
     /**
-     * An actor type name.
+     * Default actor type.
      */
-    private String actorType;
+    public final static String TYPE = "JidsFactory";
 
     /**
-     * Create a request.
+     * Create an ActorFactory.
      *
-     * @param actorType An actor type name.
+     * @param actorType The actor type.
      */
-    public GetJidFactory(String actorType) {
-        this.actorType = actorType;
+    public JidsFactoryFactory(String actorType) {
+        super(actorType);
     }
 
     /**
-     * Returns an actor type name.
+     * Create a JLPCActor.
      *
-     * @return An actor type name.
-     */
-    public String getActorType() {
-        return actorType;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
+     * @param mailbox The mailbox of the new actor.
+     * @return The new actor.
      */
     @Override
-    public _JidFactory call(JidsFactory targetActor)
-            throws Exception {
-        targetActor.getJidFactory(actorType);
-        return null;
-    }
-
-    /**
-     * Returns true when targetActor is an instanceof TARGET_TYPE
-     *
-     * @param targetActor The actor to be called.
-     * @return True when targetActor is an instanceof TARGET_TYPE.
-     */
-    protected boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof JidsFactory;
+    protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
+        return new JidsFactory(mailbox);
     }
 }

@@ -23,15 +23,21 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.components.Component;
-import org.agilewiki.jactor.components.Include;
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.JFactoryFactory;
+import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.RegisterActorFactory;
+import org.agilewiki.jactor.factory.Requirement;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.StringStringMapJidFactory;
 import org.agilewiki.jid.jidFactory.JidFactory;
-import org.agilewiki.jid.jidFactory.JidsFactory;
+import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
+import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
@@ -41,14 +47,13 @@ import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
-import java.util.ArrayList;
-
 /**
  * <p>
  * Registers the JID factories.
  * </p>
  */
-final public class JidFactories extends Component {
+final public class JidFactories extends JLPCActor {
+
     /**
      * The name of the JID actor.
      */
@@ -115,40 +120,68 @@ final public class JidFactories extends Component {
     public final static String STRING_STRING_MAP_JID_TYPE = "STRING_STRING_MAP_JID";
 
     /**
-     * Returns a list of Includes for inclusion in the actor.
+     * Create a LiteActor
      *
-     * @return A list of classes for inclusion in the actor.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    @Override
-    public ArrayList<Include> includes() {
-        ArrayList<Include> rv = new ArrayList<Include>();
-        rv.add(new Include(JidsFactory.class));
-        return rv;
+    public JidFactories(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Bind request classes.
+     * Returns the actor's requirements.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @return The actor's requirents.
      */
     @Override
-    public void bindery() throws Exception {
-        (new RegisterActorFactory(new JidFactory())).call(thisActor);
+    protected Requirement[] requirements() throws Exception {
+        Requirement[] requirements = new Requirement[2];
+        requirements[0] = new Requirement(
+                new NewActor(""),
+                new JFactoryFactory(JFactoryFactory.TYPE));
+        requirements[1] = new Requirement(
+                new NewJID(""),
+                new JidsFactoryFactory(JidsFactoryFactory.TYPE));
+        return requirements;
+    }
 
-        (new RegisterActorFactory(new BooleanJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new IntegerJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new LongJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new FloatJidAFactory())).call(thisActor);
-        (new RegisterActorFactory(new DoubleJidFactory())).call(thisActor);
+    /**
+     * Process the requirements and assign the parent actor.
+     * Once assigned, it can not be changed.
+     *
+     * @param parent The parent actor.
+     */
+    @Override
+    public void setParent(Actor parent) throws Exception {
+        super.setParent(parent);
 
-        (new RegisterActorFactory(new ActorJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new StringJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new BytesJidFactory())).call(thisActor);
+        (new RegisterActorFactory(new JidFactory())).call(this);
 
-        (new RegisterActorFactory(new TupleJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new ListJidFactory())).call(thisActor);
+        (new RegisterActorFactory(new BooleanJidFactory())).call(this);
+        (new RegisterActorFactory(new IntegerJidFactory())).call(this);
+        (new RegisterActorFactory(new LongJidFactory())).call(this);
+        (new RegisterActorFactory(new FloatJidAFactory())).call(this);
+        (new RegisterActorFactory(new DoubleJidFactory())).call(this);
 
-        (new RegisterActorFactory(new StringMapJidFactory())).call(thisActor);
-        (new RegisterActorFactory(new StringStringMapJidFactory())).call(thisActor);
+        (new RegisterActorFactory(new ActorJidFactory())).call(this);
+        (new RegisterActorFactory(new StringJidFactory())).call(this);
+        (new RegisterActorFactory(new BytesJidFactory())).call(this);
+
+        (new RegisterActorFactory(new TupleJidFactory())).call(this);
+        (new RegisterActorFactory(new ListJidFactory())).call(this);
+
+        (new RegisterActorFactory(new StringMapJidFactory())).call(this);
+        (new RegisterActorFactory(new StringStringMapJidFactory())).call(this);
+    }
+
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected void processRequest(Object request, RP rp) throws Exception {
     }
 }

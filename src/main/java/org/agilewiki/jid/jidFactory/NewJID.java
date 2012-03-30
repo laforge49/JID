@@ -25,14 +25,14 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.bind.JBConcurrentRequest;
+import org.agilewiki.jactor.lpc.ConcurrentRequest;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 
 /**
  * A request to create a JID actor and loads its serialized data.
  */
-final public class NewJID extends JBConcurrentRequest<_Jid> {
+final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
     /**
      * An actor type name.
      */
@@ -225,5 +225,28 @@ final public class NewJID extends JBConcurrentRequest<_Jid> {
      */
     public _Jid getContainer() {
         return container;
+    }
+
+    /**
+     * Send a synchronous request.
+     *
+     * @param targetActor The target actor.
+     * @return The response.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    public _Jid call(JidsFactory targetActor)
+            throws Exception {
+        return targetActor.newJID(this);
+    }
+
+    /**
+     * Returns true when targetActor is an instanceof TARGET_TYPE
+     *
+     * @param targetActor The actor to be called.
+     * @return True when targetActor is an instanceof TARGET_TYPE.
+     */
+    protected boolean isTargetType(Actor targetActor) {
+        return targetActor instanceof JidsFactory;
     }
 }

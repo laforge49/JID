@@ -24,68 +24,81 @@
 package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.bind.ConcurrentMethodBinding;
-import org.agilewiki.jactor.bind.RequestReceiver;
-import org.agilewiki.jactor.components.Component;
-import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.factory.Factory;
-import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.GetActorFactory;
+import org.agilewiki.jactor.factory.JFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
+import org.agilewiki.jactor.factory.Requirement;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
-
-import java.util.ArrayList;
 
 /**
  * A component to create JID actors and load their serialized data.
  */
-final public class JidsFactory extends Component {
+final public class JidsFactory extends JLPCActor {
+
     /**
-     * Returns a list of Includes for inclusion in the actor.
+     * Create a LiteActor
      *
-     * @return A list of classes for inclusion in the actor.
+     * @param mailbox A mailbox which may be shared with other actors.
      */
-    @Override
-    public ArrayList<Include> includes() {
-        ArrayList<Include> rv = new ArrayList<Include>();
-        rv.add(new Include(Factory.class));
-        return rv;
+    public JidsFactory(Mailbox mailbox) {
+        super(mailbox);
     }
 
     /**
-     * Bind request classes.
+     * Returns the actor's requirements.
      *
-     * @throws Exception Any exceptions thrown while binding.
+     * @return The actor's requirents.
      */
     @Override
-    public void bindery() throws Exception {
+    protected Requirement[] requirements() throws Exception {
+        Requirement[] requirements = new Requirement[1];
+        requirements[0] = new Requirement(
+                new NewActor(""),
+                new JFactoryFactory(JFactoryFactory.TYPE));
+        return requirements;
+    }
 
-        thisActor.bind(GetJidFactory.class.getName(), new ConcurrentMethodBinding<GetJidFactory, _JidFactory>() {
-            @Override
-            public _JidFactory concurrentProcessRequest(RequestReceiver requestReceiver, GetJidFactory request) throws Exception {
-                ActorFactory actorFactory = (new GetActorFactory(request.getActorType())).call(thisActor);
-                return (_JidFactory) actorFactory;
-            }
-        });
+    /**
+     * The application method for processing requests sent to the actor.
+     *
+     * @param request A request.
+     * @param rp      The response processor.
+     * @throws Exception Any uncaught exceptions raised while processing the request.
+     */
+    @Override
+    protected void processRequest(Object request, RP rp) throws Exception {
+        if (request instanceof GetJidFactory) {
+            rp.processResponse(getJidFactory(((GetJidFactory) request).getActorType()));
+            return;
+        }
+        if (request instanceof NewJID) {
+            rp.processResponse(newJID((NewJID) request));
+            return;
+        }
+    }
 
-        thisActor.bind(NewJID.class.getName(), new ConcurrentMethodBinding<NewJID, _Jid>() {
-            @Override
-            public _Jid concurrentProcessRequest(RequestReceiver requestReceiver, NewJID request)
-                    throws Exception {
-                _Jid container = request.getContainer();
-                ReadableBytes readableBytes = request.getReadableBytes();
-                Actor actor = (new NewActor(
-                        request.getActorType(),
-                        request.getMailbox(),
-                        request.getParent())).call(thisActor);
-                _Jid jid = (_Jid) actor;
-                if (readableBytes != null)
-                    jid.load(readableBytes);
-                if (container != null)
-                    jid.setContainerJid(container);
-                return jid;
-            }
-        });
+    protected _JidFactory getJidFactory(String actorType)
+            throws Exception {
+        return (_JidFactory) (new GetActorFactory(actorType)).call(this);
+    }
+
+    protected _Jid newJID(NewJID request)
+            throws Exception {
+        _Jid container = request.getContainer();
+        ReadableBytes readableBytes = request.getReadableBytes();
+        Actor actor = (new NewActor(
+                request.getActorType(),
+                request.getMailbox(),
+                request.getParent())).call(this);
+        _Jid jid = (_Jid) actor;
+        if (readableBytes != null)
+            jid.load(readableBytes);
+        if (container != null)
+            jid.setContainerJid(container);
+        return jid;
     }
 }

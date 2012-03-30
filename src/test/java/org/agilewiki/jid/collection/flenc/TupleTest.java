@@ -28,9 +28,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
-import org.agilewiki.jactor.bind.Open;
-import org.agilewiki.jactor.components.Include;
-import org.agilewiki.jactor.components.JCActor;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedBytes;
@@ -48,9 +45,8 @@ public class TupleTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            JCActor factory = new JCActor(mailboxFactory.createMailbox());
-            (new Include(JidFactories.class)).call(factory);
-            Open.req.call(factory);
+            Actor factory = new JidFactories(mailboxFactory.createMailbox());
+            factory.setParent(null);
             JLPCActor sstf = new StringStringTupleFactories(factory.getMailbox());
             sstf.setParent(factory);
             NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_TYPE, sstf.getMailbox(), sstf);
