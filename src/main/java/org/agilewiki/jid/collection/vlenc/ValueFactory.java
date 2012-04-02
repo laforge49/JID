@@ -23,13 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jid._Jid;
+import org.agilewiki.jactor.lpc.TargetActor;
 import org.agilewiki.jid.jidFactory._JidFactory;
 
 /**
  * Interface for defining the factory of the elements of a variable length collection.
  */
-public interface ValueFactory extends _Jid {
+public interface ValueFactory extends TargetActor {
     /**
      * Returns a JidFactory.
      *
