@@ -24,11 +24,12 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.TargetActor;
 
 /**
  * Incremental Deserialization / Reserialization.
  */
-public interface _Jid {
+public interface _Jid extends TargetActor {
 
     /**
      * Process a change in the persistent data.

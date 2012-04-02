@@ -23,12 +23,13 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.jidFactory._JidFactory;
 
 /**
  * Array of Jid factories for tuples.
  */
-public interface TupleFactories {
+public interface TupleFactories extends _Jid {
 
     /**
      * Returns an array of JidFactory.
