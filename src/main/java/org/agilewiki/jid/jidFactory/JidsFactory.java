@@ -27,7 +27,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.GetActorFactory;
-import org.agilewiki.jactor.factory.JFactoryFactory;
+import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
@@ -58,7 +58,7 @@ final public class JidsFactory extends JLPCActor {
         Requirement[] requirements = new Requirement[1];
         requirements[0] = new Requirement(
                 new NewActor(""),
-                new JFactoryFactory(JFactoryFactory.TYPE));
+                new JAFactoryFactory(JAFactoryFactory.TYPE));
         return requirements;
     }
 

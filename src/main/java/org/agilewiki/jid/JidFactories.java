@@ -26,7 +26,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
-import org.agilewiki.jactor.factory.JFactoryFactory;
+import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.RegisterActorFactory;
 import org.agilewiki.jactor.factory.Requirement;
@@ -138,7 +138,7 @@ final public class JidFactories extends JLPCActor {
         Requirement[] requirements = new Requirement[2];
         requirements[0] = new Requirement(
                 new NewActor(""),
-                new JFactoryFactory(JFactoryFactory.TYPE));
+                new JAFactoryFactory(JAFactoryFactory.TYPE));
         requirements[1] = new Requirement(
                 new NewJID(""),
                 new JidsFactoryFactory(JidsFactoryFactory.TYPE));
