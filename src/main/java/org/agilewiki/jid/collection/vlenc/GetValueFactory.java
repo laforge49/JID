@@ -53,7 +53,7 @@ public class GetValueFactory extends ConcurrentRequest<_JidFactory, ValueFactory
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     @Override
-    protected boolean isTargetType(Actor targetActor) {
+    public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof ValueFactory;
     }
 }
