@@ -64,7 +64,7 @@ public class SetInteger
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(IntegerJid targetActor)
+    protected Object _call(IntegerJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

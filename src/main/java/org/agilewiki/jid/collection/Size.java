@@ -41,7 +41,7 @@ public class Size extends SynchronousRequest<Integer, Collection> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Integer call(Collection targetActor)
+    protected Integer _call(Collection targetActor)
             throws Exception {
         return targetActor.size();
     }

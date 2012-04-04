@@ -77,7 +77,7 @@ public class ISetBytes extends SynchronousRequest<Object, CollectionJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(CollectionJid targetActor)
+    protected Object _call(CollectionJid targetActor)
             throws Exception {
         targetActor.iSetBytes(i, bytes);
         return null;

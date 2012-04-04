@@ -61,7 +61,7 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(Map<KEY_TYPE> targetActor)
+    protected Boolean _call(Map<KEY_TYPE> targetActor)
             throws Exception {
         targetActor.kMake(key);
         return null;

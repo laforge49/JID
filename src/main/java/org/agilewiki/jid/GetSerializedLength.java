@@ -43,7 +43,7 @@ final public class GetSerializedLength
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Integer call(Jid targetActor)
+    protected Integer _call(Jid targetActor)
             throws Exception {
         return targetActor.getSerializedLength();
     }

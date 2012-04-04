@@ -90,7 +90,7 @@ public class SetActor
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ActorJid targetActor)
+    protected Object _call(ActorJid targetActor)
             throws Exception {
         if (actorType != null)
             targetActor.setValue(actorType);

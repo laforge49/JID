@@ -41,7 +41,7 @@ public class GetValueFactory extends ConcurrentRequest<_JidFactory, ValueFactory
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public _JidFactory call(ValueFactory targetActor)
+    protected _JidFactory _call(ValueFactory targetActor)
             throws Exception {
         return targetActor.getValueFactory();
     }

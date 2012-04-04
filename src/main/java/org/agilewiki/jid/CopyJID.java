@@ -69,7 +69,7 @@ final public class CopyJID
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(Jid targetActor)
+    protected Actor _call(Jid targetActor)
             throws Exception {
         return targetActor.copyJID(mailbox);
     }

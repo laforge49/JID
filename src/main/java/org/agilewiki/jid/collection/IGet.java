@@ -61,7 +61,7 @@ public class IGet extends SynchronousRequest<Actor, CollectionJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(CollectionJid targetActor)
+    protected Actor _call(CollectionJid targetActor)
             throws Exception {
         return targetActor.iGet(i);
     }

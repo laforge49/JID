@@ -79,7 +79,7 @@ public class IAddBytes extends SynchronousRequest<Object, ListJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(ListJid targetActor)
+    protected Object _call(ListJid targetActor)
             throws Exception {
         targetActor.iAddBytes(i, bytes);
         return null;

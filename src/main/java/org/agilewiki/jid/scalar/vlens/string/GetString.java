@@ -40,7 +40,7 @@ public class GetString extends SynchronousRequest<String, StringJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected String call(StringJid targetActor)
+    protected String _call(StringJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

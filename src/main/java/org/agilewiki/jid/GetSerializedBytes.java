@@ -41,7 +41,7 @@ final public class GetSerializedBytes extends
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected byte[] call(Jid targetActor)
+    protected byte[] _call(Jid targetActor)
             throws Exception {
         return targetActor.getBytes();
     }

@@ -40,7 +40,7 @@ public class GetActor extends SynchronousRequest<Actor, ActorJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(ActorJid targetActor)
+    protected Actor _call(ActorJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

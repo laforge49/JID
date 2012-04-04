@@ -40,7 +40,7 @@ public class GetLong extends SynchronousRequest<Long, LongJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Long call(LongJid targetActor)
+    protected Long _call(LongJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

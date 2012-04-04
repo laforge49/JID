@@ -40,7 +40,7 @@ public class GetFloat extends SynchronousRequest<Float, FloatJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Float call(FloatJid targetActor)
+    protected Float _call(FloatJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

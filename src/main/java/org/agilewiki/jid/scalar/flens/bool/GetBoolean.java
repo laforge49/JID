@@ -41,7 +41,7 @@ public class GetBoolean
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BooleanJid targetActor)
+    protected Boolean _call(BooleanJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

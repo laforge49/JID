@@ -40,7 +40,7 @@ public class GetDouble extends SynchronousRequest<Double, DoubleJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Double call(DoubleJid targetActor)
+    protected Double _call(DoubleJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

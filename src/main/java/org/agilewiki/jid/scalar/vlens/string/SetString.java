@@ -64,7 +64,7 @@ public class SetString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(StringJid targetActor)
+    protected Object _call(StringJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

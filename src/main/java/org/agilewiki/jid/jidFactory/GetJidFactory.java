@@ -61,7 +61,7 @@ public class GetJidFactory extends ConcurrentRequest<_JidFactory, JidsFactory> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public _JidFactory call(JidsFactory targetActor)
+    protected _JidFactory _call(JidsFactory targetActor)
             throws Exception {
         targetActor.getJidFactory(actorType);
         return null;

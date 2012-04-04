@@ -235,7 +235,7 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public _Jid call(JidsFactory targetActor)
+    protected _Jid _call(JidsFactory targetActor)
             throws Exception {
         return targetActor.newJID(this);
     }

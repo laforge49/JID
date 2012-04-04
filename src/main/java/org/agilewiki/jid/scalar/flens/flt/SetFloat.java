@@ -64,7 +64,7 @@ public class SetFloat
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(FloatJid targetActor)
+    protected Object _call(FloatJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

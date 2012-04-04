@@ -40,7 +40,7 @@ public class GetBytes extends SynchronousRequest<byte[], BytesJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected byte[] call(BytesJid targetActor)
+    protected byte[] _call(BytesJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

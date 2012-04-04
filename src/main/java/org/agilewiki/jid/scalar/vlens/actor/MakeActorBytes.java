@@ -108,7 +108,7 @@ final public class MakeActorBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(ActorJid targetActor)
+    protected Boolean _call(ActorJid targetActor)
             throws Exception {
         if (actorType != null)
             return targetActor.makeJidBytes(actorType, bytes);

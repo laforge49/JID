@@ -64,7 +64,7 @@ public class SetBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BytesJid targetActor)
+    protected Boolean _call(BytesJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

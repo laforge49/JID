@@ -41,7 +41,7 @@ public class GetTupleFactories extends ConcurrentRequest<_JidFactory[], TupleFac
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    public _JidFactory[] call(TupleFactories targetActor)
+    protected _JidFactory[] _call(TupleFactories targetActor)
             throws Exception {
         return targetActor.getTupleFactories();
     }

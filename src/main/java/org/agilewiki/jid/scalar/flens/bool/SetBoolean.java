@@ -64,7 +64,7 @@ public class SetBoolean
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(BooleanJid targetActor)
+    protected Object _call(BooleanJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

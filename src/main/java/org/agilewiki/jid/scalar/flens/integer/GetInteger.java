@@ -40,7 +40,7 @@ public class GetInteger extends SynchronousRequest<Integer, IntegerJid> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Integer call(IntegerJid targetActor)
+    protected Integer _call(IntegerJid targetActor)
             throws Exception {
         return targetActor.getValue();
     }

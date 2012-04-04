@@ -61,7 +61,7 @@ public class KGet<KEY_TYPE extends Comparable> extends SynchronousRequest<Actor,
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Actor call(Map<KEY_TYPE> targetActor)
+    protected Actor _call(Map<KEY_TYPE> targetActor)
             throws Exception {
         targetActor.kGet(key);
         return null;

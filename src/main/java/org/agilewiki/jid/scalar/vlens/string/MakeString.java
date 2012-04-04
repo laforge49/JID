@@ -64,7 +64,7 @@ public class MakeString
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(StringJid targetActor)
+    protected Boolean _call(StringJid targetActor)
             throws Exception {
         return targetActor.makeValue(value);
     }

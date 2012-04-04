@@ -64,7 +64,7 @@ final public class Save
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(Jid targetActor)
+    protected Object _call(Jid targetActor)
             throws Exception {
         targetActor.save(appendableBytes);
         return null;

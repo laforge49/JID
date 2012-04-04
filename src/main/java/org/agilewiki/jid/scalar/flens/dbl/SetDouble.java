@@ -64,7 +64,7 @@ public class SetDouble
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(DoubleJid targetActor)
+    protected Object _call(DoubleJid targetActor)
             throws Exception {
         targetActor.setValue(value);
         return null;

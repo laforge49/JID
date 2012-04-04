@@ -41,7 +41,7 @@ final public class Clear
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Object call(VLenScalarJid<Object, Object, Object> targetActor)
+    protected Object _call(VLenScalarJid<Object, Object, Object> targetActor)
             throws Exception {
         targetActor.clear();
         return null;

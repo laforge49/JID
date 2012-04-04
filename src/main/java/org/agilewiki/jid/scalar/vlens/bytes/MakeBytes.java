@@ -64,7 +64,7 @@ public class MakeBytes
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean call(BytesJid targetActor)
+    protected Boolean _call(BytesJid targetActor)
             throws Exception {
         return targetActor.makeValue(value);
     }
