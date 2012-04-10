@@ -26,9 +26,9 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
-import org.agilewiki.jactor.factory.RegisterActorFactory;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
@@ -153,25 +153,32 @@ final public class JidFactories extends JLPCActor {
      */
     @Override
     public void setParent(Actor parent) throws Exception {
+        if (parent == null) {
+            parent = new JAFactory(getMailbox());
+        }
         super.setParent(parent);
 
-        (new RegisterActorFactory(new JidFactory())).call(this);
+        Actor f = parent;
+        while (!(f instanceof JAFactory)) f = f.getParent();
+        JAFactory factory = (JAFactory) f;
 
-        (new RegisterActorFactory(new BooleanJidFactory())).call(this);
-        (new RegisterActorFactory(new IntegerJidFactory())).call(this);
-        (new RegisterActorFactory(new LongJidFactory())).call(this);
-        (new RegisterActorFactory(new FloatJidAFactory())).call(this);
-        (new RegisterActorFactory(new DoubleJidFactory())).call(this);
+        factory.registerActorFactory(new JidFactory());
 
-        (new RegisterActorFactory(new ActorJidFactory())).call(this);
-        (new RegisterActorFactory(new StringJidFactory())).call(this);
-        (new RegisterActorFactory(new BytesJidFactory())).call(this);
+        factory.registerActorFactory(new BooleanJidFactory());
+        factory.registerActorFactory(new IntegerJidFactory());
+        factory.registerActorFactory(new LongJidFactory());
+        factory.registerActorFactory(new FloatJidAFactory());
+        factory.registerActorFactory(new DoubleJidFactory());
 
-        (new RegisterActorFactory(new TupleJidFactory())).call(this);
-        (new RegisterActorFactory(new ListJidFactory())).call(this);
+        factory.registerActorFactory(new ActorJidFactory());
+        factory.registerActorFactory(new StringJidFactory());
+        factory.registerActorFactory(new BytesJidFactory());
 
-        (new RegisterActorFactory(new StringMapJidFactory())).call(this);
-        (new RegisterActorFactory(new StringStringMapJidFactory())).call(this);
+        factory.registerActorFactory(new TupleJidFactory());
+        factory.registerActorFactory(new ListJidFactory());
+
+        factory.registerActorFactory(new StringMapJidFactory());
+        factory.registerActorFactory(new StringStringMapJidFactory());
     }
 
     /**
