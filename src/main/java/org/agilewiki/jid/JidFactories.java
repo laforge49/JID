@@ -33,8 +33,7 @@ import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
-import org.agilewiki.jid.collection.vlenc.map.string.StringMapJidFactory;
-import org.agilewiki.jid.collection.vlenc.map.string.StringStringMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.string.*;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
@@ -110,14 +109,49 @@ final public class JidFactories extends JLPCActor {
     public final static String LIST_JID_TYPE = "LIST_JID";
 
     /**
-     * The name of the ListJid component.
+     * The name of the ListJid actor.
      */
     public final static String STRING_MAP_JID_TYPE = "STRING_MAP_JID";
 
     /**
-     * The name of the ListJid component.
+     * The name of the StringStringMapJid actor.
      */
     public final static String STRING_STRING_MAP_JID_TYPE = "STRING_STRING_MAP_JID";
+
+    /**
+     * The name of the StringBytesMapJid actor.
+     */
+    public final static String STRING_BYTES_MAP_JID_TYPE = "STRING_BYTES_MAP_JID";
+
+    /**
+     * The name of the StringActorMapJid actor.
+     */
+    public final static String STRING_ACTOR_MAP_JID_TYPE = "STRING_ACTOR_MAP_JID";
+
+    /**
+     * The name of the StringLongMapJid actor.
+     */
+    public final static String STRING_LONG_MAP_JID_TYPE = "STRING_LONG_MAP_JID";
+
+    /**
+     * The name of the StringIntegerMapJid actor.
+     */
+    public final static String STRING_INTEGER_MAP_JID_TYPE = "STRING_INTEGER_MAP_JID";
+
+    /**
+     * The name of the StringFloatMapJid actor.
+     */
+    public final static String STRING_FLOAT_MAP_JID_TYPE = "STRING_FLOAT_MAP_JID";
+
+    /**
+     * The name of the StringDoubleMapJid actor.
+     */
+    public final static String STRING_DOUBLE_MAP_JID_TYPE = "STRING_DOUBLE_MAP_JID";
+
+    /**
+     * The name of the StringBooleanMapJid actor.
+     */
+    public final static String STRING_BOOLEAN_MAP_JID_TYPE = "STRING_BOOLEAN_MAP_JID";
 
     /**
      * Create a LiteActor
@@ -179,6 +213,13 @@ final public class JidFactories extends JLPCActor {
 
         factory.registerActorFactory(new StringMapJidFactory());
         factory.registerActorFactory(new StringStringMapJidFactory());
+        factory.registerActorFactory(new StringBytesMapJidFactory());
+        factory.registerActorFactory(new StringActorMapJidFactory());
+        factory.registerActorFactory(new StringLongMapJidFactory());
+        factory.registerActorFactory(new StringIntegerMapJidFactory());
+        factory.registerActorFactory(new StringFloatMapJidFactory());
+        factory.registerActorFactory(new StringDoubleMapJidFactory());
+        factory.registerActorFactory(new StringBooleanMapJidFactory());
     }
 
     /**

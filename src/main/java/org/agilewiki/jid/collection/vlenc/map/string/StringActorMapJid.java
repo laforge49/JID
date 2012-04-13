@@ -25,18 +25,18 @@ package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.jidFactory._JidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 
 /**
- * Holds a map with String keys and StringJid values.
+ * Holds a map with String keys and ActorJid values.
  */
-final public class StringStringMapJid extends StringMapJid {
+final public class StringActorMapJid extends StringMapJid {
     /**
-     * Create a StringStringMapJid
+     * Create a StringActorMapJid
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public StringStringMapJid(Mailbox mailbox) {
+    public StringActorMapJid(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -47,6 +47,6 @@ final public class StringStringMapJid extends StringMapJid {
      */
     protected _JidFactory getValueFactory()
             throws Exception {
-        return new StringJidFactory();
+        return new ActorJidFactory();
     }
 }

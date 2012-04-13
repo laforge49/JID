@@ -24,29 +24,29 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.jidFactory._JidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
+import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
- * Holds a map with String keys and StringJid values.
+ * Creates a StringBooleanMapJid.
  */
-final public class StringStringMapJid extends StringMapJid {
+public class StringBooleanMapJidFactory extends JidFactory {
     /**
-     * Create a StringStringMapJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
+     * Create a JLPCActorFactory.
      */
-    public StringStringMapJid(Mailbox mailbox) {
-        super(mailbox);
+    public StringBooleanMapJidFactory() {
+        actorType = JidFactories.STRING_BOOLEAN_MAP_JID_TYPE;
     }
 
     /**
-     * Returns the JidFactory for the values in the map.
+     * Create a JLPCActor.
      *
-     * @return The JidFactory for the values in the list.
+     * @param mailbox The mailbox of the new actor.
+     * @return The new actor.
      */
-    protected _JidFactory getValueFactory()
+    @Override
+    final protected StringBooleanMapJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new StringJidFactory();
+        return new StringBooleanMapJid(mailbox);
     }
 }
