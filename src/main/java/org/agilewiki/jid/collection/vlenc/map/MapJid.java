@@ -113,7 +113,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key which matches to the tuple's first element.
      * @return The index or - (insertion point + 1).
      */
-    final protected int search(KEY_TYPE key) throws Exception {
+    final protected int search(KEY_TYPE key)
+            throws Exception {
         int low = 0;
         int high = size() - 1;
         while (low <= high) {
@@ -128,6 +129,42 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
                 return mid;
         }
         return -(low + 1);
+    }
+
+    /**
+     * Locate the tuple with a higher key.
+     *
+     * @param key The key which matches to the tuple's first element.
+     * @return The index or -1.
+     */
+    final protected int higher(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i > -1)
+            i += 1;
+        else {
+            i = -i - 1;
+        }
+        if (i == size())
+            return -1;
+        return i;
+    }
+
+    /**
+     * Locate the tuple with the first element >= a key.
+     *
+     * @param key The key which matches to the tuple's first element.
+     * @return The index or -1.
+     */
+    final protected int ceiling(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i > -1)
+            return i;
+        i = -i - 1;
+        if (i == size())
+            return -1;
+        return i;
     }
 
     /**
@@ -169,6 +206,38 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     }
 
     /**
+     * Returns the JID value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    final public _Jid higherJid(KEY_TYPE key)
+            throws Exception {
+        initialize();
+        int i = higher(key);
+        if (i < 0)
+            return null;
+        Collection t = (Collection) iGetJid(i);
+        return t.iGetJid(1);
+    }
+
+    /**
+     * Returns the JID value with the smallest key >= the given key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    final public _Jid ceilingJid(KEY_TYPE key)
+            throws Exception {
+        initialize();
+        int i = ceiling(key);
+        if (i < 0)
+            return null;
+        Collection t = (Collection) iGetJid(i);
+        return t.iGetJid(1);
+    }
+
+    /**
      * Returns the Actor value associated with the key.
      *
      * @param key The key.
@@ -181,6 +250,50 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         if (jid == null)
             return null;
         return jid.thisActor();
+    }
+
+    /**
+     * Returns the Actor value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    final public Actor getHigher(KEY_TYPE key)
+            throws Exception {
+        _Jid jid = higherJid(key);
+        if (jid == null)
+            return null;
+        return jid.thisActor();
+    }
+
+    /**
+     * Returns the Actor value with the smallest key >= the given key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    final public Actor getCeiling(KEY_TYPE key)
+            throws Exception {
+        _Jid jid = ceilingJid(key);
+        if (jid == null)
+            return null;
+        return jid.thisActor();
+    }
+
+    /**
+     * Removes the item identified by the key.
+     *
+     * @param key The key.
+     * @return True when the item was present and removed.
+     */
+    final public boolean kRemove(KEY_TYPE key)
+            throws Exception {
+        initialize();
+        int i = search(key);
+        if (i < 0)
+            return false;
+        iRemove(i);
+        return true;
     }
 
     /**
@@ -199,6 +312,12 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
             rp.processResponse(kMake(((KMake<KEY_TYPE>) request).getKey()));
         } else if (request instanceof KGet) {
             rp.processResponse(kGet(((KGet<KEY_TYPE>) request).getKey()));
+        } else if (request instanceof GetHigher) {
+            rp.processResponse(getHigher(((GetHigher<KEY_TYPE>) request).getKey()));
+        } else if (request instanceof GetCeiling) {
+            rp.processResponse(getCeiling(((GetCeiling<KEY_TYPE>) request).getKey()));
+        } else if (request instanceof KRemove) {
+            rp.processResponse(kRemove(((KRemove<KEY_TYPE>) request).getKey()));
         } else super.processRequest(request, rp);
     }
 

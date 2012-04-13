@@ -27,9 +27,9 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
- * Create a keyed entry.
+ * Remove an entry.
  */
-public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
+public class KRemove<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -49,7 +49,7 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
      *
      * @param key The key.
      */
-    public KMake(KEY_TYPE key) {
+    public KRemove(KEY_TYPE key) {
         this.key = key;
     }
 
@@ -63,7 +63,7 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
     @Override
     protected Boolean _call(Map<KEY_TYPE> targetActor)
             throws Exception {
-        return targetActor.kMake(key);
+        return targetActor.kRemove(key);
     }
 
     /**

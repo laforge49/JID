@@ -23,7 +23,16 @@ public class StringStringMapJidTest extends TestCase {
             assertNull(StringMapJid.newKGet("a").send(future, m));
             Actor value = StringMapJid.newKGet("b").send(future, m);
             assertTrue(value instanceof StringJid);
+            value = StringMapJid.newGetHigher("a").send(future, m);
+            assertTrue(value instanceof StringJid);
+            assertNull(StringMapJid.newGetHigher("b").send(future, m));
+            value = StringMapJid.newGetCeiling("b").send(future, m);
+            assertTrue(value instanceof StringJid);
+            assertNull(StringMapJid.newGetCeiling("c").send(future, m));
             assertNull(StringMapJid.newKGet("c").send(future, m));
+            assertTrue(StringMapJid.newKRemove("b").send(future, m));
+            assertFalse(StringMapJid.newKRemove("b").send(future, m));
+            assertNull(StringMapJid.newKGet("b").send(future, m));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

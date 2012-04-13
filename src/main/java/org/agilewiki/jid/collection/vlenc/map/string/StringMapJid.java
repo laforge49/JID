@@ -24,9 +24,7 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.collection.vlenc.map.KGet;
-import org.agilewiki.jid.collection.vlenc.map.KMake;
-import org.agilewiki.jid.collection.vlenc.map.MapJid;
+import org.agilewiki.jid.collection.vlenc.map.*;
 import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -45,6 +43,16 @@ public class StringMapJid extends MapJid<String> {
     }
 
     /**
+     * Create a KRemove request.
+     *
+     * @param key The key.
+     * @return The KRemove request.
+     */
+    final public static KRemove<String> newKRemove(String key) {
+        return new KRemove<String>(key);
+    }
+
+    /**
      * Create a KGet request.
      *
      * @param key The key.
@@ -52,6 +60,26 @@ public class StringMapJid extends MapJid<String> {
      */
     final public static KGet<String> newKGet(String key) {
         return new KGet<String>(key);
+    }
+
+    /**
+     * Create a GetHigher request.
+     *
+     * @param key The key.
+     * @return The GetHigher request.
+     */
+    final public static GetHigher<String> newGetHigher(String key) {
+        return new GetHigher<String>(key);
+    }
+
+    /**
+     * Create a GetCeiling request.
+     *
+     * @param key The key.
+     * @return The GetCeiling request.
+     */
+    final public static GetCeiling<String> newGetCeiling(String key) {
+        return new GetCeiling<String>(key);
     }
 
     /**

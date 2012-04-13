@@ -27,18 +27,18 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
- * Create a keyed entry.
+ * Returns the Actor value with a greater key.
  */
-public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
+public class GetHigher<KEY_TYPE extends Comparable> extends SynchronousRequest<Actor, Map<KEY_TYPE>> {
     /**
      * The key.
      */
-    private KEY_TYPE key;
+    protected KEY_TYPE key;
 
     /**
-     * Returns the key to be used.
+     * Returns the key.
      *
-     * @return The key to be used.
+     * @return The key.
      */
     public KEY_TYPE getKey() {
         return key;
@@ -49,7 +49,7 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
      *
      * @param key The key.
      */
-    public KMake(KEY_TYPE key) {
+    public GetHigher(KEY_TYPE key) {
         this.key = key;
     }
 
@@ -61,9 +61,10 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected Boolean _call(Map<KEY_TYPE> targetActor)
+    protected Actor _call(Map<KEY_TYPE> targetActor)
             throws Exception {
-        return targetActor.kMake(key);
+        targetActor.getHigher(key);
+        return null;
     }
 
     /**

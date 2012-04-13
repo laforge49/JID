@@ -30,7 +30,7 @@ import org.agilewiki.jid.collection.Collection;
 /**
  * Holds a map.
  */
-public interface Map<KEY_TYPE>
+public interface Map<KEY_TYPE extends Comparable>
         extends Collection {
 
     /**
@@ -43,12 +43,30 @@ public interface Map<KEY_TYPE>
             throws Exception;
 
     /**
-     * Returns the JID value associated with the key.
+     * Returns the JID value with the smallest key >= the given key.
      *
      * @param key The key.
      * @return The jid assigned to the key, or null.
      */
     public _Jid kGetJid(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Returns the JID value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching JID, or null.
+     */
+    public _Jid higherJid(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Returns the JID value with the smallest first element >= key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    public _Jid ceilingJid(KEY_TYPE key)
             throws Exception;
 
     /**
@@ -58,5 +76,32 @@ public interface Map<KEY_TYPE>
      * @return The actor assigned to the key, or null.
      */
     public Actor kGet(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Returns the Actor value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    public Actor getHigher(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Returns the Actor value with the smallest key >= the given key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    public Actor getCeiling(KEY_TYPE key)
+            throws Exception;
+
+    /**
+     * Removes the item identified by the key.
+     *
+     * @param key The key.
+     * @return True when the item was present and removed.
+     */
+    public boolean kRemove(KEY_TYPE key)
             throws Exception;
 }
