@@ -33,6 +33,8 @@ import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.integer.IntegerMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.lng.LongMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.string.*;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
@@ -109,7 +111,7 @@ final public class JidFactories extends JLPCActor {
     public final static String LIST_JID_TYPE = "LIST_JID";
 
     /**
-     * The name of the ListJid actor.
+     * The name of the StringMapJid actor.
      */
     public final static String STRING_MAP_JID_TYPE = "STRING_MAP_JID";
 
@@ -152,6 +154,96 @@ final public class JidFactories extends JLPCActor {
      * The name of the StringBooleanMapJid actor.
      */
     public final static String STRING_BOOLEAN_MAP_JID_TYPE = "STRING_BOOLEAN_MAP_JID";
+
+    /**
+     * The name of the IntegerMapJid actor.
+     */
+    public final static String INTEGER_MAP_JID_TYPE = "INTEGER_MAP_JID";
+
+    /**
+     * The name of the IntegerStringMapJid actor.
+     */
+    public final static String INTEGER_STRING_MAP_JID_TYPE = "INTEGER_STRING_MAP_JID";
+
+    /**
+     * The name of the IntegerBytesMapJid actor.
+     */
+    public final static String INTEGER_BYTES_MAP_JID_TYPE = "INTEGER_BYTES_MAP_JID";
+
+    /**
+     * The name of the IntegerActorMapJid actor.
+     */
+    public final static String INTEGER_ACTOR_MAP_JID_TYPE = "INTEGER_ACTOR_MAP_JID";
+
+    /**
+     * The name of the IntegerLongMapJid actor.
+     */
+    public final static String INTEGER_LONG_MAP_JID_TYPE = "INTEGER_LONG_MAP_JID";
+
+    /**
+     * The name of the IntegerIntegerMapJid actor.
+     */
+    public final static String INTEGER_INTEGER_MAP_JID_TYPE = "INTEGER_INTEGER_MAP_JID";
+
+    /**
+     * The name of the IntegerFloatMapJid actor.
+     */
+    public final static String INTEGER_FLOAT_MAP_JID_TYPE = "INTEGER_FLOAT_MAP_JID";
+
+    /**
+     * The name of the IntegerDoubleMapJid actor.
+     */
+    public final static String INTEGER_DOUBLE_MAP_JID_TYPE = "INTEGER_DOUBLE_MAP_JID";
+
+    /**
+     * The name of the IntegerBooleanMapJid actor.
+     */
+    public final static String INTEGER_BOOLEAN_MAP_JID_TYPE = "INTEGER_BOOLEAN_MAP_JID";
+
+    /**
+     * The name of the LongMapJid actor.
+     */
+    public final static String LONG_MAP_JID_TYPE = "LONG_MAP_JID";
+
+    /**
+     * The name of the LongStringMapJid actor.
+     */
+    public final static String LONG_STRING_MAP_JID_TYPE = "LONG_STRING_MAP_JID";
+
+    /**
+     * The name of the LongBytesMapJid actor.
+     */
+    public final static String LONG_BYTES_MAP_JID_TYPE = "LONG_BYTES_MAP_JID";
+
+    /**
+     * The name of the LongActorMapJid actor.
+     */
+    public final static String LONG_ACTOR_MAP_JID_TYPE = "LONG_ACTOR_MAP_JID";
+
+    /**
+     * The name of the LongLongMapJid actor.
+     */
+    public final static String LONG_LONG_MAP_JID_TYPE = "LONG_LONG_MAP_JID";
+
+    /**
+     * The name of the LongIntegerMapJid actor.
+     */
+    public final static String LONG_INTEGER_MAP_JID_TYPE = "LONG_INTEGER_MAP_JID";
+
+    /**
+     * The name of the LongFloatMapJid actor.
+     */
+    public final static String LONG_FLOAT_MAP_JID_TYPE = "LONG_FLOAT_MAP_JID";
+
+    /**
+     * The name of the LongDoubleMapJid actor.
+     */
+    public final static String LONG_DOUBLE_MAP_JID_TYPE = "LONG_DOUBLE_MAP_JID";
+
+    /**
+     * The name of the LongBooleanMapJid actor.
+     */
+    public final static String LONG_BOOLEAN_MAP_JID_TYPE = "LONG_BOOLEAN_MAP_JID";
 
     /**
      * Create a LiteActor
@@ -220,6 +312,10 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new StringFloatMapJidFactory());
         factory.registerActorFactory(new StringDoubleMapJidFactory());
         factory.registerActorFactory(new StringBooleanMapJidFactory());
+
+        factory.registerActorFactory(new IntegerMapJidFactory());
+
+        factory.registerActorFactory(new LongMapJidFactory());
     }
 
     /**
