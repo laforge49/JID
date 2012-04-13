@@ -40,7 +40,7 @@ import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
-import org.agilewiki.jid.scalar.flens.flt.FloatJidAFactory;
+import org.agilewiki.jid.scalar.flens.flt.FloatJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
@@ -167,7 +167,7 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new BooleanJidFactory());
         factory.registerActorFactory(new IntegerJidFactory());
         factory.registerActorFactory(new LongJidFactory());
-        factory.registerActorFactory(new FloatJidAFactory());
+        factory.registerActorFactory(new FloatJidFactory());
         factory.registerActorFactory(new DoubleJidFactory());
 
         factory.registerActorFactory(new ActorJidFactory());

@@ -7,11 +7,11 @@ import org.agilewiki.jid.jidFactory.JidFactory;
 /**
  * Creates a FloatJidA.
  */
-public class FloatJidAFactory extends JidFactory {
+public class FloatJidFactory extends JidFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public FloatJidAFactory() {
+    public FloatJidFactory() {
         actorType = JidFactories.FLOAT_JID_TYPE;
     }
 
