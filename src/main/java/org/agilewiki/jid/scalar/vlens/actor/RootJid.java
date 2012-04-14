@@ -56,19 +56,17 @@ public class RootJid extends ActorJid {
     }
 
     /**
-     * Load the remaining serialized data into the JID.
+     * Returns the size of the serialized data (exclusive of its length header).
      *
      * @param readableBytes Holds the serialized data.
+     * @return The size of the remaining bytes of serialized data.
      */
     @Override
-    public void load(ReadableBytes readableBytes) {
-        super.load(readableBytes);
-        len = readableBytes.remaining();
-        if (len == 0)
-            len = -1;
-        value = null;
-        if (len > -1)
-            readableBytes.skip(len);
+    protected int loadLen(ReadableBytes readableBytes) {
+        int l = readableBytes.remaining();
+        if (l == 0)
+            return -1;
+        return l;
     }
 
     /**
@@ -76,6 +74,7 @@ public class RootJid extends ActorJid {
      *
      * @param readableBytes Holds the serialized data.
      */
+    @Override
     protected void skipLen(ReadableBytes readableBytes) {
     }
 
@@ -84,6 +83,7 @@ public class RootJid extends ActorJid {
      *
      * @param appendableBytes The object written to.
      */
+    @Override
     protected void saveLen(AppendableBytes appendableBytes) {
     }
 
