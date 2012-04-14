@@ -9,7 +9,7 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 
 /**
- * Creates a JidA.
+ * Creates a Jid.
  */
 public class JidFactory extends _JidFactory implements ActorFactory {
     /**

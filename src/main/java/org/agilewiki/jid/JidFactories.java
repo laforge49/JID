@@ -45,6 +45,7 @@ import org.agilewiki.jid.scalar.flens.flt.FloatJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
+import org.agilewiki.jid.scalar.vlens.actor.RootJidFactory;
 import org.agilewiki.jid.scalar.vlens.bytes.BytesJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -89,6 +90,11 @@ final public class JidFactories extends JLPCActor {
      * The name of the JidJid actor.
      */
     public final static String ACTOR_JID_TYPE = "ACTOR_JID";
+
+    /**
+     * The name of the JidJid actor.
+     */
+    public final static String ROOT_JID_TYPE = "ROOT_JID";
 
     /**
      * The name of the String actor.
@@ -297,6 +303,7 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new DoubleJidFactory());
 
         factory.registerActorFactory(new ActorJidFactory());
+        factory.registerActorFactory(new RootJidFactory());
         factory.registerActorFactory(new StringJidFactory());
         factory.registerActorFactory(new BytesJidFactory());
 

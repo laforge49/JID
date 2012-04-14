@@ -35,7 +35,7 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 
 /**
- * A component to create JID actors and load their serialized data.
+ * An actor to create JID actors and load their serialized data.
  */
 final public class JidsFactory extends JLPCActor {
 
