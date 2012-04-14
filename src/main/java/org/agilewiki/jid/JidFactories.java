@@ -34,7 +34,7 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.integer.IntegerMapJidFactory;
-import org.agilewiki.jid.collection.vlenc.map.lng.LongMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.lng.*;
 import org.agilewiki.jid.collection.vlenc.map.string.*;
 import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
@@ -316,6 +316,14 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new IntegerMapJidFactory());
 
         factory.registerActorFactory(new LongMapJidFactory());
+        factory.registerActorFactory(new LongStringMapJidFactory());
+        factory.registerActorFactory(new LongBytesMapJidFactory());
+        factory.registerActorFactory(new LongActorMapJidFactory());
+        factory.registerActorFactory(new LongLongMapJidFactory());
+        factory.registerActorFactory(new LongIntegerMapJidFactory());
+        factory.registerActorFactory(new LongFloatMapJidFactory());
+        factory.registerActorFactory(new LongDoubleMapJidFactory());
+        factory.registerActorFactory(new LongBooleanMapJidFactory());
     }
 
     /**
