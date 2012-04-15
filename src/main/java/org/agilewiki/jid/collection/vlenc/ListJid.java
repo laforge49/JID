@@ -40,6 +40,8 @@ import java.util.ArrayList;
  */
 public class ListJid
         extends CollectionJid {
+    public int initialCapacity = 10;
+
     /**
      * Actor type of the elements.
      */
