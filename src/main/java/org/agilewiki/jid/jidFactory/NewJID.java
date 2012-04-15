@@ -51,7 +51,7 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
     /**
      * Holds the serialized data.
      */
-    private ReadableBytes readableBytes;
+    private byte[] bytes;
 
     /**
      * The container of the new Jid.
@@ -158,9 +158,8 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
         this.mailbox = mailbox;
         this.parent = parent;
         if (bytes != null) {
-            byte[] bs = new byte[bytes.length];
-            System.arraycopy(bytes, 0, bs, 0, bytes.length);
-            readableBytes = new ReadableBytes(bs, 0);
+            this.bytes = new byte[bytes.length];
+            System.arraycopy(bytes, 0, this.bytes, 0, bytes.length);
         }
         this.container = container;
     }
@@ -178,7 +177,10 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
         this.actorType = actorType;
         this.mailbox = mailbox;
         this.parent = parent;
-        this.readableBytes = readableBytes;
+        if (readableBytes != null) {
+            this.bytes = new byte[readableBytes.remaining()];
+            System.arraycopy(readableBytes.getBytes(), readableBytes.getOffset(), this.bytes, 0, readableBytes.remaining());
+        }
         this.container = container;
     }
 
@@ -215,7 +217,9 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
      * @return The serialized data.
      */
     public ReadableBytes getReadableBytes() {
-        return readableBytes;
+        if (bytes == null)
+            return null;
+        return new ReadableBytes(bytes, 0);
     }
 
     /**

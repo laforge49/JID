@@ -4,7 +4,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.Request;
 
 public class TimeBooleanSAppender extends Request<Long, BooleanSAppender> {
-    final static public TimeBooleanAppender req = new TimeBooleanAppender();
+    final static public TimeBooleanSAppender req = new TimeBooleanSAppender();
 
     @Override
     public boolean isTargetType(Actor targetActor) {
