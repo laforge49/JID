@@ -140,7 +140,7 @@ public class BigListTest extends TestCase {
 
         //ba.count = 10000;
         //ba.repeat = 10000;
-        //Appends and serializes per second = 26164311
+        //Appends and serializes per second = 26,164,311
 
         list.initialCapacity = ba.count;
 
