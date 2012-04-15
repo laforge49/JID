@@ -117,6 +117,46 @@ final public class JidFactories extends JLPCActor {
     public final static String LIST_JID_TYPE = "LIST_JID";
 
     /**
+     * The name of the StringListJid actor.
+     */
+    public final static String STRING_LIST_JID_TYPE = "STRING_LIST_JID";
+
+    /**
+     * The name of the BytesListJid actor.
+     */
+    public final static String BYTES_LIST_JID_TYPE = "BYTES_LIST_JID";
+
+    /**
+     * The name of the ActorListJid actor.
+     */
+    public final static String ACTOR_LIST_JID_TYPE = "ACTOR_LIST_JID";
+
+    /**
+     * The name of the LongListJid actor.
+     */
+    public final static String LONG_LIST_JID_TYPE = "LONG_LIST_JID";
+
+    /**
+     * The name of the IntegerListJid actor.
+     */
+    public final static String INTEGER_LIST_JID_TYPE = "INTEGER_LIST_JID";
+
+    /**
+     * The name of the FloatListJid actor.
+     */
+    public final static String FLOAT_LIST_JID_TYPE = "FLOAT_LIST_JID";
+
+    /**
+     * The name of the DoubleListJid actor.
+     */
+    public final static String DOUBLE_LIST_JID_TYPE = "DOUBLE_LIST_JID";
+
+    /**
+     * The name of the BooleanListJid actor.
+     */
+    public final static String BOOLEAN_LIST_JID_TYPE = "BOOLEAN_LIST_JID";
+
+    /**
      * The name of the StringMapJid actor.
      */
     public final static String STRING_MAP_JID_TYPE = "STRING_MAP_JID";
@@ -308,6 +348,7 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new BytesJidFactory());
 
         factory.registerActorFactory(new TupleJidFactory());
+
         factory.registerActorFactory(new ListJidFactory());
 
         factory.registerActorFactory(new StringMapJidFactory());
