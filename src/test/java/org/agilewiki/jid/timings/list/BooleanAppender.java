@@ -28,6 +28,7 @@ public class BooleanAppender extends JLPCActor {
                 i += 1;
             }
             Empty.req.call(this, list);
+            j += 1;
         }
         long t1 = System.currentTimeMillis();
         rp.processResponse(t1 - t0);
