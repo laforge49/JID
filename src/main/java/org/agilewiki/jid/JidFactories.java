@@ -51,7 +51,7 @@ import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * <p>
- * Registers the JID factories.
+ * Defines Jid actor types and registers the JID factories.
  * </p>
  */
 final public class JidFactories extends JLPCActor {
