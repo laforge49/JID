@@ -22,6 +22,7 @@ public class StringStringMapJidTest extends TestCase {
             assertTrue(StringMapJid.newKMake("b").send(future, m));
             assertNull(StringMapJid.newKGet("a").send(future, m));
             Actor value = StringMapJid.newKGet("b").send(future, m);
+            assertNotNull(value);
             assertTrue(value instanceof StringJid);
             value = StringMapJid.newGetHigher("a").send(future, m);
             assertTrue(value instanceof StringJid);

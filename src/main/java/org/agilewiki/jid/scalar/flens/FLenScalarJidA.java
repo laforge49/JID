@@ -91,7 +91,7 @@ abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
      * @return The result of a compareTo(o).
      */
     @Override
-    public int compareKeyTo(RESPONSE_TYPE o) {
-        return value.compareTo(o);
+    public int compareKeyTo(RESPONSE_TYPE o) throws Exception {
+        return getValue().compareTo(o);
     }
 }

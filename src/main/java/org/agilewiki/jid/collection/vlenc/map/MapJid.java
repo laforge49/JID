@@ -119,7 +119,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         int high = size() - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            ComparableKey<KEY_TYPE> midVal = (ComparableKey<KEY_TYPE>) list.get(mid);
+            ComparableKey<KEY_TYPE> midVal = (ComparableKey<KEY_TYPE>) iGetJid(mid);
             int c = midVal.compareKeyTo(key);
             if (c < 0)
                 low = mid + 1;
@@ -249,7 +249,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         _Jid jid = kGetJid(key);
         if (jid == null)
             return null;
-        return jid.thisActor();
+        return jid;
     }
 
     /**
