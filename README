@@ -1,7 +1,8 @@
 High Performance Serialization
 
 A list of 10,000 items can be deserialized, updated and reserialized in less than .2
-milliseconds--regardless of the size or complexity of those items.
+milliseconds--regardless of the size or complexity of those items. (When a list is
+deserialized, no more than 8 bytes of each item is deserialized.)
 
 Fast serialization/deserialization is critical for databases. The key is to
 deserialize only what you need and to keep the serialized data for items that have
