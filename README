@@ -1,8 +1,8 @@
 High Performance Serialization
 
-A list of 10,000 items can be deserialized, updated and reserialized in less than .2
-milliseconds--regardless of the size or complexity of those items. (When a list is
-deserialized, no more than 8 bytes of each item is deserialized.)
+JID can deserialize/update/reserialize a map of 10,000 entries in 4 milliseconds,
+running on an i5 at 2.53 GHz, where serialization/reserialization timings are
+independent of the size and complexity of the table entries.
 
 Fast serialization/deserialization is critical for databases. The key is to
 deserialize only what you need and to keep the serialized data for items that have
@@ -11,6 +11,24 @@ not been changed for reserialization after an update.
 The JID project includes a number of actors which support different types of
 persistent data. These actors can in turn be subclassed to add application logic.
 Incremental serialization/deserialization is used to achieve high-performance.
+
+JID Container actors:
+ - ListJid,
+ - MapJid,
+ - TupleJid and
+ - ActorJid,
+where ListJid and MapJid are homogeneous collections and TupleJid is hetrogenous.
+(ActorJid can hold any type of Actor which subclasses Jid.)
+
+JID scalar actors:
+ - BooleanJid,
+ - IntegerJid,
+ - LongJid,
+ - FloatJid,
+ - DoubleJid and
+ - StringJid.
+
+(Only IntegerJid, LongJid and StringJid can be used as keys in a MapJid.)
 
 Downloads:     https://sourceforge.net/projects/jactor/files/
 Blog:          https://sourceforge.net/p/jactor/blog/
