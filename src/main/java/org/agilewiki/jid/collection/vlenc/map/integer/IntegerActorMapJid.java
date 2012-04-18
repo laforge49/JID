@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc.map.integer;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
+import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 
 /**
  * Holds a map with Integer keys and ActorJid values.
@@ -44,8 +44,9 @@ final public class IntegerActorMapJid extends IntegerMapJid {
      *
      * @return The JidFactory for the values in the list.
      */
-    protected LongJidFactory getValueFactory()
+    @Override
+    protected ActorJidFactory getValueFactory()
             throws Exception {
-        return new LongJidFactory();
+        return new ActorJidFactory();
     }
 }

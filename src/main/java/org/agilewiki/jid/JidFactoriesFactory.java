@@ -24,13 +24,13 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.factory.JLPCActorFactory;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
  * Creates a JidFactorys.
  */
-public class JidFactoriesFactory extends JLPCActorFactory {
+public class JidFactoriesFactory extends ActorFactory {
     /**
      * Default actor type.
      */

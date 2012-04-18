@@ -25,7 +25,7 @@ package org.agilewiki.jid.collection.vlenc.map.lng;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.collection.vlenc.map.*;
-import org.agilewiki.jid.jidFactory._JidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
@@ -96,7 +96,7 @@ public class LongMapJid extends MapJid<Long> {
      *
      * @return The JidFactory for the key.
      */
-    final protected _JidFactory getKeyFactory() {
+    final protected JidFactory getKeyFactory() {
         return new LongJidFactory();
     }
 

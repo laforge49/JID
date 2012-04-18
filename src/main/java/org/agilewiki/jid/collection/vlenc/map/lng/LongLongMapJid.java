@@ -24,7 +24,6 @@
 package org.agilewiki.jid.collection.vlenc.map.lng;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
@@ -45,7 +44,7 @@ final public class LongLongMapJid extends LongMapJid {
      *
      * @return The JidFactory for the values in the list.
      */
-    protected _JidFactory getValueFactory()
+    protected LongJidFactory getValueFactory()
             throws Exception {
         return new LongJidFactory();
     }

@@ -27,8 +27,8 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
-import org.agilewiki.jid.jidFactory._JidFactory;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
@@ -134,7 +134,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeValue(_JidFactory jidFactory)
+    protected Boolean makeValue(JidFactory jidFactory)
             throws Exception {
         if (len > -1)
             return false;
@@ -165,7 +165,7 @@ public class ActorJid
      * @param jidFactory The actor type.
      * @throws Exception Any uncaught exception raised.
      */
-    public void setValue(_JidFactory jidFactory)
+    public void setValue(JidFactory jidFactory)
             throws Exception {
         value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
@@ -228,7 +228,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setJidBytes(_JidFactory jidFactory, byte[] bytes)
+    protected void setJidBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
             clear();
@@ -243,7 +243,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeJidBytes(_JidFactory jidFactory, byte[] bytes)
+    protected Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
             return false;
@@ -258,7 +258,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(_JidFactory jidFactory, byte[] bytes)
+    protected void setBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
         value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this, bytes);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();

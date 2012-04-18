@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.jidFactory._JidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**
@@ -32,7 +32,7 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
  */
 public class IntegerActorsType extends ActorsType {
 
-    private _JidFactory jidFactory;
+    private JidFactory jidFactory;
 
     /**
      * Create a IntegerActorsType
@@ -48,7 +48,7 @@ public class IntegerActorsType extends ActorsType {
      *
      * @return A JidFactory.
      */
-    public _JidFactory getValueFactory()
+    public JidFactory getValueFactory()
             throws Exception {
         if (jidFactory == null)
             jidFactory = new IntegerJidFactory();

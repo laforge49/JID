@@ -25,12 +25,12 @@ package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.ConcurrentRequest;
-import org.agilewiki.jid.jidFactory._JidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Returns the JidFactory of the elements.
  */
-public class GetValueFactory extends ConcurrentRequest<_JidFactory, ValueFactory> {
+public class GetValueFactory extends ConcurrentRequest<JidFactory, ValueFactory> {
     public final static GetValueFactory req = new GetValueFactory();
 
     /**
@@ -41,7 +41,7 @@ public class GetValueFactory extends ConcurrentRequest<_JidFactory, ValueFactory
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected _JidFactory _call(ValueFactory targetActor)
+    protected JidFactory _call(ValueFactory targetActor)
             throws Exception {
         return targetActor.getValueFactory();
     }

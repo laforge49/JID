@@ -26,7 +26,7 @@ package org.agilewiki.jid.collection.flenc;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
-import org.agilewiki.jid.jidFactory._JidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 /**
  * Holds a fixed-size array of JID actors of various types.
@@ -37,7 +37,7 @@ public class TupleJid
     /**
      * An array of actor types, one for each element in the tuple.
      */
-    protected _JidFactory[] tupleFactories;
+    protected JidFactory[] tupleFactories;
 
     /**
      * A tuple of actors.

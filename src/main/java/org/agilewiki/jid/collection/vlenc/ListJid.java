@@ -31,7 +31,7 @@ import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.CollectionJid;
-import org.agilewiki.jid.jidFactory._JidFactory;
+import org.agilewiki.jid.jidFactory.JidFactory;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class ListJid
     /**
      * Actor type of the elements.
      */
-    private _JidFactory elementsFactory;
+    private JidFactory elementsFactory;
 
     /**
      * A list of JID actors.
@@ -112,7 +112,7 @@ public class ListJid
      *
      * @return The JidFactory for of all the elements in the list.
      */
-    protected _JidFactory getListFactory()
+    protected JidFactory getListFactory()
             throws Exception {
         return GetValueFactory.req.call(this);
     }

@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.ConcurrentRequest;
 /**
  * Returns the jid factory for a given actor type.
  */
-public class GetJidFactory extends ConcurrentRequest<_JidFactory, JidsFactory> {
+public class GetJidFactory extends ConcurrentRequest<JidFactory, JidsFactory> {
     /**
      * An actor type name.
      */
@@ -61,7 +61,7 @@ public class GetJidFactory extends ConcurrentRequest<_JidFactory, JidsFactory> {
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected _JidFactory _call(JidsFactory targetActor)
+    protected JidFactory _call(JidsFactory targetActor)
             throws Exception {
         targetActor.getJidFactory(actorType);
         return null;

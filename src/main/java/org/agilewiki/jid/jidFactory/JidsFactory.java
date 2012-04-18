@@ -81,9 +81,9 @@ final public class JidsFactory extends JLPCActor {
         }
     }
 
-    protected _JidFactory getJidFactory(String actorType)
+    protected JidFactory getJidFactory(String actorType)
             throws Exception {
-        return (_JidFactory) (new GetActorFactory(actorType)).call(this);
+        return (JidFactory) (new GetActorFactory(actorType)).call(this);
     }
 
     protected _Jid newJID(NewJID request)
