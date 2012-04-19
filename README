@@ -33,6 +33,7 @@ JID scalar actors:
 Downloads:     https://sourceforge.net/projects/jactor/files/
 Blog:          https://sourceforge.net/p/jactor/blog/
 API:           http://jactor.sourceforge.net/
+Data Layouts:  https://github.com/laforge49/JID/wiki/Serialized-Data
 VCS:           https://github.com/laforge49/JID/
 Issues:        https://github.com/laforge49/JID/issues/
 Google groups: http://groups.google.com/group/agilewikidevelopers/
