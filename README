@@ -17,7 +17,7 @@ JID Container actors:
  - MapJid,
  - TupleJid and
  - ActorJid,
-where ListJid and MapJid are homogeneous collections and TupleJid is hetrogenous.
+where ListJid and MapJid are homogeneous collections and TupleJid is heterogenous.
 (ActorJid can hold any type of Actor which subclasses Jid.)
 
 JID scalar actors:
