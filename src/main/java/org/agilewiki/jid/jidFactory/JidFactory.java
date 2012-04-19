@@ -16,7 +16,7 @@ public class JidFactory extends ActorFactory {
      * Create a JLPCActorFactory.
      */
     public JidFactory() {
-        super(JidFactories.JID_TYPE);
+        actorType = JidFactories.JID_TYPE;
     }
 
     /**
