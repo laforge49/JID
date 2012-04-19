@@ -25,7 +25,7 @@ package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.ConcurrentRequest;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Returns the JidFactory of the elements.

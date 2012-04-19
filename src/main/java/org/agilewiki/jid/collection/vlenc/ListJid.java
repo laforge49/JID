@@ -26,12 +26,8 @@ package org.agilewiki.jid.collection.vlenc;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
-import org.agilewiki.jid.AppendableBytes;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.Util;
-import org.agilewiki.jid._Jid;
+import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
-import org.agilewiki.jid.jidFactory.JidFactory;
 
 import java.util.ArrayList;
 

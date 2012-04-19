@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.lpc.TargetActor;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Array of Jid factories for tuples.

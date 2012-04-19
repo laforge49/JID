@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**

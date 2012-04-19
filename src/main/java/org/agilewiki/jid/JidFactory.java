@@ -1,12 +1,8 @@
-package org.agilewiki.jid.jidFactory;
+package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
-import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid._Jid;
 
 /**
  * Creates a Jid.

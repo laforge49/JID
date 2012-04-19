@@ -25,7 +25,7 @@ package org.agilewiki.jid.collection.vlenc.map.lng;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a LongLongMapJid.

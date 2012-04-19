@@ -31,6 +31,7 @@ import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 

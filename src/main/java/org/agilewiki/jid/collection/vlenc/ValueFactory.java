@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.lpc.TargetActor;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Interface for defining the factory of the elements of a variable length collection.

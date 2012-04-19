@@ -2,7 +2,7 @@ package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a StringJid.

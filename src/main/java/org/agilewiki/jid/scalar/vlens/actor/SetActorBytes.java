@@ -25,7 +25,7 @@ package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
-import org.agilewiki.jid.jidFactory.JidFactory;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a JID actor and loads its serialized data.

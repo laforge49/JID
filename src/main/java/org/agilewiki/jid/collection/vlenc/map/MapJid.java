@@ -27,6 +27,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.GetTupleFactories;
@@ -34,7 +35,6 @@ import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.GetValueFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
-import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.scalar.Scalar;
 
 /**

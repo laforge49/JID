@@ -36,7 +36,6 @@ import org.agilewiki.jid.collection.vlenc.*;
 import org.agilewiki.jid.collection.vlenc.map.integer.*;
 import org.agilewiki.jid.collection.vlenc.map.lng.*;
 import org.agilewiki.jid.collection.vlenc.map.string.*;
-import org.agilewiki.jid.jidFactory.JidFactory;
 import org.agilewiki.jid.jidFactory.JidsFactoryFactory;
 import org.agilewiki.jid.jidFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;

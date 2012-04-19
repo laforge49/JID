@@ -25,6 +25,7 @@ package org.agilewiki.jid.jidFactory;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.ConcurrentRequest;
+import org.agilewiki.jid.JidFactory;
 
 /**
  * Returns the jid factory for a given actor type.
