@@ -7,7 +7,7 @@ import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 import org.agilewiki.jid.scalar.flens.integer.SetInteger;
 

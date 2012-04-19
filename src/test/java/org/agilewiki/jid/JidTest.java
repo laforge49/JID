@@ -2,7 +2,7 @@ package org.agilewiki.jid;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.*;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 
 public class JidTest extends TestCase {
     public void test1() {

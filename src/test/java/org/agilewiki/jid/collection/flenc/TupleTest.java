@@ -35,7 +35,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;

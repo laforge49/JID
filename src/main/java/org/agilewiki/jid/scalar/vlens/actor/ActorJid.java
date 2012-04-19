@@ -27,7 +27,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**

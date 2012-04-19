@@ -7,7 +7,7 @@ import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 
 public class MapDAppender extends JLPCActor {
     public int count;

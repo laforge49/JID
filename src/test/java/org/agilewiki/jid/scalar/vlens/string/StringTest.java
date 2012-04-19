@@ -9,7 +9,7 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;

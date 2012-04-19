@@ -8,7 +8,7 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.BooleanListJid;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 
 public class BooleanDAppender extends JLPCActor {
     public int count;

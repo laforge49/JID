@@ -9,7 +9,7 @@ import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.vlenc.BooleanListJid;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
-import org.agilewiki.jid.jidFactory.NewJID;
+import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJid;
 import org.agilewiki.jid.scalar.flens.bool.SetBoolean;
 
