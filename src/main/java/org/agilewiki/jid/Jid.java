@@ -4,6 +4,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.jidsFactory.NewJID;
 
@@ -42,6 +43,11 @@ public class Jid extends JLPCActor implements _Jid {
         return createSubordinate(factory, getParent());
     }
 
+    final public Jid createSubordinate(String actorType)
+            throws Exception {
+        return createSubordinate(actorType, getParent());
+    }
+
     final public Jid createSubordinate(ActorFactory factory, Actor parent)
             throws Exception {
         Jid jid = (Jid) factory.newActor(getMailbox(), parent);
@@ -49,9 +55,21 @@ public class Jid extends JLPCActor implements _Jid {
         return jid;
     }
 
+    final public Jid createSubordinate(String actorType, Actor parent)
+            throws Exception {
+        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
+        jid.setContainerJid(this);
+        return jid;
+    }
+
     final public Jid createSubordinate(ActorFactory factory, byte[] bytes)
             throws Exception {
         return createSubordinate(factory, getParent(), bytes);
+    }
+
+    final public Jid createSubordinate(String actorType, byte[] bytes)
+            throws Exception {
+        return createSubordinate(actorType, getParent(), bytes);
     }
 
     final public Jid createSubordinate(ActorFactory factory, Actor parent, byte[] bytes)
@@ -64,14 +82,38 @@ public class Jid extends JLPCActor implements _Jid {
         return jid;
     }
 
+    final public Jid createSubordinate(String actorType, Actor parent, byte[] bytes)
+            throws Exception {
+        if (bytes == null)
+            return createSubordinate(actorType, parent);
+        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
+        jid.load(new ReadableBytes(bytes, 0));
+        jid.setContainerJid(this);
+        return jid;
+    }
+
     final public Jid createSubordinate(ActorFactory factory, ReadableBytes readableBytes)
             throws Exception {
         return createSubordinate(factory, getParent(), readableBytes);
     }
 
+    final public Jid createSubordinate(String actorType, ReadableBytes readableBytes)
+            throws Exception {
+        return createSubordinate(actorType, getParent(), readableBytes);
+    }
+
     final public Jid createSubordinate(ActorFactory factory, Actor parent, ReadableBytes readableBytes)
             throws Exception {
         Jid jid = (Jid) factory.newActor(getMailbox(), parent);
+        if (readableBytes != null)
+            jid.load(readableBytes);
+        jid.setContainerJid(this);
+        return jid;
+    }
+
+    final public Jid createSubordinate(String actorType, Actor parent, ReadableBytes readableBytes)
+            throws Exception {
+        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
         if (readableBytes != null)
             jid.load(readableBytes);
         jid.setContainerJid(this);

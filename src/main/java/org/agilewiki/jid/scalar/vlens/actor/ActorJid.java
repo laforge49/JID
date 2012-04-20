@@ -27,7 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
 /**
@@ -150,8 +149,7 @@ public class ActorJid
     @Override
     public void setValue(String jidType)
             throws Exception {
-        NewJID na = new NewJID(jidType, getMailbox(), getParent(), (byte[]) null, this);
-        value = na.call(this);
+        value = createSubordinate(jidType);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -212,8 +210,7 @@ public class ActorJid
      */
     protected void setBytes(String jidType, byte[] bytes)
             throws Exception {
-        NewJID na = new NewJID(jidType, getMailbox(), getParent(), bytes, this);
-        value = na.call(this);
+        value = createSubordinate(jidType, bytes);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -298,10 +295,7 @@ public class ActorJid
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         String actorType = readableBytes.readString();
-        value = (new NewJID(
-                actorType,
-                getMailbox(),
-                getParent(), readableBytes, this)).call(this);
+        value = createSubordinate(actorType, readableBytes);
         return value;
     }
 

@@ -25,13 +25,11 @@ package org.agilewiki.jid.jidsFactory;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
-import org.agilewiki.jactor.factory.GetActorFactory;
 import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
 
@@ -72,19 +70,10 @@ final public class JidsFactory extends JLPCActor {
      */
     @Override
     protected void processRequest(Object request, RP rp) throws Exception {
-        if (request instanceof GetJidFactory) {
-            rp.processResponse(getJidFactory(((GetJidFactory) request).getActorType()));
-            return;
-        }
         if (request instanceof NewJID) {
             rp.processResponse(newJID((NewJID) request));
             return;
         }
-    }
-
-    protected JidFactory getJidFactory(String actorType)
-            throws Exception {
-        return (JidFactory) (new GetActorFactory(actorType)).call(this);
     }
 
     protected Jid newJID(NewJID request)
