@@ -64,14 +64,14 @@ public class JidFactory extends ActorFactory {
      */
     final public Jid newJID(Mailbox mailbox, Actor parent, _Jid container, ReadableBytes readableBytes)
             throws Exception {
-        Jid jidA = instantiateActor(mailbox);
-        jidA.setActorType(actorType);
-        jidA.setParent(parent);
+        Jid jid = instantiateActor(mailbox);
+        jid.setFactory(this);
+        jid.setParent(parent);
         if (readableBytes != null)
-            jidA.load(readableBytes);
+            jid.load(readableBytes);
         if (container != null)
-            jidA.setContainerJid(container);
-        return jidA;
+            jid.setContainerJid(container);
+        return jid;
     }
 
     /**
