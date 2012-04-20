@@ -46,6 +46,6 @@ final public class IntegerBooleanMapJid extends IntegerMapJid {
      */
     protected BooleanJidFactory getValueFactory()
             throws Exception {
-        return new BooleanJidFactory();
+        return BooleanJidFactory.fac;
     }
 }

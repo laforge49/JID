@@ -47,6 +47,6 @@ public class BooleanListJid extends ListJid {
     @Override
     final protected BooleanJidFactory getListFactory()
             throws Exception {
-        return new BooleanJidFactory();
+        return BooleanJidFactory.fac;
     }
 }

@@ -47,6 +47,6 @@ public class IntegerListJid extends ListJid {
     @Override
     final protected IntegerJidFactory getListFactory()
             throws Exception {
-        return new IntegerJidFactory();
+        return IntegerJidFactory.fac;
     }
 }

@@ -46,6 +46,6 @@ final public class IntegerLongMapJid extends IntegerMapJid {
      */
     protected LongJidFactory getValueFactory()
             throws Exception {
-        return new LongJidFactory();
+        return LongJidFactory.fac;
     }
 }

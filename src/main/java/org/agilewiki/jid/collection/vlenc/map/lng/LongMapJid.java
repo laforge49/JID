@@ -96,7 +96,7 @@ abstract public class LongMapJid extends MapJid<Long> {
      * @return The JidFactory for the key.
      */
     final protected LongJidFactory getKeyFactory() {
-        return new LongJidFactory();
+        return LongJidFactory.fac;
     }
 
     /**

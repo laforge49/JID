@@ -13,7 +13,7 @@ public class BooleanJidFactory extends ActorFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public BooleanJidFactory() {
+    protected BooleanJidFactory() {
         super(JidFactories.BOOLEAN_JID_TYPE);
     }
 

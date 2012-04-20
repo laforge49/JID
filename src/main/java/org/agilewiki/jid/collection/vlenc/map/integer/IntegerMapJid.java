@@ -96,7 +96,7 @@ abstract public class IntegerMapJid extends MapJid<Integer> {
      * @return The JidFactory for the key.
      */
     final protected IntegerJidFactory getKeyFactory() {
-        return new IntegerJidFactory();
+        return IntegerJidFactory.fac;
     }
 
     /**

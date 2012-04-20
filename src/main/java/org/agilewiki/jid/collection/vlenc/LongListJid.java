@@ -47,6 +47,6 @@ public class LongListJid extends ListJid {
     @Override
     final protected LongJidFactory getListFactory()
             throws Exception {
-        return new LongJidFactory();
+        return LongJidFactory.fac;
     }
 }

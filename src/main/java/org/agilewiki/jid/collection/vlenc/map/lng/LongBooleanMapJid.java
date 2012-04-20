@@ -46,6 +46,6 @@ final public class LongBooleanMapJid extends LongMapJid {
      */
     protected BooleanJidFactory getValueFactory()
             throws Exception {
-        return new BooleanJidFactory();
+        return BooleanJidFactory.fac;
     }
 }

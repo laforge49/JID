@@ -46,6 +46,6 @@ final public class StringBooleanMapJid extends StringMapJid {
      */
     protected BooleanJidFactory getValueFactory()
             throws Exception {
-        return new BooleanJidFactory();
+        return BooleanJidFactory.fac;
     }
 }

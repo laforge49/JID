@@ -13,7 +13,7 @@ public class IntegerJidFactory extends ActorFactory {
     /**
      * Create a JLPCActorFactory.
      */
-    public IntegerJidFactory() {
+    protected IntegerJidFactory() {
         super(JidFactories.INTEGER_JID_TYPE);
     }
 
