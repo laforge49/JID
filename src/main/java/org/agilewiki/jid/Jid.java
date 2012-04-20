@@ -6,7 +6,6 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.jidsFactory.NewJID;
 
 import java.util.Arrays;
 
@@ -300,7 +299,9 @@ public class Jid extends JLPCActor implements _Jid {
         Mailbox mb = m;
         if (mb == null)
             mb = getMailbox();
-        return (new NewJID(getActorType(), mb, getParent(), getBytes())).call(getParent()).thisActor();
+        Jid jid = (Jid) getFactory().newActor(mb, getParent());
+        jid.load(new ReadableBytes(getBytes(), 0));
+        return jid;
     }
 
     final public void isJidEqual(Actor actor, final RP rp)
