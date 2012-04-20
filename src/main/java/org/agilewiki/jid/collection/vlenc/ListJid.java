@@ -26,6 +26,7 @@ package org.agilewiki.jid.collection.vlenc;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
 
@@ -41,7 +42,7 @@ public class ListJid
     /**
      * Actor type of the elements.
      */
-    private JidFactory elementsFactory;
+    private ActorFactory elementsFactory;
 
     /**
      * A list of JID actors.
@@ -108,7 +109,7 @@ public class ListJid
      *
      * @return The JidFactory for of all the elements in the list.
      */
-    protected JidFactory getListFactory()
+    protected ActorFactory getListFactory()
             throws Exception {
         return GetValueFactory.req.call(this);
     }

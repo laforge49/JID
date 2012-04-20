@@ -23,8 +23,8 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.TargetActor;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Array of Jid factories for tuples.
@@ -36,6 +36,6 @@ public interface TupleFactories extends TargetActor {
      *
      * @return An array of JidFactory.
      */
-    public JidFactory[] getTupleFactories()
+    public ActorFactory[] getTupleFactories()
             throws Exception;
 }

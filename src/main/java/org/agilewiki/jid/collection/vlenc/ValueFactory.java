@@ -23,8 +23,8 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.TargetActor;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Interface for defining the factory of the elements of a variable length collection.
@@ -35,6 +35,6 @@ public interface ValueFactory extends TargetActor {
      *
      * @return A JidFactory.
      */
-    public JidFactory getValueFactory()
+    public ActorFactory getValueFactory()
             throws Exception;
 }

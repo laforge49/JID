@@ -333,7 +333,7 @@ final public class JidFactories extends JLPCActor {
         while (!(f instanceof JAFactory)) f = f.getParent();
         JAFactory factory = (JAFactory) f;
 
-        factory.registerActorFactory(new JidFactory());
+        factory.registerActorFactory(JidFactory.fac);
 
         factory.registerActorFactory(new BooleanJidFactory());
         factory.registerActorFactory(new IntegerJidFactory());

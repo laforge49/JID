@@ -24,7 +24,7 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidFactory;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 
 /**
@@ -32,7 +32,7 @@ import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
  */
 public class BooleanActorsType extends ActorsType {
 
-    private JidFactory jidFactory;
+    private ActorFactory jidFactory;
 
     /**
      * Create a BooleanActorsType
@@ -48,7 +48,7 @@ public class BooleanActorsType extends ActorsType {
      *
      * @return A JidFactory.
      */
-    public JidFactory getValueFactory()
+    public ActorFactory getValueFactory()
             throws Exception {
         if (jidFactory == null)
             jidFactory = new BooleanJidFactory();

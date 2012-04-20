@@ -24,13 +24,13 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.ConcurrentRequest;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Returns an array of Jid factories for tuples.
  */
-public class GetTupleFactories extends ConcurrentRequest<JidFactory[], TupleFactories> {
+public class GetTupleFactories extends ConcurrentRequest<ActorFactory[], TupleFactories> {
     public final static GetTupleFactories req = new GetTupleFactories();
 
     /**
@@ -41,7 +41,7 @@ public class GetTupleFactories extends ConcurrentRequest<JidFactory[], TupleFact
      * @throws Exception Any uncaught exceptions raised while processing the request.
      */
     @Override
-    protected JidFactory[] _call(TupleFactories targetActor)
+    protected ActorFactory[] _call(TupleFactories targetActor)
             throws Exception {
         return targetActor.getTupleFactories();
     }

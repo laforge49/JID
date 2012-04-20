@@ -26,8 +26,8 @@ package org.agilewiki.jid.collection.vlenc.map;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
-import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.GetTupleFactories;
@@ -44,7 +44,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
         implements TupleFactories, Map<KEY_TYPE> {
 
-    private JidFactory[] tupleFactories;
+    private ActorFactory[] tupleFactories;
 
     /**
      * Create a MapJid
@@ -60,7 +60,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The JidFactory for the key.
      */
-    abstract protected JidFactory getKeyFactory();
+    abstract protected ActorFactory getKeyFactory();
 
     /**
      * Converts a string to a key.
@@ -76,7 +76,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The actor type of all the elements in the list.
      */
     @Override
-    final protected JidFactory getListFactory()
+    final protected ActorFactory getListFactory()
             throws Exception {
         return new TupleJidFactory();
     }
@@ -87,11 +87,11 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The array of actor types.
      */
     @Override
-    final public JidFactory[] getTupleFactories()
+    final public ActorFactory[] getTupleFactories()
             throws Exception {
         if (tupleFactories != null)
             return tupleFactories;
-        tupleFactories = new JidFactory[2];
+        tupleFactories = new ActorFactory[2];
         tupleFactories[0] = getKeyFactory();
         tupleFactories[1] = getValueFactory();
         return tupleFactories;
@@ -102,7 +102,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The actor type of the values in the list.
      */
-    protected JidFactory getValueFactory()
+    protected ActorFactory getValueFactory()
             throws Exception {
         return GetValueFactory.req.call(this);
     }

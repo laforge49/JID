@@ -35,7 +35,6 @@ import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.collection.IGet;
 import org.agilewiki.jid.collection.ISetBytes;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
@@ -49,8 +48,8 @@ public class TupleTest extends TestCase {
             factory.setParent(null);
             JLPCActor sstf = new StringStringTupleFactories(factory.getMailbox());
             sstf.setParent(factory);
-            NewJID newTupleJid = new NewJID(JidFactories.TUPLE_JID_TYPE, sstf.getMailbox(), sstf);
-            Actor t0 = newTupleJid.send(future, sstf).thisActor();
+            TupleJidFactory tjf = new TupleJidFactory();
+            Actor t0 = tjf.newActor(sstf.getMailbox(), sstf);
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
             Actor e0 = iget0.send(future, t0);

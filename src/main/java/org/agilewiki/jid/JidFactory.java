@@ -7,6 +7,8 @@ import org.agilewiki.jactor.factory.ActorFactory;
  * Creates a Jid.
  */
 public class JidFactory extends ActorFactory {
+    final public static JidFactory fac = new JidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
