@@ -24,14 +24,13 @@
 package org.agilewiki.jid.collection.vlenc.map.lng;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.collection.vlenc.map.*;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
  * Holds a map with Long keys.
  */
-public class LongMapJid extends MapJid<Long> {
+abstract public class LongMapJid extends MapJid<Long> {
     /**
      * Create a KMake request.
      *
@@ -96,7 +95,7 @@ public class LongMapJid extends MapJid<Long> {
      *
      * @return The JidFactory for the key.
      */
-    final protected JidFactory getKeyFactory() {
+    final protected LongJidFactory getKeyFactory() {
         return new LongJidFactory();
     }
 

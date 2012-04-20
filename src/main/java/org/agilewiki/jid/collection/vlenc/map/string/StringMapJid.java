@@ -24,14 +24,13 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.collection.vlenc.map.*;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * Holds a map with String keys.
  */
-public class StringMapJid extends MapJid<String> {
+abstract public class StringMapJid extends MapJid<String> {
     /**
      * Create a KMake request.
      *
@@ -96,7 +95,7 @@ public class StringMapJid extends MapJid<String> {
      *
      * @return The JidFactory for the key.
      */
-    final protected JidFactory getKeyFactory() {
+    final protected StringJidFactory getKeyFactory() {
         return new StringJidFactory();
     }
 

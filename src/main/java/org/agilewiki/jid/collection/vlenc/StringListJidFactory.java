@@ -31,6 +31,8 @@ import org.agilewiki.jid.JidFactory;
  * Creates a StringListJid.
  */
 public class StringListJidFactory extends JidFactory {
+    final static public StringListJidFactory fac = new StringListJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */

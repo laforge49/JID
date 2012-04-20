@@ -33,7 +33,6 @@ import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.GetTupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
-import org.agilewiki.jid.collection.vlenc.GetValueFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.scalar.Scalar;
 
@@ -102,10 +101,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The actor type of the values in the list.
      */
-    protected ActorFactory getValueFactory()
-            throws Exception {
-        return GetValueFactory.req.call(this);
-    }
+    abstract protected ActorFactory getValueFactory()
+            throws Exception;
 
     /**
      * Locate the tuple with a matching first element.

@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a IntegerJidA.
  */
-public class IntegerJidFactory extends JidFactory {
+public class IntegerJidFactory extends ActorFactory {
+    final public static IntegerJidFactory fac = new IntegerJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
     public IntegerJidFactory() {
-        actorType = JidFactories.INTEGER_JID_TYPE;
+        super(JidFactories.INTEGER_JID_TYPE);
     }
 
     /**

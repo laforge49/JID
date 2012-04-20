@@ -111,11 +111,6 @@ final public class JidFactories extends JLPCActor {
     public final static String TUPLE_JID_TYPE = "TUPLE_JID";
 
     /**
-     * The name of the ListJid actor.
-     */
-    public final static String LIST_JID_TYPE = "LIST_JID";
-
-    /**
      * The name of the StringListJid actor.
      */
     public final static String STRING_LIST_JID_TYPE = "STRING_LIST_JID";
@@ -154,11 +149,6 @@ final public class JidFactories extends JLPCActor {
      * The name of the BooleanListJid actor.
      */
     public final static String BOOLEAN_LIST_JID_TYPE = "BOOLEAN_LIST_JID";
-
-    /**
-     * The name of the StringMapJid actor.
-     */
-    public final static String STRING_MAP_JID_TYPE = "STRING_MAP_JID";
 
     /**
      * The name of the StringStringMapJid actor.
@@ -201,11 +191,6 @@ final public class JidFactories extends JLPCActor {
     public final static String STRING_BOOLEAN_MAP_JID_TYPE = "STRING_BOOLEAN_MAP_JID";
 
     /**
-     * The name of the IntegerMapJid actor.
-     */
-    public final static String INTEGER_MAP_JID_TYPE = "INTEGER_MAP_JID";
-
-    /**
      * The name of the IntegerStringMapJid actor.
      */
     public final static String INTEGER_STRING_MAP_JID_TYPE = "INTEGER_STRING_MAP_JID";
@@ -244,11 +229,6 @@ final public class JidFactories extends JLPCActor {
      * The name of the IntegerBooleanMapJid actor.
      */
     public final static String INTEGER_BOOLEAN_MAP_JID_TYPE = "INTEGER_BOOLEAN_MAP_JID";
-
-    /**
-     * The name of the LongMapJid actor.
-     */
-    public final static String LONG_MAP_JID_TYPE = "LONG_MAP_JID";
 
     /**
      * The name of the LongStringMapJid actor.
@@ -335,8 +315,8 @@ final public class JidFactories extends JLPCActor {
 
         factory.registerActorFactory(JidFactory.fac);
 
-        factory.registerActorFactory(new BooleanJidFactory());
-        factory.registerActorFactory(new IntegerJidFactory());
+        factory.registerActorFactory(BooleanJidFactory.fac);
+        factory.registerActorFactory(IntegerJidFactory.fac);
         factory.registerActorFactory(new LongJidFactory());
         factory.registerActorFactory(new FloatJidFactory());
         factory.registerActorFactory(new DoubleJidFactory());
@@ -348,7 +328,6 @@ final public class JidFactories extends JLPCActor {
 
         factory.registerActorFactory(new TupleJidFactory());
 
-        factory.registerActorFactory(new ListJidFactory());
         factory.registerActorFactory(new StringListJidFactory());
         factory.registerActorFactory(new BytesListJidFactory());
         factory.registerActorFactory(new ActorListJidFactory());
@@ -358,7 +337,6 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new DoubleListJidFactory());
         factory.registerActorFactory(new BooleanListJidFactory());
 
-        factory.registerActorFactory(new StringMapJidFactory());
         factory.registerActorFactory(new StringStringMapJidFactory());
         factory.registerActorFactory(new StringBytesMapJidFactory());
         factory.registerActorFactory(new StringActorMapJidFactory());
@@ -368,7 +346,6 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new StringDoubleMapJidFactory());
         factory.registerActorFactory(new StringBooleanMapJidFactory());
 
-        factory.registerActorFactory(new IntegerMapJidFactory());
         factory.registerActorFactory(new IntegerStringMapJidFactory());
         factory.registerActorFactory(new IntegerBytesMapJidFactory());
         factory.registerActorFactory(new IntegerActorMapJidFactory());
@@ -378,7 +355,6 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new IntegerDoubleMapJidFactory());
         factory.registerActorFactory(new IntegerBooleanMapJidFactory());
 
-        factory.registerActorFactory(new LongMapJidFactory());
         factory.registerActorFactory(new LongStringMapJidFactory());
         factory.registerActorFactory(new LongBytesMapJidFactory());
         factory.registerActorFactory(new LongActorMapJidFactory());

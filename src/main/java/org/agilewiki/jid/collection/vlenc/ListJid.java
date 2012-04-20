@@ -35,7 +35,7 @@ import java.util.ArrayList;
 /**
  * Holds an ArrayList of JID actors, all of the same type.
  */
-public class ListJid
+public abstract class ListJid
         extends CollectionJid {
     public int initialCapacity = 10;
 
@@ -109,10 +109,8 @@ public class ListJid
      *
      * @return The JidFactory for of all the elements in the list.
      */
-    protected ActorFactory getListFactory()
-            throws Exception {
-        return GetValueFactory.req.call(this);
-    }
+    abstract protected ActorFactory getListFactory()
+            throws Exception;
 
     /**
      * Perform lazy initialization.

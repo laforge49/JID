@@ -24,14 +24,13 @@
 package org.agilewiki.jid.collection.vlenc.map.integer;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.collection.vlenc.map.*;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**
  * Holds a map with Integer keys.
  */
-public class IntegerMapJid extends MapJid<Integer> {
+abstract public class IntegerMapJid extends MapJid<Integer> {
     /**
      * Create a KMake request.
      *
@@ -96,7 +95,7 @@ public class IntegerMapJid extends MapJid<Integer> {
      *
      * @return The JidFactory for the key.
      */
-    final protected JidFactory getKeyFactory() {
+    final protected IntegerJidFactory getKeyFactory() {
         return new IntegerJidFactory();
     }
 

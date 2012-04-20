@@ -73,7 +73,6 @@ public class TupleJid
         len = 0;
         while (i < size()) {
             Jid elementJid = createSubordinate(tupleFactories[i], readableBytes);
-            //_Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
