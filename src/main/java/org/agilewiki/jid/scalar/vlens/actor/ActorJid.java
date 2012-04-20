@@ -166,7 +166,7 @@ public class ActorJid
      */
     public void setValue(JidFactory jidFactory)
             throws Exception {
-        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this);
+        value = createSubordinate(jidFactory);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;
@@ -259,7 +259,7 @@ public class ActorJid
      */
     protected void setBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
-        value = jidFactory.newJID(getMailbox(), thisActor().getParent(), this, bytes);
+        value = createSubordinate(jidFactory, bytes);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();
         change(l);
         serializedBytes = null;

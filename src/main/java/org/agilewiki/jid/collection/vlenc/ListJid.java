@@ -133,7 +133,7 @@ public class ListJid
         list = new ArrayList<_Jid>(count);
         int i = 0;
         while (i < count) {
-            _Jid elementJid = elementsFactory.newJID(getMailbox(), this, this, readableBytes);
+            Jid elementJid = createSubordinate(elementsFactory, this, readableBytes);
             list.add(elementJid);
             i += 1;
         }
@@ -181,7 +181,7 @@ public class ListJid
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        _Jid elementJid = elementsFactory.newJID(getMailbox(), this, this, bytes);
+        Jid elementJid = createSubordinate(elementsFactory, this, bytes);
         _Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
@@ -221,7 +221,7 @@ public class ListJid
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        _Jid jid = elementsFactory.newJID(getMailbox(), this, this, bytes);
+        Jid jid = createSubordinate(elementsFactory, this, bytes);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);
@@ -232,7 +232,7 @@ public class ListJid
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        _Jid jid = elementsFactory.newJID(getMailbox(), this, this);
+        Jid jid = createSubordinate(elementsFactory, this);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);

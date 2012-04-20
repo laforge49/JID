@@ -71,7 +71,8 @@ public class TupleJid
         int i = 0;
         len = 0;
         while (i < size()) {
-            _Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
+            Jid elementJid = createSubordinate(tupleFactories[i], readableBytes);
+            //_Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, readableBytes);
             len += elementJid.getSerializedLength();
             tuple[i] = elementJid;
             i += 1;
@@ -89,7 +90,7 @@ public class TupleJid
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
-        _Jid elementJid = tupleFactories[i].newJID(getMailbox(), getParent(), this, bytes);
+        Jid elementJid = createSubordinate(tupleFactories[i], bytes);
         _Jid oldElementJid = iGetJid(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;

@@ -3,6 +3,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.jidsFactory.NewJID;
 
@@ -34,6 +35,47 @@ public class Jid extends JLPCActor implements _Jid {
      */
     public Jid(final Mailbox mailbox) {
         super(mailbox);
+    }
+
+    final public Jid createSubordinate(ActorFactory factory)
+            throws Exception {
+        return createSubordinate(factory, getParent());
+    }
+
+    final public Jid createSubordinate(ActorFactory factory, Actor parent)
+            throws Exception {
+        Jid jid = (Jid) factory.newActor(getMailbox(), parent);
+        jid.setContainerJid(this);
+        return jid;
+    }
+
+    final public Jid createSubordinate(ActorFactory factory, byte[] bytes)
+            throws Exception {
+        return createSubordinate(factory, getParent(), bytes);
+    }
+
+    final public Jid createSubordinate(ActorFactory factory, Actor parent, byte[] bytes)
+            throws Exception {
+        if (bytes == null)
+            return createSubordinate(factory, parent);
+        Jid jid = (Jid) factory.newActor(getMailbox(), parent);
+        jid.load(new ReadableBytes(bytes, 0));
+        jid.setContainerJid(this);
+        return jid;
+    }
+
+    final public Jid createSubordinate(ActorFactory factory, ReadableBytes readableBytes)
+            throws Exception {
+        return createSubordinate(factory, getParent(), readableBytes);
+    }
+
+    final public Jid createSubordinate(ActorFactory factory, Actor parent, ReadableBytes readableBytes)
+            throws Exception {
+        Jid jid = (Jid) factory.newActor(getMailbox(), parent);
+        if (readableBytes != null)
+            jid.load(readableBytes);
+        jid.setContainerJid(this);
+        return jid;
     }
 
     /**

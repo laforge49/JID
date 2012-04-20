@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.jidsFactory;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.GetActorFactory;
@@ -31,6 +30,7 @@ import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
@@ -87,15 +87,14 @@ final public class JidsFactory extends JLPCActor {
         return (JidFactory) (new GetActorFactory(actorType)).call(this);
     }
 
-    protected _Jid newJID(NewJID request)
+    protected Jid newJID(NewJID request)
             throws Exception {
         _Jid container = request.getContainer();
         ReadableBytes readableBytes = request.getReadableBytes();
-        Actor actor = (new NewActor(
+        Jid jid = (Jid) (new NewActor(
                 request.getActorType(),
                 request.getMailbox(),
                 request.getParent())).call(this);
-        _Jid jid = (_Jid) actor;
         if (readableBytes != null)
             jid.load(readableBytes);
         if (container != null)
