@@ -2,7 +2,6 @@ package org.agilewiki.jid;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.*;
-import org.agilewiki.jid.jidsFactory.NewJID;
 
 public class JidTest extends TestCase {
     public void test1() {
@@ -29,7 +28,7 @@ public class JidTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            Jid jid = (Jid) (new NewJID(JidFactories.JID_TYPE, factory.getMailbox(), factory)).call(factory).thisActor();
+            Jid jid = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);
@@ -82,7 +81,8 @@ public class JidTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            Jid jid = (Jid) (new NewJID(JidFactories.JID_TYPE, factory.getMailbox(), factory, new byte[0])).call(factory).thisActor();
+            Jid jid = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
+            jid.load(new ReadableBytes(new byte[0], 0));
             int l = GetSerializedLength.req.send(future, jid);
             System.err.println(l);
             assertEquals(l, 0);
@@ -102,7 +102,8 @@ public class JidTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            Jid jid1 = (Jid) (new NewJID(JidFactories.JID_TYPE, factory.getMailbox(), factory, new byte[0])).call(factory).thisActor();
+            Jid jid1 = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
+            jid1.load(new ReadableBytes(new byte[0], 0));
             Jid jid2 = (Jid) (new CopyJID(mailbox)).send(future, jid1);
             int l = GetSerializedLength.req.send(future, jid2);
             System.err.println(l);

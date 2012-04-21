@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
@@ -21,8 +20,7 @@ public class LongTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newLongJid = new NewJID(JidFactories.LONG_JID_TYPE, factory.getMailbox(), factory);
-            LongJid long1 = (LongJid) newLongJid.send(future, factory).thisActor();
+            LongJid long1 = (LongJid) LongJidFactory.fac.newActor(factory.getMailbox(), factory);
             LongJid long2 = (LongJid) (new CopyJID()).send(future, long1);
             (new SetLong(1L)).send(future, long2);
             LongJid float3 = (LongJid) (new CopyJID()).send(future, long2);

@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
@@ -21,8 +20,7 @@ public class DoubleTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newDoubleJid = new NewJID(JidFactories.DOUBLE_JID_TYPE, factory.getMailbox(), factory);
-            DoubleJid double1 = (DoubleJid) newDoubleJid.send(future, factory).thisActor();
+            DoubleJid double1 = (DoubleJid) DoubleJidFactory.fac.newActor(factory.getMailbox(), factory);
             DoubleJid double2 = (DoubleJid) (new CopyJID()).send(future, double1);
             (new SetDouble(1.D)).send(future, double2);
             DoubleJid double3 = (DoubleJid) (new CopyJID()).send(future, double2);

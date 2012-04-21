@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
@@ -21,8 +20,7 @@ public class IntegerTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newIntegerJid = new NewJID(JidFactories.INTEGER_JID_TYPE, factory.getMailbox(), factory);
-            IntegerJid int1 = (IntegerJid) newIntegerJid.send(future, factory).thisActor();
+            IntegerJid int1 = (IntegerJid) IntegerJidFactory.fac.newActor(factory.getMailbox(), factory);
             IntegerJid int2 = (IntegerJid) (new CopyJID()).send(future, int1);
             (new SetInteger(1)).send(future, int2);
             IntegerJid int3 = (IntegerJid) (new CopyJID()).send(future, int2);

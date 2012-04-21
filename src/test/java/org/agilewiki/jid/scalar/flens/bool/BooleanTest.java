@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
@@ -21,8 +20,7 @@ public class BooleanTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newBooleanJid = new NewJID(JidFactories.BOOLEAN_JID_TYPE, factory.getMailbox(), factory);
-            BooleanJid boolean1 = (BooleanJid) newBooleanJid.send(future, factory).thisActor();
+            BooleanJid boolean1 = (BooleanJid) BooleanJidFactory.fac.newActor(factory.getMailbox(), factory);
             BooleanJid boolean2 = (BooleanJid) (new CopyJID()).send(future, boolean1);
             (new SetBoolean(true)).send(future, boolean2);
             BooleanJid boolean3 = (BooleanJid) (new CopyJID()).send(future, boolean2);

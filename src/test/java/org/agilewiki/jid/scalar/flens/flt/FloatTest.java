@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
 
@@ -21,8 +20,7 @@ public class FloatTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newFloatJid = new NewJID(JidFactories.FLOAT_JID_TYPE, factory.getMailbox(), factory);
-            FloatJid float1 = (FloatJid) newFloatJid.send(future, factory).thisActor();
+            FloatJid float1 = (FloatJid) FloatJidFactory.fac.newActor(factory.getMailbox(), factory);
             FloatJid float2 = (FloatJid) (new CopyJID()).send(future, float1);
             (new SetFloat(1.0f)).send(future, float2);
             Actor float3 = (new CopyJID()).send(future, float2);
