@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a FloatJidA.
  */
-public class FloatJidFactory extends JidFactory {
+public class FloatJidFactory extends ActorFactory {
+    final public static FloatJidFactory fac = new FloatJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public FloatJidFactory() {
-        actorType = JidFactories.FLOAT_JID_TYPE;
+    protected FloatJidFactory() {
+        super(JidFactories.FLOAT_JID_TYPE);
     }
 
     /**

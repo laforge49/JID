@@ -41,7 +41,7 @@ public class IntegerTest extends TestCase {
             v = GetInteger.req.send(future, int3);
             assertEquals(1, v);
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvi = new SetActor(JidFactories.INTEGER_JID_TYPE);
             sjvi.send(future, jidJid1);
             IntegerJid rpa = (IntegerJid) (new ResolvePathname("0")).send(future, jidJid1);

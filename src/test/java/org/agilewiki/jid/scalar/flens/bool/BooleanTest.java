@@ -38,7 +38,7 @@ public class BooleanTest extends TestCase {
             assertTrue(GetBoolean.req.send(future, boolean2));
             assertTrue(GetBoolean.req.send(future, boolean3));
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvb = new SetActor(JidFactories.BOOLEAN_JID_TYPE);
             sjvb.send(future, jidJid1);
             BooleanJid rpa = (BooleanJid) (new ResolvePathname("0")).send(future, jidJid1);

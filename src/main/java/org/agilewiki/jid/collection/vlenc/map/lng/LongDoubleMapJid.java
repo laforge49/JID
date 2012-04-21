@@ -46,6 +46,6 @@ final public class LongDoubleMapJid extends LongMapJid {
      */
     protected DoubleJidFactory getValueFactory()
             throws Exception {
-        return new DoubleJidFactory();
+        return DoubleJidFactory.fac;
     }
 }

@@ -47,6 +47,6 @@ final public class IntegerActorMapJid extends IntegerMapJid {
     @Override
     protected ActorJidFactory getValueFactory()
             throws Exception {
-        return new ActorJidFactory();
+        return ActorJidFactory.fac;
     }
 }

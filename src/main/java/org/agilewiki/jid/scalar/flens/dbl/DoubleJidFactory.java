@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a DoubleJidA.
  */
-public class DoubleJidFactory extends JidFactory {
+public class DoubleJidFactory extends ActorFactory {
+    final public static DoubleJidFactory fac = new DoubleJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public DoubleJidFactory() {
-        actorType = JidFactories.DOUBLE_JID_TYPE;
+    protected DoubleJidFactory() {
+        super(JidFactories.DOUBLE_JID_TYPE);
     }
 
     /**

@@ -46,6 +46,6 @@ final public class StringFloatMapJid extends StringMapJid {
      */
     protected FloatJidFactory getValueFactory()
             throws Exception {
-        return new FloatJidFactory();
+        return FloatJidFactory.fac;
     }
 }

@@ -47,6 +47,6 @@ public class FloatListJid extends ListJid {
     @Override
     final protected FloatJidFactory getListFactory()
             throws Exception {
-        return new FloatJidFactory();
+        return FloatJidFactory.fac;
     }
 }

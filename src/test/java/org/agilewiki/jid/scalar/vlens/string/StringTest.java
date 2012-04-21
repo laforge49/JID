@@ -39,7 +39,7 @@ public class StringTest extends TestCase {
             assertEquals("abc", GetString.req.send(future, string2));
             assertEquals("abc", GetString.req.send(future, string3));
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvbs = new SetActor(JidFactories.STRING_JID_TYPE);
             sjvbs.send(future, jidJid1);
             StringJid rpa = (StringJid) (new ResolvePathname("0")).send(future, jidJid1);

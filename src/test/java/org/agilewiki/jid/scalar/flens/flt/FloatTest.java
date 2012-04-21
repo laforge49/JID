@@ -41,7 +41,7 @@ public class FloatTest extends TestCase {
             v = GetFloat.req.send(future, float3);
             assertEquals(1.f, v);
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvf = new SetActor(JidFactories.FLOAT_JID_TYPE);
             sjvf.send(future, jidJid1);
             FloatJid rpa = (FloatJid) (new ResolvePathname("0")).send(future, jidJid1);

@@ -47,6 +47,6 @@ public class ActorListJid extends ListJid {
     @Override
     final protected ActorJidFactory getListFactory()
             throws Exception {
-        return new ActorJidFactory();
+        return ActorJidFactory.fac;
     }
 }

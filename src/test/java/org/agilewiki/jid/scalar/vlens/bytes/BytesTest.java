@@ -39,7 +39,7 @@ public class BytesTest extends TestCase {
             assertEquals(3, GetBytes.req.send(future, bytes2).length);
             assertEquals(3, GetBytes.req.send(future, bytes3).length);
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvbs = new SetActor(JidFactories.BYTES_JID_TYPE);
             sjvbs.send(future, jidJid1);
             Actor rpa = (new ResolvePathname("0")).send(future, jidJid1);

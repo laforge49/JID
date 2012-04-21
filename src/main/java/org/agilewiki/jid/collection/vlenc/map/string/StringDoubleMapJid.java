@@ -46,6 +46,6 @@ final public class StringDoubleMapJid extends StringMapJid {
      */
     protected DoubleJidFactory getValueFactory()
             throws Exception {
-        return new DoubleJidFactory();
+        return DoubleJidFactory.fac;
     }
 }

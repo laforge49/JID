@@ -47,6 +47,6 @@ public class DoubleListJid extends ListJid {
     @Override
     final protected DoubleJidFactory getListFactory()
             throws Exception {
-        return new DoubleJidFactory();
+        return DoubleJidFactory.fac;
     }
 }

@@ -41,7 +41,7 @@ public class LongTest extends TestCase {
             v = GetLong.req.send(future, float3);
             assertEquals(1L, v);
 
-            Actor jidJid1 = (new ActorJidFactory()).newActor(factory.getMailbox(), factory);
+            Actor jidJid1 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             SetActor sjvl = new SetActor(JidFactories.LONG_JID_TYPE);
             sjvl.send(future, jidJid1);
             LongJid rpa = (LongJid) (new ResolvePathname("0")).send(future, jidJid1);

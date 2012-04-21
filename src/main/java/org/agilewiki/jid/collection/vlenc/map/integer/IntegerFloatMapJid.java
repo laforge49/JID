@@ -46,6 +46,6 @@ final public class IntegerFloatMapJid extends IntegerMapJid {
      */
     protected FloatJidFactory getValueFactory()
             throws Exception {
-        return new FloatJidFactory();
+        return FloatJidFactory.fac;
     }
 }

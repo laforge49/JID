@@ -46,6 +46,6 @@ final public class StringActorMapJid extends StringMapJid {
      */
     protected ActorJidFactory getValueFactory()
             throws Exception {
-        return new ActorJidFactory();
+        return ActorJidFactory.fac;
     }
 }
