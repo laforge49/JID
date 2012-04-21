@@ -4,10 +4,10 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.GetSerializedBytes;
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
-import org.agilewiki.jid.jidsFactory.NewJID;
+import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 import org.agilewiki.jid.scalar.flens.integer.SetInteger;
 
@@ -30,11 +30,13 @@ public class MapUAppender extends JLPCActor {
         }
         byte[] bytes = GetSerializedBytes.req.call(this, map);
         Empty.req.call(this, map);
-        NewJID newMap = new NewJID(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, getMailbox(), bytes);
         long t0 = System.currentTimeMillis();
         int j = 0;
         while (j < repeat) {
-            IntegerIntegerMapJid blj = (IntegerIntegerMapJid) newMap.call(this);
+            ReadableBytes rb = new ReadableBytes(bytes, 0);
+            IntegerIntegerMapJid blj = (IntegerIntegerMapJid)
+                    IntegerIntegerMapJidFactory.fac.newActor(getMailbox(), getParent());
+            blj.load(rb);
             IntegerJid sj = (IntegerJid) blj.kGet(j);
             ss.call(this, sj);
             bytes = GetSerializedBytes.req.call(this, blj);

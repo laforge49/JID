@@ -24,18 +24,20 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a BooleanListJid.
  */
-public class BooleanListJidFactory extends JidFactory {
+public class BooleanListJidFactory extends ActorFactory {
+    final public static BooleanListJidFactory fac = new BooleanListJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public BooleanListJidFactory() {
-        actorType = JidFactories.BOOLEAN_LIST_JID_TYPE;
+    protected BooleanListJidFactory() {
+        super(JidFactories.BOOLEAN_LIST_JID_TYPE);
     }
 
     /**

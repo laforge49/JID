@@ -24,18 +24,20 @@
 package org.agilewiki.jid.collection.vlenc.map.integer;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a IntegerIntegerMapJid.
  */
-public class IntegerIntegerMapJidFactory extends JidFactory {
+public class IntegerIntegerMapJidFactory extends ActorFactory {
+    final public static IntegerIntegerMapJidFactory fac = new IntegerIntegerMapJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public IntegerIntegerMapJidFactory() {
-        actorType = JidFactories.INTEGER_INTEGER_MAP_JID_TYPE;
+    protected IntegerIntegerMapJidFactory() {
+        super(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE);
     }
 
     /**

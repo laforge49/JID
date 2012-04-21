@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -22,8 +21,7 @@ public class StringTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE, factory.getMailbox(), factory);
-            StringJid string1 = (StringJid) newStringJid.send(future, factory).thisActor();
+            StringJid string1 = (StringJid) StringJidFactory.fac.newActor(factory.getMailbox(), factory);
             StringJid string2 = (StringJid) (new CopyJID()).send(future, string1);
             (new SetString("abc")).send(future, string2);
             StringJid string3 = (StringJid) (new CopyJID()).send(future, string2);

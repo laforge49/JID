@@ -6,7 +6,6 @@ import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
@@ -52,8 +51,7 @@ public class ActorJidTest extends TestCase {
             Actor sj = GetActor.req.send(future, jidJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
-            NewJID newJidJid = new NewJID(JidFactories.ACTOR_JID_TYPE, factory.getMailbox(), factory);
-            Actor jidJid2 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid2 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             sl = GetSerializedLength.req.send(future, jidJid2);
             assertEquals(4, sl);
             SetActor sjvj = new SetActor(JidFactories.JID_TYPE);
@@ -90,7 +88,7 @@ public class ActorJidTest extends TestCase {
             sl = GetSerializedLength.req.send(future, rpa);
             assertEquals(0, sl);
 
-            Actor jidJid3 = newJidJid.send(future, factory).thisActor();
+            Actor jidJid3 = ActorJidFactory.fac.newActor(factory.getMailbox(), factory);
             sl = GetSerializedLength.req.send(future, jidJid3);
             assertEquals(4, sl);
             MakeActor mjvjj = new MakeActor(JidFactories.ACTOR_JID_TYPE);

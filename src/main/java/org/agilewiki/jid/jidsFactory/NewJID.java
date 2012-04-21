@@ -32,7 +32,7 @@ import org.agilewiki.jid._Jid;
 /**
  * A request to create a JID actor and loads its serialized data.
  */
-final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
+final class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
     /**
      * An actor type name.
      */
@@ -63,7 +63,7 @@ final public class NewJID extends ConcurrentRequest<_Jid, JidsFactory> {
      *
      * @param actorType An actor type name.
      */
-    public NewJID(String actorType) {
+    NewJID(String actorType) {
         this(actorType, null, null, (byte[]) null, null);
     }
 

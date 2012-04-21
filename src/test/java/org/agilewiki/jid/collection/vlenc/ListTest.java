@@ -10,8 +10,8 @@ import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.ISetBytes;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 public class ListTest extends TestCase {
     public void test() {
@@ -32,8 +32,7 @@ public class ListTest extends TestCase {
             Actor l2 = (new CopyJID()).send(future, l1);
             int l2sl = GetSerializedLength.req.send(future, l2);
             assertEquals(12, l2sl);
-            NewJID newStringJid = new NewJID(JidFactories.STRING_JID_TYPE, factory.getMailbox(), factory);
-            Actor s0 = newStringJid.send(future, factory).thisActor();
+            Actor s0 = StringJidFactory.fac.newActor(factory.getMailbox(), factory);
             (new SetString("Hi")).send(future, s0);
             int s0sl = GetSerializedLength.req.send(future, s0);
             assertEquals(8, s0sl);

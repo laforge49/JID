@@ -36,8 +36,6 @@ import org.agilewiki.jid.collection.vlenc.*;
 import org.agilewiki.jid.collection.vlenc.map.integer.*;
 import org.agilewiki.jid.collection.vlenc.map.lng.*;
 import org.agilewiki.jid.collection.vlenc.map.string.*;
-import org.agilewiki.jid.jidsFactory.JidsFactoryFactory;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidFactory;
@@ -286,13 +284,10 @@ final public class JidFactories extends JLPCActor {
      */
     @Override
     protected Requirement[] requirements() throws Exception {
-        Requirement[] requirements = new Requirement[2];
+        Requirement[] requirements = new Requirement[1];
         requirements[0] = new Requirement(
                 new NewActor(""),
                 new JAFactoryFactory(JAFactoryFactory.TYPE));
-        requirements[1] = new Requirement(
-                new NewJID(""),
-                new JidsFactoryFactory(JidsFactoryFactory.TYPE));
         return requirements;
     }
 
@@ -335,9 +330,9 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new IntegerListJidFactory());
         factory.registerActorFactory(new FloatListJidFactory());
         factory.registerActorFactory(new DoubleListJidFactory());
-        factory.registerActorFactory(new BooleanListJidFactory());
+        factory.registerActorFactory(BooleanListJidFactory.fac);
 
-        factory.registerActorFactory(new StringStringMapJidFactory());
+        factory.registerActorFactory(StringStringMapJidFactory.fac);
         factory.registerActorFactory(new StringBytesMapJidFactory());
         factory.registerActorFactory(new StringActorMapJidFactory());
         factory.registerActorFactory(new StringLongMapJidFactory());
@@ -350,7 +345,7 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new IntegerBytesMapJidFactory());
         factory.registerActorFactory(new IntegerActorMapJidFactory());
         factory.registerActorFactory(new IntegerLongMapJidFactory());
-        factory.registerActorFactory(new IntegerIntegerMapJidFactory());
+        factory.registerActorFactory(IntegerIntegerMapJidFactory.fac);
         factory.registerActorFactory(new IntegerFloatMapJidFactory());
         factory.registerActorFactory(new IntegerDoubleMapJidFactory());
         factory.registerActorFactory(new IntegerBooleanMapJidFactory());

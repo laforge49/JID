@@ -24,18 +24,20 @@
 package org.agilewiki.jid.collection.vlenc.map.string;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a StringStringMapJid.
  */
-public class StringStringMapJidFactory extends JidFactory {
+public class StringStringMapJidFactory extends ActorFactory {
+    final public static StringStringMapJidFactory fac = new StringStringMapJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public StringStringMapJidFactory() {
-        actorType = JidFactories.STRING_STRING_MAP_JID_TYPE;
+    protected StringStringMapJidFactory() {
+        super(JidFactories.STRING_STRING_MAP_JID_TYPE);
     }
 
     /**

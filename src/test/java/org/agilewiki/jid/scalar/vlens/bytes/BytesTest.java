@@ -9,7 +9,6 @@ import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedLength;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -22,8 +21,7 @@ public class BytesTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
 
-            NewJID newBytesJid = new NewJID(JidFactories.BYTES_JID_TYPE, factory.getMailbox(), factory);
-            Actor bytes1 = newBytesJid.send(future, factory).thisActor();
+            Actor bytes1 = BytesJidFactory.fac.newActor(factory.getMailbox(), factory);
             Actor bytes2 = (new CopyJID()).send(future, bytes1);
             (new SetBytes(new byte[3])).send(future, bytes2);
             Actor bytes3 = (new CopyJID()).send(future, bytes2);

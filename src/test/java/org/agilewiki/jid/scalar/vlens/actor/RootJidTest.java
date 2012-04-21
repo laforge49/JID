@@ -6,7 +6,6 @@ import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.*;
-import org.agilewiki.jid.jidsFactory.NewJID;
 import org.agilewiki.jid.scalar.vlens.Clear;
 import org.agilewiki.jid.scalar.vlens.string.GetString;
 import org.agilewiki.jid.scalar.vlens.string.SetString;
@@ -52,8 +51,7 @@ public class RootJidTest extends TestCase {
             Actor sj = GetActor.req.send(future, rootJid1);
             assertEquals("abc", GetString.req.send(future, sj));
 
-            NewJID newRootJid = new NewJID(JidFactories.ROOT_JID_TYPE, factory.getMailbox(), factory);
-            Actor rootJid2 = newRootJid.send(future, factory).thisActor();
+            Actor rootJid2 = RootJidFactory.fac.newActor(factory.getMailbox(), factory);
             sl = GetSerializedLength.req.send(future, rootJid2);
             assertEquals(0, sl);
             SetActor sjvj = new SetActor(JidFactories.JID_TYPE);

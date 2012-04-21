@@ -25,7 +25,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 
@@ -50,7 +50,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 
@@ -88,7 +88,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 
@@ -128,7 +128,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 
@@ -168,7 +168,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 
@@ -208,7 +208,7 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(new BooleanListJidFactory());
+        SetActor setList = new SetActor(BooleanListJidFactory.fac);
         setList.send(future, root);
         BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
 

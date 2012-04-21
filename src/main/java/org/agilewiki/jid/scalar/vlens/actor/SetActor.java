@@ -24,8 +24,8 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Assigns a value.
@@ -40,7 +40,7 @@ public class SetActor
     /**
      * The jid factory.
      */
-    private JidFactory jidFactory;
+    private ActorFactory jidFactory;
 
     /**
      * Returns the actor type.
@@ -56,7 +56,7 @@ public class SetActor
      *
      * @return The jid factory.
      */
-    public JidFactory getJidFactory() {
+    public ActorFactory getJidFactory() {
         return jidFactory;
     }
 
@@ -76,7 +76,7 @@ public class SetActor
      *
      * @param jidFactory The jid factory.
      */
-    public SetActor(JidFactory jidFactory) {
+    public SetActor(ActorFactory jidFactory) {
         if (jidFactory == null)
             throw new IllegalArgumentException("value may not be null");
         this.jidFactory = jidFactory;

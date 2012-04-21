@@ -24,7 +24,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 
@@ -48,7 +48,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 
@@ -86,7 +86,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 
@@ -126,7 +126,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 
@@ -166,7 +166,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 
@@ -206,7 +206,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(new IntegerIntegerMapJidFactory());
+        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
         setMap.send(future, root);
         IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
 

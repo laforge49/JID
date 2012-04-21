@@ -163,7 +163,7 @@ public class ActorJid
      * @param jidFactory The actor type.
      * @throws Exception Any uncaught exception raised.
      */
-    public void setValue(JidFactory jidFactory)
+    public void setValue(ActorFactory jidFactory)
             throws Exception {
         value = createSubordinate(jidFactory);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();

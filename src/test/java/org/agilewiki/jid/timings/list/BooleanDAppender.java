@@ -4,11 +4,11 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.GetSerializedBytes;
-import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.collection.vlenc.BooleanListJid;
+import org.agilewiki.jid.collection.vlenc.BooleanListJidFactory;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
-import org.agilewiki.jid.jidsFactory.NewJID;
 
 public class BooleanDAppender extends JLPCActor {
     public int count;
@@ -29,11 +29,12 @@ public class BooleanDAppender extends JLPCActor {
         }
         byte[] bytes = GetSerializedBytes.req.call(this, list);
         Empty.req.call(this, list);
-        NewJID newList = new NewJID(JidFactories.BOOLEAN_LIST_JID_TYPE, getMailbox(), bytes);
         long t0 = System.currentTimeMillis();
         int j = 0;
         while (j < repeat) {
-            BooleanListJid blj = (BooleanListJid) newList.call(this);
+            ReadableBytes rb = new ReadableBytes(bytes, 0);
+            BooleanListJid blj = (BooleanListJid) BooleanListJidFactory.fac.newActor(getMailbox(), getParent());
+            blj.load(rb);
             j += 1;
         }
         long t1 = System.currentTimeMillis();
