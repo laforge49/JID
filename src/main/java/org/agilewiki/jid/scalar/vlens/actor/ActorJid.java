@@ -26,6 +26,7 @@ package org.agilewiki.jid.scalar.vlens.actor;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 
@@ -224,7 +225,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setJidBytes(JidFactory jidFactory, byte[] bytes)
+    protected void setJidBytes(ActorFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
             clear();
@@ -254,7 +255,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(JidFactory jidFactory, byte[] bytes)
+    protected void setBytes(ActorFactory jidFactory, byte[] bytes)
             throws Exception {
         value = createSubordinate(jidFactory, bytes);
         int l = Util.stringLength(jidFactory.getActorType()) + value.getSerializedLength();

@@ -66,7 +66,7 @@ public class TupleTest extends TestCase {
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", GetString.req.send(future, f1));
 
-            Actor string1 = (new StringJidFactory()).newActor(sstf.getMailbox(), sstf);
+            Actor string1 = StringJidFactory.fac.newActor(sstf.getMailbox(), sstf);
             (new SetString("Peaches")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);

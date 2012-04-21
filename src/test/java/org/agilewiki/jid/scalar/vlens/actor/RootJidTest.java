@@ -44,7 +44,7 @@ public class RootJidTest extends TestCase {
             rpa = (new ResolvePathname("0")).send(future, rootJid11);
             assertNull(rpa);
 
-            StringJidFactory stringJidAFactory = new StringJidFactory();
+            StringJidFactory stringJidAFactory = StringJidFactory.fac;
             Actor string1 = stringJidAFactory.newActor(factory.getMailbox(), factory);
             (new SetString("abc")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);

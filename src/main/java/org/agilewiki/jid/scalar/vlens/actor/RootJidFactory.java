@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a RootJid.
  */
-public class RootJidFactory extends JidFactory {
+public class RootJidFactory extends ActorFactory {
+    final public static RootJidFactory fac = new RootJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public RootJidFactory() {
-        actorType = JidFactories.ROOT_JID_TYPE;
+    protected RootJidFactory() {
+        super(JidFactories.ROOT_JID_TYPE);
     }
 
     /**

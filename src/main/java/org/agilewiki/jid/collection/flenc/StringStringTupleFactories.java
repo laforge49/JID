@@ -24,6 +24,7 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -31,7 +32,7 @@ import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
  * Defines (StringJidC, StringJidC) tuples.
  */
 public class StringStringTupleFactories extends BaseTupleFactories {
-    private JidFactory[] tupleFactories;
+    private ActorFactory[] tupleFactories;
 
     /**
      * Create a LiteActor
@@ -42,12 +43,12 @@ public class StringStringTupleFactories extends BaseTupleFactories {
         super(mailbox);
     }
 
-    private JidFactory[] tupleFactories()
+    private ActorFactory[] tupleFactories()
             throws Exception {
         if (tupleFactories != null)
             return tupleFactories;
         tupleFactories = new JidFactory[2];
-        JidFactory jf = new StringJidFactory();
+        ActorFactory jf = StringJidFactory.fac;
         tupleFactories[0] = jf;
         tupleFactories[1] = jf;
         return tupleFactories;
@@ -59,7 +60,7 @@ public class StringStringTupleFactories extends BaseTupleFactories {
      * @return An array of JidFactory.
      */
     @Override
-    public JidFactory[] getTupleFactories()
+    public ActorFactory[] getTupleFactories()
             throws Exception {
         return tupleFactories();
     }

@@ -47,6 +47,6 @@ public class StringListJid extends ListJid {
     @Override
     final protected StringJidFactory getListFactory()
             throws Exception {
-        return new StringJidFactory();
+        return StringJidFactory.fac;
     }
 }

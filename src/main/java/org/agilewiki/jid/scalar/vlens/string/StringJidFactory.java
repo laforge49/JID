@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.vlens.string;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a StringJid.
  */
-public class StringJidFactory extends JidFactory {
+public class StringJidFactory extends ActorFactory {
+    final public static StringJidFactory fac = new StringJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public StringJidFactory() {
-        actorType = JidFactories.STRING_JID_TYPE;
+    protected StringJidFactory() {
+        super(JidFactories.STRING_JID_TYPE);
     }
 
     /**

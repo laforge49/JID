@@ -96,7 +96,7 @@ abstract public class StringMapJid extends MapJid<String> {
      * @return The JidFactory for the key.
      */
     final protected StringJidFactory getKeyFactory() {
-        return new StringJidFactory();
+        return StringJidFactory.fac;
     }
 
     /**
