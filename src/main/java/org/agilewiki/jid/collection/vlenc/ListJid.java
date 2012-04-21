@@ -42,7 +42,7 @@ public class ListJid
     /**
      * Actor type of the elements.
      */
-    private ActorFactory elementsFactory;
+    public ActorFactory elementsFactory;
 
     /**
      * A list of JID actors.
