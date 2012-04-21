@@ -20,7 +20,8 @@ public class ListTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
             JAFuture future = new JAFuture();
-            Actor l0 = StringListJidFactory.fac.newActor(factory.getMailbox(), factory);
+            Actor l0 = (new ListJidFactory(JidFactories.STRING_LIST_JID_TYPE, StringJidFactory.fac)).
+                    newActor(factory.getMailbox(), factory);
             int l0sl = GetSerializedLength.req.send(future, l0);
             assertEquals(8, l0sl);
             Actor l1 = (new CopyJID()).send(future, l0);

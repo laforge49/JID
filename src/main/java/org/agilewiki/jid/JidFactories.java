@@ -32,7 +32,7 @@ import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
-import org.agilewiki.jid.collection.vlenc.*;
+import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.integer.*;
 import org.agilewiki.jid.collection.vlenc.map.lng.*;
 import org.agilewiki.jid.collection.vlenc.map.string.*;
@@ -323,14 +323,14 @@ final public class JidFactories extends JLPCActor {
 
         factory.registerActorFactory(new TupleJidFactory());
 
-        factory.registerActorFactory(new StringListJidFactory());
-        factory.registerActorFactory(new BytesListJidFactory());
-        factory.registerActorFactory(new ActorListJidFactory());
-        factory.registerActorFactory(new LongListJidFactory());
-        factory.registerActorFactory(new IntegerListJidFactory());
-        factory.registerActorFactory(new FloatListJidFactory());
-        factory.registerActorFactory(new DoubleListJidFactory());
-        factory.registerActorFactory(BooleanListJidFactory.fac);
+        factory.registerActorFactory(new ListJidFactory(STRING_LIST_JID_TYPE, StringJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(BYTES_LIST_JID_TYPE, BytesJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(ACTOR_LIST_JID_TYPE, ActorJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(LONG_LIST_JID_TYPE, LongJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(INTEGER_LIST_JID_TYPE, IntegerJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(FLOAT_LIST_JID_TYPE, FloatJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(DOUBLE_LIST_JID_TYPE, DoubleJidFactory.fac));
+        factory.registerActorFactory(new ListJidFactory(BOOLEAN_LIST_JID_TYPE, BooleanJidFactory.fac));
 
         factory.registerActorFactory(StringStringMapJidFactory.fac);
         factory.registerActorFactory(new StringBytesMapJidFactory());

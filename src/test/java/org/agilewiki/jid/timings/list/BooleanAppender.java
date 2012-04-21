@@ -3,14 +3,14 @@ package org.agilewiki.jid.timings.list;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.collection.vlenc.BooleanListJid;
 import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
+import org.agilewiki.jid.collection.vlenc.ListJid;
 
 public class BooleanAppender extends JLPCActor {
     public int count;
     public int repeat;
-    public BooleanListJid list;
+    public ListJid list;
     private IAdd iAdd = new IAdd(-1);
 
     public BooleanAppender(Mailbox mailbox) {

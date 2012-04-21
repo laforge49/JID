@@ -6,9 +6,8 @@ import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.collection.vlenc.BooleanListJid;
-import org.agilewiki.jid.collection.vlenc.BooleanListJidFactory;
 import org.agilewiki.jid.collection.vlenc.IAdd;
+import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.scalar.vlens.actor.GetActor;
 import org.agilewiki.jid.scalar.vlens.actor.RootJid;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -25,9 +24,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         IAdd iAdd = new IAdd(-1);
         int i = 0;
@@ -50,9 +49,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         BooleanAppender ba = new BooleanAppender(mailbox);
         ba.setParent(factory);
@@ -88,9 +87,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         BooleanAppender ba = new BooleanAppender(mailbox);
         ba.setParent(factory);
@@ -128,9 +127,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         BooleanSAppender ba = new BooleanSAppender(mailbox);
         ba.setParent(factory);
@@ -168,9 +167,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         BooleanDAppender ba = new BooleanDAppender(mailbox);
         ba.setParent(factory);
@@ -208,9 +207,9 @@ public class BigBooleanListTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setList = new SetActor(BooleanListJidFactory.fac);
+        SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
-        BooleanListJid list = (BooleanListJid) GetActor.req.send(future, root);
+        ListJid list = (ListJid) GetActor.req.send(future, root);
 
         BooleanUAppender ba = new BooleanUAppender(mailbox);
         ba.setParent(factory);
