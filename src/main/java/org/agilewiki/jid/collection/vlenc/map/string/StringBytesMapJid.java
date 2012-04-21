@@ -46,6 +46,6 @@ final public class StringBytesMapJid extends StringMapJid {
      */
     protected BytesJidFactory getValueFactory()
             throws Exception {
-        return new BytesJidFactory();
+        return BytesJidFactory.fac;
     }
 }

@@ -324,7 +324,7 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(ActorJidFactory.fac);
         factory.registerActorFactory(RootJidFactory.fac);
         factory.registerActorFactory(StringJidFactory.fac);
-        factory.registerActorFactory(new BytesJidFactory());
+        factory.registerActorFactory(BytesJidFactory.fac);
 
         factory.registerActorFactory(new TupleJidFactory());
 

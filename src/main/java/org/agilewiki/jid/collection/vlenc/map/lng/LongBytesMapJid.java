@@ -46,6 +46,6 @@ final public class LongBytesMapJid extends LongMapJid {
      */
     protected BytesJidFactory getValueFactory()
             throws Exception {
-        return new BytesJidFactory();
+        return BytesJidFactory.fac;
     }
 }

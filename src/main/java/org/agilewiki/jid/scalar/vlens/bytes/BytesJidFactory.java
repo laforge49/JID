@@ -1,18 +1,20 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a BytesJidA.
  */
-public class BytesJidFactory extends JidFactory {
+public class BytesJidFactory extends ActorFactory {
+    final public static BytesJidFactory fac = new BytesJidFactory();
+
     /**
      * Create a JLPCActorFactory.
      */
-    public BytesJidFactory() {
-        actorType = JidFactories.BYTES_JID_TYPE;
+    protected BytesJidFactory() {
+        super(JidFactories.BYTES_JID_TYPE);
     }
 
     /**

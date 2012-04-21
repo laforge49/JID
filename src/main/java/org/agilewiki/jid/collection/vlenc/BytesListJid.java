@@ -47,6 +47,6 @@ public class BytesListJid extends ListJid {
     @Override
     final protected BytesJidFactory getListFactory()
             throws Exception {
-        return new BytesJidFactory();
+        return BytesJidFactory.fac;
     }
 }
