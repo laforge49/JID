@@ -33,9 +33,9 @@ import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
-import org.agilewiki.jid.collection.vlenc.map.integer.*;
-import org.agilewiki.jid.collection.vlenc.map.lng.*;
-import org.agilewiki.jid.collection.vlenc.map.string.*;
+import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.LongMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.StringMapJidFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.dbl.DoubleJidFactory;
 import org.agilewiki.jid.scalar.flens.flt.FloatJidFactory;
@@ -339,32 +339,32 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new ListJidFactory(DOUBLE_LIST_JID_TYPE, DoubleJidFactory.fac));
         factory.registerActorFactory(new ListJidFactory(BOOLEAN_LIST_JID_TYPE, BooleanJidFactory.fac));
 
-        factory.registerActorFactory(StringStringMapJidFactory.fac);
-        factory.registerActorFactory(new StringBytesMapJidFactory());
-        factory.registerActorFactory(new StringActorMapJidFactory());
-        factory.registerActorFactory(new StringLongMapJidFactory());
-        factory.registerActorFactory(new StringIntegerMapJidFactory());
-        factory.registerActorFactory(new StringFloatMapJidFactory());
-        factory.registerActorFactory(new StringDoubleMapJidFactory());
-        factory.registerActorFactory(new StringBooleanMapJidFactory());
+        factory.registerActorFactory(new StringMapJidFactory(STRING_STRING_MAP_JID_TYPE, StringJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_BYTES_MAP_JID_TYPE, BytesJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_ACTOR_MAP_JID_TYPE, ActorJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_LONG_MAP_JID_TYPE, LongJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_FLOAT_MAP_JID_TYPE, FloatJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_DOUBLE_MAP_JID_TYPE, DoubleJidFactory.fac));
+        factory.registerActorFactory(new StringMapJidFactory(STRING_BOOLEAN_MAP_JID_TYPE, BooleanJidFactory.fac));
 
-        factory.registerActorFactory(new IntegerStringMapJidFactory());
-        factory.registerActorFactory(new IntegerBytesMapJidFactory());
-        factory.registerActorFactory(new IntegerActorMapJidFactory());
-        factory.registerActorFactory(new IntegerLongMapJidFactory());
-        factory.registerActorFactory(IntegerIntegerMapJidFactory.fac);
-        factory.registerActorFactory(new IntegerFloatMapJidFactory());
-        factory.registerActorFactory(new IntegerDoubleMapJidFactory());
-        factory.registerActorFactory(new IntegerBooleanMapJidFactory());
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_STRING_MAP_JID_TYPE, StringJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_BYTES_MAP_JID_TYPE, BytesJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_ACTOR_MAP_JID_TYPE, ActorJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_LONG_MAP_JID_TYPE, LongJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_FLOAT_MAP_JID_TYPE, FloatJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_DOUBLE_MAP_JID_TYPE, DoubleJidFactory.fac));
+        factory.registerActorFactory(new IntegerMapJidFactory(INTEGER_BOOLEAN_MAP_JID_TYPE, BooleanJidFactory.fac));
 
-        factory.registerActorFactory(new LongStringMapJidFactory());
-        factory.registerActorFactory(new LongBytesMapJidFactory());
-        factory.registerActorFactory(new LongActorMapJidFactory());
-        factory.registerActorFactory(new LongLongMapJidFactory());
-        factory.registerActorFactory(new LongIntegerMapJidFactory());
-        factory.registerActorFactory(new LongFloatMapJidFactory());
-        factory.registerActorFactory(new LongDoubleMapJidFactory());
-        factory.registerActorFactory(new LongBooleanMapJidFactory());
+        factory.registerActorFactory(new LongMapJidFactory(LONG_STRING_MAP_JID_TYPE, StringJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_BYTES_MAP_JID_TYPE, BytesJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_ACTOR_MAP_JID_TYPE, ActorJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_LONG_MAP_JID_TYPE, LongJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_FLOAT_MAP_JID_TYPE, FloatJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_DOUBLE_MAP_JID_TYPE, DoubleJidFactory.fac));
+        factory.registerActorFactory(new LongMapJidFactory(LONG_BOOLEAN_MAP_JID_TYPE, BooleanJidFactory.fac));
     }
 
     /**
