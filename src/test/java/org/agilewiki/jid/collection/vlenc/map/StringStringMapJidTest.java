@@ -1,4 +1,4 @@
-package org.agilewiki.jid.collection.vlenc.map.string;
+package org.agilewiki.jid.collection.vlenc.map;
 
 import junit.framework.TestCase;
 import org.agilewiki.jactor.Actor;
@@ -6,8 +6,8 @@ import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.collection.vlenc.map.StringMapJid;
 import org.agilewiki.jid.scalar.vlens.string.StringJid;
+import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 public class StringStringMapJidTest extends TestCase {
     public void test() {
@@ -16,7 +16,8 @@ public class StringStringMapJidTest extends TestCase {
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
             JAFuture future = new JAFuture();
-            Actor m = StringStringMapJidFactory.fac.newActor(factory.getMailbox(), factory);
+            Actor m = (new StringMapJidFactory(JidFactories.STRING_STRING_MAP_JID_TYPE, StringJidFactory.fac)).
+                    newActor(factory.getMailbox(), factory);
             assertNull(StringMapJid.newKGet("a").send(future, m));
             assertTrue(StringMapJid.newKMake("b").send(future, m));
             assertNull(StringMapJid.newKGet("a").send(future, m));
