@@ -29,7 +29,7 @@ import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 /**
  * Holds a map with Long keys.
  */
-abstract public class LongMapJid extends MapJid<Long> {
+public class LongMapJid extends MapJid<Long> {
     /**
      * Create a KMake request.
      *

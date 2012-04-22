@@ -29,7 +29,7 @@ import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 /**
  * Holds a map with String keys.
  */
-abstract public class StringMapJid extends MapJid<String> {
+public class StringMapJid extends MapJid<String> {
     /**
      * Create a KMake request.
      *

@@ -29,7 +29,7 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 /**
  * Holds a map with Integer keys.
  */
-abstract public class IntegerMapJid extends MapJid<Integer> {
+public class IntegerMapJid extends MapJid<Integer> {
     /**
      * Create a KMake request.
      *
