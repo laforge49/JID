@@ -44,6 +44,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         implements TupleFactories, Map<KEY_TYPE> {
 
     private ActorFactory[] tupleFactories;
+    public ActorFactory valueFactory;
 
     /**
      * Create a MapJid
@@ -101,8 +102,12 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      *
      * @return The actor type of the values in the list.
      */
-    abstract protected ActorFactory getValueFactory()
-            throws Exception;
+    protected ActorFactory getValueFactory()
+            throws Exception {
+        if (valueFactory != null)
+            return valueFactory;
+        throw new IllegalStateException("valueFactory not set");
+    }
 
     /**
      * Locate the tuple with a matching first element.
