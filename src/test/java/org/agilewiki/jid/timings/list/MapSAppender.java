@@ -5,12 +5,12 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.collection.vlenc.Empty;
-import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
+import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 
 public class MapSAppender extends JLPCActor {
     public int count;
     public int repeat;
-    public IntegerIntegerMapJid map;
+    public IntegerMapJid map;
 
     public MapSAppender(Mailbox mailbox) {
         super(mailbox);

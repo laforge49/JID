@@ -4,12 +4,12 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.vlenc.Empty;
-import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
+import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 
 public class MapAppender extends JLPCActor {
     public int count;
     public int repeat;
-    public IntegerIntegerMapJid map;
+    public IntegerMapJid map;
 
     public MapAppender(Mailbox mailbox) {
         super(mailbox);

@@ -6,8 +6,9 @@ import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJid;
-import org.agilewiki.jid.collection.vlenc.map.integer.IntegerIntegerMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
+import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.GetActor;
 import org.agilewiki.jid.scalar.vlens.actor.RootJid;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -24,9 +25,9 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(new IntegerMapJidFactory(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         int i = 0;
         while (i < 10) {
@@ -48,9 +49,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(
+                new IntegerMapJidFactory(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         MapAppender ba = new MapAppender(mailbox);
         ba.setParent(factory);
@@ -86,9 +88,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(new IntegerMapJidFactory(
+                JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         MapAppender ba = new MapAppender(mailbox);
         ba.setParent(factory);
@@ -126,9 +129,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(new IntegerMapJidFactory(
+                JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         MapSAppender ba = new MapSAppender(mailbox);
         ba.setParent(factory);
@@ -166,9 +170,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(new IntegerMapJidFactory(
+                JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         MapDAppender ba = new MapDAppender(mailbox);
         ba.setParent(factory);
@@ -206,9 +211,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         RootJid root = new RootJid(mailbox);
         root.setParent(factory);
 
-        SetActor setMap = new SetActor(IntegerIntegerMapJidFactory.fac);
+        SetActor setMap = new SetActor(new IntegerMapJidFactory(
+                JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
-        IntegerIntegerMapJid map = (IntegerIntegerMapJid) GetActor.req.send(future, root);
+        IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
         MapUAppender ba = new MapUAppender(mailbox);
         ba.setParent(factory);
