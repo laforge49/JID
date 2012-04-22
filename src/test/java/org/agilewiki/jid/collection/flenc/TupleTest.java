@@ -28,7 +28,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
-import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
@@ -46,10 +45,9 @@ public class TupleTest extends TestCase {
             JAFuture future = new JAFuture();
             Actor factory = new JidFactories(mailboxFactory.createMailbox());
             factory.setParent(null);
-            JLPCActor sstf = new StringStringTupleFactories(factory.getMailbox());
-            sstf.setParent(factory);
-            TupleJidFactory tjf = new TupleJidFactory();
-            Actor t0 = tjf.newActor(sstf.getMailbox(), sstf);
+            TupleJidFactory tjf = new TupleJidFactory(
+                    JidFactories.STRING_STRING_TUPLE_JID_TYPE, StringJidFactory.fac, StringJidFactory.fac);
+            Actor t0 = tjf.newActor(factory.getMailbox(), factory);
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
             Actor e0 = iget0.send(future, t0);
@@ -66,7 +64,7 @@ public class TupleTest extends TestCase {
             Actor f1 = (new ResolvePathname("1")).send(future, t1);
             assertEquals("Oranges", GetString.req.send(future, f1));
 
-            Actor string1 = StringJidFactory.fac.newActor(sstf.getMailbox(), sstf);
+            Actor string1 = StringJidFactory.fac.newActor(factory.getMailbox(), factory);
             (new SetString("Peaches")).send(future, string1);
             byte[] sb = GetSerializedBytes.req.send(future, string1);
             (new ISetBytes(1, sb)).send(future, t1);

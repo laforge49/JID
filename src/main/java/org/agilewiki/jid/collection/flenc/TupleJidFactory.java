@@ -49,7 +49,7 @@ public class TupleJidFactory extends ActorFactory {
      * @param subActorType   The actor type.
      * @param tupleFactories The element factories.
      */
-    public TupleJidFactory(String subActorType, ActorFactory[] tupleFactories) {
+    public TupleJidFactory(String subActorType, ActorFactory... tupleFactories) {
         super(subActorType);
         this.tupleFactories = tupleFactories;
     }

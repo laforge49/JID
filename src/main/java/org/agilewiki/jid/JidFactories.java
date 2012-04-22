@@ -109,6 +109,11 @@ final public class JidFactories extends JLPCActor {
     public final static String TUPLE_JID_TYPE = "TUPLE_JID";
 
     /**
+     * The name of the TupleJid actor.
+     */
+    public final static String STRING_STRING_TUPLE_JID_TYPE = "STRING_STRING_TUPLE_JID";
+
+    /**
      * The name of the StringListJid actor.
      */
     public final static String STRING_LIST_JID_TYPE = "STRING_LIST_JID";
@@ -322,6 +327,8 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(BytesJidFactory.fac);
 
         factory.registerActorFactory(TupleJidFactory.fac);
+        factory.registerActorFactory(new TupleJidFactory(
+                STRING_STRING_TUPLE_JID_TYPE, StringJidFactory.fac, StringJidFactory.fac));
 
         factory.registerActorFactory(new ListJidFactory(STRING_LIST_JID_TYPE, StringJidFactory.fac));
         factory.registerActorFactory(new ListJidFactory(BYTES_LIST_JID_TYPE, BytesJidFactory.fac));
