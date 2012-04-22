@@ -21,24 +21,23 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc.map.lng;
+package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.collection.vlenc.map.*;
-import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**
- * Holds a map with Long keys.
+ * Holds a map with Integer keys.
  */
-abstract public class LongMapJid extends MapJid<Long> {
+abstract public class IntegerMapJid extends MapJid<Integer> {
     /**
      * Create a KMake request.
      *
      * @param key The key.
      * @return The KMake request.
      */
-    final public static KMake<Long> newKMake(Long key) {
-        return new KMake<Long>(key);
+    final public static KMake<Integer> newKMake(Integer key) {
+        return new KMake<Integer>(key);
     }
 
     /**
@@ -47,8 +46,8 @@ abstract public class LongMapJid extends MapJid<Long> {
      * @param key The key.
      * @return The KRemove request.
      */
-    final public static KRemove<Long> newKRemove(Long key) {
-        return new KRemove<Long>(key);
+    final public static KRemove<Integer> newKRemove(Integer key) {
+        return new KRemove<Integer>(key);
     }
 
     /**
@@ -57,8 +56,8 @@ abstract public class LongMapJid extends MapJid<Long> {
      * @param key The key.
      * @return The KGet request.
      */
-    final public static KGet<Long> newKGet(Long key) {
-        return new KGet<Long>(key);
+    final public static KGet<Integer> newKGet(Integer key) {
+        return new KGet<Integer>(key);
     }
 
     /**
@@ -67,8 +66,8 @@ abstract public class LongMapJid extends MapJid<Long> {
      * @param key The key.
      * @return The GetHigher request.
      */
-    final public static GetHigher<Long> newGetHigher(Long key) {
-        return new GetHigher<Long>(key);
+    final public static GetHigher<Integer> newGetHigher(Integer key) {
+        return new GetHigher<Integer>(key);
     }
 
     /**
@@ -77,16 +76,16 @@ abstract public class LongMapJid extends MapJid<Long> {
      * @param key The key.
      * @return The GetCeiling request.
      */
-    final public static GetCeiling<Long> newGetCeiling(Long key) {
-        return new GetCeiling<Long>(key);
+    final public static GetCeiling<Integer> newGetCeiling(Integer key) {
+        return new GetCeiling<Integer>(key);
     }
 
     /**
-     * Create a LongMapJid
+     * Create a IntegerMapJid
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public LongMapJid(Mailbox mailbox) {
+    public IntegerMapJid(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -95,17 +94,17 @@ abstract public class LongMapJid extends MapJid<Long> {
      *
      * @return The JidFactory for the key.
      */
-    final protected LongJidFactory getKeyFactory() {
-        return LongJidFactory.fac;
+    final protected IntegerJidFactory getKeyFactory() {
+        return IntegerJidFactory.fac;
     }
 
     /**
      * Converts a string to a key.
      *
-     * @param skey The Long to be converted.
+     * @param skey The integer to be converted.
      * @return The key.
      */
-    final protected Long stringToKey(String skey) {
-        return new Long(skey);
+    final protected Integer stringToKey(String skey) {
+        return new Integer(skey);
     }
 }

@@ -24,6 +24,7 @@
 package org.agilewiki.jid.collection.vlenc.map.lng;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jid.collection.vlenc.map.LongMapJid;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**

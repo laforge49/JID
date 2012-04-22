@@ -21,24 +21,23 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc.map.string;
+package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jid.collection.vlenc.map.*;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
+import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
- * Holds a map with String keys.
+ * Holds a map with Long keys.
  */
-abstract public class StringMapJid extends MapJid<String> {
+abstract public class LongMapJid extends MapJid<Long> {
     /**
      * Create a KMake request.
      *
      * @param key The key.
      * @return The KMake request.
      */
-    final public static KMake<String> newKMake(String key) {
-        return new KMake<String>(key);
+    final public static KMake<Long> newKMake(Long key) {
+        return new KMake<Long>(key);
     }
 
     /**
@@ -47,8 +46,8 @@ abstract public class StringMapJid extends MapJid<String> {
      * @param key The key.
      * @return The KRemove request.
      */
-    final public static KRemove<String> newKRemove(String key) {
-        return new KRemove<String>(key);
+    final public static KRemove<Long> newKRemove(Long key) {
+        return new KRemove<Long>(key);
     }
 
     /**
@@ -57,8 +56,8 @@ abstract public class StringMapJid extends MapJid<String> {
      * @param key The key.
      * @return The KGet request.
      */
-    final public static KGet<String> newKGet(String key) {
-        return new KGet<String>(key);
+    final public static KGet<Long> newKGet(Long key) {
+        return new KGet<Long>(key);
     }
 
     /**
@@ -67,8 +66,8 @@ abstract public class StringMapJid extends MapJid<String> {
      * @param key The key.
      * @return The GetHigher request.
      */
-    final public static GetHigher<String> newGetHigher(String key) {
-        return new GetHigher<String>(key);
+    final public static GetHigher<Long> newGetHigher(Long key) {
+        return new GetHigher<Long>(key);
     }
 
     /**
@@ -77,16 +76,16 @@ abstract public class StringMapJid extends MapJid<String> {
      * @param key The key.
      * @return The GetCeiling request.
      */
-    final public static GetCeiling<String> newGetCeiling(String key) {
-        return new GetCeiling<String>(key);
+    final public static GetCeiling<Long> newGetCeiling(Long key) {
+        return new GetCeiling<Long>(key);
     }
 
     /**
-     * Create a StringMapJid
+     * Create a LongMapJid
      *
      * @param mailbox A mailbox which may be shared with other actors.
      */
-    public StringMapJid(Mailbox mailbox) {
+    public LongMapJid(Mailbox mailbox) {
         super(mailbox);
     }
 
@@ -95,17 +94,17 @@ abstract public class StringMapJid extends MapJid<String> {
      *
      * @return The JidFactory for the key.
      */
-    final protected StringJidFactory getKeyFactory() {
-        return StringJidFactory.fac;
+    final protected LongJidFactory getKeyFactory() {
+        return LongJidFactory.fac;
     }
 
     /**
      * Converts a string to a key.
      *
-     * @param skey The string to be converted.
+     * @param skey The Long to be converted.
      * @return The key.
      */
-    final protected String stringToKey(String skey) {
-        return skey;
+    final protected Long stringToKey(String skey) {
+        return new Long(skey);
     }
 }
