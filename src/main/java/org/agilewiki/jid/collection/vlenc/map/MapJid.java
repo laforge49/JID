@@ -77,7 +77,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     @Override
     final protected ActorFactory getListFactory()
             throws Exception {
-        return new TupleJidFactory();
+        return TupleJidFactory.fac;
     }
 
     /**

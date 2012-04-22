@@ -24,18 +24,34 @@
 package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.JidFactory;
 
 /**
  * Creates a TupleJid.
  */
-public class TupleJidFactory extends JidFactory {
+public class TupleJidFactory extends ActorFactory {
+    final public static TupleJidFactory fac = new TupleJidFactory();
+
+    private String subActorType;
+    private ActorFactory[] tupleFactories;
+
     /**
      * Create a JLPCActorFactory.
      */
-    public TupleJidFactory() {
-        actorType = JidFactories.TUPLE_JID_TYPE;
+    protected TupleJidFactory() {
+        super(JidFactories.TUPLE_JID_TYPE);
+    }
+
+    /**
+     * Create a JLPCActorFactory.
+     *
+     * @param subActorType   The actor type.
+     * @param tupleFactories The element factories.
+     */
+    public TupleJidFactory(String subActorType, ActorFactory[] tupleFactories) {
+        super(subActorType);
+        this.tupleFactories = tupleFactories;
     }
 
     /**
@@ -47,6 +63,8 @@ public class TupleJidFactory extends JidFactory {
     @Override
     final protected TupleJid instantiateActor(Mailbox mailbox)
             throws Exception {
-        return new TupleJid(mailbox);
+        TupleJid tj = new TupleJid(mailbox);
+        tj.tupleFactories = tupleFactories;
+        return tj;
     }
 }

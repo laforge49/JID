@@ -60,9 +60,9 @@ public class TupleJid
      */
     private void initialize()
             throws Exception {
-        if (tupleFactories != null)
+        if (tuple != null)
             return;
-        tupleFactories = GetTupleFactories.req.call(this);
+        tupleFactories = getTupleFactories();
         ReadableBytes readableBytes = null;
         if (isSerialized()) {
             readableBytes = readable();
@@ -77,6 +77,19 @@ public class TupleJid
             tuple[i] = elementJid;
             i += 1;
         }
+    }
+
+    /**
+     * Returns the element factories.
+     *
+     * @return An array of element factories.
+     */
+    protected ActorFactory[] getTupleFactories()
+            throws Exception {
+        if (tupleFactories != null)
+            return tupleFactories;
+        tupleFactories = GetTupleFactories.req.call(this);
+        return tupleFactories;
     }
 
     /**
@@ -116,8 +129,7 @@ public class TupleJid
      */
     public int size()
             throws Exception {
-        initialize();
-        return tupleFactories.length;
+        return getTupleFactories().length;
     }
 
     /**
