@@ -23,7 +23,7 @@ public class HelloWorldTest extends TestCase {
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 
         RootJid root2 = new RootJid(mailbox);
-        root.setParent(factory);
+        root2.setParent(factory);
         root2.load(rootBytes);
         Actor a = (new ResolvePathname("0")).send(future, root2);
         Proc.req.send(future, a);
