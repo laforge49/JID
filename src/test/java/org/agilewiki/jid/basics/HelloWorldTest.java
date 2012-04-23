@@ -3,9 +3,7 @@ package org.agilewiki.jid.basics;
 import junit.framework.TestCase;
 import org.agilewiki.jactor.*;
 import org.agilewiki.jactor.factory.JAFactory;
-import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jid.GetSerializedBytes;
-import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.ResolvePathname;
 import org.agilewiki.jid.scalar.vlens.actor.RootJid;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -17,16 +15,16 @@ public class HelloWorldTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
         JAFactory factory = new JAFactory(mailbox);
-        factory.defineActorType("root", RootJid.class);
         factory.defineActorType("hi", HelloWorld.class);
 
-        RootJid root = (RootJid) (new NewActor("root")).call(factory);
+        RootJid root = new RootJid(mailbox);
+        root.setParent(factory);
         (new SetActor("hi")).send(future, root);
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 
-        ReadableBytes rb = new ReadableBytes(rootBytes, 0);
-        RootJid root2 = (RootJid) (new NewActor("root")).call(factory);
-        root2.load(rb);
+        RootJid root2 = new RootJid(mailbox);
+        root.setParent(factory);
+        root2.load(rootBytes);
         Actor a = (new ResolvePathname("0")).send(future, root2);
         Proc.req.send(future, a);
 

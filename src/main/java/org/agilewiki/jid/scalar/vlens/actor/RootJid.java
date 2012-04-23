@@ -45,6 +45,17 @@ public class RootJid extends ActorJid {
     }
 
     /**
+     * Load the serialized data into the JID.
+     *
+     * @param bytes Holds the serialized data.
+     *              (And nothing else.)
+     */
+    public void load(byte[] bytes) {
+        ReadableBytes rb = new ReadableBytes(bytes, 0);
+        load(rb);
+    }
+
+    /**
      * Throws an UnsupportedOperationException,
      * as a RootJid does NOT have a container.
      *
