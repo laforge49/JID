@@ -55,16 +55,25 @@ public class TupleJidFactory extends ActorFactory {
     }
 
     /**
+     * Initialize a new tuple with its element factories.
+     *
+     * @param tj The new tuple.
+     */
+    public void assignElementFactories(TupleJid tj) {
+        tj.tupleFactories = tupleFactories;
+    }
+
+    /**
      * Create a JLPCActor.
      *
      * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    final protected TupleJid instantiateActor(Mailbox mailbox)
+    protected TupleJid instantiateActor(Mailbox mailbox)
             throws Exception {
         TupleJid tj = new TupleJid(mailbox);
-        tj.tupleFactories = tupleFactories;
+        assignElementFactories(tj);
         return tj;
     }
 }
