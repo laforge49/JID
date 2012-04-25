@@ -19,7 +19,7 @@ public class User extends TupleJid implements Main {
             IntegerJid age = (IntegerJid) iGet(1);
             System.out.println("age: " + age.getValue());
             StringJid location = (StringJid) iGet(2);
-            System.out.println("location: " + name.getValue());
+            System.out.println("location: " + location.getValue());
             rp.processResponse(null);
             return;
         }

@@ -75,7 +75,8 @@ public interface _Jid extends TargetActor {
      *
      * @param readableBytes Holds the serialized data.
      */
-    public void load(ReadableBytes readableBytes);
+    public void load(ReadableBytes readableBytes)
+            throws Exception;
 
     /**
      * Resolves a JID pathname, returning a JID actor or null.

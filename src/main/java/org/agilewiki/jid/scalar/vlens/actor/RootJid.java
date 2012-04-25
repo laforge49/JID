@@ -50,7 +50,8 @@ public class RootJid extends ActorJid {
      * @param bytes Holds the serialized data.
      *              (And nothing else.)
      */
-    public void load(byte[] bytes) {
+    public void load(byte[] bytes)
+            throws Exception {
         ReadableBytes rb = new ReadableBytes(bytes, 0);
         load(rb);
     }

@@ -116,7 +116,8 @@ abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
      * @return The size of the serialized data (exclusive of its length header).
      */
     protected int loadLen(ReadableBytes readableBytes) {
-        return readableBytes.readInt();
+        int l = readableBytes.readInt();
+        return l;
     }
 
     /**
@@ -158,7 +159,8 @@ abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
      * @param readableBytes Holds the serialized data.
      */
     @Override
-    public void load(ReadableBytes readableBytes) {
+    public void load(ReadableBytes readableBytes)
+            throws Exception {
         super.load(readableBytes);
         len = loadLen(readableBytes);
         value = null;

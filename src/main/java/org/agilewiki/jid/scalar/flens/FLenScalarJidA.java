@@ -63,8 +63,10 @@ abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
      * @param readableBytes Holds the serialized data.
      */
     @Override
-    public void load(ReadableBytes readableBytes) {
+    public void load(ReadableBytes readableBytes)
+            throws Exception {
         super.load(readableBytes);
+        readableBytes.skip(getSerializedLength());
         value = null;
     }
 

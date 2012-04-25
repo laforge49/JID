@@ -243,7 +243,8 @@ public class Jid extends JLPCActor implements _Jid {
      * @param readableBytes Holds the serialized data.
      */
     @Override
-    public void load(ReadableBytes readableBytes) {
+    public void load(ReadableBytes readableBytes)
+            throws Exception {
         serializedBytes = readableBytes.getBytes();
         serializedOffset = readableBytes.getOffset();
     }
