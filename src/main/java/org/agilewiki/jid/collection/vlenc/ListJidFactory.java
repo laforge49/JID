@@ -34,6 +34,11 @@ public class ListJidFactory extends ActorFactory {
         this(actorType, elementsFactory, 10);
     }
 
+    public void assignElementsFactory(ListJid listJid) {
+        listJid.elementsFactory = elementsFactory;
+        listJid.initialCapacity = initialCapacity;
+    }
+
     /**
      * Create a JLPCActor.
      *
@@ -43,8 +48,7 @@ public class ListJidFactory extends ActorFactory {
     @Override
     protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
         ListJid listJid = new ListJid(mailbox);
-        listJid.elementsFactory = elementsFactory;
-        listJid.initialCapacity = initialCapacity;
+        assignElementsFactory(listJid);
         return listJid;
     }
 }
