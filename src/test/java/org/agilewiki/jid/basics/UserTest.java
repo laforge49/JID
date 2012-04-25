@@ -23,7 +23,7 @@ public class UserTest extends TestCase {
         factories.setParent(factory);
 
         RootJid root = new RootJid(mailbox);
-        root.setParent(factories);
+        root.setParent(factory);
         (new SetActor("user")).send(future, root);
         Actor name = (new ResolvePathname("0/0")).send(future, root);
         (new SetString("Frank")).send(future, name);
@@ -34,7 +34,7 @@ public class UserTest extends TestCase {
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 
         RootJid root2 = new RootJid(mailbox);
-        root2.setParent(factories);
+        root2.setParent(factory);
         root2.load(rootBytes);
         Actor user = (new ResolvePathname("0")).send(future, root2);
         Proc.req.send(future, user);
