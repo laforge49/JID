@@ -48,6 +48,8 @@ public class IGet extends SynchronousRequest<Actor, CollectionJid> {
      * Create the request.
      *
      * @param i The index of the desired element.
+     *          If negative, the index used is increased by the size of the collection,
+     *          so that -1 returns the last element.
      */
     public IGet(int i) {
         this.i = i;

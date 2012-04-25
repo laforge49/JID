@@ -34,6 +34,11 @@ public class ListJidFactory extends ActorFactory {
         this(actorType, elementsFactory, 10);
     }
 
+    /**
+     * Initialize the new list.
+     *
+     * @param listJid The new list.
+     */
     public void assignElementsFactory(ListJid listJid) {
         listJid.elementsFactory = elementsFactory;
         listJid.initialCapacity = initialCapacity;
