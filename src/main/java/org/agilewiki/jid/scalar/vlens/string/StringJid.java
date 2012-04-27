@@ -140,6 +140,6 @@ public class StringJid
      */
     @Override
     public int compareKeyTo(String o) {
-        return value.compareTo(o);
+        return getValue().compareTo(o);
     }
 }
