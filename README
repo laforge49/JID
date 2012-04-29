@@ -6,7 +6,8 @@ not been changed for reserialization after an update.
 
 JID can deserialize/update/reserialize a map of 10,000 entries in 4 milliseconds,
 running on an i5 at 2.53 GHz, where deserialization/reserialization timings are
-largely independent of the size and complexity of the table entries.
+largely independent of the size and complexity of the table entries. That's 400
+nanoseconds per table entry, where the entries are actor key / actor value pairs.
 
 Application are built by subclassing existing JID actors and then composing more
 complex structures from them. The JID project includes a number of actors which
