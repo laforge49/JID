@@ -1,6 +1,6 @@
 High Performance Serialization
 
-Fast serialization/deserialization is critical for databases. The key is to
+Fast deserialization/reserialization is critical for databases. The key is to
 deserialize only what you need and to keep the serialized data for items that have
 not been changed for reserialization after an update.
 
