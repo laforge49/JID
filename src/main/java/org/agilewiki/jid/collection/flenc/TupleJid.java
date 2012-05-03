@@ -88,8 +88,7 @@ public class TupleJid
             throws Exception {
         if (tupleFactories != null)
             return tupleFactories;
-        tupleFactories = GetTupleFactories.req.call(this);
-        return tupleFactories;
+        throw new IllegalStateException("tupleFactories is null");
     }
 
     /**

@@ -27,10 +27,9 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
-import org.agilewiki.jid.collection.flenc.GetTupleFactories;
-import org.agilewiki.jid.collection.flenc.TupleFactories;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.scalar.Scalar;
@@ -40,7 +39,7 @@ import org.agilewiki.jid.scalar.Scalar;
  */
 abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
-        implements TupleFactories, Map<KEY_TYPE> {
+        implements Map<KEY_TYPE> {
 
     private ActorFactory[] tupleFactories;
     public ActorFactory valueFactory;
@@ -77,23 +76,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     @Override
     final protected ActorFactory getListFactory()
             throws Exception {
-        return TupleJidFactory.fac;
-    }
-
-    /**
-     * Returns the array of actor types used to define the key/value tuples.
-     *
-     * @return The array of actor types.
-     */
-    @Override
-    final public ActorFactory[] getTupleFactories()
-            throws Exception {
-        if (tupleFactories != null)
-            return tupleFactories;
-        tupleFactories = new ActorFactory[2];
-        tupleFactories[0] = getKeyFactory();
-        tupleFactories[1] = getValueFactory();
-        return tupleFactories;
+        return new TupleJidFactory(JidFactories.TUPLE_JID_TYPE, getKeyFactory(), getValueFactory());
     }
 
     /**
@@ -267,9 +250,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof GetTupleFactories) {
-            rp.processResponse(getTupleFactories());
-        } else if (request instanceof KMake) {
+        if (request instanceof KMake) {
             rp.processResponse(kMake(((KMake<KEY_TYPE>) request).getKey()));
         } else if (request instanceof KGet) {
             rp.processResponse(kGet(((KGet<KEY_TYPE>) request).getKey()));
