@@ -31,7 +31,6 @@ import org.agilewiki.jactor.factory.JAFactoryFactory;
 import org.agilewiki.jactor.factory.NewActor;
 import org.agilewiki.jactor.factory.Requirement;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.LongMapJidFactory;
@@ -107,11 +106,6 @@ final public class JidFactories extends JLPCActor {
      * The name of the TupleJid actor.
      */
     public final static String TUPLE_JID_TYPE = "TUPLE_JID";
-
-    /**
-     * The name of the TupleJid actor.
-     */
-    public final static String STRING_STRING_TUPLE_JID_TYPE = "STRING_STRING_TUPLE_JID";
 
     /**
      * The name of the StringListJid actor.
@@ -325,10 +319,6 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(RootJidFactory.fac);
         factory.registerActorFactory(StringJidFactory.fac);
         factory.registerActorFactory(BytesJidFactory.fac);
-
-        factory.registerActorFactory(TupleJidFactory.fac);
-        factory.registerActorFactory(new TupleJidFactory(
-                STRING_STRING_TUPLE_JID_TYPE, StringJidFactory.fac, StringJidFactory.fac));
 
         factory.registerActorFactory(new ListJidFactory(STRING_LIST_JID_TYPE, StringJidFactory.fac));
         factory.registerActorFactory(new ListJidFactory(BYTES_LIST_JID_TYPE, BytesJidFactory.fac));

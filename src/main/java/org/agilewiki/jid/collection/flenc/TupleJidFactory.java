@@ -25,23 +25,13 @@ package org.agilewiki.jid.collection.flenc;
 
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
-import org.agilewiki.jid.JidFactories;
 
 /**
  * Creates a TupleJid.
  */
 public class TupleJidFactory extends ActorFactory {
-    final public static TupleJidFactory fac = new TupleJidFactory();
-
     private String subActorType;
     private ActorFactory[] tupleFactories;
-
-    /**
-     * Create a JLPCActorFactory.
-     */
-    protected TupleJidFactory() {
-        super(JidFactories.TUPLE_JID_TYPE);
-    }
 
     /**
      * Create a JLPCActorFactory.

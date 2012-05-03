@@ -24,10 +24,8 @@
 package org.agilewiki.jid.collection.flenc;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.JAFuture;
-import org.agilewiki.jactor.JAMailboxFactory;
-import org.agilewiki.jactor.MailboxFactory;
+import org.agilewiki.jactor.*;
+import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jid.CopyJID;
 import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
@@ -43,10 +41,14 @@ public class TupleTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory(mailbox);
+            factory.registerActorFactory(new TupleJidFactory(
+                    "sst", StringJidFactory.fac, StringJidFactory.fac));
+            (new JidFactories(mailbox)).setParent(factory);
             factory.setParent(null);
             TupleJidFactory tjf = new TupleJidFactory(
-                    JidFactories.STRING_STRING_TUPLE_JID_TYPE, StringJidFactory.fac, StringJidFactory.fac);
+                    "sst", StringJidFactory.fac, StringJidFactory.fac);
             Actor t0 = tjf.newActor(factory.getMailbox(), factory);
             IGet iget0 = new IGet(0);
             IGet iget1 = new IGet(1);
