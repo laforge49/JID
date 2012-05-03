@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
@@ -63,6 +62,7 @@ public class ListJid
      *
      * @return The size of the collection.
      */
+    @Override
     public int size()
             throws Exception {
         initialize();
@@ -77,7 +77,8 @@ public class ListJid
      *          so that -1 returns the last element.
      * @return The ith JID component.
      */
-    public _Jid iGetJid(int i)
+    @Override
+    public _Jid iGet(int i)
             throws Exception {
         initialize();
         if (i < 0)
@@ -159,7 +160,7 @@ public class ListJid
         appendableBytes.writeInt(size());
         int i = 0;
         while (i < size()) {
-            iGetJid(i).save(appendableBytes);
+            iGet(i).save(appendableBytes);
             i += 1;
         }
     }
@@ -172,7 +173,7 @@ public class ListJid
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname)
+    public _Jid resolvePathname(String pathname)
             throws Exception {
         initialize();
         return super.resolvePathname(pathname);
@@ -190,7 +191,7 @@ public class ListJid
             throws Exception {
         initialize();
         Jid elementJid = createSubordinate(elementsFactory, this, bytes);
-        _Jid oldElementJid = iGetJid(i);
+        _Jid oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -252,7 +253,7 @@ public class ListJid
         int i = 0;
         int s = size();
         while (i < s) {
-            _Jid jid = iGetJid(i);
+            _Jid jid = iGet(i);
             jid.setContainerJid(null);
             c -= jid.getSerializedLength();
             i += 1;
@@ -263,7 +264,7 @@ public class ListJid
 
     public void iRemove(int i)
             throws Exception {
-        _Jid jid = iGetJid(i);
+        _Jid jid = iGet(i);
         jid.setContainerJid(null);
         int c = -jid.getSerializedLength();
         list.remove(i);

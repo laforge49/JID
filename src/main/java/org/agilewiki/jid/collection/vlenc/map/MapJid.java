@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
@@ -121,7 +120,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         int high = size() - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            ComparableKey<KEY_TYPE> midVal = (ComparableKey<KEY_TYPE>) iGetJid(mid);
+            ComparableKey<KEY_TYPE> midVal = (ComparableKey<KEY_TYPE>) iGet(mid);
             int c = midVal.compareKeyTo(key);
             if (c < 0)
                 low = mid + 1;
@@ -184,8 +183,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
             return false;
         i = -i - 1;
         iAdd(i);
-        Collection t = (Collection) iGetJid(i);
-        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.iGetJid(0);
+        Collection t = (Collection) iGet(i);
+        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.iGet(0);
         e0.setValue(key);
         return true;
     }
@@ -197,14 +196,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @return The jid assigned to the key, or null.
      */
     @Override
-    final public _Jid kGetJid(KEY_TYPE key)
+    final public _Jid kGet(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = search(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGetJid(i);
-        return t.iGetJid(1);
+        Collection t = (Collection) iGet(i);
+        return t.iGet(1);
     }
 
     /**
@@ -213,14 +212,15 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return The matching jid, or null.
      */
-    final public _Jid higherJid(KEY_TYPE key)
+    @Override
+    final public _Jid getHigher(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = higher(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGetJid(i);
-        return t.iGetJid(1);
+        Collection t = (Collection) iGet(i);
+        return t.iGet(1);
     }
 
     /**
@@ -229,57 +229,15 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return The matching jid, or null.
      */
-    final public _Jid ceilingJid(KEY_TYPE key)
+    @Override
+    final public _Jid getCeiling(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = ceiling(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGetJid(i);
-        return t.iGetJid(1);
-    }
-
-    /**
-     * Returns the Actor value associated with the key.
-     *
-     * @param key The key.
-     * @return The actor assigned to the key, or null.
-     */
-    @Override
-    final public Actor kGet(KEY_TYPE key)
-            throws Exception {
-        _Jid jid = kGetJid(key);
-        if (jid == null)
-            return null;
-        return jid;
-    }
-
-    /**
-     * Returns the Actor value with a greater key.
-     *
-     * @param key The key.
-     * @return The matching jid, or null.
-     */
-    final public Actor getHigher(KEY_TYPE key)
-            throws Exception {
-        _Jid jid = higherJid(key);
-        if (jid == null)
-            return null;
-        return jid.thisActor();
-    }
-
-    /**
-     * Returns the Actor value with the smallest key >= the given key.
-     *
-     * @param key The key.
-     * @return The matching jid, or null.
-     */
-    final public Actor getCeiling(KEY_TYPE key)
-            throws Exception {
-        _Jid jid = ceilingJid(key);
-        if (jid == null)
-            return null;
-        return jid.thisActor();
+        Collection t = (Collection) iGet(i);
+        return t.iGet(1);
     }
 
     /**
@@ -288,6 +246,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key.
      * @return True when the item was present and removed.
      */
+    @Override
     final public boolean kRemove(KEY_TYPE key)
             throws Exception {
         initialize();
@@ -331,7 +290,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    final public Actor resolvePathname(String pathname)
+    final public _Jid resolvePathname(String pathname)
             throws Exception {
         initialize();
         if (pathname.length() == 0) {
@@ -343,11 +302,11 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         if (s == 0)
             throw new IllegalArgumentException("pathname " + pathname);
         String ns = pathname.substring(0, s);
-        _Jid jid = kGetJid(stringToKey(ns));
+        _Jid jid = kGet(stringToKey(ns));
         if (jid == null)
             return null;
         if (s == pathname.length())
-            return jid.thisActor();
+            return jid;
         return jid.resolvePathname(pathname.substring(s + 1));
     }
 }

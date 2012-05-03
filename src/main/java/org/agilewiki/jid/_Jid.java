@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.TargetActor;
 
 /**
@@ -46,13 +45,6 @@ public interface _Jid extends TargetActor {
      * @param containerJid The container, or null.
      */
     public void setContainerJid(_Jid containerJid);
-
-    /**
-     * Returns this actor.
-     *
-     * @return This actor.
-     */
-    public Actor thisActor();
 
     /**
      * Returns the number of bytes needed to serialize the persistent data.
@@ -85,13 +77,6 @@ public interface _Jid extends TargetActor {
      * @return A JID actor or null.
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
-    public Actor resolvePathname(String pathname)
+    public _Jid resolvePathname(String pathname)
             throws Exception;
-
-    /**
-     * Returns the actor type.
-     *
-     * @return The actor type, or null.
-     */
-    public String getActorType();
 }

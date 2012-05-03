@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jid._Jid;
 
 /**
@@ -41,21 +40,12 @@ public interface Collection
             throws Exception;
 
     /**
-     * Returns the ith JID component.
-     *
-     * @param i The index of the element of interest.
-     * @return The ith JID component.
-     */
-    public _Jid iGetJid(int i)
-            throws Exception;
-
-    /**
      * Returns the selected element.
      *
      * @param ndx Selects the element.
      * @return The actor held by the selected element.
      */
-    public Actor iGet(int ndx)
+    public _Jid iGet(int ndx)
             throws Exception;
 
     /**

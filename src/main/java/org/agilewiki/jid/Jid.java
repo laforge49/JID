@@ -164,11 +164,6 @@ public class Jid extends JLPCActor implements _Jid {
         this.containerJid = containerJid;
     }
 
-    @Override
-    public Jid thisActor() {
-        return this;
-    }
-
     /**
      * Returns the number of bytes needed to serialize the persistent data.
      *
@@ -257,7 +252,7 @@ public class Jid extends JLPCActor implements _Jid {
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname) throws Exception {
+    public _Jid resolvePathname(String pathname) throws Exception {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);
         return this;

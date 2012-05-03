@@ -270,21 +270,7 @@ public class ActorJid
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    public Actor getValue()
-            throws Exception {
-        _Jid v = get();
-        if (v == null)
-            return null;
-        return value.thisActor();
-    }
-
-    /**
-     * Returns the value held by this component.
-     *
-     * @return The value held by this component, or null.
-     * @throws Exception Any uncaught exception raised during deserialization.
-     */
-    private _Jid get()
+    public _Jid getValue()
             throws Exception {
         if (len == -1)
             return null;
@@ -324,7 +310,7 @@ public class ActorJid
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname)
+    public _Jid resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return this;
@@ -333,7 +319,7 @@ public class ActorJid
             return getValue();
         }
         if (pathname.startsWith("0/")) {
-            _Jid v = get();
+            _Jid v = getValue();
             if (v == null)
                 return null;
             return v.resolvePathname(pathname.substring(2));

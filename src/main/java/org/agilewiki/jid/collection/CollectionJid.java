@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
@@ -98,7 +97,7 @@ abstract public class CollectionJid
      * @throws Exception Any uncaught exception which occurred while processing the request.
      */
     @Override
-    public Actor resolvePathname(String pathname)
+    public _Jid resolvePathname(String pathname)
             throws Exception {
         if (pathname.length() == 0) {
             return this;
@@ -117,21 +116,10 @@ abstract public class CollectionJid
         }
         if (n < 0 || n >= size())
             throw new IllegalArgumentException("pathname " + pathname);
-        _Jid jid = iGetJid(n);
+        _Jid jid = iGet(n);
         if (s == pathname.length())
-            return jid.thisActor();
+            return jid;
         return jid.resolvePathname(pathname.substring(s + 1));
-    }
-
-    /**
-     * Returns the selected element.
-     *
-     * @param ndx Selects the element.
-     * @return The actor held by the selected element.
-     */
-    public Actor iGet(int ndx)
-            throws Exception {
-        return iGetJid(ndx).thisActor();
     }
 
     /**

@@ -104,7 +104,7 @@ public class TupleJid
             throws Exception {
         initialize();
         Jid elementJid = createSubordinate(tupleFactories[i], bytes);
-        _Jid oldElementJid = iGetJid(i);
+        _Jid oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);
         tuple[i] = elementJid;
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -127,6 +127,7 @@ public class TupleJid
      *
      * @return The size of the collection.
      */
+    @Override
     public int size()
             throws Exception {
         return getTupleFactories().length;
@@ -138,7 +139,8 @@ public class TupleJid
      * @param i The index of the element of interest.
      * @return The ith JID component.
      */
-    public _Jid iGetJid(int i) throws Exception {
+    @Override
+    public _Jid iGet(int i) throws Exception {
         initialize();
         return tuple[i];
     }
@@ -154,7 +156,7 @@ public class TupleJid
         saveLen(appendableBytes);
         int i = 0;
         while (i < size()) {
-            iGetJid(i).save(appendableBytes);
+            iGet(i).save(appendableBytes);
             i += 1;
         }
     }
@@ -179,9 +181,10 @@ public class TupleJid
      * @param o The comparison value.
      * @return The result of a compareTo(o) using element 0.
      */
+    @Override
     public int compareKeyTo(Object o)
             throws Exception {
-        ComparableKey<Object> e0 = (ComparableKey<Object>) iGetJid(0);
+        ComparableKey<Object> e0 = (ComparableKey<Object>) iGet(0);
         return e0.compareKeyTo(o);
     }
 }
