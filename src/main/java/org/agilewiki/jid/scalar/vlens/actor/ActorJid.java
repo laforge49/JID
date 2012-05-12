@@ -96,7 +96,7 @@ public class ActorJid
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected void clear() throws Exception {
+    public void clear() throws Exception {
         if (len == -1)
             return;
         int l = len;
@@ -118,7 +118,7 @@ public class ActorJid
      * @throws Exception Any uncaught exception raised.
      */
     @Override
-    protected Boolean makeValue(String jidType)
+    public Boolean makeValue(String jidType)
             throws Exception {
         if (len > -1)
             return false;
@@ -133,7 +133,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeValue(JidFactory jidFactory)
+    public Boolean makeValue(JidFactory jidFactory)
             throws Exception {
         if (len > -1)
             return false;
@@ -179,7 +179,7 @@ public class ActorJid
      * @param bytes     The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setJidBytes(String actorType, byte[] bytes)
+    public void setJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
             clear();
@@ -194,7 +194,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeJidBytes(String actorType, byte[] bytes)
+    public Boolean makeJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
             return false;
@@ -209,7 +209,7 @@ public class ActorJid
      * @param bytes   The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(String jidType, byte[] bytes)
+    public void setBytes(String jidType, byte[] bytes)
             throws Exception {
         value = createSubordinate(jidType, bytes);
         int l = Util.stringLength(jidType) + value.getSerializedLength();
@@ -225,7 +225,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setJidBytes(ActorFactory jidFactory, byte[] bytes)
+    public void setJidBytes(ActorFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
             clear();
@@ -240,7 +240,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
-    protected Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
+    public Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
             return false;
@@ -255,7 +255,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
-    protected void setBytes(ActorFactory jidFactory, byte[] bytes)
+    public void setBytes(ActorFactory jidFactory, byte[] bytes)
             throws Exception {
         value = createSubordinate(jidFactory, bytes);
         int l = Util.stringLength(jidFactory.actorType) + value.getSerializedLength();

@@ -97,7 +97,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key which matches to the tuple's first element.
      * @return The index or - (insertion point + 1).
      */
-    final protected int search(KEY_TYPE key)
+    final public int search(KEY_TYPE key)
             throws Exception {
         int low = 0;
         int high = size() - 1;
@@ -121,7 +121,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key which matches to the tuple's first element.
      * @return The index or -1.
      */
-    final protected int higher(KEY_TYPE key)
+    final public int higher(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i > -1)
@@ -140,7 +140,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
      * @param key The key which matches to the tuple's first element.
      * @return The index or -1.
      */
-    final protected int ceiling(KEY_TYPE key)
+    final public int ceiling(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i > -1)
