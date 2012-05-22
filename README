@@ -50,6 +50,7 @@ Dependencies
 
 Dependent Projects
  - File Persistence        https://github.com/laforge49/JFile
+ - Netty Integration       https://github.com/kumarshantanu/JANetty
 
 Available on The Central Repository (Maven): http://search.maven.org/#search|ga|1|org.agilewiki
 So you just need to add this to your POM file:

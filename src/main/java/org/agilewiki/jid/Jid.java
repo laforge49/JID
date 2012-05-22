@@ -247,7 +247,7 @@ public class Jid extends JLPCActor implements _Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    final byte[] getBytes()
+    public final byte[] getBytes()
             throws Exception {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
