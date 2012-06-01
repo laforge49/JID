@@ -12,15 +12,10 @@ public class Blob extends StringMapJid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            initialize();
-            ActorJid aj = (ActorJid) kGet("fun");
-            Actor a = aj.getValue();
-            Proc.req.send(this, a, rp);
-            return;
-        }
-
-        super.processRequest(request, rp);
+    public void processRequest(Proc request, RP rp) throws Exception {
+        initialize();
+        ActorJid aj = (ActorJid) kGet("fun");
+        Actor a = aj.getValue();
+        Proc.req.send(this, a, rp);
     }
 }

@@ -14,20 +14,15 @@ public class Sum extends ListJid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            initialize();
-            int sum = 0;
-            Iterator<_Jid> it = list.iterator();
-            while (it.hasNext()) {
-                IntegerJid ij = (IntegerJid) it.next();
-                sum += ij.getValue();
-            }
-            System.out.println("Total: " + sum);
-            rp.processResponse(null);
-            return;
+    public void processRequest(Proc request, RP rp) throws Exception {
+        initialize();
+        int sum = 0;
+        Iterator<_Jid> it = list.iterator();
+        while (it.hasNext()) {
+            IntegerJid ij = (IntegerJid) it.next();
+            sum += ij.getValue();
         }
-
-        super.processRequest(request, rp);
+        System.out.println("Total: " + sum);
+        rp.processResponse(null);
     }
 }

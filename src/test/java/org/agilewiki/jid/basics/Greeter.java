@@ -12,15 +12,10 @@ public class Greeter extends StringJid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            if (greeting == null)
-                throw new IllegalStateException("greeting is null");
-            System.out.println(greeting + " " + getValue());
-            rp.processResponse(null);
-            return;
-        }
-
-        super.processRequest(request, rp);
+    public void processRequest(Proc request, RP rp) throws Exception {
+        if (greeting == null)
+            throw new IllegalStateException("greeting is null");
+        System.out.println(greeting + " " + getValue());
+        rp.processResponse(null);
     }
 }

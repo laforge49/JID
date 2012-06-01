@@ -10,13 +10,8 @@ public class HelloWorld extends Jid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            System.out.println("Hello world!");
-            rp.processResponse(null);
-            return;
-        }
-
-        super.processRequest(request, rp);
+    public void processRequest(Proc request, RP rp) throws Exception {
+        System.out.println("Hello world!");
+        rp.processResponse(null);
     }
 }

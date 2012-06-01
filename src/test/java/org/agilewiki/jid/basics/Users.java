@@ -15,20 +15,15 @@ public class Users extends StringMapJid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            initialize();
-            Iterator<_Jid> it = list.iterator();
-            while (it.hasNext()) {
-                TupleJid tj = (TupleJid) it.next();
-                StringJid name = (StringJid) tj.iGet(0);
-                StringJid email = (StringJid) tj.iGet(1);
-                System.out.println("name: " + name.getValue() + ", email: " + email.getValue());
-            }
-            rp.processResponse(null);
-            return;
+    public void processRequest(Proc request, RP rp) throws Exception {
+        initialize();
+        Iterator<_Jid> it = list.iterator();
+        while (it.hasNext()) {
+            TupleJid tj = (TupleJid) it.next();
+            StringJid name = (StringJid) tj.iGet(0);
+            StringJid email = (StringJid) tj.iGet(1);
+            System.out.println("name: " + name.getValue() + ", email: " + email.getValue());
         }
-
-        super.processRequest(request, rp);
+        rp.processResponse(null);
     }
 }

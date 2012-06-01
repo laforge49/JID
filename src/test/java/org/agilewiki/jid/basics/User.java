@@ -12,18 +12,13 @@ public class User extends TupleJid implements Main {
     }
 
     @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
-        if (request.getClass() == Proc.class) {
-            StringJid name = (StringJid) iGet(0);
-            System.out.println("name: " + name.getValue());
-            IntegerJid age = (IntegerJid) iGet(1);
-            System.out.println("age: " + age.getValue());
-            StringJid location = (StringJid) iGet(2);
-            System.out.println("location: " + location.getValue());
-            rp.processResponse(null);
-            return;
-        }
-
-        super.processRequest(request, rp);
+    public void processRequest(Proc request, RP rp) throws Exception {
+        StringJid name = (StringJid) iGet(0);
+        System.out.println("name: " + name.getValue());
+        IntegerJid age = (IntegerJid) iGet(1);
+        System.out.println("age: " + age.getValue());
+        StringJid location = (StringJid) iGet(2);
+        System.out.println("location: " + location.getValue());
+        rp.processResponse(null);
     }
 }
