@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
 
@@ -38,15 +37,6 @@ abstract public class CollectionJid
      * The size of the serialized data (exclusive of its length header).
      */
     protected int len;
-
-    /**
-     * Create a CollectionJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    protected CollectionJid(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * Skip over the length at the beginning of the serialized data.

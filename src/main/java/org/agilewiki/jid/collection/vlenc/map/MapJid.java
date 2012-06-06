@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
@@ -43,15 +42,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
 
     private ActorFactory[] tupleFactories;
     public ActorFactory valueFactory;
-
-    /**
-     * Create a MapJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    protected MapJid(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * Returns the JidFactory for the key.

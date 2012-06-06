@@ -1,6 +1,5 @@
 package org.agilewiki.jid.basics;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -10,9 +9,9 @@ public class UsersFactory extends ActorFactory {
     }
 
     @Override
-    protected Users instantiateActor(Mailbox mailbox)
+    protected Users instantiateActor()
             throws Exception {
-        Users users = new Users(mailbox);
+        Users users = new Users();
         users.valueFactory = StringJidFactory.fac;
         return users;
     }

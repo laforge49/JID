@@ -18,8 +18,8 @@ public class StringTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             StringJid string1 = (StringJid) StringJidFactory.fac.newActor(factory.getMailbox(), factory);
             StringJid string2 = (StringJid) (new CopyJID()).send(future, string1);

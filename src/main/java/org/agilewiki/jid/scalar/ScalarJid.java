@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.Jid;
 
 /**
@@ -32,12 +31,4 @@ import org.agilewiki.jid.Jid;
 abstract public class ScalarJid<SET_TYPE, RESPONSE_TYPE>
         extends Jid
         implements Scalar<SET_TYPE, RESPONSE_TYPE> {
-    /**
-     * Create a ScalarJidA.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public ScalarJid(final Mailbox mailbox) {
-        super(mailbox);
-    }
 }

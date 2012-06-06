@@ -1,6 +1,5 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
 
@@ -20,12 +19,11 @@ public class BytesJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    final protected BytesJid instantiateActor(Mailbox mailbox)
+    final protected BytesJid instantiateActor()
             throws Exception {
-        return new BytesJid(mailbox);
+        return new BytesJid();
     }
 }

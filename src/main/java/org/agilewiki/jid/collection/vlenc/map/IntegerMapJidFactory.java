@@ -1,6 +1,5 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 
 /**
@@ -22,13 +21,12 @@ public class IntegerMapJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    protected IntegerMapJid instantiateActor(Mailbox mailbox)
+    protected IntegerMapJid instantiateActor()
             throws Exception {
-        IntegerMapJid imj = new IntegerMapJid(mailbox);
+        IntegerMapJid imj = new IntegerMapJid();
         imj.valueFactory = valueFactory;
         return imj;
     }

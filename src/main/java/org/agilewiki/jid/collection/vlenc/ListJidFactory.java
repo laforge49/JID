@@ -1,6 +1,5 @@
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
@@ -47,12 +46,11 @@ public class ListJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
-        ListJid listJid = new ListJid(mailbox);
+    protected JLPCActor instantiateActor() throws Exception {
+        ListJid listJid = new ListJid();
         assignElementsFactory(listJid);
         return listJid;
     }

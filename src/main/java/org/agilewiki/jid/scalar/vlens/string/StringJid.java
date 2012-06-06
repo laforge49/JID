@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.vlens.string;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ComparableKey;
@@ -36,15 +35,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 public class StringJid
         extends VLenScalarJid<String, String, String>
         implements ComparableKey<String> {
-    /**
-     * Create a StringJid.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public StringJid(Mailbox mailbox) {
-        super(mailbox);
-    }
-
     /**
      * The application method for processing requests sent to the actor.
      *

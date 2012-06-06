@@ -1,6 +1,5 @@
 package org.agilewiki.jid.timings.list;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.GetSerializedBytes;
@@ -11,10 +10,6 @@ public class MapSAppender extends JLPCActor {
     public int count;
     public int repeat;
     public IntegerMapJid map;
-
-    public MapSAppender(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     @Override
     protected void processRequest(Object o, RP rp) throws Exception {

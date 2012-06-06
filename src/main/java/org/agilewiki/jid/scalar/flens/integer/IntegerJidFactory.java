@@ -1,6 +1,5 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
 
@@ -20,12 +19,11 @@ public class IntegerJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    final protected IntegerJid instantiateActor(Mailbox mailbox)
+    final protected IntegerJid instantiateActor()
             throws Exception {
-        return new IntegerJid(mailbox);
+        return new IntegerJid();
     }
 }

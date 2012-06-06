@@ -1,16 +1,11 @@
 package org.agilewiki.jid.basics;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.collection.flenc.TupleJid;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 import org.agilewiki.jid.scalar.vlens.string.StringJid;
 
 public class User extends TupleJid implements Main {
-    public User(final Mailbox mailbox) {
-        super(mailbox);
-    }
-
     @Override
     public void processRequest(Proc request, RP rp) throws Exception {
         StringJid name = (StringJid) iGet(0);

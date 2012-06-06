@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.vlens.bytes;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -34,15 +33,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  */
 public class BytesJid
         extends VLenScalarJid<byte[], byte[], byte[]> {
-    /**
-     * Create a StringJid.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public BytesJid(Mailbox mailbox) {
-        super(mailbox);
-    }
-
     /**
      * The application method for processing requests sent to the actor.
      *

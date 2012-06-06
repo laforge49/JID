@@ -1,6 +1,5 @@
 package org.agilewiki.jid.basics;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
@@ -13,8 +12,8 @@ public class GreeterFactory extends ActorFactory {
     }
 
     @Override
-    protected JLPCActor instantiateActor(Mailbox mailbox) throws Exception {
-        Greeter greeter = new Greeter(mailbox);
+    protected JLPCActor instantiateActor() throws Exception {
+        Greeter greeter = new Greeter();
         greeter.greeting = greeting;
         return greeter;
     }

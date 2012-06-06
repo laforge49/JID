@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.collection.CollectionJid;
@@ -43,15 +42,6 @@ public class TupleJid
      * A tuple of actors.
      */
     protected _Jid[] tuple;
-
-    /**
-     * Create a TupleJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public TupleJid(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * Perform lazy initialization.

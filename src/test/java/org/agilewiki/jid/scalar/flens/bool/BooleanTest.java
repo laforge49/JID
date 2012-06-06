@@ -17,8 +17,8 @@ public class BooleanTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             BooleanJid boolean1 = (BooleanJid) BooleanJidFactory.fac.newActor(factory.getMailbox(), factory);
             BooleanJid boolean2 = (BooleanJid) (new CopyJID()).send(future, boolean1);

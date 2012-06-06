@@ -1,6 +1,5 @@
 package org.agilewiki.jid.scalar.flens.flt;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
 
@@ -20,12 +19,11 @@ public class FloatJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    final protected FloatJid instantiateActor(Mailbox mailbox)
+    final protected FloatJid instantiateActor()
             throws Exception {
-        return new FloatJid(mailbox);
+        return new FloatJid();
     }
 }

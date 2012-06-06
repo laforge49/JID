@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.vlens;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -45,15 +44,6 @@ abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
      * The size of the serialized (exclusive of its length header).
      */
     protected int len = -1;
-
-    /**
-     * Create a VLenScalarJidA.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    protected VLenScalarJid(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * The application method for processing requests sent to the actor.

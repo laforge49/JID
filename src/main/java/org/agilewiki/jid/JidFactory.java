@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 
 /**
@@ -42,11 +41,10 @@ public class JidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    protected Jid instantiateActor(Mailbox mailbox) throws Exception {
-        return new Jid(mailbox);
+    protected Jid instantiateActor() throws Exception {
+        return new Jid();
     }
 }

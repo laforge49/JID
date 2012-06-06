@@ -17,8 +17,8 @@ public class LongTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             LongJid long1 = (LongJid) LongJidFactory.fac.newActor(factory.getMailbox(), factory);
             LongJid long2 = (LongJid) (new CopyJID()).send(future, long1);

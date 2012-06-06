@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
@@ -78,15 +77,6 @@ public class StringMapJid extends MapJid<String> {
      */
     final public static GetCeiling<String> newGetCeiling(String key) {
         return new GetCeiling<String>(key);
-    }
-
-    /**
-     * Create a StringMapJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public StringMapJid(Mailbox mailbox) {
-        super(mailbox);
     }
 
     /**

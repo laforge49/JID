@@ -18,11 +18,11 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
@@ -43,18 +43,18 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
         ListJid list = (ListJid) GetActor.req.send(future, root);
 
-        BooleanAppender ba = new BooleanAppender(mailbox);
-        ba.setParent(factory);
+        BooleanAppender ba = new BooleanAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -81,18 +81,18 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
         ListJid list = (ListJid) GetActor.req.send(future, root);
 
-        BooleanAppender ba = new BooleanAppender(mailbox);
-        ba.setParent(factory);
+        BooleanAppender ba = new BooleanAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -121,18 +121,18 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
         ListJid list = (ListJid) GetActor.req.send(future, root);
 
-        BooleanSAppender ba = new BooleanSAppender(mailbox);
-        ba.setParent(factory);
+        BooleanSAppender ba = new BooleanSAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -161,18 +161,18 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
         ListJid list = (ListJid) GetActor.req.send(future, root);
 
-        BooleanDAppender ba = new BooleanDAppender(mailbox);
-        ba.setParent(factory);
+        BooleanDAppender ba = new BooleanDAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -201,18 +201,18 @@ public class BigBooleanListTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setList = new SetActor(JidFactories.BOOLEAN_LIST_JID_TYPE);
         setList.send(future, root);
         ListJid list = (ListJid) GetActor.req.send(future, root);
 
-        BooleanUAppender ba = new BooleanUAppender(mailbox);
-        ba.setParent(factory);
+        BooleanUAppender ba = new BooleanUAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;

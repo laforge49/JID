@@ -26,10 +26,7 @@ package org.agilewiki.jid;
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
-import org.agilewiki.jactor.factory.JAFactory;
-import org.agilewiki.jactor.factory.JAFactoryFactory;
-import org.agilewiki.jactor.factory.NewActor;
-import org.agilewiki.jactor.factory.Requirement;
+import org.agilewiki.jactor.factory.*;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
@@ -268,15 +265,6 @@ final public class JidFactories extends JLPCActor {
     public final static String LONG_BOOLEAN_MAP_JID_TYPE = "LONG_BOOLEAN_MAP_JID";
 
     /**
-     * Create a LiteActor
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public JidFactories(Mailbox mailbox) {
-        super(mailbox);
-    }
-
-    /**
      * Returns the actor's requirements.
      *
      * @return The actor's requirents.
@@ -294,14 +282,18 @@ final public class JidFactories extends JLPCActor {
      * Process the requirements and assign the parent actor.
      * Once assigned, it can not be changed.
      *
-     * @param parent The parent actor.
+     * @param mailbox      A mailbox which may be shared with other actors.
+     * @param parent       The parent actor.
+     * @param actorFactory The factory.
      */
     @Override
-    public void setParent(Actor parent) throws Exception {
+    public void initialize(Mailbox mailbox, Actor parent, ActorFactory actorFactory)
+            throws Exception {
         if (parent == null) {
-            parent = new JAFactory(getMailbox());
+            parent = new JAFactory();
+            ((JAFactory) parent).initialize(mailbox);
         }
-        super.setParent(parent);
+        super.initialize(mailbox, parent, actorFactory);
 
         Actor f = parent;
         while (!(f instanceof JAFactory)) f = f.getParent();

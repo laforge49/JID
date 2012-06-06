@@ -1,6 +1,5 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.JidFactories;
 
@@ -20,12 +19,11 @@ public class ActorJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    final protected ActorJid instantiateActor(Mailbox mailbox)
+    final protected ActorJid instantiateActor()
             throws Exception {
-        return new ActorJid(mailbox);
+        return new ActorJid();
     }
 }

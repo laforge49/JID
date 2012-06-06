@@ -16,13 +16,14 @@ public class UsersTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
-        JAFactory factory = new JAFactory(mailbox);
+        JAFactory factory = new JAFactory();
+        factory.initialize(mailbox);
         factory.registerActorFactory(new UsersFactory("users"));
-        JidFactories factories = new JidFactories(mailbox);
-        factories.setParent(factory);
+        JidFactories factories = new JidFactories();
+        factories.initialize(mailbox, factory);
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
         (new SetActor("users")).send(future, root);
         Users users = (Users) (new ResolvePathname("0")).send(future, root);
         users.newKMake("John").send(future, users);
@@ -36,8 +37,8 @@ public class UsersTest extends TestCase {
         fEmail.setValue("fredk@gmail.com");
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 
-        RootJid root2 = new RootJid(mailbox);
-        root2.setParent(factory);
+        RootJid root2 = new RootJid();
+        root2.initialize(mailbox, factory);
         root2.load(rootBytes);
         Actor a = (new ResolvePathname("0")).send(future, root2);
         Proc.req.send(future, a);

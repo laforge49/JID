@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**
@@ -78,15 +77,6 @@ public class IntegerMapJid extends MapJid<Integer> {
      */
     final public static GetCeiling<Integer> newGetCeiling(Integer key) {
         return new GetCeiling<Integer>(key);
-    }
-
-    /**
-     * Create a IntegerMapJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public IntegerMapJid(Mailbox mailbox) {
-        super(mailbox);
     }
 
     /**

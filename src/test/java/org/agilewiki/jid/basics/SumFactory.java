@@ -1,6 +1,5 @@
 package org.agilewiki.jid.basics;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
@@ -10,9 +9,9 @@ public class SumFactory extends ListJidFactory {
     }
 
     @Override
-    protected Sum instantiateActor(Mailbox mailbox)
+    protected Sum instantiateActor()
             throws Exception {
-        Sum sum = new Sum(mailbox);
+        Sum sum = new Sum();
         assignElementsFactory(sum);
         return sum;
     }

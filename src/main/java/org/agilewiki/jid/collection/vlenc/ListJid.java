@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
@@ -47,15 +46,6 @@ public class ListJid
      * A list of JID actors.
      */
     protected ArrayList<_Jid> list;
-
-    /**
-     * Create a ListJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public ListJid(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * Returns the size of the collection.

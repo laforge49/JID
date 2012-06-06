@@ -17,8 +17,8 @@ public class DoubleTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             DoubleJid double1 = (DoubleJid) DoubleJidFactory.fac.newActor(factory.getMailbox(), factory);
             DoubleJid double2 = (DoubleJid) (new CopyJID()).send(future, double1);

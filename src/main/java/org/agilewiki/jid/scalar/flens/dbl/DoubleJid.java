@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.flens.dbl;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
@@ -35,15 +34,6 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
  */
 public class DoubleJid
         extends FLenScalarJidA<Double> {
-    /**
-     * Create a DoubleJid.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public DoubleJid(Mailbox mailbox) {
-        super(mailbox);
-    }
-
     /**
      * The application method for processing requests sent to the actor.
      *

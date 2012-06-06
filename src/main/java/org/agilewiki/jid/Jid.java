@@ -51,15 +51,6 @@ public class Jid extends JLPCActor implements _Jid {
      */
     protected int serializedOffset;
 
-    /**
-     * Create a JidA
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public Jid(final Mailbox mailbox) {
-        super(mailbox);
-    }
-
     final public Jid createSubordinate(ActorFactory factory)
             throws Exception {
         return createSubordinate(factory, getParent());

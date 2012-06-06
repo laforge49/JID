@@ -14,16 +14,17 @@ public class HelloWorldTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
-        JAFactory factory = new JAFactory(mailbox);
+        JAFactory factory = new JAFactory();
+        factory.initialize(mailbox);
         factory.defineActorType("hi", HelloWorld.class);
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
         (new SetActor("hi")).send(future, root);
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 
-        RootJid root2 = new RootJid(mailbox);
-        root2.setParent(factory);
+        RootJid root2 = new RootJid();
+        root2.initialize(mailbox, factory);
         root2.load(rootBytes);
         Actor a = (new ResolvePathname("0")).send(future, root2);
         Proc.req.send(future, a);

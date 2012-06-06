@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.flenc;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 
 /**
@@ -56,13 +55,12 @@ public class TupleJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    protected TupleJid instantiateActor(Mailbox mailbox)
+    protected TupleJid instantiateActor()
             throws Exception {
-        TupleJid tj = new TupleJid(mailbox);
+        TupleJid tj = new TupleJid();
         assignElementFactories(tj);
         return tj;
     }

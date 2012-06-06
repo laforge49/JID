@@ -24,7 +24,6 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
@@ -36,15 +35,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 public class ActorJid
         extends VLenScalarJid<_Jid, String, Actor>
         implements ComparableKey<Object> {
-    /**
-     * Create an actor jid.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public ActorJid(Mailbox mailbox) {
-        super(mailbox);
-    }
-
     /**
      * The application method for processing requests sent to the actor.
      *

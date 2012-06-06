@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.flens;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.ScalarJid;
@@ -40,15 +39,6 @@ abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
      * The value.
      */
     protected RESPONSE_TYPE value = newValue();
-
-    /**
-     * Create a FLenScalarJidA.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public FLenScalarJidA(final Mailbox mailbox) {
-        super(mailbox);
-    }
 
     /**
      * Create the value.

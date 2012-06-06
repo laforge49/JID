@@ -1,7 +1,10 @@
 package org.agilewiki.jid;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.*;
+import org.agilewiki.jactor.JAFuture;
+import org.agilewiki.jactor.JAMailboxFactory;
+import org.agilewiki.jactor.Mailbox;
+import org.agilewiki.jactor.MailboxFactory;
 
 public class JidTest extends TestCase {
     public void test1() {
@@ -9,7 +12,8 @@ public class JidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Jid a = new Jid(mailboxFactory.createMailbox());
+            Jid a = new Jid();
+            a.initialize(mailboxFactory.createMailbox());
             int l = GetSerializedLength.req.send(future, a);
             System.err.println(l);
             assertEquals(l, 0);
@@ -25,8 +29,8 @@ public class JidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             Jid jid = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
             int l = GetSerializedLength.req.send(future, jid);
@@ -44,7 +48,8 @@ public class JidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Jid a = new Jid(mailboxFactory.createMailbox());
+            Jid a = new Jid();
+            a.initialize(mailboxFactory.createMailbox());
             int l = GetSerializedLength.req.send(future, a);
             AppendableBytes appendableBytes = new AppendableBytes(l);
             (new Save(appendableBytes)).send(future, a);
@@ -60,7 +65,8 @@ public class JidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Jid a = new Jid(mailboxFactory.createMailbox());
+            Jid a = new Jid();
+            a.initialize(mailboxFactory.createMailbox());
             byte[] bytes = GetSerializedBytes.req.send(future, a);
             int l = bytes.length;
             System.err.println(l);
@@ -78,8 +84,8 @@ public class JidTest extends TestCase {
         try {
             Mailbox mailbox = mailboxFactory.createMailbox();
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             Jid jid = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
             jid.load(new ReadableBytes(new byte[0], 0));
@@ -99,8 +105,8 @@ public class JidTest extends TestCase {
         try {
             Mailbox mailbox = mailboxFactory.createMailbox();
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             Jid jid1 = (Jid) JidFactory.fac.newActor(factory.getMailbox(), factory);
             jid1.load(new ReadableBytes(new byte[0], 0));
@@ -122,7 +128,8 @@ public class JidTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Jid a = new Jid(mailboxFactory.createMailbox());
+            Jid a = new Jid();
+            a.initialize(mailboxFactory.createMailbox());
             Jid b = (Jid) future.send(a, new ResolvePathname(""));
             assertEquals(a, b);
         } catch (Exception e) {

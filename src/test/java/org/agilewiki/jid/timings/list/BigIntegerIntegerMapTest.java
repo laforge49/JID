@@ -19,11 +19,11 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(new IntegerMapJidFactory(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
@@ -43,19 +43,19 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(
                 new IntegerMapJidFactory(JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
         IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
-        MapAppender ba = new MapAppender(mailbox);
-        ba.setParent(factory);
+        MapAppender ba = new MapAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -82,19 +82,19 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(new IntegerMapJidFactory(
                 JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
         IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
-        MapAppender ba = new MapAppender(mailbox);
-        ba.setParent(factory);
+        MapAppender ba = new MapAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -123,19 +123,19 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(new IntegerMapJidFactory(
                 JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
         IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
-        MapSAppender ba = new MapSAppender(mailbox);
-        ba.setParent(factory);
+        MapSAppender ba = new MapSAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -164,19 +164,19 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(new IntegerMapJidFactory(
                 JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
         IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
-        MapDAppender ba = new MapDAppender(mailbox);
-        ba.setParent(factory);
+        MapDAppender ba = new MapDAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;
@@ -205,19 +205,19 @@ public class BigIntegerIntegerMapTest extends TestCase {
         Mailbox mailbox = mailboxFactory.createMailbox();
         JAFuture future = new JAFuture();
 
-        JidFactories factory = new JidFactories(mailboxFactory.createMailbox());
-        factory.setParent(null);
+        JidFactories factory = new JidFactories();
+        factory.initialize(mailboxFactory.createMailbox());
 
-        RootJid root = new RootJid(mailbox);
-        root.setParent(factory);
+        RootJid root = new RootJid();
+        root.initialize(mailbox, factory);
 
         SetActor setMap = new SetActor(new IntegerMapJidFactory(
                 JidFactories.INTEGER_INTEGER_MAP_JID_TYPE, IntegerJidFactory.fac));
         setMap.send(future, root);
         IntegerMapJid map = (IntegerMapJid) GetActor.req.send(future, root);
 
-        MapUAppender ba = new MapUAppender(mailbox);
-        ba.setParent(factory);
+        MapUAppender ba = new MapUAppender();
+        ba.initialize(mailbox, factory);
 
         ba.count = 10;
         ba.repeat = 10;

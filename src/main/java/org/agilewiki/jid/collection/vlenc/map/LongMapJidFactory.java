@@ -1,6 +1,5 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 
 /**
@@ -22,13 +21,12 @@ public class LongMapJidFactory extends ActorFactory {
     /**
      * Create a JLPCActor.
      *
-     * @param mailbox The mailbox of the new actor.
      * @return The new actor.
      */
     @Override
-    protected LongMapJid instantiateActor(Mailbox mailbox)
+    protected LongMapJid instantiateActor()
             throws Exception {
-        LongMapJid imj = new LongMapJid(mailbox);
+        LongMapJid imj = new LongMapJid();
         imj.valueFactory = valueFactory;
         return imj;
     }

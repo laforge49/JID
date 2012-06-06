@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
@@ -78,15 +77,6 @@ public class LongMapJid extends MapJid<Long> {
      */
     final public static GetCeiling<Long> newGetCeiling(Long key) {
         return new GetCeiling<Long>(key);
-    }
-
-    /**
-     * Create a LongMapJid
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public LongMapJid(Mailbox mailbox) {
-        super(mailbox);
     }
 
     /**

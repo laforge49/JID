@@ -17,8 +17,8 @@ public class FloatTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             FloatJid float1 = (FloatJid) FloatJidFactory.fac.newActor(factory.getMailbox(), factory);
             FloatJid float2 = (FloatJid) (new CopyJID()).send(future, float1);

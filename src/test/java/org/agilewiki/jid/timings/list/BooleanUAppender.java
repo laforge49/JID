@@ -1,6 +1,5 @@
 package org.agilewiki.jid.timings.list;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.GetSerializedBytes;
@@ -20,10 +19,6 @@ public class BooleanUAppender extends JLPCActor {
     public int repeat;
     public ListJid list;
     private IAdd iAdd = new IAdd(-1);
-
-    public BooleanUAppender(Mailbox mailbox) {
-        super(mailbox);
-    }
 
     @Override
     protected void processRequest(Object o, RP rp) throws Exception {

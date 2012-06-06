@@ -17,8 +17,8 @@ public class IntegerTest extends TestCase {
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
             JAFuture future = new JAFuture();
-            Actor factory = new JidFactories(mailboxFactory.createMailbox());
-            factory.setParent(null);
+            JidFactories factory = new JidFactories();
+            factory.initialize(mailboxFactory.createMailbox());
 
             IntegerJid int1 = (IntegerJid) IntegerJidFactory.fac.newActor(factory.getMailbox(), factory);
             IntegerJid int2 = (IntegerJid) (new CopyJID()).send(future, int1);

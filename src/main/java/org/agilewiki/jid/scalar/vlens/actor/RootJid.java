@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.vlens.actor;
 
-import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid._Jid;
@@ -35,15 +34,6 @@ import org.agilewiki.jid._Jid;
  * The load method simply grabs all the remaining data.
  */
 public class RootJid extends ActorJid {
-    /**
-     * Create an actor jid.
-     *
-     * @param mailbox A mailbox which may be shared with other actors.
-     */
-    public RootJid(Mailbox mailbox) {
-        super(mailbox);
-    }
-
     /**
      * Load the serialized data into the JID.
      *

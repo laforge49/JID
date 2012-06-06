@@ -42,11 +42,11 @@ public class TupleTest extends TestCase {
         try {
             JAFuture future = new JAFuture();
             Mailbox mailbox = mailboxFactory.createMailbox();
-            JAFactory factory = new JAFactory(mailbox);
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
             factory.registerActorFactory(new TupleJidFactory(
                     "sst", StringJidFactory.fac, StringJidFactory.fac));
-            (new JidFactories(mailbox)).setParent(factory);
-            factory.setParent(null);
+            (new JidFactories()).initialize(mailbox, factory);
             TupleJidFactory tjf = new TupleJidFactory(
                     "sst", StringJidFactory.fac, StringJidFactory.fac);
             Actor t0 = tjf.newActor(factory.getMailbox(), factory);
