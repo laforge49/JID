@@ -304,7 +304,7 @@ public class Jid extends JLPCActor implements _Jid {
      * @param m The mailbox.
      * @return a copy of the actor.
      */
-    final Actor copyJID(Mailbox m)
+    final public Actor copyJID(Mailbox m)
             throws Exception {
         Mailbox mb = m;
         if (mb == null)
