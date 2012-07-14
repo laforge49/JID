@@ -5,7 +5,7 @@
 
     <groupId>org.agilewiki.jid</groupId>
     <artifactId>jid</artifactId>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <packaging>jar</packaging>
     <name>JID</name>
     <description>Incremental Deserialization</description>
@@ -74,7 +74,7 @@
         <dependency>
             <groupId>org.agilewiki.jactor</groupId>
             <artifactId>jactor</artifactId>
-            <version>3.3.1</version>
+            <version>3.3.2</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
