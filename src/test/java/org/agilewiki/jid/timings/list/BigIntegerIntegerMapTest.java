@@ -222,9 +222,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
+        //System.out.println("###########################################################");
         //ba.count = 10000;
         //ba.repeat = 1000;
-        //Updates per second = 2486325
+        //Updates per second = 11,037,527
 
         map.initialCapacity = ba.count;
 
