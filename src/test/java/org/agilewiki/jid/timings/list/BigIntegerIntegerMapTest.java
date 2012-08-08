@@ -60,9 +60,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
+        //System.out.println("###########################################################");
         //ba.count = 5000;
         //ba.repeat = 1000;
-        //Appends per second = 2,079,002
+        //Appends per second = 5,827,505
 
         ba.map = map;
         TimeMapAppender.req.send(future, ba);
@@ -99,9 +100,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
+        //System.out.println("###########################################################");
         //ba.count = 10000;
         //ba.repeat = 1000;
-        //Appends per second = 2897710
+        //Appends per second = 4,533,091
 
         map.initialCapacity = ba.count;
 
@@ -140,9 +142,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
+        //System.out.println("###########################################################");
         //ba.count = 10000;
         //ba.repeat = 1000;
-        //Appends and serializes per second = 1,080,030
+        //Appends and serializes per second = 5,070,993
 
         map.initialCapacity = ba.count;
 
@@ -181,9 +184,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
+        //System.out.println("###########################################################");
         //ba.count = 10000;
         //ba.repeat = 10000;
-        //Deserializes per second = 12,500,000,000
+        //Deserializes per second = 33,333,333,333
 
         map.initialCapacity = ba.count;
 
