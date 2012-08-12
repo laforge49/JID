@@ -265,20 +265,6 @@ final public class JidFactories extends JLPCActor {
     public final static String LONG_BOOLEAN_MAP_JID_TYPE = "LONG_BOOLEAN_MAP_JID";
 
     /**
-     * Returns the actor's requirements.
-     *
-     * @return The actor's requirents.
-     */
-    @Override
-    protected Requirement[] requirements() throws Exception {
-        Requirement[] requirements = new Requirement[1];
-        requirements[0] = new Requirement(
-                new NewActor(""),
-                new JAFactoryFactory(JAFactoryFactory.TYPE));
-        return requirements;
-    }
-
-    /**
      * Process the requirements and assign the parent actor.
      * Once assigned, it can not be changed.
      *

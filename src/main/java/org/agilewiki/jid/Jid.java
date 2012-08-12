@@ -27,7 +27,7 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
-import org.agilewiki.jactor.factory.NewActor;
+import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
 import java.util.Arrays;
@@ -70,7 +70,7 @@ public class Jid extends JLPCActor implements _Jid {
 
     final public Jid createSubordinate(String actorType, Actor parent)
             throws Exception {
-        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
+        Jid jid = (Jid) JAFactory.newActor(this, actorType, getMailbox(), parent);
         jid.setContainerJid(this);
         return jid;
     }
@@ -99,7 +99,7 @@ public class Jid extends JLPCActor implements _Jid {
             throws Exception {
         if (bytes == null)
             return createSubordinate(actorType, parent);
-        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
+        Jid jid = (Jid) JAFactory.newActor(this, actorType, getMailbox(), parent);
         jid.load(new ReadableBytes(bytes, 0));
         jid.setContainerJid(this);
         return jid;
@@ -126,7 +126,7 @@ public class Jid extends JLPCActor implements _Jid {
 
     final public Jid createSubordinate(String actorType, Actor parent, ReadableBytes readableBytes)
             throws Exception {
-        Jid jid = (Jid) (new NewActor(actorType, getMailbox(), parent)).call(this);
+        Jid jid = (Jid) JAFactory.newActor(this, actorType, getMailbox(), parent);
         if (readableBytes != null)
             jid.load(readableBytes);
         jid.setContainerJid(this);
