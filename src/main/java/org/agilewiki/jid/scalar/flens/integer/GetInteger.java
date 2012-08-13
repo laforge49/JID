@@ -25,7 +25,6 @@ package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.

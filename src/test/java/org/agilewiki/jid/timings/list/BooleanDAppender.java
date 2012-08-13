@@ -4,7 +4,6 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.collection.vlenc.IAdd;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
@@ -13,13 +12,12 @@ public class BooleanDAppender extends JLPCActor {
     public int count;
     public int repeat;
     public ListJid list;
-    private IAdd iAdd = new IAdd(-1);
 
     @Override
     protected void processRequest(Object o, RP rp) throws Exception {
         int i = 0;
         while (i < count) {
-            iAdd.call(this, list);
+            list.iAdd(-1);
             i += 1;
         }
         byte[] bytes = list.getSerializedBytes();

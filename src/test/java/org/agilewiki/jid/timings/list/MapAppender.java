@@ -2,7 +2,6 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 
 public class MapAppender extends JLPCActor {

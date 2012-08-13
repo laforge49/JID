@@ -2,15 +2,12 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.collection.vlenc.Empty;
-import org.agilewiki.jid.collection.vlenc.IAdd;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 
 public class BooleanAppender extends JLPCActor {
     public int count;
     public int repeat;
     public ListJid list;
-    private IAdd iAdd = new IAdd(-1);
 
     @Override
     protected void processRequest(Object o, RP rp) throws Exception {
@@ -19,7 +16,7 @@ public class BooleanAppender extends JLPCActor {
         while (j < repeat) {
             int i = 0;
             while (i < count) {
-                iAdd.call(this, list);
+                list.iAdd(-1);
                 i += 1;
             }
             list.empty();

@@ -201,10 +201,6 @@ public class ListJid
             IAddBytes iAddBytes = (IAddBytes) request;
             iAddBytes(iAddBytes.getI(), iAddBytes.getBytes());
             rp.processResponse(null);
-        } else if (request instanceof IAdd) {
-            IAdd iAdd = (IAdd) request;
-            iAdd(iAdd.getI());
-            rp.processResponse(null);
         } else if (request instanceof IRemove) {
             IRemove iRemove = (IRemove) request;
             iRemove(iRemove.getI());

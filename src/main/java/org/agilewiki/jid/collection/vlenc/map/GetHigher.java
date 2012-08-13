@@ -25,7 +25,6 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the Actor value with a greater key.

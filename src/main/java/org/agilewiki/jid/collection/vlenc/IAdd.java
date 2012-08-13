@@ -24,14 +24,16 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Creates a JID and inserts it in the ith position.
  * If i < 0, the new JID is placed at position size + 1 - i.
  * (If i == -1, the element is added to the end of the list.)
  */
-public class IAdd extends SynchronousRequest<Object, ListJid> {
+public class IAdd extends Request<Object, ListJid> {
     /**
      * The insertion index of the new element.
      */
@@ -56,20 +58,6 @@ public class IAdd extends SynchronousRequest<Object, ListJid> {
     }
 
     /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Object _call(ListJid targetActor)
-            throws Exception {
-        targetActor.iAdd(i);
-        return null;
-    }
-
-    /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
      *
      * @param targetActor The actor to be called.
@@ -77,5 +65,11 @@ public class IAdd extends SynchronousRequest<Object, ListJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof ListJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((ListJid) targetActor).iAdd(i);
+        rp.processResponse(null);
     }
 }
