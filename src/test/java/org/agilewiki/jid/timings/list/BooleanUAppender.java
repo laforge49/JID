@@ -27,7 +27,7 @@ public class BooleanUAppender extends JLPCActor {
             iAdd.call(this, list);
             i += 1;
         }
-        byte[] bytes = GetSerializedBytes.req.call(this, list);
+        byte[] bytes = list.getBytes();
         list.empty();
         SetBoolean sbTrue = new SetBoolean(true);
         long t0 = System.currentTimeMillis();
@@ -41,7 +41,7 @@ public class BooleanUAppender extends JLPCActor {
             IGet ig = new IGet(j);
             BooleanJid bj = (BooleanJid) ig.call(this, blj);
             sbTrue.call(this, bj);
-            bytes = GetSerializedBytes.req.call(this, blj);
+            bytes = blj.getBytes();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

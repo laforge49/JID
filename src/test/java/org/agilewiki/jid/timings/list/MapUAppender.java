@@ -25,7 +25,7 @@ public class MapUAppender extends JLPCActor {
             map.newKMake(i).call(this, map);
             i += 1;
         }
-        byte[] bytes = GetSerializedBytes.req.call(this, map);
+        byte[] bytes = map.getBytes();
         map.empty();
         long t0 = System.currentTimeMillis();
         int j = 0;
@@ -37,7 +37,7 @@ public class MapUAppender extends JLPCActor {
             blj.load(rb);
             IntegerJid sj = (IntegerJid) blj.kGet(j);
             ss.call(this, sj);
-            bytes = GetSerializedBytes.req.call(this, blj);
+            bytes = blj.getBytes();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

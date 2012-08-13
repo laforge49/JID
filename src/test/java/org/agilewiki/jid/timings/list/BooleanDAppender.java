@@ -24,7 +24,7 @@ public class BooleanDAppender extends JLPCActor {
             iAdd.call(this, list);
             i += 1;
         }
-        byte[] bytes = GetSerializedBytes.req.call(this, list);
+        byte[] bytes = list.getBytes();
         list.empty();
         long t0 = System.currentTimeMillis();
         int j = 0;

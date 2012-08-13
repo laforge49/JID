@@ -24,26 +24,14 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetInteger extends SynchronousRequest<Integer, IntegerJid> {
+public class GetInteger extends Request<Integer, IntegerJid> {
     final public static GetInteger req = new GetInteger();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Integer _call(IntegerJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

@@ -24,26 +24,14 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a value.
  */
-public class GetLong extends SynchronousRequest<Long, LongJid> {
+public class GetLong extends Request<Long, LongJid> {
     final public static GetLong req = new GetLong();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Long _call(LongJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

@@ -23,7 +23,7 @@ public class BooleanSAppender extends JLPCActor {
                 iAdd.call(this, list);
                 i += 1;
             }
-            GetSerializedBytes.req.call(this, list);
+            list.getBytes();
             list.empty();
             j += 1;
         }

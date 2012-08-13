@@ -21,7 +21,7 @@ public class MapSAppender extends JLPCActor {
                 map.newKMake(i).call(this, map);
                 i += 1;
             }
-            GetSerializedBytes.req.call(this, map);
+            map.getBytes();
             map.empty();
             j += 1;
         }

@@ -24,27 +24,17 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a byte array holding the serialized persistent data.
  */
 final public class GetSerializedBytes extends
-        SynchronousRequest<byte[], Jid> {
+        Request<byte[], Jid> {
     public final static GetSerializedBytes req = new GetSerializedBytes();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected byte[] _call(Jid targetActor)
-            throws Exception {
-        return targetActor.getBytes();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
@@ -54,5 +44,10 @@ final public class GetSerializedBytes extends
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof Jid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((Jid) targetActor).getBytes());
     }
 }

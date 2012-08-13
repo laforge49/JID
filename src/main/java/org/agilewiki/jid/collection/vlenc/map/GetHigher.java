@@ -24,12 +24,13 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns the Actor value with a greater key.
  */
-public class GetHigher<KEY_TYPE extends Comparable> extends SynchronousRequest<Actor, Map<KEY_TYPE>> {
+public class GetHigher<KEY_TYPE extends Comparable> extends Request<Actor, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -51,20 +52,6 @@ public class GetHigher<KEY_TYPE extends Comparable> extends SynchronousRequest<A
      */
     public GetHigher(KEY_TYPE key) {
         this.key = key;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Actor _call(Map<KEY_TYPE> targetActor)
-            throws Exception {
-        targetActor.getHigher(key);
-        return null;
     }
 
     /**
