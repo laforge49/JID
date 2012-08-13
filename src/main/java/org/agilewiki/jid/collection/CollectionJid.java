@@ -124,8 +124,6 @@ abstract public class CollectionJid
             throws Exception {
         if (request instanceof Size) {
             rp.processResponse(size());
-        } else if (request instanceof IGet) {
-            rp.processResponse(iGet(((IGet) request).getI()));
         } else if (request instanceof ISetBytes) {
             ISetBytes iSetBytes = (ISetBytes) request;
             iSetBytes(iSetBytes.getI(), iSetBytes.getBytes());

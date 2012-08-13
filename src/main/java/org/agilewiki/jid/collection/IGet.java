@@ -24,12 +24,14 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns the ith element of a collection.
  */
-public class IGet extends SynchronousRequest<Actor, CollectionJid> {
+public class IGet extends Request<Actor, CollectionJid> {
     /**
      * The index of the desired element.
      */
@@ -56,19 +58,6 @@ public class IGet extends SynchronousRequest<Actor, CollectionJid> {
     }
 
     /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Actor _call(CollectionJid targetActor)
-            throws Exception {
-        return targetActor.iGet(i);
-    }
-
-    /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
      *
      * @param targetActor The actor to be called.
@@ -76,5 +65,10 @@ public class IGet extends SynchronousRequest<Actor, CollectionJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof CollectionJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((CollectionJid) targetActor).iGet(i));
     }
 }
