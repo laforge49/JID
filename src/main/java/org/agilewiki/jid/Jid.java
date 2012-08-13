@@ -238,7 +238,7 @@ public class Jid extends JLPCActor implements _Jid {
      *
      * @return The byte array holding the serialized persistent data.
      */
-    public final byte[] getBytes()
+    public final byte[] getSerializedBytes()
             throws Exception {
         byte[] bs = new byte[getSerializedLength()];
         AppendableBytes appendableBytes = new AppendableBytes(bs, 0);
@@ -287,7 +287,7 @@ public class Jid extends JLPCActor implements _Jid {
         else if (request instanceof ResolvePathname)
             rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
         else if (request instanceof GetSerializedBytes)
-            rp.processResponse(getBytes());
+            rp.processResponse(getSerializedBytes());
         else if (request instanceof Save) {
             save(((Save) request).getAppendableBytes());
             rp.processResponse(null);
@@ -310,7 +310,7 @@ public class Jid extends JLPCActor implements _Jid {
         if (mb == null)
             mb = getMailbox();
         Jid jid = (Jid) getFactory().newActor(mb, getParent());
-        jid.load(new ReadableBytes(getBytes(), 0));
+        jid.load(new ReadableBytes(getSerializedBytes(), 0));
         return jid;
     }
 
@@ -331,7 +331,7 @@ public class Jid extends JLPCActor implements _Jid {
                 send(jidA, GetSerializedBytes.req, new RP<byte[]>() {
                     @Override
                     public void processResponse(byte[] response) throws Exception {
-                        boolean eq = Arrays.equals(response, getBytes());
+                        boolean eq = Arrays.equals(response, getSerializedBytes());
                         rp.processResponse(eq);
                     }
                 });

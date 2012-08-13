@@ -2,10 +2,8 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
-import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
@@ -25,7 +23,7 @@ public class MapUAppender extends JLPCActor {
             map.newKMake(i).call(this, map);
             i += 1;
         }
-        byte[] bytes = map.getBytes();
+        byte[] bytes = map.getSerializedBytes();
         map.empty();
         long t0 = System.currentTimeMillis();
         int j = 0;
@@ -37,7 +35,7 @@ public class MapUAppender extends JLPCActor {
             blj.load(rb);
             IntegerJid sj = (IntegerJid) blj.kGet(j);
             ss.call(this, sj);
-            bytes = blj.getBytes();
+            bytes = blj.getSerializedBytes();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

@@ -2,8 +2,6 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.GetSerializedBytes;
-import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 
 public class MapSAppender extends JLPCActor {
@@ -21,7 +19,7 @@ public class MapSAppender extends JLPCActor {
                 map.newKMake(i).call(this, map);
                 i += 1;
             }
-            map.getBytes();
+            map.getSerializedBytes();
             map.empty();
             j += 1;
         }

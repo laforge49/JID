@@ -27,7 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Returns a byte array holding the serialized persistent data.
@@ -48,6 +47,6 @@ final public class GetSerializedBytes extends
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((Jid) targetActor).getBytes());
+        rp.processResponse(((Jid) targetActor).getSerializedBytes());
     }
 }

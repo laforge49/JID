@@ -2,11 +2,9 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.collection.IGet;
-import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
@@ -27,7 +25,7 @@ public class BooleanUAppender extends JLPCActor {
             iAdd.call(this, list);
             i += 1;
         }
-        byte[] bytes = list.getBytes();
+        byte[] bytes = list.getSerializedBytes();
         list.empty();
         SetBoolean sbTrue = new SetBoolean(true);
         long t0 = System.currentTimeMillis();
@@ -41,7 +39,7 @@ public class BooleanUAppender extends JLPCActor {
             IGet ig = new IGet(j);
             BooleanJid bj = (BooleanJid) ig.call(this, blj);
             sbTrue.call(this, bj);
-            bytes = blj.getBytes();
+            bytes = blj.getSerializedBytes();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

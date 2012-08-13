@@ -2,8 +2,6 @@ package org.agilewiki.jid.timings.list;
 
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.GetSerializedBytes;
-import org.agilewiki.jid.collection.vlenc.Empty;
 import org.agilewiki.jid.collection.vlenc.IAdd;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 
@@ -23,7 +21,7 @@ public class BooleanSAppender extends JLPCActor {
                 iAdd.call(this, list);
                 i += 1;
             }
-            list.getBytes();
+            list.getSerializedBytes();
             list.empty();
             j += 1;
         }
