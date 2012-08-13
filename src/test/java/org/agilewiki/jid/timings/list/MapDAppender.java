@@ -23,7 +23,7 @@ public class MapDAppender extends JLPCActor {
             i += 1;
         }
         byte[] bytes = GetSerializedBytes.req.call(this, map);
-        Empty.req.call(this, map);
+        map.empty();
         long t0 = System.currentTimeMillis();
         int j = 0;
         while (j < repeat) {

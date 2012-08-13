@@ -22,7 +22,7 @@ public class BooleanAppender extends JLPCActor {
                 iAdd.call(this, list);
                 i += 1;
             }
-            Empty.req.call(this, list);
+            list.empty();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

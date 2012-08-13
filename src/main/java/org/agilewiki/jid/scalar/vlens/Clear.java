@@ -24,28 +24,14 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Clears the container.
  */
 final public class Clear
-        extends SynchronousRequest<Object, VLenScalarJid<Object, Object, Object>> {
+        extends Request<Object, VLenScalarJid<Object, Object, Object>> {
     public final static Clear req = new Clear();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Object _call(VLenScalarJid<Object, Object, Object> targetActor)
-            throws Exception {
-        targetActor.clear();
-        return null;
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

@@ -20,7 +20,7 @@ public class MapAppender extends JLPCActor {
                 map.newKMake(i).call(this, map);
                 i += 1;
             }
-            Empty.req.call(this, map);
+            map.empty();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

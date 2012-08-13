@@ -24,26 +24,13 @@
 package org.agilewiki.jid.scalar.flens.flt;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns a value.
  */
-public class GetFloat extends SynchronousRequest<Float, FloatJid> {
+public class GetFloat extends Request<Float, FloatJid> {
     final public static GetFloat req = new GetFloat();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Float _call(FloatJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

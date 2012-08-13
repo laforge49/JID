@@ -22,7 +22,7 @@ public class MapSAppender extends JLPCActor {
                 i += 1;
             }
             GetSerializedBytes.req.call(this, map);
-            Empty.req.call(this, map);
+            map.empty();
             j += 1;
         }
         long t1 = System.currentTimeMillis();

@@ -24,27 +24,14 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns a value.
  */
 public class GetBoolean
-        extends SynchronousRequest<Boolean, BooleanJid> {
+        extends Request<Boolean, BooleanJid> {
     final public static GetBoolean req = new GetBoolean();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Boolean _call(BooleanJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

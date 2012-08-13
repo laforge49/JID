@@ -197,10 +197,7 @@ public class ListJid
     @Override
     protected void processRequest(Object request, RP rp)
             throws Exception {
-        if (request instanceof Empty) {
-            empty();
-            rp.processResponse(null);
-        } else if (request instanceof IAddBytes) {
+        if (request instanceof IAddBytes) {
             IAddBytes iAddBytes = (IAddBytes) request;
             iAddBytes(iAddBytes.getI(), iAddBytes.getBytes());
             rp.processResponse(null);

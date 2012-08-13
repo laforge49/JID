@@ -24,27 +24,15 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Empty a collection.
  */
-public class Empty extends SynchronousRequest<Object, ListJid> {
+public class Empty extends Request<Object, ListJid> {
     public final static Empty req = new Empty();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Object _call(ListJid targetActor)
-            throws Exception {
-        targetActor.empty();
-        return null;
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
@@ -54,5 +42,11 @@ public class Empty extends SynchronousRequest<Object, ListJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof ListJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((ListJid) targetActor).empty();
+        rp.processResponse(null);
     }
 }

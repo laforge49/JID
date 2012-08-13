@@ -25,13 +25,13 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns a copy of the JID.
  */
 final public class CopyJID
-        extends SynchronousRequest<Actor, Jid> {
+        extends Request<Actor, Jid> {
     /**
      * A mailbox which may be shared with other actors.
      */
@@ -59,19 +59,6 @@ final public class CopyJID
      */
     public Mailbox getMailbox() {
         return mailbox;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Actor _call(Jid targetActor)
-            throws Exception {
-        return targetActor.copyJID(mailbox);
     }
 
     /**

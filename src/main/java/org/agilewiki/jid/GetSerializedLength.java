@@ -24,7 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * <p>
@@ -32,21 +32,8 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * </p>
  */
 final public class GetSerializedLength
-        extends SynchronousRequest<Integer, Jid> {
+        extends Request<Integer, Jid> {
     public final static GetSerializedLength req = new GetSerializedLength();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Integer _call(Jid targetActor)
-            throws Exception {
-        return targetActor.getSerializedLength();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

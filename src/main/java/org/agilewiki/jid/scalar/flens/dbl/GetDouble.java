@@ -24,26 +24,13 @@
 package org.agilewiki.jid.scalar.flens.dbl;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns a value.
  */
-public class GetDouble extends SynchronousRequest<Double, DoubleJid> {
+public class GetDouble extends Request<Double, DoubleJid> {
     final public static GetDouble req = new GetDouble();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Double _call(DoubleJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

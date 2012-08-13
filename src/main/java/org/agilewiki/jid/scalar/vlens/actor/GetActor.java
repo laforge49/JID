@@ -24,26 +24,13 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns a value.
  */
-public class GetActor extends SynchronousRequest<Actor, ActorJid> {
+public class GetActor extends Request<Actor, ActorJid> {
     final public static GetActor req = new GetActor();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Actor _call(ActorJid targetActor)
-            throws Exception {
-        return targetActor.getValue();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

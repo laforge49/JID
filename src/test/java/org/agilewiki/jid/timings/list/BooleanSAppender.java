@@ -24,7 +24,7 @@ public class BooleanSAppender extends JLPCActor {
                 i += 1;
             }
             GetSerializedBytes.req.call(this, list);
-            Empty.req.call(this, list);
+            list.empty();
             j += 1;
         }
         long t1 = System.currentTimeMillis();
