@@ -24,12 +24,14 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Create a keyed entry.
  */
-public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
+public class KMake<KEY_TYPE extends Comparable> extends Request<Boolean, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -54,19 +56,6 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
     }
 
     /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Boolean _call(Map<KEY_TYPE> targetActor)
-            throws Exception {
-        return targetActor.kMake(key);
-    }
-
-    /**
      * Returns true when targetActor is an instanceof TARGET_TYPE
      *
      * @param targetActor The actor to be called.
@@ -74,5 +63,10 @@ public class KMake<KEY_TYPE extends Comparable> extends SynchronousRequest<Boole
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof Map;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((Map<KEY_TYPE>) targetActor).kMake(key));
     }
 }

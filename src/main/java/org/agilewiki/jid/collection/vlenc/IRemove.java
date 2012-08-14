@@ -24,13 +24,13 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Removes a JID from the ith position.
  * If i < 0, the new JID is removed from position size + 1 - i.
  */
-public class IRemove extends SynchronousRequest<Object, ListJid> {
+public class IRemove extends Request<Object, ListJid> {
     /**
      * The index of the desired element.
      */
@@ -52,20 +52,6 @@ public class IRemove extends SynchronousRequest<Object, ListJid> {
      */
     public IRemove(int i) {
         this.i = i;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Object _call(ListJid targetActor)
-            throws Exception {
-        targetActor.iRemove(i);
-        return null;
     }
 
     /**

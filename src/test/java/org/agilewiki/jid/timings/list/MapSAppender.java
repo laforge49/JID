@@ -16,7 +16,7 @@ public class MapSAppender extends JLPCActor {
         while (j < repeat) {
             int i = 0;
             while (i < count) {
-                map.newKMake(i).call(this, map);
+                map.kMake(i);
                 i += 1;
             }
             map.getSerializedBytes();

@@ -20,7 +20,7 @@ public class MapUAppender extends JLPCActor {
     protected void processRequest(Object o, RP rp) throws Exception {
         int i = 0;
         while (i < count) {
-            map.newKMake(i).call(this, map);
+            map.kMake(i);
             i += 1;
         }
         byte[] bytes = map.getSerializedBytes();
