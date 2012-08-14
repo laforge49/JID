@@ -47,29 +47,13 @@ public class ActorJid
             throws Exception {
         if (request instanceof GetActor)
             rp.processResponse(getValue());
-        else if (request instanceof SetActor) {
-            SetActor setActor = (SetActor) request;
-            String actorType = setActor.getValue();
-            if (actorType != null)
-                setValue(actorType);
-            else
-                setValue(setActor.getJidFactory());
-            rp.processResponse(null);
-        } else if (request instanceof MakeActor) {
+        else if (request instanceof MakeActor) {
             MakeActor makeActor = (MakeActor) request;
             String actorType = makeActor.getValue();
             if (actorType != null)
                 rp.processResponse(makeValue(actorType));
             else
                 rp.processResponse(makeValue(makeActor.getJidFactory()));
-        } else if (request instanceof SetActorBytes) {
-            SetActorBytes setActorBytes = (SetActorBytes) request;
-            String actorType = setActorBytes.getActorType();
-            if (actorType != null)
-                setJidBytes(actorType, setActorBytes.getBytes());
-            else
-                setJidBytes(setActorBytes.getJidFactory(), setActorBytes.getBytes());
-            rp.processResponse(null);
         } else if (request instanceof MakeActorBytes) {
             MakeActorBytes makeActorBytes = (MakeActorBytes) request;
             String actorType = makeActorBytes.getActorType();

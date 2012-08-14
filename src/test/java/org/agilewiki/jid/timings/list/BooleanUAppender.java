@@ -8,7 +8,6 @@ import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJid;
 import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
-import org.agilewiki.jid.scalar.flens.bool.SetBoolean;
 
 public class BooleanUAppender extends JLPCActor {
     public int count;
@@ -24,7 +23,6 @@ public class BooleanUAppender extends JLPCActor {
         }
         byte[] bytes = list.getSerializedBytes();
         list.empty();
-        SetBoolean sbTrue = new SetBoolean(true);
         long t0 = System.currentTimeMillis();
         int j = 0;
 
@@ -34,7 +32,7 @@ public class BooleanUAppender extends JLPCActor {
                     newActor(getMailbox(), getParent());
             blj.load(rb);
             BooleanJid bj = (BooleanJid) blj.iGet(j);
-            sbTrue.call(this, bj);
+            bj.setValue(true);
             bytes = blj.getSerializedBytes();
             j += 1;
         }

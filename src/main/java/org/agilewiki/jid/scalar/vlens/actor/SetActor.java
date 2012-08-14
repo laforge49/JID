@@ -24,14 +24,16 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Assigns a value.
  */
 public class SetActor
-        extends SynchronousRequest<Object, ActorJid> {
+        extends Request<Object, ActorJid> {
     /**
      * The actor type.
      */
@@ -82,21 +84,13 @@ public class SetActor
         this.jidFactory = jidFactory;
     }
 
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
     @Override
-    protected Object _call(ActorJid targetActor)
-            throws Exception {
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
         if (actorType != null)
-            targetActor.setValue(actorType);
+            ((ActorJid) targetActor).setValue(actorType);
         else
-            targetActor.setValue(jidFactory);
-        return null;
+            ((ActorJid) targetActor).setValue(jidFactory);
+        rp.processResponse(null);
     }
 
     /**
