@@ -24,13 +24,16 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jactor.lpc.SynchronousRequest;
 
 /**
  * Assigns a value.
  */
 public class SetBytes
-        extends SynchronousRequest<Object, BytesJid> {
+        extends Request<Object, BytesJid> {
     /**
      * The value.
      */
@@ -56,18 +59,10 @@ public class SetBytes
         this.value = value;
     }
 
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
     @Override
-    protected Boolean _call(BytesJid targetActor)
-            throws Exception {
-        targetActor.setValue(value);
-        return null;
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((BytesJid) targetActor).setValue(value);
+        rp.processResponse(null);
     }
 
     /**

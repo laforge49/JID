@@ -45,10 +45,7 @@ public class BytesJid
             throws Exception {
         if (request instanceof GetBytes)
             rp.processResponse(getValue());
-        else if (request instanceof SetBytes) {
-            setValue(((SetBytes) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**

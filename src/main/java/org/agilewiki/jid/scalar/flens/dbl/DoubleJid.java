@@ -46,10 +46,7 @@ public class DoubleJid
             throws Exception {
         if (request instanceof GetDouble)
             rp.processResponse(getValue());
-        else if (request instanceof SetDouble) {
-            setValue(((SetDouble) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**
