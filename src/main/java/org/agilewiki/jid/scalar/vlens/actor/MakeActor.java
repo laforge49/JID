@@ -24,14 +24,14 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.JidFactory;
 
 /**
  * Assigns a value if not already present.
  */
 public class MakeActor
-        extends SynchronousRequest<Boolean, ActorJid> {
+        extends Request<Boolean, ActorJid> {
     /**
      * The actor type.
      */
@@ -80,22 +80,6 @@ public class MakeActor
         if (jidFactory == null)
             throw new IllegalArgumentException("value may not be null");
         this.jidFactory = jidFactory;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Boolean _call(ActorJid targetActor)
-            throws Exception {
-        if (actorType != null)
-            return targetActor.makeValue(actorType);
-        else
-            return targetActor.makeValue(jidFactory);
     }
 
     /**

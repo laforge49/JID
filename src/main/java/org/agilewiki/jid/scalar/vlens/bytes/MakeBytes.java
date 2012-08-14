@@ -24,13 +24,15 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Assigns a value.
  */
 public class MakeBytes
-        extends SynchronousRequest<Boolean, BytesJid> {
+        extends Request<Boolean, BytesJid> {
     /**
      * The value.
      */
@@ -56,17 +58,9 @@ public class MakeBytes
         this.value = value;
     }
 
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
     @Override
-    protected Boolean _call(BytesJid targetActor)
-            throws Exception {
-        return targetActor.makeValue(value);
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((BytesJid) targetActor).makeValue(value));
     }
 
     /**

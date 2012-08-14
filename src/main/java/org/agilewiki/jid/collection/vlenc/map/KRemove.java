@@ -24,12 +24,12 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Remove an entry.
  */
-public class KRemove<KEY_TYPE extends Comparable> extends SynchronousRequest<Boolean, Map<KEY_TYPE>> {
+public class KRemove<KEY_TYPE extends Comparable> extends Request<Boolean, Map<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -51,19 +51,6 @@ public class KRemove<KEY_TYPE extends Comparable> extends SynchronousRequest<Boo
      */
     public KRemove(KEY_TYPE key) {
         this.key = key;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Boolean _call(Map<KEY_TYPE> targetActor)
-            throws Exception {
-        return targetActor.kRemove(key);
     }
 
     /**

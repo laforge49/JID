@@ -50,8 +50,6 @@ public class StringJid
         else if (request instanceof SetString) {
             setValue(((SetString) request).getValue());
             rp.processResponse(null);
-        } else if (request instanceof MakeString) {
-            rp.processResponse(makeValue(((MakeString) request).getValue()));
         } else super.processRequest(request, rp);
     }
 

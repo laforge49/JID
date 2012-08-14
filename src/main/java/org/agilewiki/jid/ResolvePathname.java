@@ -24,13 +24,13 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Returns the JID actor identified by the pathname.
  */
 final public class ResolvePathname
-        extends SynchronousRequest<Actor, Jid> {
+        extends Request<Actor, Jid> {
     /**
      * The pathname of a JID.
      */
@@ -52,19 +52,6 @@ final public class ResolvePathname
      */
     public String getPathname() {
         return pathname;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Actor _call(Jid targetActor)
-            throws Exception {
-        return targetActor.resolvePathname(pathname);
     }
 
     /**

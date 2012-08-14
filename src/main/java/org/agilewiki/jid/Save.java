@@ -24,7 +24,7 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * <p>
@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.SynchronousRequest;
  * </p>
  */
 final public class Save
-        extends SynchronousRequest<Object, Jid> {
+        extends Request<Object, Jid> {
     /**
      * Where the persistent data is to be saved.
      */
@@ -54,20 +54,6 @@ final public class Save
      */
     public AppendableBytes getAppendableBytes() {
         return appendableBytes;
-    }
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Object _call(Jid targetActor)
-            throws Exception {
-        targetActor.save(appendableBytes);
-        return null;
     }
 
     /**

@@ -48,8 +48,6 @@ public class BytesJid
         else if (request instanceof SetBytes) {
             setValue(((SetBytes) request).getValue());
             rp.processResponse(null);
-        } else if (request instanceof MakeBytes) {
-            rp.processResponse(makeValue(((MakeBytes) request).getValue()));
         } else super.processRequest(request, rp);
     }
 
