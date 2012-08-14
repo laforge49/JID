@@ -46,10 +46,7 @@ public class LongJid
             throws Exception {
         if (request instanceof GetLong)
             rp.processResponse(getValue());
-        else if (request instanceof SetLong) {
-            setValue(((SetLong) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**

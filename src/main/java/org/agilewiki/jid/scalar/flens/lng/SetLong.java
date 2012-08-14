@@ -24,13 +24,15 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 /**
  * Assigns a value.
  */
 public class SetLong
-        extends SynchronousRequest<Object, LongJid> {
+        extends Request<Object, LongJid> {
     /**
      * The value.
      */
@@ -56,18 +58,10 @@ public class SetLong
         this.value = value;
     }
 
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
     @Override
-    protected Object _call(LongJid targetActor)
-            throws Exception {
-        targetActor.setValue(value);
-        return null;
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((LongJid) targetActor).setValue(value);
+        rp.processResponse(null);
     }
 
     /**

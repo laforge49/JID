@@ -24,27 +24,14 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
-import org.agilewiki.jactor.lpc.SynchronousRequest;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 
 /**
  * Returns the size of the collection.
  */
-public class Size extends SynchronousRequest<Integer, Collection> {
+public class Size extends Request<Integer, Collection> {
     public final static Size req = new Size();
-
-    /**
-     * Send a synchronous request.
-     *
-     * @param targetActor The target actor.
-     * @return The response.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected Integer _call(Collection targetActor)
-            throws Exception {
-        return targetActor.size();
-    }
 
     /**
      * Returns true when targetActor is an instanceof TARGET_TYPE

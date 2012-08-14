@@ -47,10 +47,7 @@ public class StringJid
             throws Exception {
         if (request instanceof GetString)
             rp.processResponse(getValue());
-        else if (request instanceof SetString) {
-            setValue(((SetString) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**
