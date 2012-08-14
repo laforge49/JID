@@ -46,10 +46,7 @@ public class IntegerJid
             throws Exception {
         if (request instanceof GetInteger)
             rp.processResponse(getValue());
-        else if (request instanceof SetInteger) {
-            setValue(((SetInteger) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**

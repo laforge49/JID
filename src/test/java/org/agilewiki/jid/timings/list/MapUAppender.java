@@ -8,13 +8,11 @@ import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
-import org.agilewiki.jid.scalar.flens.integer.SetInteger;
 
 public class MapUAppender extends JLPCActor {
     public int count;
     public int repeat;
     public IntegerMapJid map;
-    private final SetInteger ss = new SetInteger(42);
 
     @Override
     protected void processRequest(Object o, RP rp) throws Exception {
@@ -34,7 +32,7 @@ public class MapUAppender extends JLPCActor {
                             newActor(getMailbox(), getParent());
             blj.load(rb);
             IntegerJid sj = (IntegerJid) blj.kGet(j);
-            ss.call(this, sj);
+            sj.setValue(42);
             bytes = blj.getSerializedBytes();
             j += 1;
         }

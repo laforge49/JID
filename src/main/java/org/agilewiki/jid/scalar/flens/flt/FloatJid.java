@@ -46,10 +46,7 @@ public class FloatJid
             throws Exception {
         if (request instanceof GetFloat)
             rp.processResponse(getValue());
-        else if (request instanceof SetFloat) {
-            setValue(((SetFloat) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
+        else super.processRequest(request, rp);
     }
 
     /**
