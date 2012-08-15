@@ -9,8 +9,7 @@ public class MapAppender extends JLPCActor {
     public int repeat;
     public IntegerMapJid map;
 
-    @Override
-    protected void processRequest(Object o, RP rp) throws Exception {
+    protected long time() throws Exception {
         long t0 = System.currentTimeMillis();
         int j = 0;
         while (j < repeat) {
@@ -23,6 +22,6 @@ public class MapAppender extends JLPCActor {
             j += 1;
         }
         long t1 = System.currentTimeMillis();
-        rp.processResponse(t1 - t0);
+        return t1 - t0;
     }
 }

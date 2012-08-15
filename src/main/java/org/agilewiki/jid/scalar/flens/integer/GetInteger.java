@@ -24,6 +24,8 @@
 package org.agilewiki.jid.scalar.flens.integer;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -40,5 +42,10 @@ public class GetInteger extends Request<Integer, IntegerJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof IntegerJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((IntegerJid) targetActor).getValue());
     }
 }

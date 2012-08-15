@@ -24,6 +24,8 @@
 package org.agilewiki.jid.scalar.vlens;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -41,5 +43,11 @@ final public class Clear
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof VLenScalarJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((VLenScalarJid) targetActor).clear();
+        rp.processResponse(null);
     }
 }

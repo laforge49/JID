@@ -24,6 +24,8 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -79,5 +81,11 @@ public class IAddBytes extends Request<Object, ListJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof ListJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((ListJid) targetActor).iAddBytes(i, bytes);
+        rp.processResponse(null);
     }
 }

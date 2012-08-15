@@ -9,8 +9,7 @@ public class BooleanAppender extends JLPCActor {
     public int repeat;
     public ListJid list;
 
-    @Override
-    protected void processRequest(Object o, RP rp) throws Exception {
+    protected long time() throws Exception {
         long t0 = System.currentTimeMillis();
         int j = 0;
         while (j < repeat) {
@@ -23,6 +22,6 @@ public class BooleanAppender extends JLPCActor {
             j += 1;
         }
         long t1 = System.currentTimeMillis();
-        rp.processResponse(t1 - t0);
+        return t1 - t0;
     }
 }

@@ -35,24 +35,6 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 public class BooleanJid
         extends FLenScalarJidA<Boolean> {
     /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetBoolean)
-            rp.processResponse(getValue());
-        else if (request instanceof SetBoolean) {
-            setValue(((SetBoolean) request).getValue());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
-    }
-
-    /**
      * Create the value.
      *
      * @return The default value

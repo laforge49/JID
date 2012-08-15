@@ -36,35 +36,6 @@ public class ActorJid
         extends VLenScalarJid<_Jid, String, Actor>
         implements ComparableKey<Object> {
     /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetActor)
-            rp.processResponse(getValue());
-        else if (request instanceof MakeActor) {
-            MakeActor makeActor = (MakeActor) request;
-            String actorType = makeActor.getValue();
-            if (actorType != null)
-                rp.processResponse(makeValue(actorType));
-            else
-                rp.processResponse(makeValue(makeActor.getJidFactory()));
-        } else if (request instanceof MakeActorBytes) {
-            MakeActorBytes makeActorBytes = (MakeActorBytes) request;
-            String actorType = makeActorBytes.getActorType();
-            if (actorType != null)
-                rp.processResponse(makeJidBytes(actorType, makeActorBytes.getBytes()));
-            else
-                rp.processResponse(makeJidBytes(makeActorBytes.getJidFactory(), makeActorBytes.getBytes()));
-        } else super.processRequest(request, rp);
-    }
-
-    /**
      * Clear the content.
      *
      * @throws Exception Any uncaught exception raised.

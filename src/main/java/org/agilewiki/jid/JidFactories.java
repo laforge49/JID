@@ -29,6 +29,7 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.LongMapJidFactory;
@@ -334,16 +335,5 @@ final public class JidFactories extends JLPCActor {
         factory.registerActorFactory(new LongMapJidFactory(LONG_FLOAT_MAP_JID_TYPE, FloatJidFactory.fac));
         factory.registerActorFactory(new LongMapJidFactory(LONG_DOUBLE_MAP_JID_TYPE, DoubleJidFactory.fac));
         factory.registerActorFactory(new LongMapJidFactory(LONG_BOOLEAN_MAP_JID_TYPE, BooleanJidFactory.fac));
-    }
-
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp) throws Exception {
     }
 }

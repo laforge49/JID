@@ -24,7 +24,10 @@
 package org.agilewiki.jid.scalar.flens.lng;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 
 /**
  * Returns a value.
@@ -40,5 +43,10 @@ public class GetLong extends Request<Long, LongJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof LongJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((LongJid) targetActor).getValue());
     }
 }

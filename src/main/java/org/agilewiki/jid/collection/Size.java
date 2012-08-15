@@ -24,6 +24,8 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 
@@ -40,6 +42,11 @@ public class Size extends Request<Integer, Collection> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJid;
+        return targetActor instanceof Collection;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((Collection) targetActor).size());
     }
 }

@@ -187,27 +187,6 @@ public class ListJid
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof IAddBytes) {
-            IAddBytes iAddBytes = (IAddBytes) request;
-            iAddBytes(iAddBytes.getI(), iAddBytes.getBytes());
-            rp.processResponse(null);
-        } else if (request instanceof IRemove) {
-            IRemove iRemove = (IRemove) request;
-            iRemove(iRemove.getI());
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
-    }
-
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
         initialize();

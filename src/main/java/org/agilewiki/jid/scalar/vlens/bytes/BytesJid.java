@@ -34,21 +34,6 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
 public class BytesJid
         extends VLenScalarJid<byte[], byte[], byte[]> {
     /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetBytes)
-            rp.processResponse(getValue());
-        else super.processRequest(request, rp);
-    }
-
-    /**
      * Assign a value.
      *
      * @param v The new value.

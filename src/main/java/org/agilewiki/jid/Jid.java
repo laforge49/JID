@@ -29,6 +29,7 @@ import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
+import org.agilewiki.jactor.lpc.Request;
 
 import java.util.Arrays;
 
@@ -270,32 +271,6 @@ public class Jid extends JLPCActor implements _Jid {
         if (pathname != "")
             throw new IllegalArgumentException("pathname " + pathname);
         return this;
-    }
-
-    /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetSerializedLength)
-            rp.processResponse(getSerializedLength());
-        else if (request instanceof ResolvePathname)
-            rp.processResponse(resolvePathname(((ResolvePathname) request).getPathname()));
-        else if (request instanceof GetSerializedBytes)
-            rp.processResponse(getSerializedBytes());
-        else if (request instanceof Save) {
-            save(((Save) request).getAppendableBytes());
-            rp.processResponse(null);
-        } else if (request instanceof CopyJID)
-            rp.processResponse(copyJID(((CopyJID) request).getMailbox()));
-        else if (request instanceof IsJidEqual)
-            isJidEqual(((IsJidEqual) request).getJidActor(), rp);
-        else throw new UnsupportedOperationException(request.getClass().getName());
     }
 
     /**

@@ -24,7 +24,10 @@
 package org.agilewiki.jid.scalar.vlens.bytes;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 
 /**
  * Returns a value.
@@ -40,5 +43,10 @@ public class GetBytes extends Request<byte[], BytesJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof BytesJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((BytesJid) targetActor).getValue());
     }
 }

@@ -24,6 +24,8 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -40,6 +42,11 @@ public class IsJidEqual extends Request<Boolean, Jid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof Jid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((Jid) targetActor).isJidEqual(jidActor, rp);
     }
 
     /**

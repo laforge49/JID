@@ -24,6 +24,8 @@
 package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -64,5 +66,11 @@ final public class Save
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof Jid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((Jid) targetActor).save(appendableBytes);
+        rp.processResponse(null);
     }
 }

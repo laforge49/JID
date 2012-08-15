@@ -24,7 +24,10 @@
 package org.agilewiki.jid.scalar.flens.bool;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 
 /**
  * Returns a value.
@@ -41,5 +44,10 @@ public class GetBoolean
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof BooleanJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((BooleanJid) targetActor).getValue());
     }
 }

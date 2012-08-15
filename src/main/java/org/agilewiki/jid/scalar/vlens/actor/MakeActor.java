@@ -24,6 +24,8 @@
 package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.JidFactory;
 
@@ -90,5 +92,13 @@ public class MakeActor
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof ActorJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        if (actorType != null)
+            rp.processResponse(((ActorJid) targetActor).makeValue(actorType));
+        else
+            rp.processResponse(((ActorJid) targetActor).makeValue(jidFactory));
     }
 }

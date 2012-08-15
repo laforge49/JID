@@ -35,21 +35,6 @@ import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
 public class LongJid
         extends FLenScalarJidA<Long> {
     /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof GetLong)
-            rp.processResponse(getValue());
-        else super.processRequest(request, rp);
-    }
-
-    /**
      * Create the value.
      *
      * @return The default value

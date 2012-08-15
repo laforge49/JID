@@ -46,22 +46,6 @@ abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
     protected int len = -1;
 
     /**
-     * The application method for processing requests sent to the actor.
-     *
-     * @param request A request.
-     * @param rp      The response processor.
-     * @throws Exception Any uncaught exceptions raised while processing the request.
-     */
-    @Override
-    protected void processRequest(Object request, RP rp)
-            throws Exception {
-        if (request instanceof Clear) {
-            clear();
-            rp.processResponse(null);
-        } else super.processRequest(request, rp);
-    }
-
-    /**
      * Assign a value unless one is already present.
      *
      * @param v The value.

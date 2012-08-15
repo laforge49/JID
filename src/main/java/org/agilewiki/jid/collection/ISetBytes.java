@@ -24,6 +24,8 @@
 package org.agilewiki.jid.collection;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -77,5 +79,11 @@ public class ISetBytes extends Request<Object, CollectionJid> {
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof CollectionJid;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        ((CollectionJid) targetActor).iSetBytes(i, bytes);
+        rp.processResponse(null);
     }
 }

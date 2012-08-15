@@ -24,6 +24,8 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.RP;
+import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
@@ -61,5 +63,11 @@ public class KGet<KEY_TYPE extends Comparable> extends Request<Actor, Map<KEY_TY
      */
     public boolean isTargetType(Actor targetActor) {
         return targetActor instanceof Map;
+    }
+
+    @Override
+    public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
+        rp.processResponse(((Map<KEY_TYPE>) targetActor).kGet(key));
+
     }
 }
