@@ -8,9 +8,9 @@ Application are built by subclassing existing JID actors and then composing more
 complex structures from them. The JID project includes a number of actors which
 support different types of persistent data.
 
-JID can deserialize/update/reserialize a map of 10,000 entries in .9 milliseconds,
+JID can deserialize/update/reserialize a map of 10,000 entries in .09 milliseconds,
 where deserialization/reserialization timings are largely independent of the size
-and complexity of the table entries. That's 90 nanoseconds per table entry, where
+and complexity of the table entries. That's 9 nanoseconds per table entry, where
 the entries are actor key / actor value pairs.
 
 Test Environment
