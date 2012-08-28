@@ -226,10 +226,10 @@ public class BigIntegerIntegerMapTest extends TestCase {
         ba.count = 10;
         ba.repeat = 10;
 
-        //System.out.println("###########################################################");
-        //ba.count = 10000;
-        //ba.repeat = 1000;
-        //Updates per second = 11,037,527
+        System.out.println("###########################################################");
+        ba.count = 10000;
+        ba.repeat = 1000;
+        //Updates per second = 1152
 
         map.initialCapacity = ba.count;
 
@@ -239,7 +239,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
         System.out.println("map size = " + ba.count);
         System.out.println("repeats = " + ba.repeat);
         if (t > 0) {
-            long ips = 1000L * ba.count * ba.repeat / t;
+            long ips = 1000L * ba.repeat / t;
             System.out.println("Updates per second = " + ips);
         }
 
