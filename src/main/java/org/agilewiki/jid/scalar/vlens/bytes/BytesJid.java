@@ -104,7 +104,9 @@ public class BytesJid
         byte[] bytes = getValue();
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         ObjectInputStream ois = new ObjectInputStream(bais);
-        return ois.readObject();
+        Object o = ois.readObject();
+        ois.close();
+        return o;
     }
 
     /**
