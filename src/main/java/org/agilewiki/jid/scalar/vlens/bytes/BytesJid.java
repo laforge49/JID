@@ -23,10 +23,14 @@
  */
 package org.agilewiki.jid.scalar.vlens.bytes;
 
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * A JID component that holds a byte array.
@@ -48,6 +52,15 @@ public class BytesJid
         serializedBytes = null;
         serializedOffset = -1;
         change(c);
+    }
+
+    public void setObject(Object v) throws Exception {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(v);
+        oos.close();
+        byte[] bytes = baos.toByteArray();
+        setValue(bytes);
     }
 
     /**
@@ -85,6 +98,13 @@ public class BytesJid
         skipLen(readableBytes);
         value = readableBytes.readBytes(len);
         return value;
+    }
+
+    public Object getObject() throws Exception {
+        byte[] bytes = getValue();
+        ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        return ois.readObject();
     }
 
     /**

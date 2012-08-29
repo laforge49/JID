@@ -27,7 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jid.collection.vlenc.ListJid;
 
 /**
  * Returns the size of the collection.

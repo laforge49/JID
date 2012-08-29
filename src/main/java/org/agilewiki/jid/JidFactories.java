@@ -25,11 +25,9 @@ package org.agilewiki.jid;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jactor.lpc.Request;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
 import org.agilewiki.jid.collection.vlenc.map.LongMapJidFactory;

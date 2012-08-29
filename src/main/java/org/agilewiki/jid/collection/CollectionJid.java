@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection;
 
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.*;
 
 /**

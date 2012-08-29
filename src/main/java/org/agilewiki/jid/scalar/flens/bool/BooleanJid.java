@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.scalar.flens.bool;
 
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;

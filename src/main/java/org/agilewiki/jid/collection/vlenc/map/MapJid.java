@@ -23,7 +23,6 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
-import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.JidFactories;
