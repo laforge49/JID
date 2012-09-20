@@ -26,13 +26,14 @@ package org.agilewiki.jid.scalar.vlens;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
+import org.agilewiki.jid.scalar.Clearable;
 import org.agilewiki.jid.scalar.ScalarJid;
 
 /**
  * A JID component that holds a variable-length value, or null.
  */
 abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
-        extends ScalarJid<SET_TYPE, RESPONSE_TYPE> {
+        extends ScalarJid<SET_TYPE, RESPONSE_TYPE> implements Clearable {
 
     /**
      * Holds the value, or null.
@@ -59,7 +60,8 @@ abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
      *
      * @throws Exception Any uncaught exception raised.
      */
-    protected void clear() throws Exception {
+    @Override
+    public void clear() throws Exception {
         if (len == -1)
             return;
         int l = len;

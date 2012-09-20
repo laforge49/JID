@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.scalar.vlens;
+package org.agilewiki.jid.scalar;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.Request;
  * Clears the container.
  */
 final public class Clear
-        extends Request<Object, VLenScalarJid<Object, Object, Object>> {
+        extends Request<Object, Clearable> {
     public final static Clear req = new Clear();
 
     /**
@@ -42,12 +42,12 @@ final public class Clear
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof VLenScalarJid;
+        return targetActor instanceof Clearable;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        ((VLenScalarJid) targetActor).clear();
+        ((Clearable) targetActor).clear();
         rp.processResponse(null);
     }
 }
