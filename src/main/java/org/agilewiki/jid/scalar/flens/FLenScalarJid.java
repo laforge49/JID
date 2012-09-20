@@ -31,7 +31,7 @@ import org.agilewiki.jid.scalar.ScalarJid;
  * A JID actor that holds a fixed-length value.
  * The value is always present.
  */
-abstract public class FLenScalarJidA<RESPONSE_TYPE extends Comparable>
+abstract public class FLenScalarJid<RESPONSE_TYPE extends Comparable>
         extends ScalarJid<RESPONSE_TYPE, RESPONSE_TYPE>
         implements ComparableKey<RESPONSE_TYPE> {
 

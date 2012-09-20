@@ -26,13 +26,13 @@ package org.agilewiki.jid.scalar.flens.integer;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
+import org.agilewiki.jid.scalar.flens.FLenScalarJid;
 
 /**
  * A JID actor that holds an integer.
  */
 public class IntegerJid
-        extends FLenScalarJidA<Integer> {
+        extends FLenScalarJid<Integer> {
     /**
      * Create the value.
      *

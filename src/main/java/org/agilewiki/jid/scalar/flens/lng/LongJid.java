@@ -26,13 +26,13 @@ package org.agilewiki.jid.scalar.flens.lng;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
+import org.agilewiki.jid.scalar.flens.FLenScalarJid;
 
 /**
  * A JID actor that holds a long.
  */
 public class LongJid
-        extends FLenScalarJidA<Long> {
+        extends FLenScalarJid<Long> {
     /**
      * Create the value.
      *

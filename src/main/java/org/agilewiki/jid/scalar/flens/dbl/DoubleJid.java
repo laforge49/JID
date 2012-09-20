@@ -26,13 +26,13 @@ package org.agilewiki.jid.scalar.flens.dbl;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
+import org.agilewiki.jid.scalar.flens.FLenScalarJid;
 
 /**
  * A JID actor that holds a double.
  */
 public class DoubleJid
-        extends FLenScalarJidA<Double> {
+        extends FLenScalarJid<Double> {
     /**
      * Create the value.
      *

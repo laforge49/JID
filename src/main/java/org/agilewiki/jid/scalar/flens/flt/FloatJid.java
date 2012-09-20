@@ -26,13 +26,13 @@ package org.agilewiki.jid.scalar.flens.flt;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
+import org.agilewiki.jid.scalar.flens.FLenScalarJid;
 
 /**
  * A JID actor that holds a float.
  */
 public class FloatJid
-        extends FLenScalarJidA<Float> {
+        extends FLenScalarJid<Float> {
     /**
      * Create the value.
      *

@@ -26,13 +26,13 @@ package org.agilewiki.jid.scalar.flens.bool;
 import org.agilewiki.jid.AppendableBytes;
 import org.agilewiki.jid.ReadableBytes;
 import org.agilewiki.jid.Util;
-import org.agilewiki.jid.scalar.flens.FLenScalarJidA;
+import org.agilewiki.jid.scalar.flens.FLenScalarJid;
 
 /**
  * A JID actor that holds a boolean.
  */
 public class BooleanJid
-        extends FLenScalarJidA<Boolean> {
+        extends FLenScalarJid<Boolean> {
     /**
      * Create the value.
      *
