@@ -280,7 +280,7 @@ public class ActorJid
     @Override
     public int compareKeyTo(Object o)
             throws Exception {
-        ComparableKey<Object> v = (ComparableKey<Object>) value;
+        ComparableKey<Object> v = (ComparableKey<Object>) getValue();
         return v.compareKeyTo(o);
     }
 }

@@ -24,7 +24,6 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jid._Jid;
-import org.agilewiki.jid.collection.Collection;
 
 /**
  * Holds a map.
