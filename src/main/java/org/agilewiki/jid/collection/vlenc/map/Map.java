@@ -30,7 +30,15 @@ import org.agilewiki.jid.collection.Collection;
  * Holds a map.
  */
 public interface Map<KEY_TYPE extends Comparable>
-        extends Collection {
+        extends _Jid {
+
+    /**
+     * Returns the size of the collection.
+     *
+     * @return The size of the collection.
+     */
+    public int size()
+            throws Exception;
 
     /**
      * Add a tuple to the map unless there is a tuple with a matching first element.
@@ -75,5 +83,11 @@ public interface Map<KEY_TYPE extends Comparable>
      * @return True when the item was present and removed.
      */
     public boolean kRemove(KEY_TYPE key)
+            throws Exception;
+
+    public _Jid getFirst()
+            throws Exception;
+
+    public _Jid getLast()
             throws Exception;
 }

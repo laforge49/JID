@@ -43,7 +43,7 @@ public interface Collection
      * Returns the selected element.
      *
      * @param ndx Selects the element.
-     * @return The actor held by the selected element.
+     * @return The actor held by the selected element, or null if the collection is empty.
      */
     public _Jid iGet(int ndx)
             throws Exception;

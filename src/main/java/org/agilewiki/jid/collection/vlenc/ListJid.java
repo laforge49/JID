@@ -64,12 +64,14 @@ public class ListJid
      * @param i The index of the element of interest.
      *          If negative, the index used is increased by the size of the collection,
      *          so that -1 returns the last element.
-     * @return The ith JID component.
+     * @return The ith JID component, or null if the list is empty.
      */
     @Override
     public _Jid iGet(int i)
             throws Exception {
         initialize();
+        if (list.size() == 0)
+            return null;
         if (i < 0)
             i += list.size();
         return list.get(i);

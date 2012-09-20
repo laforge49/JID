@@ -37,7 +37,7 @@ import org.agilewiki.jid.scalar.Scalar;
  */
 abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
-        implements Map<KEY_TYPE> {
+        implements Map<KEY_TYPE>, Collection {
 
     private ActorFactory[] tupleFactories;
     public ActorFactory valueFactory;
@@ -255,5 +255,15 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         if (s == pathname.length())
             return jid;
         return jid.resolvePathname(pathname.substring(s + 1));
+    }
+
+    public _Jid getFirst()
+            throws Exception {
+        return iGet(0);
+    }
+
+    public _Jid getLast()
+            throws Exception {
+        return iGet(-1);
     }
 }
