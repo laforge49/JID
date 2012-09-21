@@ -32,8 +32,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  * A JID actor that holds a JID actor.
  */
 public class ActorJid
-        extends VLenScalarJid<_Jid, String, Actor>
-        implements ComparableKey<Object> {
+        extends VLenScalarJid<_Jid, String, Actor> {
     /**
      * Clear the content.
      *
@@ -269,18 +268,5 @@ public class ActorJid
             return v.resolvePathname(pathname.substring(2));
         }
         throw new IllegalArgumentException("pathname " + pathname);
-    }
-
-    /**
-     * Compares the key or value;
-     *
-     * @param o The comparison value.
-     * @return The result of a compareTo(o).
-     */
-    @Override
-    public int compareKeyTo(Object o)
-            throws Exception {
-        ComparableKey<Object> v = (ComparableKey<Object>) getValue();
-        return v.compareKeyTo(o);
     }
 }
