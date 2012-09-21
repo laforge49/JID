@@ -32,7 +32,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  * A JID actor that holds a JID actor.
  */
 public class ActorJid
-        extends VLenScalarJid<_Jid, String, Actor> {
+        extends VLenScalarJid<String, Jid> {
     /**
      * Clear the content.
      *
@@ -213,12 +213,12 @@ public class ActorJid
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
-    public _Jid getValue()
+    public Jid getValue()
             throws Exception {
         if (len == -1)
             return null;
         if (value != null)
-            return value;
+            return (Jid) value;
         if (len == -1) {
             return null;
         }
@@ -226,7 +226,7 @@ public class ActorJid
         skipLen(readableBytes);
         String actorType = readableBytes.readString();
         value = createSubordinate(actorType, readableBytes);
-        return value;
+        return (Jid) value;
     }
 
     /**

@@ -32,13 +32,13 @@ import org.agilewiki.jid.scalar.ScalarJid;
 /**
  * A JID component that holds a variable-length value, or null.
  */
-abstract public class VLenScalarJid<VALUE_TYPE, SET_TYPE, RESPONSE_TYPE>
+abstract public class VLenScalarJid<SET_TYPE, RESPONSE_TYPE>
         extends ScalarJid<SET_TYPE, RESPONSE_TYPE> implements Clearable {
 
     /**
      * Holds the value, or null.
      */
-    protected VALUE_TYPE value = null;
+    protected RESPONSE_TYPE value = null;
 
     /**
      * The size of the serialized (exclusive of its length header).

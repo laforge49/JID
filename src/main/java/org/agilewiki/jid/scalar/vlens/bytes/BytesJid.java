@@ -36,7 +36,7 @@ import java.io.ObjectOutputStream;
  * A JID component that holds a byte array.
  */
 public class BytesJid
-        extends VLenScalarJid<byte[], byte[], byte[]> {
+        extends VLenScalarJid<byte[], byte[]> {
     /**
      * Assign a value.
      *

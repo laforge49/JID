@@ -32,7 +32,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  * A JID actor that holds a String.
  */
 public class StringJid
-        extends VLenScalarJid<String, String, String>
+        extends VLenScalarJid<String, String>
         implements ComparableKey<String> {
     /**
      * Assign a value.
