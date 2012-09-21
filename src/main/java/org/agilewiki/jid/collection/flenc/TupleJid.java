@@ -126,11 +126,15 @@ public class TupleJid
      * Returns the ith JID component.
      *
      * @param i The index of the element of interest.
-     * @return The ith JID component.
+     * @return The ith JID component, or null if the index is out of range.
      */
     @Override
     public _Jid iGet(int i) throws Exception {
         initialize();
+        if (i < 0)
+            i += size();
+        if (i < 0 || i >= size())
+            return null;
         return tuple[i];
     }
 
