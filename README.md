@@ -18,7 +18,7 @@ so you just need to add this to your POM file:
 <dependency>
       <groupId>org.agilewiki.jid</groupId>
       <artifactId>jid</artifactId>
-      <version>1.4.0</version>
+      <version>1.4.1</version>
 </dependency>
 ```
 (Be sure to update the version number appropriately, of course.)
