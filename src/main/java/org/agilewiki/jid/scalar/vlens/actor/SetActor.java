@@ -33,7 +33,7 @@ import org.agilewiki.jactor.lpc.Request;
  * Assigns a value.
  */
 public class SetActor
-        extends Request<Object, ActorJid> {
+        extends Request<Object, Reference> {
     /**
      * The actor type.
      */
@@ -87,9 +87,9 @@ public class SetActor
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
         if (actorType != null)
-            ((ActorJid) targetActor).setValue(actorType);
+            ((Reference) targetActor).setValue(actorType);
         else
-            ((ActorJid) targetActor).setValue(jidFactory);
+            ((Reference) targetActor).setValue(jidFactory);
         rp.processResponse(null);
     }
 
@@ -100,6 +100,6 @@ public class SetActor
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJid;
+        return targetActor instanceof Reference;
     }
 }

@@ -33,7 +33,7 @@ import org.agilewiki.jactor.lpc.Request;
  * Creates a JID actor and loads its serialized data.
  */
 final public class SetActorBytes
-        extends Request<Object, ActorJid> {
+        extends Request<Object, Reference> {
     /**
      * An actor type name.
      */
@@ -105,9 +105,9 @@ final public class SetActorBytes
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
         if (actorType != null)
-            ((ActorJid) targetActor).setJidBytes(actorType, bytes);
+            ((Reference) targetActor).setJidBytes(actorType, bytes);
         else
-            ((ActorJid) targetActor).setJidBytes(jidFactory, bytes);
+            ((Reference) targetActor).setJidBytes(jidFactory, bytes);
         rp.processResponse(null);
     }
 
@@ -118,6 +118,6 @@ final public class SetActorBytes
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJid;
+        return targetActor instanceof Reference;
     }
 }

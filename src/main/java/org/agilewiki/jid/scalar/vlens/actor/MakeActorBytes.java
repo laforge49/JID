@@ -33,7 +33,7 @@ import org.agilewiki.jid.JidFactory;
  * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
  */
 final public class MakeActorBytes
-        extends Request<Boolean, ActorJid> {
+        extends Request<Boolean, Reference> {
     /**
      * An actor type name.
      */
@@ -105,9 +105,9 @@ final public class MakeActorBytes
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
         if (actorType != null)
-            rp.processResponse(((ActorJid) targetActor).makeJidBytes(actorType, bytes));
+            rp.processResponse(((Reference) targetActor).makeJidBytes(actorType, bytes));
         else
-            rp.processResponse(((ActorJid) targetActor).makeJidBytes(jidFactory, bytes));
+            rp.processResponse(((Reference) targetActor).makeJidBytes(jidFactory, bytes));
     }
 
     /**
@@ -117,6 +117,6 @@ final public class MakeActorBytes
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJid;
+        return targetActor instanceof Reference;
     }
 }

@@ -32,7 +32,7 @@ import org.agilewiki.jid.scalar.vlens.VLenScalarJid;
  * A JID actor that holds a JID actor.
  */
 public class ActorJid
-        extends VLenScalarJid<String, Jid> {
+        extends VLenScalarJid<String, Jid> implements Reference {
     /**
      * Clear the content.
      *
@@ -76,6 +76,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public Boolean makeValue(JidFactory jidFactory)
             throws Exception {
         if (len > -1)
@@ -106,6 +107,7 @@ public class ActorJid
      * @param jidFactory The actor type.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public void setValue(ActorFactory jidFactory)
             throws Exception {
         value = createSubordinate(jidFactory);
@@ -122,6 +124,7 @@ public class ActorJid
      * @param bytes     The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public void setJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
@@ -137,6 +140,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public Boolean makeJidBytes(String actorType, byte[] bytes)
             throws Exception {
         if (len > -1)
@@ -168,6 +172,7 @@ public class ActorJid
      * @param bytes      The serialized data.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public void setJidBytes(ActorFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
@@ -183,6 +188,7 @@ public class ActorJid
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
      */
+    @Override
     public Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
             throws Exception {
         if (len > -1)
@@ -213,6 +219,7 @@ public class ActorJid
      * @return The actor held by this component, or null.
      * @throws Exception Any uncaught exception raised during deserialization.
      */
+    @Override
     public Jid getValue()
             throws Exception {
         if (len == -1)

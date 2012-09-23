@@ -33,7 +33,7 @@ import org.agilewiki.jid.JidFactory;
  * Assigns a value if not already present.
  */
 public class MakeActor
-        extends Request<Boolean, ActorJid> {
+        extends Request<Boolean, Reference> {
     /**
      * The actor type.
      */
@@ -91,14 +91,14 @@ public class MakeActor
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJid;
+        return targetActor instanceof Reference;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
         if (actorType != null)
-            rp.processResponse(((ActorJid) targetActor).makeValue(actorType));
+            rp.processResponse(((Reference) targetActor).makeValue(actorType));
         else
-            rp.processResponse(((ActorJid) targetActor).makeValue(jidFactory));
+            rp.processResponse(((Reference) targetActor).makeValue(jidFactory));
     }
 }

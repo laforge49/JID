@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Returns a value.
  */
-public class GetActor extends Request<Actor, ActorJid> {
+public class GetActor extends Request<Actor, Reference> {
     final public static GetActor req = new GetActor();
 
     /**
@@ -41,11 +41,11 @@ public class GetActor extends Request<Actor, ActorJid> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ActorJid;
+        return targetActor instanceof Reference;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((ActorJid) targetActor).getValue());
+        rp.processResponse(((Reference) targetActor).getValue());
     }
 }

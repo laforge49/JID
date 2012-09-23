@@ -27,8 +27,9 @@ import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.scalar.Clearable;
 import org.agilewiki.jid.scalar.ScalarJid;
+import org.agilewiki.jid.scalar.vlens.actor.Reference;
 
-public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
+public class UnionJid extends ScalarJid<String, Jid> implements Clearable, Reference {
     protected ActorFactory[] unionFactories;
     protected int factoryIndex = -1;
     protected Jid value;
@@ -38,6 +39,18 @@ public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
         if (unionFactories != null)
             return unionFactories;
         throw new IllegalStateException("unionFactories is null");
+    }
+
+    protected int getFactoryIndex(String actorType)
+            throws Exception {
+        ActorFactory[] uf = getUnionFactories();
+        int i = 0;
+        while (i < uf.length) {
+            if (uf[i].actorType.equals(actorType))
+                return i;
+            i += 1;
+        }
+        throw new IllegalArgumentException("Not a valid union type: " + actorType);
     }
 
     /**
@@ -81,6 +94,17 @@ public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
     }
 
     @Override
+    public void setValue(String actorType)
+            throws Exception {
+        setValue(getFactoryIndex(actorType));
+    }
+
+    @Override
+    public void setValue(ActorFactory actorFactory)
+            throws Exception {
+        setValue(getFactoryIndex(actorFactory.actorType));
+    }
+
     public void setValue(Integer ndx)
             throws Exception {
         int oldLength = getSerializedLength();
@@ -96,6 +120,32 @@ public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
             value.setContainerJid(this);
         }
         change(getSerializedLength() - oldLength);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param actorType An actor type name.
+     * @param bytes     The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    @Override
+    public void setJidBytes(String actorType, byte[] bytes)
+            throws Exception {
+        setUnionBytes(getFactoryIndex(actorType), bytes);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @throws Exception Any uncaught exception raised.
+     */
+    @Override
+    public void setJidBytes(ActorFactory jidFactory, byte[] bytes)
+            throws Exception {
+        setUnionBytes(getFactoryIndex(jidFactory.actorType), bytes);
     }
 
     /**
@@ -121,6 +171,32 @@ public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
     /**
      * Assign a value unless one is already present.
      *
+     * @param jidType The MakeValue request.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    @Override
+    public Boolean makeValue(String jidType)
+            throws Exception {
+        return makeUnionValue(getFactoryIndex(jidType));
+    }
+
+    /**
+     * Assign a value unless one is already present.
+     *
+     * @param jidFactory The actor type.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    @Override
+    public Boolean makeValue(JidFactory jidFactory)
+            throws Exception {
+        return makeUnionValue(getFactoryIndex(jidFactory.actorType));
+    }
+
+    /**
+     * Assign a value unless one is already present.
+     *
      * @param ndx The Make request.
      * @return True if a new value is created.
      * @throws Exception Any uncaught exception raised.
@@ -131,6 +207,32 @@ public class UnionJid extends ScalarJid<Integer, Jid> implements Clearable {
             return false;
         setValue(ndx);
         return true;
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
+     *
+     * @param actorType An actor type name.
+     * @param bytes     The serialized data.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    public Boolean makeJidBytes(String actorType, byte[] bytes)
+            throws Exception {
+        return makeUnionBytes(getFactoryIndex(actorType), bytes);
+    }
+
+    /**
+     * Creates a JID actor and loads its serialized data, unless a JID actor is already present.
+     *
+     * @param jidFactory The actor type.
+     * @param bytes      The serialized data.
+     * @return True if a new value is created.
+     * @throws Exception Any uncaught exception raised.
+     */
+    public Boolean makeJidBytes(JidFactory jidFactory, byte[] bytes)
+            throws Exception {
+        return makeUnionBytes(getFactoryIndex(jidFactory.actorType), bytes);
     }
 
     public Boolean makeUnionBytes(Integer ndx, byte[] bytes)
