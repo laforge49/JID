@@ -7,7 +7,6 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jid.JidFactories;
-import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJid;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
