@@ -27,7 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.Factory;
-import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
@@ -51,8 +50,8 @@ public class TupleJidFactory extends ActorFactory {
     /**
      * Create a JLPCActorFactory.
      *
-     * @param subActorType   The actor type.
-     * @param actorTypes The element types.
+     * @param subActorType The actor type.
+     * @param actorTypes   The element types.
      */
     public TupleJidFactory(String subActorType, String... actorTypes) {
         super(subActorType);

@@ -23,13 +23,18 @@
  */
 package org.agilewiki.jid.scalar.vlens.actor;
 
+import org.agilewiki.jactor.Actor;
+import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jactor.factory.Factory;
+import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
  * Creates a UnionJid.
  */
 public class UnionJidFactory extends ActorFactory {
     private ActorFactory[] unionFactories;
+    private String[] actorTypes;
 
     /**
      * Create a JLPCActorFactory.
@@ -40,6 +45,17 @@ public class UnionJidFactory extends ActorFactory {
     public UnionJidFactory(String subActorType, ActorFactory... unionFactories) {
         super(subActorType);
         this.unionFactories = unionFactories;
+    }
+
+    /**
+     * Create a JLPCActorFactory.
+     *
+     * @param subActorType The actor type.
+     * @param actorTypes   The element types.
+     */
+    public UnionJidFactory(String subActorType, String... actorTypes) {
+        super(subActorType);
+        this.actorTypes = actorTypes;
     }
 
     /**
@@ -61,6 +77,32 @@ public class UnionJidFactory extends ActorFactory {
             throws Exception {
         UnionJid uj = new UnionJid();
         assignElementFactories(uj);
+        return uj;
+    }
+
+    /**
+     * Create and configure an actor.
+     *
+     * @param mailbox The mailbox of the new actor.
+     * @param parent  The parent of the new actor.
+     * @return The new actor.
+     */
+    public JLPCActor newActor(Mailbox mailbox, Actor parent)
+            throws Exception {
+        UnionJid uj = (UnionJid) super.newActor(mailbox, parent);
+        if (uj.unionFactories == null) {
+            if (unionFactories == null) {
+                Factory f = (Factory) parent.getMatch(Factory.class);
+                ActorFactory[] afs = new ActorFactory[actorTypes.length];
+                int i = 0;
+                while (i < actorTypes.length) {
+                    afs[i] = f.getActorFactory(actorTypes[i]);
+                    i += 1;
+                }
+                unionFactories = afs;
+            }
+            assignElementFactories(uj);
+        }
         return uj;
     }
 }
