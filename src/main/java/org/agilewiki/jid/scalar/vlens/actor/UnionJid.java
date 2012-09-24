@@ -27,7 +27,6 @@ import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.*;
 import org.agilewiki.jid.scalar.Clearable;
 import org.agilewiki.jid.scalar.ScalarJid;
-import org.agilewiki.jid.scalar.vlens.actor.Reference;
 
 public class UnionJid extends ScalarJid<String, Jid> implements Clearable, Reference {
     protected ActorFactory[] unionFactories;

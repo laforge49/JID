@@ -21,34 +21,34 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.flenc;
+package org.agilewiki.jid.scalar.vlens.actor;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 
 /**
- * Creates a TupleJid.
+ * Creates a UnionJid.
  */
-public class TupleJidFactory extends ActorFactory {
-    private ActorFactory[] tupleFactories;
+public class UnionJidFactory extends ActorFactory {
+    private ActorFactory[] unionFactories;
 
     /**
      * Create a JLPCActorFactory.
      *
      * @param subActorType   The actor type.
-     * @param tupleFactories The element factories.
+     * @param unionFactories The element factories.
      */
-    public TupleJidFactory(String subActorType, ActorFactory... tupleFactories) {
+    public UnionJidFactory(String subActorType, ActorFactory... unionFactories) {
         super(subActorType);
-        this.tupleFactories = tupleFactories;
+        this.unionFactories = unionFactories;
     }
 
     /**
-     * Initialize a new tuple with its element factories.
+     * Initialize a new UnionJid with its element factories.
      *
-     * @param tj The new tuple.
+     * @param tj The new union.
      */
-    public void assignElementFactories(TupleJid tj) {
-        tj.tupleFactories = tupleFactories;
+    public void assignElementFactories(UnionJid tj) {
+        tj.unionFactories = unionFactories;
     }
 
     /**
@@ -57,10 +57,10 @@ public class TupleJidFactory extends ActorFactory {
      * @return The new actor.
      */
     @Override
-    protected TupleJid instantiateActor()
+    protected UnionJid instantiateActor()
             throws Exception {
-        TupleJid tj = new TupleJid();
-        assignElementFactories(tj);
-        return tj;
+        UnionJid uj = new UnionJid();
+        assignElementFactories(uj);
+        return uj;
     }
 }
