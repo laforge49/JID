@@ -21,7 +21,7 @@ public class UnionJidTest extends TestCase {
             factory.initialize(mailbox);
             (new JidFactories()).initialize(mailbox, factory);
             UnionJidFactory siuf =
-                    new UnionJidFactory("siUnion", StringJidFactory.fac.actorType, IntegerJidFactory.fac.actorType);
+                    new UnionJidFactory("siUnion", StringJidFactory.fac.actorType, "siUnion");
             factory.registerActorFactory(siuf);
             UnionJid siu1 = (UnionJid) factory.newActor("siUnion");
             assertNull(siu1.getValue());
