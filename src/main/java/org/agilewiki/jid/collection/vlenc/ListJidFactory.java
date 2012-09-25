@@ -5,7 +5,6 @@ import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jactor.factory.Factory;
 import org.agilewiki.jactor.lpc.JLPCActor;
-import org.agilewiki.jid.scalar.vlens.actor.UnionJid;
 
 /**
  * Creates ListJids.
