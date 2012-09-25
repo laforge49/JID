@@ -75,9 +75,7 @@ public class TupleJidFactory extends ActorFactory {
     @Override
     protected TupleJid instantiateActor()
             throws Exception {
-        TupleJid tj = new TupleJid();
-        assignElementFactories(tj);
-        return tj;
+        return new TupleJid();
     }
 
     /**
@@ -90,19 +88,17 @@ public class TupleJidFactory extends ActorFactory {
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
         TupleJid tj = (TupleJid) super.newActor(mailbox, parent);
-        if (tj.tupleFactories == null) {
-            if (tupleFactories == null) {
-                Factory f = (Factory) parent.getMatch(Factory.class);
-                ActorFactory[] afs = new ActorFactory[actorTypes.length];
-                int i = 0;
-                while (i < actorTypes.length) {
-                    afs[i] = f.getActorFactory(actorTypes[i]);
-                    i += 1;
-                }
-                tupleFactories = afs;
+        if (tupleFactories == null) {
+            Factory f = (Factory) parent.getMatch(Factory.class);
+            ActorFactory[] afs = new ActorFactory[actorTypes.length];
+            int i = 0;
+            while (i < actorTypes.length) {
+                afs[i] = f.getActorFactory(actorTypes[i]);
+                i += 1;
             }
-            assignElementFactories(tj);
+            tupleFactories = afs;
         }
+        assignElementFactories(tj);
         return tj;
     }
 }

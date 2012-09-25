@@ -75,9 +75,7 @@ public class UnionJidFactory extends ActorFactory {
     @Override
     protected UnionJid instantiateActor()
             throws Exception {
-        UnionJid uj = new UnionJid();
-        assignElementFactories(uj);
-        return uj;
+        return new UnionJid();
     }
 
     /**
@@ -90,19 +88,17 @@ public class UnionJidFactory extends ActorFactory {
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
         UnionJid uj = (UnionJid) super.newActor(mailbox, parent);
-        if (uj.unionFactories == null) {
-            if (unionFactories == null) {
-                Factory f = (Factory) parent.getMatch(Factory.class);
-                ActorFactory[] afs = new ActorFactory[actorTypes.length];
-                int i = 0;
-                while (i < actorTypes.length) {
-                    afs[i] = f.getActorFactory(actorTypes[i]);
-                    i += 1;
-                }
-                unionFactories = afs;
+        if (unionFactories == null) {
+            Factory f = (Factory) parent.getMatch(Factory.class);
+            ActorFactory[] afs = new ActorFactory[actorTypes.length];
+            int i = 0;
+            while (i < actorTypes.length) {
+                afs[i] = f.getActorFactory(actorTypes[i]);
+                i += 1;
             }
-            assignElementFactories(uj);
+            unionFactories = afs;
         }
+        assignElementFactories(uj);
         return uj;
     }
 }
