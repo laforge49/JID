@@ -25,7 +25,6 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
-import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
@@ -64,7 +63,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
     @Override
     final protected ActorFactory getListFactory()
             throws Exception {
-        return new TupleJidFactory(JidFactories.TUPLE_JID_TYPE, getKeyFactory(), getValueFactory());
+        return new TupleJidFactory(null, getKeyFactory(), getValueFactory());
     }
 
     /**
