@@ -39,7 +39,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
         implements Map<KEY_TYPE>, Collection {
 
-    private ActorFactory[] tupleFactories;
     public ActorFactory valueFactory;
 
     /**
