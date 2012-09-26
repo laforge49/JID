@@ -29,7 +29,7 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
 
 /**
- * @return The ith JID component, or null if the index is out of range.
+ * Returns the ith JID component, or null if the index is out of range.
  */
 public class IGet extends Request<Actor, CollectionJid> {
     /**
