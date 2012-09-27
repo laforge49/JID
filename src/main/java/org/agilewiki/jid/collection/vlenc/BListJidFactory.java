@@ -12,6 +12,9 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 public class BListJidFactory extends ActorFactory {
     private ActorFactory elementsFactory;
     private String elementsType;
+    private int nodeCapacity = 28;
+    private boolean isRoot = true;
+    private boolean isLeaf = true;
 
     /**
      * Create an ActorFactory.
@@ -28,11 +31,43 @@ public class BListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
+     * @param elementsFactory The elements factory.
+     * @param nodeCapacity The size of the nodes.
+     */
+    public BListJidFactory(String actorType, ActorFactory elementsFactory,
+                           int nodeCapacity, boolean isRoot, boolean isLeaf) {
+        super(actorType);
+        this.elementsFactory = elementsFactory;
+        this.nodeCapacity = nodeCapacity;
+        this.isRoot = isRoot;
+        this.isLeaf = isLeaf;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType       The actor type.
      * @param elementsType    The elements type.
      */
     public BListJidFactory(String actorType, String elementsType) {
         super(actorType);
         this.elementsType = elementsType;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType       The actor type.
+     * @param elementsType    The elements type.
+     * @param nodeCapacity The size of the nodes.
+     */
+    public BListJidFactory(String actorType, String elementsType,
+                           int nodeCapacity, boolean isRoot, boolean isLeaf) {
+        super(actorType);
+        this.elementsType = elementsType;
+        this.nodeCapacity = nodeCapacity;
+        this.isRoot = isRoot;
+        this.isLeaf = isLeaf;
     }
 
     /**
@@ -69,8 +104,9 @@ public class BListJidFactory extends ActorFactory {
             elementsFactory = f.getActorFactory(elementsType);
         }
         assignElementsFactory(lj);
-        lj.isRoot = true;
-        lj.setLeafNode(true);
+        lj.nodeCapacity = nodeCapacity;
+        lj.isRoot = isRoot;
+        lj.setLeafNode(isLeaf);
         return lj;
     }
 }
