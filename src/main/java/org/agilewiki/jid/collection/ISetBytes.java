@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Creates a JID actor in place of the ith element of the collection and loads its serialized data.
  */
-public class ISetBytes extends Request<Object, CollectionJid> {
+public class ISetBytes extends Request<Object, Collection> {
     /**
      * The index of the desired element.
      */

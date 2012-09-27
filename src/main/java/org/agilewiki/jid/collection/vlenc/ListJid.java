@@ -181,6 +181,10 @@ public class ListJid
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
+        if (i < 0)
+            i += list.size();
+        if (i < 0 || i >= list.size())
+            throw new IllegalArgumentException();
         Jid elementJid = createSubordinate(elementsFactory, this, bytes);
         _Jid oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);

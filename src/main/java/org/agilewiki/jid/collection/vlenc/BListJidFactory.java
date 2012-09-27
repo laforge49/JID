@@ -9,32 +9,19 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 /**
  * Creates ListJids.
  */
-public class ListJidFactory extends ActorFactory {
+public class BListJidFactory extends ActorFactory {
     private ActorFactory elementsFactory;
     private String elementsType;
-    private int initialCapacity;
 
     /**
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
      * @param elementsFactory The elements factory.
-     * @param initialCapacity The initial capacity.
      */
-    public ListJidFactory(String actorType, ActorFactory elementsFactory, int initialCapacity) {
+    public BListJidFactory(String actorType, ActorFactory elementsFactory) {
         super(actorType);
         this.elementsFactory = elementsFactory;
-        this.initialCapacity = initialCapacity;
-    }
-
-    /**
-     * Create an ActorFactory.
-     *
-     * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
-     */
-    public ListJidFactory(String actorType, ActorFactory elementsFactory) {
-        this(actorType, elementsFactory, 10);
     }
 
     /**
@@ -42,22 +29,10 @@ public class ListJidFactory extends ActorFactory {
      *
      * @param actorType       The actor type.
      * @param elementsType    The elements type.
-     * @param initialCapacity The initial capacity.
      */
-    public ListJidFactory(String actorType, String elementsType, int initialCapacity) {
+    public BListJidFactory(String actorType, String elementsType) {
         super(actorType);
         this.elementsType = elementsType;
-        this.initialCapacity = initialCapacity;
-    }
-
-    /**
-     * Create an ActorFactory.
-     *
-     * @param actorType    The actor type.
-     * @param elementsType The elements type.
-     */
-    public ListJidFactory(String actorType, String elementsType) {
-        this(actorType, elementsType, 10);
     }
 
     /**
@@ -65,9 +40,8 @@ public class ListJidFactory extends ActorFactory {
      *
      * @param listJid The new list.
      */
-    public void assignElementsFactory(ListJid listJid) {
+    public void assignElementsFactory(BListJid listJid) {
         listJid.elementsFactory = elementsFactory;
-        listJid.initialCapacity = initialCapacity;
     }
 
     /**
@@ -77,7 +51,7 @@ public class ListJidFactory extends ActorFactory {
      */
     @Override
     protected JLPCActor instantiateActor() throws Exception {
-        return new ListJid();
+        return new BListJid();
     }
 
     /**
@@ -89,12 +63,14 @@ public class ListJidFactory extends ActorFactory {
      */
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
-        ListJid lj = (ListJid) super.newActor(mailbox, parent);
+        BListJid lj = (BListJid) super.newActor(mailbox, parent);
         if (elementsFactory == null) {
             Factory f = (Factory) parent.getMatch(Factory.class);
             elementsFactory = f.getActorFactory(elementsType);
         }
         assignElementsFactory(lj);
+        lj.isRoot = true;
+        lj.setLeafNode(true);
         return lj;
     }
 }

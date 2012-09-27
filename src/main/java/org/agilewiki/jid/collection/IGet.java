@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Returns the ith JID component, or null if the index is out of range.
  */
-public class IGet extends Request<Actor, CollectionJid> {
+public class IGet extends Request<Actor, Collection> {
     /**
      * The index of the desired element.
      */
