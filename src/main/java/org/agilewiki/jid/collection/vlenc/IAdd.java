@@ -33,7 +33,7 @@ import org.agilewiki.jactor.lpc.Request;
  * If i < 0, the new JID is placed at position size + 1 - i.
  * (If i == -1, the element is added to the end of the list.)
  */
-public class IAdd extends Request<Object, ListJid> {
+public class IAdd extends Request<Object, JAList> {
     /**
      * The insertion index of the new element.
      */
@@ -64,12 +64,12 @@ public class IAdd extends Request<Object, ListJid> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJid;
+        return targetActor instanceof JAList;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        ((ListJid) targetActor).iAdd(i);
+        ((JAList) targetActor).iAdd(i);
         rp.processResponse(null);
     }
 }

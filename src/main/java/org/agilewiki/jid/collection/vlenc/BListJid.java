@@ -35,7 +35,7 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 /**
  * A balanced tree holding a list of JIDs, all of the same type.
  */
-public class BListJid extends AppJid implements Collection {
+public class BListJid extends AppJid implements Collection, JAList {
     protected final int SIZE = 0;
     protected final int IS_LEAF = 1;
     protected final int NODE = 2;
@@ -66,7 +66,6 @@ public class BListJid extends AppJid implements Collection {
         tupleFactories[SIZE] = IntegerJidFactory.fac;
         tupleFactories[IS_LEAF] = BooleanJidFactory.fac;
         tupleFactories[NODE] = new ListJidFactory(null, nodeElementsFactory, nodeCapacity);
-        setSize(0);
         getIsLeafJid().setValue(isLeaf);
     }
 
@@ -86,9 +85,10 @@ public class BListJid extends AppJid implements Collection {
         return getSizeJid().getValue();
     }
 
-    protected void setSize(int s)
+    protected void incSize(int inc)
             throws Exception {
-        getSizeJid().setValue(s);
+        IntegerJid sj = getSizeJid();
+        sj.setValue(sj.getValue() + inc);
     }
 
     protected BooleanJid getIsLeafJid()
@@ -166,5 +166,52 @@ public class BListJid extends AppJid implements Collection {
             ndx -= bns;
             i += 1;
         }
+    }
+
+    /**
+     * Resolves a JID pathname, returning a JID actor or null.
+     *
+     * @param pathname A JID pathname.
+     * @return A JID actor or null.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
+     */
+    @Override
+    public _Jid resolvePathname(String pathname)
+            throws Exception {
+        if (pathname.length() == 0) {
+            return this;
+        }
+        int s = pathname.indexOf("/");
+        if (s == -1)
+            s = pathname.length();
+        if (s == 0)
+            throw new IllegalArgumentException("pathname " + pathname);
+        String ns = pathname.substring(0, s);
+        int n = 0;
+        try {
+            n = Integer.parseInt(ns);
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("pathname " + pathname);
+        }
+        if (n < 0 || n >= size())
+            throw new IllegalArgumentException("pathname " + pathname);
+        _Jid jid = iGet(n);
+        if (s == pathname.length())
+            return jid;
+        return jid.resolvePathname(pathname.substring(s + 1));
+    }
+
+    @Override
+    public void iAdd(int i)
+            throws Exception {
+        ListJid node = getNode();
+        if (isLeaf()) {
+            node.iAdd(i);
+            incSize(1);
+            if (node.size() < nodeCapacity)
+                return;
+            throw new UnsupportedOperationException("leaf overflow"); //todo
+        }
+        throw new UnsupportedOperationException("not leaf"); //todo
     }
 }
