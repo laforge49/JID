@@ -101,9 +101,14 @@ public class BListJid extends AppJid implements Collection, JAList {
         return (ListJid) getUnionJid().getValue();
     }
 
+    public String getNodeType()
+            throws Exception {
+        return getNode().getActorType();
+    }
+
     public boolean isLeaf()
             throws Exception {
-        return getNode().getActorType().equals("leaf");
+        return getNodeType().equals("leaf");
     }
 
     public boolean isFat() throws Exception {
@@ -229,10 +234,9 @@ public class BListJid extends AppJid implements Collection, JAList {
             if (node.size() < nodeCapacity)
                 return;
             if (isRoot) {
-                rootLeafSplit();
+                rootSplit();
                 return;
             }
-            inodeLeafSplit();
             return;
         }
         int i = 0;
@@ -243,7 +247,16 @@ public class BListJid extends AppJid implements Collection, JAList {
             if (ndx < bns || i == node.size()) {
                 bnode.iAddBytes(ndx, bytes);
                 if (bnode.isFat()) {
-                    throw new UnsupportedOperationException("fat inode");
+                    node.iAdd(i - 1);
+                    BListJid left = (BListJid) node.iGet(i - 1);
+                    left.setNodeType(bnode.getNodeType());
+                    bnode.inodeSplit(left);
+                    if (node.size() < nodeCapacity)
+                        return;
+                    if (isRoot) {
+                        rootSplit();
+                        return;
+                    }
                 }
                 return;
             }
@@ -251,17 +264,33 @@ public class BListJid extends AppJid implements Collection, JAList {
         }
     }
 
-    protected void rootLeafSplit()
+    protected void inodeSplit(BListJid left)
+            throws Exception {
+        ListJid node = getNode();
+        int h = nodeCapacity / 2;
+        int i = 0;
+        while (i < h) {
+            Jid e = (Jid) node.iGet(0);
+            node.iRemove(0);
+            byte[] bytes = e.getSerializedBytes();
+            left.iAddBytes(-1, bytes);
+            i += 1;
+        }
+        incSize(-h);
+    }
+
+    protected void rootSplit()
             throws Exception {
         ListJid oldRoot = getNode();
+        String oldType = oldRoot.getActorType();
         getUnionJid().setValue("inode");
         ListJid newRoot = getNode();
         newRoot.iAdd(0);
         newRoot.iAdd(1);
         BListJid left = (BListJid) newRoot.iGet(0);
         BListJid right = (BListJid) newRoot.iGet(1);
-        left.setNodeType("leaf");
-        right.setNodeType("leaf");
+        left.setNodeType(oldType);
+        right.setNodeType(oldType);
         int h = nodeCapacity / 2;
         int i = 0;
         while (i < h) {
@@ -276,10 +305,5 @@ public class BListJid extends AppJid implements Collection, JAList {
             right.iAddBytes(-1, bytes);
             i += 1;
         }
-    }
-
-    protected void inodeLeafSplit()
-            throws Exception {
-        throw new UnsupportedOperationException("inodeLeafSplit"); //todo
     }
 }

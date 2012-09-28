@@ -104,4 +104,34 @@ public class BListTest extends TestCase {
             mailboxFactory.close();
         }
     }
+
+    public void test4() {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BListJidFactory intListFactory = new BListJidFactory("il", IntegerJidFactory.fac);
+            factory.registerActorFactory(intListFactory);
+            BListJid intList1 = (BListJid) factory.newActor("il");
+            int i = 0;
+            while (i < 391) {
+                intList1.iAdd(-1);
+                IntegerJid ij0 = (IntegerJid) intList1.iGet(-1);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 391) {
+                IntegerJid ij = (IntegerJid) intList1.iGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mailboxFactory.close();
+        }
+    }
 }

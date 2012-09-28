@@ -233,6 +233,10 @@ public class ListJid
 
     public void iRemove(int i)
             throws Exception {
+        if (i < 0)
+            i += list.size();
+        if (i < 0 || i >= list.size())
+            throw new IllegalArgumentException();
         _Jid jid = iGet(i);
         jid.setContainerJid(null);
         int c = -jid.getSerializedLength();
