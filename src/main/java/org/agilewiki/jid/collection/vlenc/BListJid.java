@@ -101,9 +101,13 @@ public class BListJid extends AppJid implements Collection, JAList {
         return (ListJid) getUnionJid().getValue();
     }
 
-    protected boolean isLeaf()
+    public boolean isLeaf()
             throws Exception {
         return getNode().getActorType().equals("leaf");
+    }
+
+    public boolean isFat() throws Exception {
+        return getNode().size() >= nodeCapacity;
     }
 
     /**
@@ -166,6 +170,7 @@ public class BListJid extends AppJid implements Collection, JAList {
             ndx -= bns;
             i += 1;
         }
+        throw new IllegalArgumentException();
     }
 
     /**
@@ -208,17 +213,19 @@ public class BListJid extends AppJid implements Collection, JAList {
     }
 
     @Override
-    public void iAddBytes(int i, byte[] bytes)
+    public void iAddBytes(int ndx, byte[] bytes)
             throws Exception {
-        if (i < 0)
-            i = size() + 1 + i;
+        if (ndx < 0)
+            ndx = size() + 1 + ndx;
+        if (ndx < 0 || ndx > size())
+            throw new IllegalArgumentException();
+        incSize(1);
         ListJid node = getNode();
         if (isLeaf()) {
             if (bytes == null)
-                node.iAdd(i);
+                node.iAdd(ndx);
             else
-                node.iAddBytes(i, bytes);
-            incSize(1);
+                node.iAddBytes(ndx, bytes);
             if (node.size() < nodeCapacity)
                 return;
             if (isRoot) {
@@ -228,7 +235,20 @@ public class BListJid extends AppJid implements Collection, JAList {
             inodeLeafSplit();
             return;
         }
-        throw new UnsupportedOperationException("not leaf"); //todo
+        int i = 0;
+        while (true) {
+            BListJid bnode = (BListJid) node.iGet(i);
+            int bns = bnode.size();
+            i += 1;
+            if (ndx < bns || i == node.size()) {
+                bnode.iAddBytes(ndx, bytes);
+                if (bnode.isFat()) {
+                    throw new UnsupportedOperationException("fat inode");
+                }
+                return;
+            }
+            ndx -= bns;
+        }
     }
 
     protected void rootLeafSplit()
