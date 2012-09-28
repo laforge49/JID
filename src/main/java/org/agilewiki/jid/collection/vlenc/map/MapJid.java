@@ -36,7 +36,7 @@ import org.agilewiki.jid.scalar.Scalar;
  */
 abstract public class MapJid<KEY_TYPE extends Comparable>
         extends ListJid
-        implements Map<KEY_TYPE>, Collection {
+        implements JAMap<KEY_TYPE>, Collection {
 
     public ActorFactory valueFactory;
 

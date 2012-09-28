@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Returns the Actor value with the smallest key >= the given key.
  */
-public class GetCeiling<KEY_TYPE extends Comparable> extends Request<Actor, Map<KEY_TYPE>> {
+public class GetCeiling<KEY_TYPE extends Comparable> extends Request<Actor, JAMap<KEY_TYPE>> {
     /**
      * The key.
      */
@@ -62,12 +62,12 @@ public class GetCeiling<KEY_TYPE extends Comparable> extends Request<Actor, Map<
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof Map;
+        return targetActor instanceof JAMap;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((Map<KEY_TYPE>) targetActor).getCeiling(key));
+        rp.processResponse(((JAMap<KEY_TYPE>) targetActor).getCeiling(key));
 
     }
 }

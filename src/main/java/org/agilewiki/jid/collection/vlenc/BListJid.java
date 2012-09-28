@@ -139,7 +139,7 @@ public class BListJid extends AppJid implements Collection {
     /**
      * Creates a JID actor and loads its serialized data.
      *
-     * @param ndx     The index of the desired element.
+     * @param ndx   The index of the desired element.
      * @param bytes Holds the serialized data.
      * @throws Exception Any exceptions thrown while processing the request.
      */
