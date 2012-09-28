@@ -24,21 +24,21 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.AppJid;
-import org.agilewiki.jid.scalar.flens.bool.BooleanJid;
-import org.agilewiki.jid.scalar.flens.bool.BooleanJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
+import org.agilewiki.jid.scalar.vlens.actor.UnionJid;
+import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
 
 /**
  * A balanced tree holding a list of JIDs, all of the same type.
  */
 public class BListJid extends AppJid implements Collection, JAList {
-    protected final int SIZE = 0;
-    protected final int IS_LEAF = 1;
-    protected final int NODE = 2;
+    protected final int TUPLE_SIZE = 0;
+    protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
     protected boolean isRoot;
     protected ActorFactory elementsFactory;
@@ -55,23 +55,23 @@ public class BListJid extends AppJid implements Collection, JAList {
         return elementsFactory;
     }
 
-    protected void setLeafNode(boolean isLeaf)
+    protected void init()
             throws Exception {
-        ActorFactory nodeElementsFactory = null;
-        if (isLeaf)
-            nodeElementsFactory = elementsFactory;
-        else
-            nodeElementsFactory = getFactory();
-        tupleFactories = new ActorFactory[3];
-        tupleFactories[SIZE] = IntegerJidFactory.fac;
-        tupleFactories[IS_LEAF] = BooleanJidFactory.fac;
-        tupleFactories[NODE] = new ListJidFactory(null, nodeElementsFactory, nodeCapacity);
-        getIsLeafJid().setValue(isLeaf);
+        tupleFactories = new ActorFactory[2];
+        tupleFactories[TUPLE_SIZE] = IntegerJidFactory.fac;
+        tupleFactories[TUPLE_UNION] = new UnionJidFactory(null,
+                new ListJidFactory("leaf", elementsFactory, nodeCapacity),
+                new ListJidFactory("inode", new BListJidFactory(null, elementsFactory, nodeCapacity, false, false), nodeCapacity));
+    }
+
+    protected void setNodeType(String nodeType)
+            throws Exception {
+        getUnionJid().setValue(nodeType);
     }
 
     protected IntegerJid getSizeJid()
             throws Exception {
-        return (IntegerJid) _iGet(SIZE);
+        return (IntegerJid) _iGet(TUPLE_SIZE);
     }
 
     /**
@@ -91,19 +91,19 @@ public class BListJid extends AppJid implements Collection, JAList {
         sj.setValue(sj.getValue() + inc);
     }
 
-    protected BooleanJid getIsLeafJid()
+    protected UnionJid getUnionJid()
             throws Exception {
-        return (BooleanJid) _iGet(IS_LEAF);
-    }
-
-    protected boolean isLeaf()
-            throws Exception {
-        return getIsLeafJid().getValue();
+        return (UnionJid) _iGet(TUPLE_UNION);
     }
 
     protected ListJid getNode()
             throws Exception {
-        return (ListJid) _iGet(NODE);
+        return (ListJid) getUnionJid().getValue();
+    }
+
+    protected boolean isLeaf()
+            throws Exception {
+        return getNode().getActorType().equals("leaf");
     }
 
     /**
@@ -204,14 +204,62 @@ public class BListJid extends AppJid implements Collection, JAList {
     @Override
     public void iAdd(int i)
             throws Exception {
+        iAddBytes(i, null);
+    }
+
+    @Override
+    public void iAddBytes(int i, byte[] bytes)
+            throws Exception {
+        if (i < 0)
+            i = size() + 1 + i;
         ListJid node = getNode();
         if (isLeaf()) {
-            node.iAdd(i);
+            if (bytes == null)
+                node.iAdd(i);
+            else
+                node.iAddBytes(i, bytes);
             incSize(1);
             if (node.size() < nodeCapacity)
                 return;
-            throw new UnsupportedOperationException("leaf overflow"); //todo
+            if (isRoot) {
+                rootLeafSplit();
+                return;
+            }
+            inodeLeafSplit();
+            return;
         }
         throw new UnsupportedOperationException("not leaf"); //todo
+    }
+
+    protected void rootLeafSplit()
+            throws Exception {
+        ListJid oldRoot = getNode();
+        getUnionJid().setValue("inode");
+        ListJid newRoot = getNode();
+        newRoot.iAdd(0);
+        newRoot.iAdd(1);
+        BListJid left = (BListJid) newRoot.iGet(0);
+        BListJid right = (BListJid) newRoot.iGet(1);
+        left.setNodeType("leaf");
+        right.setNodeType("leaf");
+        int h = nodeCapacity / 2;
+        int i = 0;
+        while (i < h) {
+            Jid e = (Jid) oldRoot.iGet(i);
+            byte[] bytes = e.getSerializedBytes();
+            left.iAddBytes(-1, bytes);
+            i += 1;
+        }
+        while (i < nodeCapacity) {
+            Jid e = (Jid) oldRoot.iGet(i);
+            byte[] bytes = e.getSerializedBytes();
+            right.iAddBytes(-1, bytes);
+            i += 1;
+        }
+    }
+
+    protected void inodeLeafSplit()
+            throws Exception {
+        throw new UnsupportedOperationException("inodeLeafSplit"); //todo
     }
 }

@@ -31,4 +31,6 @@ import org.agilewiki.jid._Jid;
 public interface JAList extends _Jid {
     public void iAdd(int i)
             throws Exception;
+    public void iAddBytes(int i, byte[] bytes)
+            throws Exception;
 }

@@ -14,7 +14,7 @@ public class BListJidFactory extends ActorFactory {
     private String elementsType;
     private int nodeCapacity = 28;
     private boolean isRoot = true;
-    private boolean isLeaf = true;
+    private boolean auto = true;
 
     /**
      * Create an ActorFactory.
@@ -35,12 +35,12 @@ public class BListJidFactory extends ActorFactory {
      * @param nodeCapacity    The size of the nodes.
      */
     public BListJidFactory(String actorType, ActorFactory elementsFactory,
-                           int nodeCapacity, boolean isRoot, boolean isLeaf) {
+                           int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
         this.elementsFactory = elementsFactory;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
-        this.isLeaf = isLeaf;
+        this.auto = auto;
     }
 
     /**
@@ -62,12 +62,12 @@ public class BListJidFactory extends ActorFactory {
      * @param nodeCapacity The size of the nodes.
      */
     public BListJidFactory(String actorType, String elementsType,
-                           int nodeCapacity, boolean isRoot, boolean isLeaf) {
+                           int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
         this.elementsType = elementsType;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
-        this.isLeaf = isLeaf;
+        this.auto = auto;
     }
 
     /**
@@ -106,7 +106,9 @@ public class BListJidFactory extends ActorFactory {
         assignElementsFactory(lj);
         lj.nodeCapacity = nodeCapacity;
         lj.isRoot = isRoot;
-        lj.setLeafNode(isLeaf);
+        lj.init();
+        if (auto)
+            lj.setNodeType("leaf");
         return lj;
     }
 }

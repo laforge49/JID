@@ -1,12 +1,13 @@
 package org.agilewiki.jid.collection.vlenc;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.JAFuture;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.Mailbox;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jid.JidFactories;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.string.StringJid;
 import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
@@ -18,10 +19,9 @@ public class BListTest extends TestCase {
             JAFactory factory = new JAFactory();
             factory.initialize(mailbox);
             (new JidFactories()).initialize(mailbox, factory);
-            JAFuture future = new JAFuture();
-            BListJidFactory stringListFactory = new BListJidFactory("slf", StringJidFactory.fac);
+            BListJidFactory stringListFactory = new BListJidFactory("sl", StringJidFactory.fac);
             factory.registerActorFactory(stringListFactory);
-            BListJid stringList1 = (BListJid) factory.newActor("slf");
+            BListJid stringList1 = (BListJid) factory.newActor("sl");
             stringList1.iAdd(0);
             stringList1.iAdd(1);
             stringList1.iAdd(2);
@@ -38,6 +38,36 @@ public class BListTest extends TestCase {
             assertEquals("a", s0.getValue());
             assertEquals("b", s1.getValue());
             assertEquals("c", s2.getValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test2() {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BListJidFactory intListFactory = new BListJidFactory("il", IntegerJidFactory.fac);
+            factory.registerActorFactory(intListFactory);
+            BListJid intList1 = (BListJid) factory.newActor("il");
+            int i = 0;
+            while (i < 28) {
+                intList1.iAdd(i);
+                IntegerJid ij0 = (IntegerJid) intList1.iGet(i);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 28) {
+                IntegerJid ij = (IntegerJid) intList1.iGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

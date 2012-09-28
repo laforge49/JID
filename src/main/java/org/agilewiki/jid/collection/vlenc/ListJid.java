@@ -192,6 +192,7 @@ public class ListJid
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
     }
 
+    @Override
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
         initialize();
