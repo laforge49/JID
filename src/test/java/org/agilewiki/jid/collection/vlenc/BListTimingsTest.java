@@ -14,6 +14,10 @@ public class BListTimingsTest extends TestCase {
 
         int s = 100000;
         int r = 1000;
+        // list size = 100000
+        // repetitions = 1000
+        // total run time (milliseconds) = 250
+        // time per update (microseconds) = 250
 
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
@@ -42,8 +46,11 @@ public class BListTimingsTest extends TestCase {
             }
             long t1 = System.currentTimeMillis();
             System.out.println("list size = " + s);
+            System.out.println("repetitions = " + r);
             long rt = t1 - t0;
-            System.out.println("total run time = " + rt);
+            System.out.println("total run time (milliseconds) = " + rt);
+            long tpu = rt * 1000L / r;
+            System.out.println("time per update (microseconds) = " + tpu);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
