@@ -336,6 +336,79 @@ public class BListJid extends AppJid implements Collection, JAList {
         }
     }
 
+    @Override
+    public void empty()
+            throws Exception {
+        ListJid node = getNode();
+        node.empty();
+        IntegerJid sj = getSizeJid();
+        sj.setValue(0);
+    }
+
+    @Override
+    public void iRemove(int ndx)
+            throws Exception {
+        int s = size();
+        if (ndx < 0)
+            ndx += s;
+        if (ndx < 0 || ndx >= s)
+            throw new IllegalArgumentException();
+        ListJid node = getNode();
+        if (isLeaf()) {
+            node.iRemove(ndx);
+            return;
+        }
+        int i = 0;
+        while (i < node.size()) {
+            BListJid bnode = (BListJid) node.iGet(i);
+            int bns = bnode.size();
+            if (ndx < bns) {
+                bnode.iRemove(ndx);
+                incSize(-1);
+                int bnodeSize = bnode.size();
+                if (bnodeSize > nodeCapacity / 3)
+                    return;
+                if (bnodeSize == 0) {
+                    node.iRemove(ndx);
+                    return;
+                }
+                if (s == 1)
+                    return;
+                if (ndx > 0) {
+                    BListJid leftBNode = (BListJid) node.iGet(ndx -1);
+                    if (leftBNode.size() + bnodeSize < nodeCapacity) {
+                        bnode.append(leftBNode);
+                        node.iRemove(ndx);
+                        return;
+                    }
+                }
+                if (ndx + 1 < s) {
+                    BListJid rightBNode = (BListJid) node.iGet(ndx + 1);
+                    if (bnodeSize + rightBNode.size() < nodeCapacity) {
+                        rightBNode.append(bnode);
+                        node.iRemove(ndx + 1);
+                        return;
+                    }
+                }
+                return;
+            }
+            ndx -= bns;
+            i += 1;
+        }
+        throw new IllegalArgumentException();
+    }
+
+    void append(BListJid leftNode)
+            throws Exception {
+        ListJid node = getNode();
+        int i = 0;
+        while (i < node.size()) {
+            BListJid bnode = (BListJid) node.iGet(i);
+            leftNode.append(bnode.getSerializedBytes(), bnode.size());
+            i += 1;
+        }
+    }
+
     void append(byte[] bytes, int eSize)
             throws Exception {
         ListJid node = getNode();

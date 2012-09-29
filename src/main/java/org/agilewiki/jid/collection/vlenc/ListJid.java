@@ -216,6 +216,7 @@ public class ListJid
         change(c);
     }
 
+    @Override
     public void empty()
             throws Exception {
         int c = 0;
@@ -231,6 +232,7 @@ public class ListJid
         change(c);
     }
 
+    @Override
     public void iRemove(int i)
             throws Exception {
         if (i < 0)

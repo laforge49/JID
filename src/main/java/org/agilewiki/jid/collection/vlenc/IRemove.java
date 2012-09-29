@@ -32,7 +32,7 @@ import org.agilewiki.jactor.lpc.Request;
  * Removes a JID from the ith position.
  * If i < 0, the new JID is removed from position size + 1 - i.
  */
-public class IRemove extends Request<Object, ListJid> {
+public class IRemove extends Request<Object, JAList> {
     /**
      * The index of the desired element.
      */
@@ -63,12 +63,12 @@ public class IRemove extends Request<Object, ListJid> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJid;
+        return targetActor instanceof JAList;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        ((ListJid) targetActor).iRemove(i);
+        ((JAList) targetActor).iRemove(i);
         rp.processResponse(null);
     }
 }

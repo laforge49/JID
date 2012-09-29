@@ -31,7 +31,7 @@ import org.agilewiki.jactor.lpc.Request;
 /**
  * Empty a collection.
  */
-public class Empty extends Request<Object, ListJid> {
+public class Empty extends Request<Object, JAList> {
     public final static Empty req = new Empty();
 
     /**
@@ -41,12 +41,12 @@ public class Empty extends Request<Object, ListJid> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof ListJid;
+        return targetActor instanceof JAList;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        ((ListJid) targetActor).empty();
+        ((JAList) targetActor).empty();
         rp.processResponse(null);
     }
 }
