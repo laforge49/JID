@@ -264,46 +264,82 @@ public class BListJid extends AppJid implements Collection, JAList {
         }
     }
 
-    protected void inodeSplit(BListJid left)
+    protected void rootSplit()
+            throws Exception {
+        ListJid oldRootNode = getNode();
+        String oldType = oldRootNode.getActorType();
+        getUnionJid().setValue("inode");
+        ListJid newRootNode = getNode();
+        newRootNode.iAdd(0);
+        newRootNode.iAdd(1);
+        BListJid leftBNode = (BListJid) newRootNode.iGet(0);
+        BListJid rightBNode = (BListJid) newRootNode.iGet(1);
+        leftBNode.setNodeType(oldType);
+        rightBNode.setNodeType(oldType);
+        int h = nodeCapacity / 2;
+        int i = 0;
+        if (oldType.equals("leaf")) {
+            while (i < h) {
+                Jid e = (Jid) oldRootNode.iGet(i);
+                byte[] bytes = e.getSerializedBytes();
+                leftBNode.iAddBytes(-1, bytes);
+                i += 1;
+            }
+            while (i < nodeCapacity) {
+                Jid e = (Jid) oldRootNode.iGet(i);
+                byte[] bytes = e.getSerializedBytes();
+                rightBNode.iAddBytes(-1, bytes);
+                i += 1;
+            }
+        } else {
+            while (i < h) {
+                BListJid e = (BListJid) oldRootNode.iGet(i);
+                int eSize = e.size();
+                byte[] bytes = e.getSerializedBytes();
+                leftBNode.append(bytes, eSize);
+                i += 1;
+            }
+            while (i < nodeCapacity) {
+                BListJid e = (BListJid) oldRootNode.iGet(i);
+                int eSize = e.size();
+                byte[] bytes = e.getSerializedBytes();
+                rightBNode.append(bytes, eSize);
+                i += 1;
+            }
+        }
+    }
+
+    protected void inodeSplit(BListJid leftBNode)
             throws Exception {
         ListJid node = getNode();
         int h = nodeCapacity / 2;
         int i = 0;
-        while (i < h) {
-            Jid e = (Jid) node.iGet(0);
-            node.iRemove(0);
-            byte[] bytes = e.getSerializedBytes();
-            left.iAddBytes(-1, bytes);
-            i += 1;
+        if (isLeaf()) {
+            while (i < h) {
+                Jid e = (Jid) node.iGet(0);
+                node.iRemove(0);
+                byte[] bytes = e.getSerializedBytes();
+                leftBNode.iAddBytes(-1, bytes);
+                i += 1;
+            }
+            incSize(-h);
+        } else {
+            while (i < h) {
+                BListJid e = (BListJid) node.iGet(0);
+                node.iRemove(0);
+                int eSize = e.size();
+                incSize(-eSize);
+                byte[] bytes = e.getSerializedBytes();
+                leftBNode.append(bytes, eSize);
+                i += 1;
+            }
         }
-        incSize(-h);
     }
 
-    protected void rootSplit()
+    void append(byte[] bytes, int eSize)
             throws Exception {
-        ListJid oldRoot = getNode();
-        String oldType = oldRoot.getActorType();
-        getUnionJid().setValue("inode");
-        ListJid newRoot = getNode();
-        newRoot.iAdd(0);
-        newRoot.iAdd(1);
-        BListJid left = (BListJid) newRoot.iGet(0);
-        BListJid right = (BListJid) newRoot.iGet(1);
-        left.setNodeType(oldType);
-        right.setNodeType(oldType);
-        int h = nodeCapacity / 2;
-        int i = 0;
-        while (i < h) {
-            Jid e = (Jid) oldRoot.iGet(i);
-            byte[] bytes = e.getSerializedBytes();
-            left.iAddBytes(-1, bytes);
-            i += 1;
-        }
-        while (i < nodeCapacity) {
-            Jid e = (Jid) oldRoot.iGet(i);
-            byte[] bytes = e.getSerializedBytes();
-            right.iAddBytes(-1, bytes);
-            i += 1;
-        }
+        ListJid node = getNode();
+        node.iAddBytes(-1, bytes);
+        incSize(eSize);
     }
 }
