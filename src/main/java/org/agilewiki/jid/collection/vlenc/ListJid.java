@@ -235,9 +235,10 @@ public class ListJid
     @Override
     public void iRemove(int i)
             throws Exception {
+        int s = size();
         if (i < 0)
-            i += list.size();
-        if (i < 0 || i >= list.size())
+            i += s;
+        if (i < 0 || i >= s)
             throw new IllegalArgumentException();
         _Jid jid = iGet(i);
         jid.setContainerJid(null);

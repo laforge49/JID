@@ -111,8 +111,13 @@ public class BListJid extends AppJid implements Collection, JAList {
         return getNodeType().equals("leaf");
     }
 
+    public int nodeSize()
+            throws Exception {
+        return getNode().size();
+    }
+
     public boolean isFat() throws Exception {
-        return getNode().size() >= nodeCapacity;
+        return nodeSize() >= nodeCapacity;
     }
 
     /**
@@ -356,6 +361,7 @@ public class BListJid extends AppJid implements Collection, JAList {
         ListJid node = getNode();
         if (isLeaf()) {
             node.iRemove(ndx);
+            incSize(-1);
             return;
         }
         int i = 0;
@@ -372,19 +378,19 @@ public class BListJid extends AppJid implements Collection, JAList {
                     node.iRemove(ndx);
                     return;
                 }
-                if (s == 1)
+                if (node.size() == 1)
                     return;
                 if (ndx > 0) {
-                    BListJid leftBNode = (BListJid) node.iGet(ndx -1);
-                    if (leftBNode.size() + bnodeSize < nodeCapacity) {
+                    BListJid leftBNode = (BListJid) node.iGet(ndx - 1);
+                    if (leftBNode.nodeSize() + bnodeSize < nodeCapacity) {
                         bnode.append(leftBNode);
                         node.iRemove(ndx);
                         return;
                     }
                 }
-                if (ndx + 1 < s) {
+                if (ndx + 1 < node.size()) {
                     BListJid rightBNode = (BListJid) node.iGet(ndx + 1);
-                    if (bnodeSize + rightBNode.size() < nodeCapacity) {
+                    if (bnodeSize + rightBNode.nodeSize() < nodeCapacity) {
                         rightBNode.append(bnode);
                         node.iRemove(ndx + 1);
                         return;
@@ -402,10 +408,18 @@ public class BListJid extends AppJid implements Collection, JAList {
             throws Exception {
         ListJid node = getNode();
         int i = 0;
-        while (i < node.size()) {
-            BListJid bnode = (BListJid) node.iGet(i);
-            leftNode.append(bnode.getSerializedBytes(), bnode.size());
-            i += 1;
+        if (isLeaf()) {
+            while (i < node.size()) {
+                Jid e = (Jid) node.iGet(i);
+                leftNode.append(e.getSerializedBytes(), 1);
+                i += 1;
+            }
+        } else {
+            while (i < node.size()) {
+                BListJid e = (BListJid) node.iGet(i);
+                leftNode.append(e.getSerializedBytes(), e.size());
+                i += 1;
+            }
         }
     }
 
