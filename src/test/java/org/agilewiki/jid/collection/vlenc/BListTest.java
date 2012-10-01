@@ -184,7 +184,7 @@ public class BListTest extends TestCase {
             }
             i = 0;
             while (i < 10000) {
-                intList1.iRemove(0);
+                intList1.iRemove(-1);
                 i += 1;
             }
             assertEquals(0, intList1.size());
