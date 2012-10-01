@@ -376,30 +376,29 @@ public class BListJid extends AppJid implements Collection, JAList {
                     return;
                 if (bnodeSize == 0) {
                     node.iRemove(ndx);
-                    return;
-                }
-                if (i > 0) {
-                    BListJid leftBNode = (BListJid) node.iGet(i - 1);
-                    if (leftBNode.nodeSize() + bnodeSize < nodeCapacity) {
-                        bnode.append(leftBNode);
-                        node.iRemove(i);
-                        bnode = leftBNode;
-                        bnodeSize = bnode.size();
-                        ndx -= 1;
-                        return;
+                } else {
+                    if (i > 0) {
+                        BListJid leftBNode = (BListJid) node.iGet(i - 1);
+                        if (leftBNode.nodeSize() + bnodeSize < nodeCapacity) {
+                            bnode.append(leftBNode);
+                            node.iRemove(i);
+                        }
+                    }
+                    if (i + 1 < node.size()) {
+                        BListJid rightBNode = (BListJid) node.iGet(i + 1);
+                        if (bnodeSize + rightBNode.nodeSize() < nodeCapacity) {
+                            rightBNode.append(bnode);
+                            node.iRemove(i + 1);
+                        }
                     }
                 }
-                if (i + 1 < node.size()) {
-                    BListJid rightBNode = (BListJid) node.iGet(i + 1);
-                    if (bnodeSize + rightBNode.nodeSize() < nodeCapacity) {
-                        rightBNode.append(bnode);
-                        node.iRemove(i + 1);
-                        bnodeSize = bnode.size();
-                        return;
-                    }
+                if (node.size() == 1 && isRoot && !isLeaf()) {
+                    bnode = (BListJid) node.iGet(0);
+                    setNodeType(bnode.getNodeType());
+                    IntegerJid sj = getSizeJid();
+                    sj.setValue(0);
+                    bnode.append(this);
                 }
-                if (node.size() == 1)
-                    return;
                 return;
             }
             ndx -= bns;

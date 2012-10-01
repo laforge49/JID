@@ -187,6 +187,7 @@ public class BListTest extends TestCase {
                 intList1.iRemove(-1);
                 i += 1;
             }
+            assertTrue(intList1.isLeaf());
             assertEquals(0, intList1.size());
         } catch (Exception e) {
             e.printStackTrace();
