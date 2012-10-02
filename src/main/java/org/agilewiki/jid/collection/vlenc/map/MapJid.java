@@ -27,6 +27,7 @@ import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
+import org.agilewiki.jid.collection.flenc.TupleJid;
 import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
 import org.agilewiki.jid.scalar.Scalar;
@@ -153,7 +154,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
             return false;
         i = -i - 1;
         iAdd(i);
-        Collection t = (Collection) iGet(i);
+        TupleJid t = (TupleJid) iGet(i);
         Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.iGet(0);
         e0.setValue(key);
         return true;
@@ -172,7 +173,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         int i = search(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGet(i);
+        TupleJid t = (TupleJid) iGet(i);
         return t.iGet(1);
     }
 
@@ -189,7 +190,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         int i = higher(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGet(i);
+        TupleJid t = (TupleJid) iGet(i);
         return t.iGet(1);
     }
 
@@ -206,7 +207,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable>
         int i = ceiling(key);
         if (i < 0)
             return null;
-        Collection t = (Collection) iGet(i);
+        TupleJid t = (TupleJid) iGet(i);
         return t.iGet(1);
     }
 
