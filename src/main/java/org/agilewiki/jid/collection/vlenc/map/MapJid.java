@@ -168,14 +168,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
      * @return The jid assigned to the key, or null.
      */
     @Override
-    final public _Jid kGet(KEY_TYPE key)
+    final public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = search(key);
         if (i < 0)
             return null;
         TupleJid t = (TupleJid) iGet(i);
-        return t.iGet(1);
+        return (VALUE_TYPE) t.iGet(1);
     }
 
     /**
@@ -185,14 +185,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
      * @return The matching jid, or null.
      */
     @Override
-    final public _Jid getHigher(KEY_TYPE key)
+    final public VALUE_TYPE getHigher(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = higher(key);
         if (i < 0)
             return null;
         TupleJid t = (TupleJid) iGet(i);
-        return t.iGet(1);
+        return (VALUE_TYPE) t.iGet(1);
     }
 
     /**
@@ -202,14 +202,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
      * @return The matching jid, or null.
      */
     @Override
-    final public _Jid getCeiling(KEY_TYPE key)
+    final public VALUE_TYPE getCeiling(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = ceiling(key);
         if (i < 0)
             return null;
         TupleJid t = (TupleJid) iGet(i);
-        return t.iGet(1);
+        return (VALUE_TYPE) t.iGet(1);
     }
 
     /**
@@ -257,13 +257,13 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         return jid.resolvePathname(pathname.substring(s + 1));
     }
 
-    public _Jid getFirst()
+    public VALUE_TYPE getFirst()
             throws Exception {
-        return iGet(0);
+        return (VALUE_TYPE) iGet(0);
     }
 
-    public _Jid getLast()
+    public VALUE_TYPE getLast()
             throws Exception {
-        return iGet(-1);
+        return (VALUE_TYPE) iGet(-1);
     }
 }

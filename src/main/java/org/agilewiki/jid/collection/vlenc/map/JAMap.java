@@ -55,7 +55,7 @@ public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
      * @param key The key.
      * @return The actor assigned to the key, or null.
      */
-    public _Jid kGet(KEY_TYPE key)
+    public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception;
 
     /**
@@ -64,7 +64,7 @@ public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
      * @param key The key.
      * @return The matching jid, or null.
      */
-    public _Jid getHigher(KEY_TYPE key)
+    public VALUE_TYPE getHigher(KEY_TYPE key)
             throws Exception;
 
     /**
@@ -73,7 +73,7 @@ public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
      * @param key The key.
      * @return The matching jid, or null.
      */
-    public _Jid getCeiling(KEY_TYPE key)
+    public VALUE_TYPE getCeiling(KEY_TYPE key)
             throws Exception;
 
     /**
@@ -85,9 +85,9 @@ public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
     public boolean kRemove(KEY_TYPE key)
             throws Exception;
 
-    public _Jid getFirst()
+    public VALUE_TYPE getFirst()
             throws Exception;
 
-    public _Jid getLast()
+    public VALUE_TYPE getLast()
             throws Exception;
 }
