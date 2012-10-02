@@ -23,62 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.scalar.flens.lng.LongJidFactory;
 
 /**
  * Holds a map with Long keys.
  */
-public class LongMapJid extends MapJid<Long> {
-    /**
-     * Create a KMake request.
-     *
-     * @param key The key.
-     * @return The KMake request.
-     */
-    final public static KMake<Long> newKMake(Long key) {
-        return new KMake<Long>(key);
-    }
-
-    /**
-     * Create a KRemove request.
-     *
-     * @param key The key.
-     * @return The KRemove request.
-     */
-    final public static KRemove<Long> newKRemove(Long key) {
-        return new KRemove<Long>(key);
-    }
-
-    /**
-     * Create a KGet request.
-     *
-     * @param key The key.
-     * @return The KGet request.
-     */
-    final public static KGet<Long> newKGet(Long key) {
-        return new KGet<Long>(key);
-    }
-
-    /**
-     * Create a GetHigher request.
-     *
-     * @param key The key.
-     * @return The GetHigher request.
-     */
-    final public static GetHigher<Long> newGetHigher(Long key) {
-        return new GetHigher<Long>(key);
-    }
-
-    /**
-     * Create a GetCeiling request.
-     *
-     * @param key The key.
-     * @return The GetCeiling request.
-     */
-    final public static GetCeiling<Long> newGetCeiling(Long key) {
-        return new GetCeiling<Long>(key);
-    }
-
+public class LongMapJid<VALUE_TYPE extends Jid> extends MapJid<Long, VALUE_TYPE> {
     /**
      * Returns the JidFactory for the key.
      *

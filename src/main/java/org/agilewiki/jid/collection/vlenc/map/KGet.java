@@ -27,11 +27,13 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.Jid;
 
 /**
  * Returns the value assigned to a given key.
  */
-public class KGet<KEY_TYPE extends Comparable> extends Request<Actor, JAMap<KEY_TYPE>> {
+public class KGet<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+        extends Request<Actor, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.
      */
@@ -67,7 +69,7 @@ public class KGet<KEY_TYPE extends Comparable> extends Request<Actor, JAMap<KEY_
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((JAMap<KEY_TYPE>) targetActor).kGet(key));
+        rp.processResponse(((JAMap<KEY_TYPE, VALUE_TYPE>) targetActor).kGet(key));
 
     }
 }

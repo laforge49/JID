@@ -27,11 +27,13 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.Jid;
 
 /**
  * Returns the Actor value with the smallest key >= the given key.
  */
-public class GetCeiling<KEY_TYPE extends Comparable> extends Request<Actor, JAMap<KEY_TYPE>> {
+public class GetCeiling<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+        extends Request<Actor, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.
      */
@@ -67,7 +69,7 @@ public class GetCeiling<KEY_TYPE extends Comparable> extends Request<Actor, JAMa
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((JAMap<KEY_TYPE>) targetActor).getCeiling(key));
+        rp.processResponse(((JAMap<KEY_TYPE, VALUE_TYPE>) targetActor).getCeiling(key));
 
     }
 }

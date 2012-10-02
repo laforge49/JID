@@ -8,6 +8,7 @@ import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJid;
 import org.agilewiki.jid.collection.vlenc.map.IntegerMapJidFactory;
+import org.agilewiki.jid.collection.vlenc.map.KMake;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.GetActor;
 import org.agilewiki.jid.scalar.vlens.actor.RootJid;
@@ -31,7 +32,7 @@ public class BigIntegerIntegerMapTest extends TestCase {
 
         int i = 0;
         while (i < 10) {
-            map.newKMake(i).send(future, map);
+            new KMake(i).send(future, map);
             i += 1;
         }
 

@@ -6,6 +6,8 @@ import org.agilewiki.jactor.factory.JAFactory;
 import org.agilewiki.jid.GetSerializedBytes;
 import org.agilewiki.jid.JidFactories;
 import org.agilewiki.jid.ResolvePathname;
+import org.agilewiki.jid.collection.vlenc.map.KGet;
+import org.agilewiki.jid.collection.vlenc.map.KMake;
 import org.agilewiki.jid.scalar.vlens.actor.ActorJid;
 import org.agilewiki.jid.scalar.vlens.actor.RootJid;
 import org.agilewiki.jid.scalar.vlens.actor.SetActor;
@@ -27,8 +29,8 @@ public class BlobTest extends TestCase {
         root.initialize(mailbox, factory);
         (new SetActor("blob")).send(future, root);
         Blob blob = (Blob) (new ResolvePathname("0")).send(future, root);
-        blob.newKMake("fun").send(future, blob);
-        ActorJid fun = (ActorJid) blob.newKGet("fun").send(future, blob);
+        new KMake<String, ActorJid>("fun").send(future, blob);
+        ActorJid fun = (ActorJid) new KGet<String, ActorJid>("fun").send(future, blob);
         (new SetActor("hi")).send(future, fun);
         byte[] rootBytes = GetSerializedBytes.req.send(future, root);
 

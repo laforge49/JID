@@ -25,6 +25,7 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
 import org.agilewiki.jid.collection.flenc.TupleJid;
@@ -35,9 +36,9 @@ import org.agilewiki.jid.scalar.Scalar;
 /**
  * Holds a map.
  */
-abstract public class MapJid<KEY_TYPE extends Comparable>
+abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
         extends ListJid
-        implements JAMap<KEY_TYPE>, Collection {
+        implements JAMap<KEY_TYPE, VALUE_TYPE>, Collection {
 
     public ActorFactory valueFactory;
 

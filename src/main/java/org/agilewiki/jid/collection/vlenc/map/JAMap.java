@@ -23,12 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid._Jid;
 
 /**
  * Holds a map.
  */
-public interface JAMap<KEY_TYPE extends Comparable>
+public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
         extends _Jid {
 
     /**

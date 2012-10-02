@@ -18,22 +18,22 @@ public class StringStringMapJidTest extends TestCase {
             JAFuture future = new JAFuture();
             Actor m = (new StringMapJidFactory(JidFactories.STRING_STRING_MAP_JID_TYPE, StringJidFactory.fac)).
                     newActor(factory.getMailbox(), factory);
-            assertNull(StringMapJid.newKGet("a").send(future, m));
-            assertTrue(StringMapJid.newKMake("b").send(future, m));
-            assertNull(StringMapJid.newKGet("a").send(future, m));
-            Actor value = StringMapJid.newKGet("b").send(future, m);
+            assertNull(new KGet<String, StringJid>("a").send(future, m));
+            assertTrue(new KMake<String, StringJid>("b").send(future, m));
+            assertNull(new KGet<String, StringJid>("a").send(future, m));
+            Actor value = new KGet<String, StringJid>("b").send(future, m);
             assertNotNull(value);
             assertTrue(value instanceof StringJid);
-            value = StringMapJid.newGetHigher("a").send(future, m);
+            value = new GetHigher<String, StringJid>("a").send(future, m);
             assertTrue(value instanceof StringJid);
-            assertNull(StringMapJid.newGetHigher("b").send(future, m));
-            value = StringMapJid.newGetCeiling("b").send(future, m);
+            assertNull(new GetHigher<String, StringJid>("b").send(future, m));
+            value = new GetCeiling<String, StringJid>("b").send(future, m);
             assertTrue(value instanceof StringJid);
-            assertNull(StringMapJid.newGetCeiling("c").send(future, m));
-            assertNull(StringMapJid.newKGet("c").send(future, m));
-            assertTrue(StringMapJid.newKRemove("b").send(future, m));
-            assertFalse(StringMapJid.newKRemove("b").send(future, m));
-            assertNull(StringMapJid.newKGet("b").send(future, m));
+            assertNull(new GetCeiling<String, StringJid>("c").send(future, m));
+            assertNull(new KGet<String, StringJid>("c").send(future, m));
+            assertTrue(new KRemove<String, StringJid>("b").send(future, m));
+            assertFalse(new KRemove<String, StringJid>("b").send(future, m));
+            assertNull(new KGet<String, StringJid>("b").send(future, m));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

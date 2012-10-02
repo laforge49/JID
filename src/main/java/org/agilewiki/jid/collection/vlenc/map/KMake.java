@@ -27,11 +27,13 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.Jid;
 
 /**
  * Create a keyed entry.
  */
-public class KMake<KEY_TYPE extends Comparable> extends Request<Boolean, JAMap<KEY_TYPE>> {
+public class KMake<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+        extends Request<Boolean, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.
      */
@@ -67,6 +69,6 @@ public class KMake<KEY_TYPE extends Comparable> extends Request<Boolean, JAMap<K
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((JAMap<KEY_TYPE>) targetActor).kMake(key));
+        rp.processResponse(((JAMap<KEY_TYPE, VALUE_TYPE>) targetActor).kMake(key));
     }
 }

@@ -23,62 +23,13 @@
  */
 package org.agilewiki.jid.collection.vlenc.map;
 
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 
 /**
  * Holds a map with Integer keys.
  */
-public class IntegerMapJid extends MapJid<Integer> {
-    /**
-     * Create a KMake request.
-     *
-     * @param key The key.
-     * @return The KMake request.
-     */
-    final public static KMake<Integer> newKMake(Integer key) {
-        return new KMake<Integer>(key);
-    }
-
-    /**
-     * Create a KRemove request.
-     *
-     * @param key The key.
-     * @return The KRemove request.
-     */
-    final public static KRemove<Integer> newKRemove(Integer key) {
-        return new KRemove<Integer>(key);
-    }
-
-    /**
-     * Create a KGet request.
-     *
-     * @param key The key.
-     * @return The KGet request.
-     */
-    final public static KGet<Integer> newKGet(Integer key) {
-        return new KGet<Integer>(key);
-    }
-
-    /**
-     * Create a GetHigher request.
-     *
-     * @param key The key.
-     * @return The GetHigher request.
-     */
-    final public static GetHigher<Integer> newGetHigher(Integer key) {
-        return new GetHigher<Integer>(key);
-    }
-
-    /**
-     * Create a GetCeiling request.
-     *
-     * @param key The key.
-     * @return The GetCeiling request.
-     */
-    final public static GetCeiling<Integer> newGetCeiling(Integer key) {
-        return new GetCeiling<Integer>(key);
-    }
-
+public class IntegerMapJid<VALUE_TYPE extends Jid> extends MapJid<Integer, VALUE_TYPE> {
     /**
      * Returns the JidFactory for the key.
      *

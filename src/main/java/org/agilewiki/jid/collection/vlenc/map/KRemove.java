@@ -27,11 +27,13 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
+import org.agilewiki.jid.Jid;
 
 /**
  * Remove an entry.
  */
-public class KRemove<KEY_TYPE extends Comparable> extends Request<Boolean, JAMap<KEY_TYPE>> {
+public class KRemove<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+        extends Request<Boolean, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.
      */
@@ -67,7 +69,7 @@ public class KRemove<KEY_TYPE extends Comparable> extends Request<Boolean, JAMap
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((JAMap<KEY_TYPE>) targetActor).kRemove(key));
+        rp.processResponse(((JAMap<KEY_TYPE, VALUE_TYPE>) targetActor).kRemove(key));
 
     }
 }
