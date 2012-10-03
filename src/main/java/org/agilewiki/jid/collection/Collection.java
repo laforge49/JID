@@ -23,12 +23,13 @@
  */
 package org.agilewiki.jid.collection;
 
+import org.agilewiki.jid.Jid;
 import org.agilewiki.jid._Jid;
 
 /**
  * A collection of JID actors.
  */
-public interface Collection
+public interface Collection<ENTRY_TYPE extends Jid>
         extends _Jid {
 
     /**
@@ -45,7 +46,7 @@ public interface Collection
      * @param ndx Selects the element.
      * @return The ith JID component, or null if the index is out of range.
      */
-    public _Jid iGet(int ndx)
+    public ENTRY_TYPE iGet(int ndx)
             throws Exception;
 
     /**
