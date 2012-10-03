@@ -180,14 +180,13 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
      * @return The matching jid, or null.
      */
     @Override
-    final public VALUE_TYPE getHigher(KEY_TYPE key)
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = higher(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
-        return t.getValue();
+        return iGet(i);
     }
 
     /**
@@ -197,14 +196,13 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
      * @return The matching jid, or null.
      */
     @Override
-    final public VALUE_TYPE getCeiling(KEY_TYPE key)
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> getCeiling(KEY_TYPE key)
             throws Exception {
         initialize();
         int i = ceiling(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
-        return (VALUE_TYPE) t.getValue();
+        return iGet(i);
     }
 
     /**
@@ -252,13 +250,13 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         return jid.resolvePathname(pathname.substring(s + 1));
     }
 
-    public VALUE_TYPE getFirst()
+    public MapEntry<KEY_TYPE, VALUE_TYPE> getFirst()
             throws Exception {
-        return (VALUE_TYPE) iGet(0);
+        return iGet(0);
     }
 
-    public VALUE_TYPE getLast()
+    public MapEntry<KEY_TYPE, VALUE_TYPE> getLast()
             throws Exception {
-        return (VALUE_TYPE) iGet(-1);
+        return iGet(-1);
     }
 }
