@@ -71,15 +71,6 @@ public class BListJidFactory extends ActorFactory {
     }
 
     /**
-     * Initialize the new list.
-     *
-     * @param listJid The new list.
-     */
-    public void assignElementsFactory(BListJid listJid) {
-        listJid.elementsFactory = elementsFactory;
-    }
-
-    /**
      * Create a JLPCActor.
      *
      * @return The new actor.
@@ -103,7 +94,7 @@ public class BListJidFactory extends ActorFactory {
             Factory f = (Factory) parent.getMatch(Factory.class);
             elementsFactory = f.getActorFactory(elementsType);
         }
-        assignElementsFactory(lj);
+        lj.elementsFactory = elementsFactory;
         lj.nodeCapacity = nodeCapacity;
         lj.isRoot = isRoot;
         lj.init();
