@@ -40,7 +40,7 @@ public class BListTimingsTest extends TestCase {
             int j = 0;
             while (j < r) {
                 BListJid intList2 = (BListJid) intList1.copyJID(mailbox);
-                intList1.iAdd(s/2);
+                intList1.iAdd(s / 2);
                 intList2.getSerializedBytes();
                 j += 1;
             }

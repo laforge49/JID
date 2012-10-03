@@ -24,14 +24,10 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
-import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.Collection;
-import org.agilewiki.jid.collection.flenc.TupleJid;
-import org.agilewiki.jid.collection.flenc.TupleJidFactory;
 import org.agilewiki.jid.collection.vlenc.ListJid;
-import org.agilewiki.jid.scalar.Scalar;
 
 /**
  * Holds a map.
@@ -65,7 +61,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
     @Override
     final protected ActorFactory getListFactory()
             throws Exception {
-        return new TupleJidFactory(null, getKeyFactory(), getValueFactory());
+        return new MapEntryFactory(null, getKeyFactory(), getValueFactory());
     }
 
     /**
@@ -92,7 +88,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int high = size() - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            ComparableKey<KEY_TYPE> midVal = (ComparableKey<KEY_TYPE>) iGet(mid);
+            MapEntry<KEY_TYPE, VALUE_TYPE> midVal = (MapEntry) iGet(mid);
             int c = midVal.compareKeyTo(key);
             if (c < 0)
                 low = mid + 1;
@@ -155,9 +151,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
             return false;
         i = -i - 1;
         iAdd(i);
-        TupleJid t = (TupleJid) iGet(i);
-        Scalar<KEY_TYPE, KEY_TYPE> e0 = (Scalar<KEY_TYPE, KEY_TYPE>) t.iGet(0);
-        e0.setValue(key);
+        MapEntry<KEY_TYPE, VALUE_TYPE> me = (MapEntry) iGet(i);
+        me.setKey(key);
         return true;
     }
 
@@ -174,8 +169,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = search(key);
         if (i < 0)
             return null;
-        TupleJid t = (TupleJid) iGet(i);
-        return (VALUE_TYPE) t.iGet(1);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        return t.getValue();
     }
 
     /**
@@ -191,8 +186,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = higher(key);
         if (i < 0)
             return null;
-        TupleJid t = (TupleJid) iGet(i);
-        return (VALUE_TYPE) t.iGet(1);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        return t.getValue();
     }
 
     /**
@@ -208,8 +203,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = ceiling(key);
         if (i < 0)
             return null;
-        TupleJid t = (TupleJid) iGet(i);
-        return (VALUE_TYPE) t.iGet(1);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        return (VALUE_TYPE) t.getValue();
     }
 
     /**

@@ -24,16 +24,46 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
+import org.agilewiki.jid.ComparableKey;
 import org.agilewiki.jid.collection.flenc.AppJid;
+import org.agilewiki.jid.scalar.ScalarJid;
 
 /**
  * A map is, in part, a list of map entries.
  */
-public class MapEntry<KEY_TYPE, VALUE_TYPE> extends AppJid {
+public class MapEntry<KEY_TYPE extends Comparable, VALUE_TYPE>
+        extends AppJid
+        implements ComparableKey {
 
     void setFactories(ActorFactory keyFactory, ActorFactory valueFactory) {
         tupleFactories = new ActorFactory[2];
         tupleFactories[0] = keyFactory;
         tupleFactories[1] = valueFactory;
+    }
+
+    public KEY_TYPE getKey()
+            throws Exception {
+        return (KEY_TYPE) ((ScalarJid) _iGet(0)).getValue();
+    }
+
+    public void setKey(KEY_TYPE key)
+            throws Exception {
+        ((ScalarJid) _iGet(0)).setValue(key);
+    }
+
+    public VALUE_TYPE getValue()
+            throws Exception {
+        return (VALUE_TYPE) _iGet(1);
+    }
+
+    /**
+     * Compares the key or value;
+     *
+     * @param o The comparison value.
+     * @return The result of a compareTo(o).
+     */
+    @Override
+    public int compareKeyTo(Object o) throws Exception {
+        return getKey().compareTo(o);
     }
 }
