@@ -33,8 +33,8 @@ import org.agilewiki.jid.collection.vlenc.ListJid;
  * Holds a map.
  */
 abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
-        extends ListJid
-        implements JAMap<KEY_TYPE, VALUE_TYPE>, Collection {
+        extends ListJid<MapEntry<KEY_TYPE, VALUE_TYPE>>
+        implements JAMap<KEY_TYPE, VALUE_TYPE>, Collection<MapEntry<KEY_TYPE, VALUE_TYPE>> {
 
     public ActorFactory valueFactory;
 
@@ -88,7 +88,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int high = size() - 1;
         while (low <= high) {
             int mid = (low + high) >>> 1;
-            MapEntry<KEY_TYPE, VALUE_TYPE> midVal = (MapEntry) iGet(mid);
+            MapEntry<KEY_TYPE, VALUE_TYPE> midVal = iGet(mid);
             int c = midVal.compareKeyTo(key);
             if (c < 0)
                 low = mid + 1;
@@ -151,7 +151,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
             return false;
         i = -i - 1;
         iAdd(i);
-        MapEntry<KEY_TYPE, VALUE_TYPE> me = (MapEntry) iGet(i);
+        MapEntry<KEY_TYPE, VALUE_TYPE> me = iGet(i);
         me.setKey(key);
         return true;
     }
@@ -169,7 +169,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = search(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
         return t.getValue();
     }
 
@@ -186,7 +186,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = higher(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
         return t.getValue();
     }
 
@@ -203,7 +203,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid
         int i = ceiling(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = (MapEntry) iGet(i);
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
         return (VALUE_TYPE) t.getValue();
     }
 

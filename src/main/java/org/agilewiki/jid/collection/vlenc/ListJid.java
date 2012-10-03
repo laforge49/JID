@@ -32,8 +32,8 @@ import java.util.ArrayList;
 /**
  * Holds an ArrayList of JID actors, all of the same type.
  */
-public class ListJid
-        extends CollectionJid implements JAList {
+public class ListJid<ENTRY_TYPE extends Jid>
+        extends CollectionJid<ENTRY_TYPE> implements JAList {
     public int initialCapacity = 10;
 
     /**
@@ -44,7 +44,7 @@ public class ListJid
     /**
      * A list of JID actors.
      */
-    protected ArrayList<_Jid> list;
+    protected ArrayList<ENTRY_TYPE> list;
 
     /**
      * Returns the size of the collection.
@@ -67,7 +67,7 @@ public class ListJid
      * @return The ith JID component, or null if the index is out of range.
      */
     @Override
-    public _Jid iGet(int i)
+    public ENTRY_TYPE iGet(int i)
             throws Exception {
         initialize();
         if (i < 0)
@@ -124,16 +124,16 @@ public class ListJid
             return;
         elementsFactory = getListFactory();
         if (!isSerialized()) {
-            list = new ArrayList<_Jid>();
+            list = new ArrayList<ENTRY_TYPE>();
             return;
         }
         ReadableBytes readableBytes = readable();
         skipLen(readableBytes);
         int count = readableBytes.readInt();
-        list = new ArrayList<_Jid>(count);
+        list = new ArrayList<ENTRY_TYPE>(count);
         int i = 0;
         while (i < count) {
-            Jid elementJid = createSubordinate(elementsFactory, this, readableBytes);
+            ENTRY_TYPE elementJid = (ENTRY_TYPE) createSubordinate(elementsFactory, this, readableBytes);
             list.add(elementJid);
             i += 1;
         }
@@ -185,8 +185,8 @@ public class ListJid
             i += list.size();
         if (i < 0 || i >= list.size())
             throw new IllegalArgumentException();
-        Jid elementJid = createSubordinate(elementsFactory, this, bytes);
-        _Jid oldElementJid = iGet(i);
+        ENTRY_TYPE elementJid = (ENTRY_TYPE) createSubordinate(elementsFactory, this, bytes);
+        ENTRY_TYPE oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
         change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
@@ -198,7 +198,7 @@ public class ListJid
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        Jid jid = createSubordinate(elementsFactory, this, bytes);
+        ENTRY_TYPE jid = (ENTRY_TYPE) createSubordinate(elementsFactory, this, bytes);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);
@@ -210,7 +210,7 @@ public class ListJid
         initialize();
         if (i < 0)
             i = size() + 1 + i;
-        Jid jid = createSubordinate(elementsFactory, this);
+        ENTRY_TYPE jid = (ENTRY_TYPE) createSubordinate(elementsFactory, this);
         int c = jid.getSerializedLength();
         list.add(i, jid);
         change(c);

@@ -36,7 +36,7 @@ import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
 /**
  * A balanced tree holding a list of JIDs, all of the same type.
  */
-public class BListJid extends AppJid implements Collection, JAList {
+public class BListJid<ENTRY_TYPE extends Jid> extends AppJid implements Collection<ENTRY_TYPE>, JAList {
     protected final int TUPLE_SIZE = 0;
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
@@ -127,11 +127,11 @@ public class BListJid extends AppJid implements Collection, JAList {
      * @return The ith JID component, or null if the index is out of range.
      */
     @Override
-    public _Jid iGet(int ndx)
+    public ENTRY_TYPE iGet(int ndx)
             throws Exception {
         ListJid node = getNode();
         if (isLeaf()) {
-            return node.iGet(ndx);
+            return (ENTRY_TYPE) node.iGet(ndx);
         }
         if (ndx < 0)
             ndx += size();
@@ -142,7 +142,7 @@ public class BListJid extends AppJid implements Collection, JAList {
             BListJid bnode = (BListJid) node.iGet(i);
             int bns = bnode.size();
             if (ndx < bns) {
-                return bnode.iGet(ndx);
+                return (ENTRY_TYPE) bnode.iGet(ndx);
             }
             ndx -= bns;
             i += 1;

@@ -31,7 +31,7 @@ import org.agilewiki.jid.collection.CollectionJid;
  * Holds a fixed-size array of JID actors of various types.
  */
 public class TupleJid
-        extends CollectionJid
+        extends CollectionJid<Jid>
         implements ComparableKey<Object> {
     /**
      * An array of actor types, one for each element in the tuple.
@@ -41,7 +41,7 @@ public class TupleJid
     /**
      * A tuple of actors.
      */
-    protected _Jid[] tuple;
+    protected Jid[] tuple;
 
     /**
      * Perform lazy initialization.
@@ -58,7 +58,7 @@ public class TupleJid
             readableBytes = readable();
             skipLen(readableBytes);
         }
-        tuple = new _Jid[size()];
+        tuple = new Jid[size()];
         int i = 0;
         len = 0;
         while (i < size()) {
@@ -129,7 +129,7 @@ public class TupleJid
      * @return The ith JID component, or null if the index is out of range.
      */
     @Override
-    public _Jid iGet(int i) throws Exception {
+    public Jid iGet(int i) throws Exception {
         initialize();
         if (i < 0)
             i += size();

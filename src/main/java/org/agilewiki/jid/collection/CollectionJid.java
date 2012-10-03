@@ -28,9 +28,9 @@ import org.agilewiki.jid.*;
 /**
  * A collection of JID actors.
  */
-abstract public class CollectionJid
+abstract public class CollectionJid<ENTRY_TYPE extends Jid>
         extends Jid
-        implements Collection {
+        implements Collection<ENTRY_TYPE> {
 
     /**
      * The size of the serialized data (exclusive of its length header).
