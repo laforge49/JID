@@ -32,7 +32,7 @@ import org.agilewiki.jid.collection.vlenc.ListJid;
 /**
  * Holds a map.
  */
-abstract public class MapJid<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends ListJid<MapEntry<KEY_TYPE, VALUE_TYPE>>
         implements JAMap<KEY_TYPE, VALUE_TYPE>, Collection<MapEntry<KEY_TYPE, VALUE_TYPE>> {
 

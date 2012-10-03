@@ -29,7 +29,7 @@ import org.agilewiki.jid._Jid;
 /**
  * Holds a map.
  */
-public interface JAMap<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+public interface JAMap<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends _Jid {
 
     /**

@@ -31,29 +31,32 @@ import org.agilewiki.jid.scalar.ScalarJid;
 /**
  * A map is, in part, a list of map entries.
  */
-public class MapEntry<KEY_TYPE extends Comparable, VALUE_TYPE>
+public class MapEntry<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE>
         extends AppJid
-        implements ComparableKey {
+        implements ComparableKey<KEY_TYPE> {
+
+    private final static int TUPLE_KEY = 0;
+    private final static int TUPLE_VALUE = 1;
 
     void setFactories(ActorFactory keyFactory, ActorFactory valueFactory) {
         tupleFactories = new ActorFactory[2];
-        tupleFactories[0] = keyFactory;
-        tupleFactories[1] = valueFactory;
+        tupleFactories[TUPLE_KEY] = keyFactory;
+        tupleFactories[TUPLE_VALUE] = valueFactory;
     }
 
     public KEY_TYPE getKey()
             throws Exception {
-        return (KEY_TYPE) ((ScalarJid) _iGet(0)).getValue();
+        return (KEY_TYPE) ((ScalarJid) _iGet(TUPLE_KEY)).getValue();
     }
 
     public void setKey(KEY_TYPE key)
             throws Exception {
-        ((ScalarJid) _iGet(0)).setValue(key);
+        ((ScalarJid) _iGet(TUPLE_KEY)).setValue(key);
     }
 
     public VALUE_TYPE getValue()
             throws Exception {
-        return (VALUE_TYPE) _iGet(1);
+        return (VALUE_TYPE) _iGet(TUPLE_VALUE);
     }
 
     /**
@@ -63,7 +66,7 @@ public class MapEntry<KEY_TYPE extends Comparable, VALUE_TYPE>
      * @return The result of a compareTo(o).
      */
     @Override
-    public int compareKeyTo(Object o) throws Exception {
+    public int compareKeyTo(KEY_TYPE o) throws Exception {
         return getKey().compareTo(o);
     }
 }

@@ -32,7 +32,7 @@ import org.agilewiki.jid.Jid;
 /**
  * Returns the Actor value with the smallest key >= the given key.
  */
-public class GetCeiling<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+public class GetCeiling<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends Request<Actor, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.

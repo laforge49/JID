@@ -32,7 +32,7 @@ import org.agilewiki.jid.Jid;
 /**
  * Create a keyed entry.
  */
-public class KMake<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+public class KMake<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends Request<Boolean, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.

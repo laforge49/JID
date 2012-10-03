@@ -32,7 +32,7 @@ import org.agilewiki.jid.Jid;
 /**
  * Returns the Actor value with a greater key.
  */
-public class GetHigher<KEY_TYPE extends Comparable, VALUE_TYPE extends Jid>
+public class GetHigher<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends Request<Actor, JAMap<KEY_TYPE, VALUE_TYPE>> {
     /**
      * The key.
