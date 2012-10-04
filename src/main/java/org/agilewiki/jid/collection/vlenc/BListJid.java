@@ -49,7 +49,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
      *
      * @return The JidFactory for of all the elements in the list.
      */
-    protected ActorFactory getListFactory()
+    protected ActorFactory getElementsFactory()
             throws Exception {
         if (elementsFactory == null)
             throw new IllegalStateException("elementFactory uninitialized");
@@ -60,9 +60,18 @@ public class BListJid<ENTRY_TYPE extends Jid>
             throws Exception {
         tupleFactories = new ActorFactory[2];
         tupleFactories[TUPLE_SIZE] = IntegerJidFactory.fac;
-        tupleFactories[TUPLE_UNION] = new UnionJidFactory(null,
-                new ListJidFactory("leaf", elementsFactory, nodeCapacity),
-                new ListJidFactory("inode", new BListJidFactory(null, elementsFactory, nodeCapacity, false, false), nodeCapacity));
+        tupleFactories[TUPLE_UNION] = new UnionJidFactory(
+                null,
+                new ListJidFactory("leaf", getElementsFactory(), nodeCapacity),
+                new ListJidFactory(
+                        "inode",
+                        new BListJidFactory(
+                                null,
+                                getElementsFactory(),
+                                nodeCapacity,
+                                false,
+                                false),
+                        nodeCapacity));
     }
 
     protected void setNodeType(String nodeType)

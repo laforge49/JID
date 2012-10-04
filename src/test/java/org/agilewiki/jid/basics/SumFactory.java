@@ -12,7 +12,6 @@ public class SumFactory extends ListJidFactory {
     protected Sum instantiateActor()
             throws Exception {
         Sum sum = new Sum();
-        assignElementsFactory(sum);
         return sum;
     }
 }

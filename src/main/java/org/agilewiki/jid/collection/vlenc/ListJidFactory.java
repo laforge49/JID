@@ -33,43 +33,20 @@ import org.agilewiki.jactor.lpc.JLPCActor;
  * Creates ListJids.
  */
 public class ListJidFactory extends ActorFactory {
-    private ActorFactory elementsFactory;
-    private String elementsType;
+    private ActorFactory entryFactory;
+    private String entryType;
     private int initialCapacity;
 
     /**
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
+     * @param entryFactory    The elements factory.
      * @param initialCapacity The initial capacity.
      */
-    public ListJidFactory(String actorType, ActorFactory elementsFactory, int initialCapacity) {
+    public ListJidFactory(String actorType, ActorFactory entryFactory, int initialCapacity) {
         super(actorType);
-        this.elementsFactory = elementsFactory;
-        this.initialCapacity = initialCapacity;
-    }
-
-    /**
-     * Create an ActorFactory.
-     *
-     * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
-     */
-    public ListJidFactory(String actorType, ActorFactory elementsFactory) {
-        this(actorType, elementsFactory, 10);
-    }
-
-    /**
-     * Create an ActorFactory.
-     *
-     * @param actorType       The actor type.
-     * @param elementsType    The elements type.
-     * @param initialCapacity The initial capacity.
-     */
-    public ListJidFactory(String actorType, String elementsType, int initialCapacity) {
-        super(actorType);
-        this.elementsType = elementsType;
+        this.entryFactory = entryFactory;
         this.initialCapacity = initialCapacity;
     }
 
@@ -77,20 +54,33 @@ public class ListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param elementsType The elements type.
+     * @param entryFactory The elements factory.
      */
-    public ListJidFactory(String actorType, String elementsType) {
-        this(actorType, elementsType, 10);
+    public ListJidFactory(String actorType, ActorFactory entryFactory) {
+        this(actorType, entryFactory, 10);
     }
 
     /**
-     * Initialize the new list.
+     * Create an ActorFactory.
      *
-     * @param listJid The new list.
+     * @param actorType       The actor type.
+     * @param entryType       The elements type.
+     * @param initialCapacity The initial capacity.
      */
-    public void assignElementsFactory(ListJid listJid) {
-        listJid.elementsFactory = elementsFactory;
-        listJid.initialCapacity = initialCapacity;
+    public ListJidFactory(String actorType, String entryType, int initialCapacity) {
+        super(actorType);
+        this.entryType = entryType;
+        this.initialCapacity = initialCapacity;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType The actor type.
+     * @param entryType The elements type.
+     */
+    public ListJidFactory(String actorType, String entryType) {
+        this(actorType, entryType, 10);
     }
 
     /**
@@ -113,11 +103,12 @@ public class ListJidFactory extends ActorFactory {
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
         ListJid lj = (ListJid) super.newActor(mailbox, parent);
-        if (elementsFactory == null) {
+        if (entryFactory == null) {
             Factory f = (Factory) parent.getMatch(Factory.class);
-            elementsFactory = f.getActorFactory(elementsType);
+            entryFactory = f.getActorFactory(entryType);
         }
-        assignElementsFactory(lj);
+        lj.entryFactory = entryFactory;
+        lj.initialCapacity = initialCapacity;
         return lj;
     }
 }

@@ -59,7 +59,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
      * @return The actor type of all the elements in the list.
      */
     @Override
-    final protected ActorFactory getListFactory()
+    final protected ActorFactory getEntryFactory()
             throws Exception {
         return new MapEntryFactory(null, getKeyFactory(), getValueFactory());
     }
