@@ -26,25 +26,25 @@ package org.agilewiki.jid.collection.vlenc.map;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.collection.vlenc.ListJidFactory;
+import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
- * A balanced tree that holds a map with String keys.
+ * A balanced tree that holds a map with Integer keys.
  */
-public class StringBMapJid<VALUE_TYPE extends Jid> extends BMapJid<String, VALUE_TYPE> {
+public class IntegerBMapJid<VALUE_TYPE extends Jid> extends BMapJid<Integer, VALUE_TYPE> {
     protected ActorFactory getUnionJidFactory()
             throws Exception {
         return new UnionJidFactory(null,
                 new ListJidFactory(
                         "leaf",
-                        new StringMapJidFactory(
+                        new IntegerMapJidFactory(
                                 null,
-                                new MapEntryFactory(null, StringJidFactory.fac, getValueFactory())),
+                                new MapEntryFactory(null, IntegerJidFactory.fac, getValueFactory())),
                         nodeCapacity),
                 new ListJidFactory(
                         "inode",
-                        new StringBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
+                        new IntegerBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
                         nodeCapacity));
     }
 
@@ -54,7 +54,7 @@ public class StringBMapJid<VALUE_TYPE extends Jid> extends BMapJid<String, VALUE
      * @param skey The string to be converted.
      * @return The key.
      */
-    final protected String stringToKey(String skey) {
-        return skey;
+    final protected Integer stringToKey(String skey) {
+        return new Integer(skey);
     }
 }
