@@ -40,7 +40,23 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     protected boolean isRoot;
     public ActorFactory valueFactory;
 
-    abstract protected ActorFactory getUnionJidFactory();
+    abstract protected ActorFactory getUnionJidFactory()
+            throws Exception;
+
+    /**
+     * Converts a string to a key.
+     *
+     * @param skey The string to be converted.
+     * @return The key.
+     */
+    abstract protected KEY_TYPE stringToKey(String skey);
+
+    protected ActorFactory getValueFactory()
+            throws Exception {
+        if (valueFactory == null)
+            throw new IllegalStateException("valueFactory uninitialized");
+        return valueFactory;
+    }
 
     protected void init()
             throws Exception {
@@ -58,12 +74,4 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             throws Exception {
         return (UnionJid) _iGet(TUPLE_UNION);
     }
-
-    /**
-     * Converts a string to a key.
-     *
-     * @param skey The string to be converted.
-     * @return The key.
-     */
-    abstract protected KEY_TYPE stringToKey(String skey);
 }

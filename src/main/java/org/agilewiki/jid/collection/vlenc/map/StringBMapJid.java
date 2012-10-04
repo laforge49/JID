@@ -34,13 +34,14 @@ import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
  */
 public class StringBMapJid<VALUE_TYPE extends Jid> extends BMapJid<String, VALUE_TYPE> {
 
-    protected ActorFactory getUnionJidFactory() {
+    protected ActorFactory getUnionJidFactory()
+            throws Exception {
         return new UnionJidFactory(null,
                 new ListJidFactory(
                         "leaf",
                         new StringMapJidFactory(
                                 null,
-                                new MapEntryFactory(null, StringJidFactory.fac, valueFactory)),
+                                new MapEntryFactory(null, StringJidFactory.fac, getValueFactory())),
                         nodeCapacity),
                 new ListJidFactory(
                         "inode",
