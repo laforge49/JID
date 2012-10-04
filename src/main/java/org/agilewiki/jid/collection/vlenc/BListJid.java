@@ -36,7 +36,8 @@ import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
 /**
  * A balanced tree holding a list of JIDs, all of the same type.
  */
-public class BListJid<ENTRY_TYPE extends Jid> extends AppJid implements Collection<ENTRY_TYPE>, JAList {
+public class BListJid<ENTRY_TYPE extends Jid>
+        extends AppJid implements Collection<ENTRY_TYPE>, JAList {
     protected final int TUPLE_SIZE = 0;
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;

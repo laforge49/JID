@@ -21,7 +21,7 @@
  * A copy of this license is also included and can be
  * found as well at http://www.opensource.org/licenses/cpl1.0.txt
  */
-package org.agilewiki.jid.collection.vlenc;
+package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.Mailbox;
@@ -30,10 +30,11 @@ import org.agilewiki.jactor.factory.Factory;
 import org.agilewiki.jactor.lpc.JLPCActor;
 
 /**
- * Creates ListJids.
+ * Creates StringBMapJid's.
  */
-public class BListJidFactory extends ActorFactory {
-    private ActorFactory elementsFactory;
+public class StringBMapJidFactory extends ActorFactory {
+    private ActorFactory valueFactory;
+    private String valueType;
     private String elementsType;
     private int nodeCapacity = 28;
     private boolean isRoot = true;
@@ -42,25 +43,25 @@ public class BListJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
+     * @param actorType    The actor type.
+     * @param valueFactory The value factory.
      */
-    public BListJidFactory(String actorType, ActorFactory elementsFactory) {
+    public StringBMapJidFactory(String actorType, ActorFactory valueFactory) {
         super(actorType);
-        this.elementsFactory = elementsFactory;
+        this.valueFactory = valueFactory;
     }
 
     /**
      * Create an ActorFactory.
      *
-     * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
-     * @param nodeCapacity    The size of the nodes.
+     * @param actorType    The actor type.
+     * @param valueFactory The value factory.
+     * @param nodeCapacity The size of the nodes.
      */
-    public BListJidFactory(String actorType, ActorFactory elementsFactory,
-                           int nodeCapacity, boolean isRoot, boolean auto) {
+    public StringBMapJidFactory(String actorType, ActorFactory valueFactory,
+                                int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
-        this.elementsFactory = elementsFactory;
+        this.valueFactory = valueFactory;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
         this.auto = auto;
@@ -69,25 +70,25 @@ public class BListJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType    The actor type.
-     * @param elementsType The elements type.
+     * @param actorType The actor type.
+     * @param valueType The value type.
      */
-    public BListJidFactory(String actorType, String elementsType) {
+    public StringBMapJidFactory(String actorType, String valueType) {
         super(actorType);
-        this.elementsType = elementsType;
+        this.valueType = valueType;
     }
 
     /**
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param elementsType The elements type.
+     * @param valueType    The value type.
      * @param nodeCapacity The size of the nodes.
      */
-    public BListJidFactory(String actorType, String elementsType,
-                           int nodeCapacity, boolean isRoot, boolean auto) {
+    public StringBMapJidFactory(String actorType, String valueType,
+                                int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
-        this.elementsType = elementsType;
+        this.valueType = valueType;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
         this.auto = auto;
@@ -100,7 +101,7 @@ public class BListJidFactory extends ActorFactory {
      */
     @Override
     protected JLPCActor instantiateActor() throws Exception {
-        return new BListJid();
+        return new StringBMapJid();
     }
 
     /**
@@ -112,17 +113,17 @@ public class BListJidFactory extends ActorFactory {
      */
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
-        BListJid lj = (BListJid) super.newActor(mailbox, parent);
-        if (elementsFactory == null) {
+        StringBMapJid imj = (StringBMapJid) super.newActor(mailbox, parent);
+        if (valueFactory == null) {
             Factory f = (Factory) parent.getMatch(Factory.class);
-            elementsFactory = f.getActorFactory(elementsType);
+            valueFactory = f.getActorFactory(valueType);
         }
-        lj.elementsFactory = elementsFactory;
-        lj.nodeCapacity = nodeCapacity;
-        lj.isRoot = isRoot;
-        lj.init();
+        imj.valueFactory = valueFactory;
+        imj.nodeCapacity = nodeCapacity;
+        imj.isRoot = isRoot;
+        imj.init();
         if (auto)
-            lj.setNodeType("leaf");
-        return lj;
+            imj.setNodeType("leaf");
+        return imj;
     }
 }
