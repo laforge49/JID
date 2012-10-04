@@ -109,7 +109,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     protected ActorFactory getEntryFactory()
             throws Exception {
         if (entryFactory == null)
-            throw new IllegalStateException("elementFactory uninitialized");
+            throw new IllegalStateException("entryFactory uninitialized");
         return entryFactory;
     }
 

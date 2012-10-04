@@ -42,18 +42,18 @@ public class BListJid<ENTRY_TYPE extends Jid>
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
     protected boolean isRoot;
-    protected ActorFactory elementsFactory;
+    protected ActorFactory entryFactory;
 
     /**
      * Returns the JidFactory for all the elements in the list.
      *
      * @return The JidFactory for of all the elements in the list.
      */
-    protected ActorFactory getElementsFactory()
+    protected ActorFactory getEntryFactory()
             throws Exception {
-        if (elementsFactory == null)
-            throw new IllegalStateException("elementFactory uninitialized");
-        return elementsFactory;
+        if (entryFactory == null)
+            throw new IllegalStateException("entryFactory uninitialized");
+        return entryFactory;
     }
 
     protected void init()
@@ -62,12 +62,12 @@ public class BListJid<ENTRY_TYPE extends Jid>
         tupleFactories[TUPLE_SIZE] = IntegerJidFactory.fac;
         tupleFactories[TUPLE_UNION] = new UnionJidFactory(
                 null,
-                new ListJidFactory("leaf", getElementsFactory(), nodeCapacity),
+                new ListJidFactory("leaf", getEntryFactory(), nodeCapacity),
                 new ListJidFactory(
                         "inode",
                         new BListJidFactory(
                                 null,
-                                getElementsFactory(),
+                                getEntryFactory(),
                                 nodeCapacity,
                                 false,
                                 false),

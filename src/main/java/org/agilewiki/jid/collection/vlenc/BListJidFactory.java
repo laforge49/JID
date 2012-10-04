@@ -33,8 +33,8 @@ import org.agilewiki.jactor.lpc.JLPCActor;
  * Creates ListJids.
  */
 public class BListJidFactory extends ActorFactory {
-    private ActorFactory elementsFactory;
-    private String elementsType;
+    private ActorFactory entryFactory;
+    private String entryType;
     private int nodeCapacity = 28;
     private boolean isRoot = true;
     private boolean auto = true;
@@ -43,24 +43,24 @@ public class BListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
+     * @param entryFactory The entry factory.
      */
-    public BListJidFactory(String actorType, ActorFactory elementsFactory) {
+    public BListJidFactory(String actorType, ActorFactory entryFactory) {
         super(actorType);
-        this.elementsFactory = elementsFactory;
+        this.entryFactory = entryFactory;
     }
 
     /**
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
-     * @param elementsFactory The elements factory.
+     * @param entryFactory The entry factory.
      * @param nodeCapacity    The size of the nodes.
      */
-    public BListJidFactory(String actorType, ActorFactory elementsFactory,
+    public BListJidFactory(String actorType, ActorFactory entryFactory,
                            int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
-        this.elementsFactory = elementsFactory;
+        this.entryFactory = entryFactory;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
         this.auto = auto;
@@ -70,24 +70,24 @@ public class BListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param elementsType The elements type.
+     * @param entryType The entry type.
      */
-    public BListJidFactory(String actorType, String elementsType) {
+    public BListJidFactory(String actorType, String entryType) {
         super(actorType);
-        this.elementsType = elementsType;
+        this.entryType = entryType;
     }
 
     /**
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param elementsType The elements type.
+     * @param entryType The entry type.
      * @param nodeCapacity The size of the nodes.
      */
-    public BListJidFactory(String actorType, String elementsType,
+    public BListJidFactory(String actorType, String entryType,
                            int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
-        this.elementsType = elementsType;
+        this.entryType = entryType;
         this.nodeCapacity = nodeCapacity;
         this.isRoot = isRoot;
         this.auto = auto;
@@ -113,11 +113,11 @@ public class BListJidFactory extends ActorFactory {
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
         BListJid lj = (BListJid) super.newActor(mailbox, parent);
-        if (elementsFactory == null) {
+        if (entryFactory == null) {
             Factory f = (Factory) parent.getMatch(Factory.class);
-            elementsFactory = f.getActorFactory(elementsType);
+            entryFactory = f.getActorFactory(entryType);
         }
-        lj.elementsFactory = elementsFactory;
+        lj.entryFactory = entryFactory;
         lj.nodeCapacity = nodeCapacity;
         lj.isRoot = isRoot;
         lj.init();
