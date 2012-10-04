@@ -38,7 +38,8 @@ import org.agilewiki.jid.scalar.vlens.actor.UnionJid;
  * A balanced tree that holds a map.
  */
 abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
-        extends AppJid implements Collection<MapEntry<KEY_TYPE, VALUE_TYPE>>, JAList {
+        extends AppJid
+        implements Collection<MapEntry<KEY_TYPE, VALUE_TYPE>>, JAList, JAMap<KEY_TYPE, VALUE_TYPE> {
     protected final int TUPLE_SIZE = 0;
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
@@ -187,39 +188,6 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             i += 1;
         }
         throw new IllegalArgumentException();
-    }
-
-    /**
-     * Resolves a JID pathname, returning a JID actor or null.
-     *
-     * @param pathname A JID pathname.
-     * @return A JID actor or null.
-     * @throws Exception Any uncaught exception which occurred while processing the request.
-     */
-    @Override
-    public _Jid resolvePathname(String pathname)
-            throws Exception {
-        if (pathname.length() == 0) {
-            return this;
-        }
-        int s = pathname.indexOf("/");
-        if (s == -1)
-            s = pathname.length();
-        if (s == 0)
-            throw new IllegalArgumentException("pathname " + pathname);
-        String ns = pathname.substring(0, s);
-        int n = 0;
-        try {
-            n = Integer.parseInt(ns);
-        } catch (Exception ex) {
-            throw new IllegalArgumentException("pathname " + pathname);
-        }
-        if (n < 0 || n >= size())
-            throw new IllegalArgumentException("pathname " + pathname);
-        _Jid jid = iGet(n);
-        if (s == pathname.length())
-            return jid;
-        return jid.resolvePathname(pathname.substring(s + 1));
     }
 
     @Override
@@ -436,5 +404,183 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
         ListJid node = getNode();
         node.iAddBytes(-1, bytes);
         incSize(eSize);
+    }
+
+    /**
+     * Locate the tuple with a matching first element.
+     *
+     * @param key The key which matches to the tuple's first element.
+     * @return The index or - (insertion point + 1).
+     */
+    final public int search(KEY_TYPE key)
+            throws Exception {
+        int low = 0;
+        int high = size() - 1;
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            MapEntry<KEY_TYPE, VALUE_TYPE> midVal = iGet(mid);
+            int c = midVal.compareKeyTo(key);
+            if (c < 0)
+                low = mid + 1;
+            else if (c > 0)
+                high = mid - 1;
+            else
+                return mid;
+        }
+        return -(low + 1);
+    }
+
+    /**
+     * Locate the tuple with a higher key.
+     *
+     * @param key The key which matches to the tuple's first element.
+     * @return The index or -1.
+     */
+    final public int higher(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i > -1)
+            i += 1;
+        else {
+            i = -i - 1;
+        }
+        if (i == size())
+            return -1;
+        return i;
+    }
+
+    /**
+     * Locate the tuple with the first element >= a key.
+     *
+     * @param key The key which matches to the tuple's first element.
+     * @return The index or -1.
+     */
+    final public int ceiling(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i > -1)
+            return i;
+        i = -i - 1;
+        if (i == size())
+            return -1;
+        return i;
+    }
+
+    /**
+     * Add a tuple to the map unless there is a tuple with a matching first element.
+     *
+     * @param key Used to match the first element of the tuples.
+     * @return True if a new tuple was created.
+     */
+    @Override
+    final public Boolean kMake(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i > -1)
+            return false;
+        i = -i - 1;
+        iAdd(i);
+        MapEntry<KEY_TYPE, VALUE_TYPE> me = iGet(i);
+        me.setKey(key);
+        return true;
+    }
+
+    /**
+     * Returns the JID value associated with the key.
+     *
+     * @param key The key.
+     * @return The jid assigned to the key, or null.
+     */
+    @Override
+    final public VALUE_TYPE kGet(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i < 0)
+            return null;
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
+        return t.getValue();
+    }
+
+    /**
+     * Returns the JID value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    @Override
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
+            throws Exception {
+        int i = higher(key);
+        if (i < 0)
+            return null;
+        return iGet(i);
+    }
+
+    /**
+     * Returns the JID value with the smallest key >= the given key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    @Override
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> getCeiling(KEY_TYPE key)
+            throws Exception {
+        int i = ceiling(key);
+        if (i < 0)
+            return null;
+        return iGet(i);
+    }
+
+    /**
+     * Removes the item identified by the key.
+     *
+     * @param key The key.
+     * @return True when the item was present and removed.
+     */
+    @Override
+    final public boolean kRemove(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i < 0)
+            return false;
+        iRemove(i);
+        return true;
+    }
+
+    /**
+     * Resolves a JID pathname, returning a JID actor or null.
+     *
+     * @param pathname A JID pathname.
+     * @return A JID actor or null.
+     * @throws Exception Any uncaught exception which occurred while processing the request.
+     */
+    @Override
+    final public _Jid resolvePathname(String pathname)
+            throws Exception {
+        if (pathname.length() == 0) {
+            return this;
+        }
+        int s = pathname.indexOf("/");
+        if (s == -1)
+            s = pathname.length();
+        if (s == 0)
+            throw new IllegalArgumentException("pathname " + pathname);
+        String ns = pathname.substring(0, s);
+        _Jid jid = kGet(stringToKey(ns));
+        if (jid == null)
+            return null;
+        if (s == pathname.length())
+            return jid;
+        return jid.resolvePathname(pathname.substring(s + 1));
+    }
+
+    public MapEntry<KEY_TYPE, VALUE_TYPE> getFirst()
+            throws Exception {
+        return iGet(0);
+    }
+
+    public MapEntry<KEY_TYPE, VALUE_TYPE> getLast()
+            throws Exception {
+        return iGet(-1);
     }
 }
