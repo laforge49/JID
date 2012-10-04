@@ -26,11 +26,8 @@ package org.agilewiki.jid.collection.vlenc.map;
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
 import org.agilewiki.jid.collection.flenc.AppJid;
-import org.agilewiki.jid.collection.vlenc.BListJidFactory;
-import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.UnionJid;
-import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
 
 /**
  * A balanced tree that holds a map.
@@ -41,16 +38,15 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
     protected boolean isRoot;
-    protected ActorFactory elementsFactory;
     public ActorFactory valueFactory;
+
+    abstract protected ActorFactory getUnionJidFactory();
 
     protected void init()
             throws Exception {
         tupleFactories = new ActorFactory[2];
         tupleFactories[TUPLE_SIZE] = IntegerJidFactory.fac;
-        tupleFactories[TUPLE_UNION] = new UnionJidFactory(null,
-                new ListJidFactory("leaf", elementsFactory, nodeCapacity),
-                new ListJidFactory("inode", new BListJidFactory(null, elementsFactory, nodeCapacity, false, false), nodeCapacity));
+        tupleFactories[TUPLE_UNION] = getUnionJidFactory();
     }
 
     protected void setNodeType(String nodeType)
@@ -62,13 +58,6 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             throws Exception {
         return (UnionJid) _iGet(TUPLE_UNION);
     }
-
-    /**
-     * Returns the JidFactory for the key.
-     *
-     * @return The JidFactory for the key.
-     */
-    abstract protected ActorFactory getKeyFactory();
 
     /**
      * Converts a string to a key.
