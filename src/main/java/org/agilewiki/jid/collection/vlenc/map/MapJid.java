@@ -77,9 +77,9 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     }
 
     /**
-     * Locate the tuple with a matching first element.
+     * Locate the entry with a matching first element.
      *
-     * @param key The key which matches to the tuple's first element.
+     * @param key The key which matches to the entry's first element.
      * @return The index or - (insertion point + 1).
      */
     final public int search(KEY_TYPE key)
@@ -101,9 +101,9 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     }
 
     /**
-     * Locate the tuple with a higher key.
+     * Locate the entry with a higher key.
      *
-     * @param key The key which matches to the tuple's first element.
+     * @param key The key which matches to the entry's first element.
      * @return The index or -1.
      */
     final public int higher(KEY_TYPE key)
@@ -120,27 +120,39 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     }
 
     /**
-     * Locate the tuple with the first element >= a key.
+     * Locate the entry with the first element >= a key, or the last entry.
      *
-     * @param key The key which matches to the tuple's first element.
-     * @return The index or -1.
+     * @param key The key which matches to the entry's first element.
+     * @return The index.
      */
-    final public int ceiling(KEY_TYPE key)
+    final public int match(KEY_TYPE key)
             throws Exception {
         int i = search(key);
         if (i > -1)
             return i;
         i = -i - 1;
+        return i;
+    }
+
+    /**
+     * Locate the entry with the first element >= a key.
+     *
+     * @param key The key which matches to the entry's first element.
+     * @return The index or -1.
+     */
+    final public int ceiling(KEY_TYPE key)
+            throws Exception {
+        int i = match(key);
         if (i == size())
             return -1;
         return i;
     }
 
     /**
-     * Add a tuple to the map unless there is a tuple with a matching first element.
+     * Add an entry to the map unless there is an entry with a matching first element.
      *
-     * @param key Used to match the first element of the tuples.
-     * @return True if a new tuple was created.
+     * @param key Used to match the first element of the entries.
+     * @return True if a new entry was created.
      */
     @Override
     final public Boolean kMake(KEY_TYPE key)

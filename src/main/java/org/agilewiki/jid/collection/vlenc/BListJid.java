@@ -106,7 +106,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
         return (UnionJid) _iGet(TUPLE_UNION);
     }
 
-    protected ListJid getNode()
+    protected ListJid<ENTRY_TYPE> getNode()
             throws Exception {
         return (ListJid) getUnionJid().getValue();
     }
@@ -139,7 +139,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
     @Override
     public ENTRY_TYPE iGet(int ndx)
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         if (isLeaf()) {
             return (ENTRY_TYPE) node.iGet(ndx);
         }
@@ -170,7 +170,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
     @Override
     public void iSetBytes(int ndx, byte[] bytes)
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         if (isLeaf()) {
             node.iSetBytes(ndx, bytes);
             return;
@@ -240,7 +240,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
         if (ndx < 0 || ndx > size())
             throw new IllegalArgumentException();
         incSize(1);
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         if (isLeaf()) {
             if (bytes == null)
                 node.iAdd(ndx);
@@ -281,10 +281,10 @@ public class BListJid<ENTRY_TYPE extends Jid>
 
     protected void rootSplit()
             throws Exception {
-        ListJid oldRootNode = getNode();
+        ListJid<ENTRY_TYPE> oldRootNode = getNode();
         String oldType = oldRootNode.getActorType();
         getUnionJid().setValue("inode");
-        ListJid newRootNode = getNode();
+        ListJid<ENTRY_TYPE> newRootNode = getNode();
         newRootNode.iAdd(0);
         newRootNode.iAdd(1);
         BListJid<ENTRY_TYPE> leftBNode = (BListJid) newRootNode.iGet(0);
@@ -326,7 +326,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
 
     protected void inodeSplit(BListJid<ENTRY_TYPE> leftBNode)
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         int h = nodeCapacity / 2;
         int i = 0;
         if (isLeaf()) {
@@ -354,7 +354,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
     @Override
     public void empty()
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         node.empty();
         IntegerJid sj = getSizeJid();
         sj.setValue(0);
@@ -368,7 +368,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
             ndx += s;
         if (ndx < 0 || ndx >= s)
             throw new IllegalArgumentException();
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         if (isLeaf()) {
             node.iRemove(ndx);
             incSize(-1);
@@ -419,7 +419,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
 
     void append(BListJid<ENTRY_TYPE> leftNode)
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         int i = 0;
         if (isLeaf()) {
             while (i < node.size()) {
@@ -438,7 +438,7 @@ public class BListJid<ENTRY_TYPE extends Jid>
 
     void append(byte[] bytes, int eSize)
             throws Exception {
-        ListJid node = getNode();
+        ListJid<ENTRY_TYPE> node = getNode();
         node.iAddBytes(-1, bytes);
         incSize(eSize);
     }
