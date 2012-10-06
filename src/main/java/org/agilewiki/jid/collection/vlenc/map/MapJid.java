@@ -122,8 +122,8 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     /**
      * Locate the entry with the first element >= a key, or the last entry.
      *
-     * @param key The key which matches to the entry's first element.
-     * @return The index.
+     * @param key The key which matches to the entry's first element, or size.
+     * @return The index, or size.
      */
     final public int match(KEY_TYPE key)
             throws Exception {
