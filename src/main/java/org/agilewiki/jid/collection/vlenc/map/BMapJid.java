@@ -38,7 +38,7 @@ import org.agilewiki.jid.scalar.vlens.actor.UnionJid;
  */
 abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends Jid>
         extends AppJid
-        implements Collection<MapEntry<KEY_TYPE, Jid>>, JAList, JAMap<KEY_TYPE, VALUE_TYPE> {
+        implements Collection<MapEntry<KEY_TYPE, VALUE_TYPE>>, JAList, JAMap<KEY_TYPE, VALUE_TYPE> {
     protected final int TUPLE_SIZE = 0;
     protected final int TUPLE_UNION = 1;
     protected int nodeCapacity = 28;
@@ -133,11 +133,11 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
      * @return The ith JID component, or null if the index is out of range.
      */
     @Override
-    public MapEntry<KEY_TYPE, Jid> iGet(int ndx)
+    public MapEntry<KEY_TYPE, VALUE_TYPE> iGet(int ndx)
             throws Exception {
         MapJid<KEY_TYPE, Jid> node = getNode();
         if (isLeaf()) {
-            return (MapEntry<KEY_TYPE, Jid>) node.iGet(ndx);
+            return (MapEntry<KEY_TYPE, VALUE_TYPE>) node.iGet(ndx);
         }
         if (ndx < 0)
             ndx += size();
@@ -216,9 +216,10 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             if (i > -1)
                 return false;
             i = -i - 1;
-            iAdd(i);
-            MapEntry<KEY_TYPE, Jid> me = iGet(i);
+            node.iAdd(i);
+            MapEntry<KEY_TYPE, Jid> me = node.iGet(i);
             me.setKey(key);
+            incSize(1);
             return true;
         }
         int i = node.match(key);
@@ -432,8 +433,8 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
         int i = node.search(key);
         if (i < 0)
             return null;
-        MapEntry<KEY_TYPE, Jid> t = iGet(i);
-        return (VALUE_TYPE) t.getValue();
+        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
+        return t.getValue();
     }
 
     /**

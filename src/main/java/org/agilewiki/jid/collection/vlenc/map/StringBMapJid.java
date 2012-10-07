@@ -36,16 +36,14 @@ public class StringBMapJid<VALUE_TYPE extends Jid> extends BMapJid<String, VALUE
     protected ActorFactory getUnionJidFactory()
             throws Exception {
         return new UnionJidFactory(null,
-                new ListJidFactory(
+                new StringMapJidFactory(
                         "leaf",
-                        new StringMapJidFactory(
-                                null,
-                                new MapEntryFactory(null, StringJidFactory.fac, getValueFactory())),
-                        nodeCapacity),
-                new ListJidFactory(
+                        valueFactory/*,
+                        nodeCapacity*/),
+                new StringMapJidFactory(
                         "inode",
-                        new StringBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
-                        nodeCapacity));
+                        new StringBMapJidFactory(null, valueFactory, nodeCapacity, false, false)/*,
+                        nodeCapacity*/));
     }
 
     /**
