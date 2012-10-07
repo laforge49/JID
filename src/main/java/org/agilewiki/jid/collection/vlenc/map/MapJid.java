@@ -271,4 +271,9 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
             throws Exception {
         return iGet(-1);
     }
+
+    public KEY_TYPE getLastKey()
+            throws Exception {
+        return getLast().getKey();
+    }
 }
