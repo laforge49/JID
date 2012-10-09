@@ -376,7 +376,7 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
                         }
                     }
                     if (i + 1 < node.size()) {
-                        MapEntry rightEntry = node.iGet(i - 1);
+                        MapEntry rightEntry = node.iGet(i + 1);
                         BMapJid<KEY_TYPE, VALUE_TYPE> rightBNode = (BMapJid) rightEntry.getValue();
                         if (bnodeSize + rightBNode.nodeSize() < nodeCapacity) {
                             rightBNode.append(bnode);
