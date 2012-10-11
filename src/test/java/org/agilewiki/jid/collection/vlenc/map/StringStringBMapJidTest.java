@@ -31,6 +31,13 @@ public class StringStringBMapJidTest extends TestCase {
             assertEquals("1", me.getKey());
             m.iRemove(0);
             assertEquals(0, m.size());
+            assertTrue(m.kMake("1"));
+            assertEquals(1, m.size());
+            me = m.iGet(0);
+            assertEquals("1", me.getKey());
+            assertFalse(m.kRemove("0"));
+            assertTrue(m.kRemove("1"));
+            assertEquals(0, m.size());
         } finally {
             mailboxFactory.close();
         }
