@@ -413,36 +413,44 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             throws Exception {
         if (isLeaf()) {
             MapJid<KEY_TYPE, Jid> node = getNode();
-            return node.kRemove(key);
+            if (node.kRemove(key)) {
+                incSize(-1);
+                return true;
+            }
+            return false;
         }
         MapJid<KEY_TYPE, BMapJid<KEY_TYPE, Jid>> node = (MapJid) getNode();
-        int ndx = node.match(key);
-        if (ndx == size())
+        int i = node.match(key);
+        if (i == size())
             return false;
-        MapEntry<KEY_TYPE, BMapJid<KEY_TYPE, Jid>> entry = node.iGet(ndx);
+        MapEntry<KEY_TYPE, BMapJid<KEY_TYPE, Jid>> entry = node.iGet(i);
         BMapJid<KEY_TYPE, Jid> bnode = entry.getValue();
         if (!bnode.kRemove(key))
             return false;
-        entry.setKey(bnode.getLastKey());
         incSize(-1);
         int bnodeSize = bnode.size();
         if (bnodeSize > nodeCapacity / 3)
             return true;
         if (bnodeSize == 0) {
-            node.iRemove(ndx);
+            node.iRemove(i);
         } else {
-            if (ndx > 0) {
-                BMapJid<KEY_TYPE, VALUE_TYPE> leftBNode = (BMapJid) node.iGet(ndx - 1).getValue();
+            entry.setKey(bnode.getLastKey());
+            if (i > 0) {
+                MapEntry leftEntry = node.iGet(i - 1);
+                BMapJid<KEY_TYPE, VALUE_TYPE> leftBNode = (BMapJid) leftEntry.getValue();
                 if (leftBNode.nodeSize() + bnodeSize < nodeCapacity) {
                     bnode.appendTo((BMapJid<KEY_TYPE, Jid>) leftBNode);
-                    node.iRemove(ndx);
+                    node.iRemove(i);
+                    leftEntry.setKey(leftBNode.getLastKey());
                 }
             }
-            if (ndx + 1 < node.size()) {
-                BMapJid<KEY_TYPE, VALUE_TYPE> rightBNode = (BMapJid) node.iGet(ndx + 1).getValue();
+            if (i + 1 < node.size()) {
+                MapEntry rightEntry = node.iGet(i + 1);
+                BMapJid<KEY_TYPE, VALUE_TYPE> rightBNode = (BMapJid) rightEntry.getValue();
                 if (bnodeSize + rightBNode.nodeSize() < nodeCapacity) {
                     rightBNode.appendTo((BMapJid<KEY_TYPE, VALUE_TYPE>) bnode);
-                    node.iRemove(ndx + 1);
+                    node.iRemove(i + 1);
+                    rightEntry.setKey(rightBNode.getLastKey());
                 }
             }
         }
