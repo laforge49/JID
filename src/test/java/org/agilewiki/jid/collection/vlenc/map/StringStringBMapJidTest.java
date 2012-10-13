@@ -28,6 +28,8 @@ public class StringStringBMapJidTest extends TestCase {
             assertEquals(me, m.getCeiling("0"));
             assertEquals(me, m.getCeiling("1"));
             assertNull(m.getCeiling("2"));
+            assertEquals(me, m.getHigher("0"));
+            assertNull(m.getHigher("1"));
             m.empty();
             assertEquals(0, m.size());
             assertTrue(m.kMake("1"));

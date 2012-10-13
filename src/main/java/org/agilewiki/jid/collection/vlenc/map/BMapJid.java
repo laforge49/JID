@@ -544,10 +544,13 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
             throws Exception {
         MapJid<KEY_TYPE, Jid> node = getNode();
-        int i = node.higher(key);
-        if (i < 0)
+        MapEntry entry = node.getHigher(key);
+        if (isLeaf())
+            return (MapEntry<KEY_TYPE, VALUE_TYPE>) entry;
+        if (entry == null)
             return null;
-        return iGet(i);
+        BMapJid<KEY_TYPE, VALUE_TYPE> bnode = (BMapJid) entry.getValue();
+        return bnode.getHigher(key);
     }
 
     /**
