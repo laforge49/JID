@@ -23,6 +23,8 @@ public class StringStringBMapJidTest extends TestCase {
             assertEquals(1, m.size());
             MapEntry<String, StringJid> me = m.iGet(0);
             assertEquals("1", me.getKey());
+            StringJid v = m.kGet("1");
+            assertEquals(v, me.getValue());
             m.empty();
             assertEquals(0, m.size());
             assertTrue(m.kMake("1"));

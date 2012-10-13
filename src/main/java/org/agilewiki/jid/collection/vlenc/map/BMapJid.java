@@ -500,11 +500,18 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     final public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception {
         MapJid<KEY_TYPE, Jid> node = getNode();
-        int i = node.search(key);
-        if (i < 0)
+        if (isLeaf()) {
+            int i = node.search(key);
+            if (i < 0)
+                return null;
+            MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
+            return t.getValue();
+        }
+        int i = node.match(key);
+        if (i == size())
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
-        return t.getValue();
+        BMapJid<KEY_TYPE, Jid> bnode = (BMapJid) node.iGet(i).getValue();
+        return (VALUE_TYPE) bnode.kGet(key);
     }
 
     /**
@@ -520,7 +527,7 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
         int i = node.higher(key);
         if (i < 0)
             return null;
-        return (MapEntry<KEY_TYPE, VALUE_TYPE>) iGet(i);
+        return iGet(i);
     }
 
     /**
@@ -536,7 +543,7 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
         int i = node.ceiling(key);
         if (i < 0)
             return null;
-        return (MapEntry<KEY_TYPE, VALUE_TYPE>) iGet(i);
+        return iGet(i);
     }
 
     /**
@@ -568,12 +575,12 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
 
     public MapEntry<KEY_TYPE, VALUE_TYPE> getFirst()
             throws Exception {
-        return (MapEntry<KEY_TYPE, VALUE_TYPE>) iGet(0);
+        return iGet(0);
     }
 
     public MapEntry<KEY_TYPE, VALUE_TYPE> getLast()
             throws Exception {
-        return (MapEntry<KEY_TYPE, VALUE_TYPE>) iGet(-1);
+        return iGet(-1);
     }
 
     public KEY_TYPE getLastKey()
