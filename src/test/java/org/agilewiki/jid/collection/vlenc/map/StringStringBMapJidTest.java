@@ -25,6 +25,9 @@ public class StringStringBMapJidTest extends TestCase {
             assertEquals("1", me.getKey());
             StringJid v = m.kGet("1");
             assertEquals(v, me.getValue());
+            assertEquals(me, m.getCeiling("0"));
+            assertEquals(me, m.getCeiling("1"));
+            assertNull(m.getCeiling("2"));
             m.empty();
             assertEquals(0, m.size());
             assertTrue(m.kMake("1"));
