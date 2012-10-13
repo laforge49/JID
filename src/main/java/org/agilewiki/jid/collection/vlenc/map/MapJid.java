@@ -84,6 +84,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
      */
     final public int search(KEY_TYPE key)
             throws Exception {
+        initialize();
         int low = 0;
         int high = size() - 1;
         while (low <= high) {
@@ -157,7 +158,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public Boolean kMake(KEY_TYPE key)
             throws Exception {
-        initialize();
         int i = search(key);
         if (i > -1)
             return false;
@@ -177,7 +177,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception {
-        initialize();
         int i = search(key);
         if (i < 0)
             return null;
@@ -194,7 +193,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
             throws Exception {
-        initialize();
         int i = higher(key);
         if (i < 0)
             return null;
@@ -210,7 +208,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public MapEntry<KEY_TYPE, VALUE_TYPE> getCeiling(KEY_TYPE key)
             throws Exception {
-        initialize();
         int i = ceiling(key);
         if (i < 0)
             return null;
@@ -226,7 +223,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public boolean kRemove(KEY_TYPE key)
             throws Exception {
-        initialize();
         int i = search(key);
         if (i < 0)
             return false;
@@ -244,7 +240,6 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public _Jid resolvePathname(String pathname)
             throws Exception {
-        initialize();
         if (pathname.length() == 0) {
             return this;
         }

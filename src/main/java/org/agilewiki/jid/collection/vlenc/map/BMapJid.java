@@ -515,22 +515,6 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     }
 
     /**
-     * Returns the JID value with a greater key.
-     *
-     * @param key The key.
-     * @return The matching jid, or null.
-     */
-    @Override
-    final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
-            throws Exception {
-        MapJid<KEY_TYPE, Jid> node = getNode();
-        int i = node.higher(key);
-        if (i < 0)
-            return null;
-        return iGet(i);
-    }
-
-    /**
      * Returns the JID value with the smallest key >= the given key.
      *
      * @param key The key.
@@ -541,6 +525,22 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             throws Exception {
         MapJid<KEY_TYPE, Jid> node = getNode();
         int i = node.ceiling(key);
+        if (i < 0)
+            return null;
+        return iGet(i);
+    }
+
+    /**
+     * Returns the JID value with a greater key.
+     *
+     * @param key The key.
+     * @return The matching jid, or null.
+     */
+    @Override
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> getHigher(KEY_TYPE key)
+            throws Exception {
+        MapJid<KEY_TYPE, Jid> node = getNode();
+        int i = node.higher(key);
         if (i < 0)
             return null;
         return iGet(i);
