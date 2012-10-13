@@ -584,7 +584,8 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
 
     public MapEntry<KEY_TYPE, VALUE_TYPE> getLast()
             throws Exception {
-        return iGet(-1);
+        MapJid<KEY_TYPE, Jid> node = getNode();
+        return (MapEntry<KEY_TYPE, VALUE_TYPE>) node.getLast();
     }
 
     public KEY_TYPE getLastKey()
