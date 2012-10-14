@@ -35,7 +35,6 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 public class IntegerBMapJidFactory extends ActorFactory {
     private ActorFactory valueFactory;
     private String valueType;
-    private String elementsType;
     private int nodeCapacity = 28;
     private boolean isRoot = true;
     private boolean auto = true;
@@ -113,7 +112,7 @@ public class IntegerBMapJidFactory extends ActorFactory {
      */
     public JLPCActor newActor(Mailbox mailbox, Actor parent)
             throws Exception {
-        StringBMapJid imj = (StringBMapJid) super.newActor(mailbox, parent);
+        IntegerBMapJid imj = (IntegerBMapJid) super.newActor(mailbox, parent);
         if (valueFactory == null) {
             Factory f = (Factory) parent.getMatch(Factory.class);
             valueFactory = f.getActorFactory(valueType);

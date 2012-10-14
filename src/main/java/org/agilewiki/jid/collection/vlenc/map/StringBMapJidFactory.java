@@ -35,7 +35,6 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 public class StringBMapJidFactory extends ActorFactory {
     private ActorFactory valueFactory;
     private String valueType;
-    private String elementsType;
     private int nodeCapacity = 28;
     private boolean isRoot = true;
     private boolean auto = true;

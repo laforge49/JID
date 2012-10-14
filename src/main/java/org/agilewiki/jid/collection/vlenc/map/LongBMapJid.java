@@ -36,16 +36,12 @@ public class LongBMapJid<VALUE_TYPE extends Jid> extends BMapJid<Long, VALUE_TYP
     protected ActorFactory getUnionJidFactory()
             throws Exception {
         return new UnionJidFactory(null,
-                new ListJidFactory(
+                new LongMapJidFactory(
                         "leaf",
-                        new LongMapJidFactory(
-                                null,
-                                new MapEntryFactory(null, LongJidFactory.fac, getValueFactory())),
-                        nodeCapacity),
-                new ListJidFactory(
+                        valueFactory),
+                new LongMapJidFactory(
                         "inode",
-                        new LongBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
-                        nodeCapacity));
+                        new LongBMapJidFactory(null, valueFactory, nodeCapacity, false, false)));
     }
 
     /**

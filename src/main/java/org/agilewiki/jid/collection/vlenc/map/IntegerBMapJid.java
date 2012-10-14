@@ -36,16 +36,12 @@ public class IntegerBMapJid<VALUE_TYPE extends Jid> extends BMapJid<Integer, VAL
     protected ActorFactory getUnionJidFactory()
             throws Exception {
         return new UnionJidFactory(null,
-                new ListJidFactory(
+                new IntegerMapJidFactory(
                         "leaf",
-                        new IntegerMapJidFactory(
-                                null,
-                                new MapEntryFactory(null, IntegerJidFactory.fac, getValueFactory())),
-                        nodeCapacity),
-                new ListJidFactory(
+                        valueFactory),
+                new IntegerMapJidFactory(
                         "inode",
-                        new IntegerBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
-                        nodeCapacity));
+                        new IntegerBMapJidFactory(null, valueFactory, nodeCapacity, false, false)));
     }
 
     /**
