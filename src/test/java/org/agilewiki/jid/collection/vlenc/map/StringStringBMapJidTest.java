@@ -1,7 +1,6 @@
 package org.agilewiki.jid.collection.vlenc.map;
 
 import junit.framework.TestCase;
-import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.JAMailboxFactory;
 import org.agilewiki.jactor.MailboxFactory;
 import org.agilewiki.jid.JidFactories;

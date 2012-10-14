@@ -41,7 +41,7 @@ public class ListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
-     * @param entryFactory    The elements factory.
+     * @param entryFactory    The entry factory.
      * @param initialCapacity The initial capacity.
      */
     public ListJidFactory(String actorType, ActorFactory entryFactory, int initialCapacity) {
@@ -54,7 +54,7 @@ public class ListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param entryFactory The elements factory.
+     * @param entryFactory The entry factory.
      */
     public ListJidFactory(String actorType, ActorFactory entryFactory) {
         this(actorType, entryFactory, 10);
@@ -64,7 +64,7 @@ public class ListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType       The actor type.
-     * @param entryType       The elements type.
+     * @param entryType       The entry type.
      * @param initialCapacity The initial capacity.
      */
     public ListJidFactory(String actorType, String entryType, int initialCapacity) {
@@ -77,7 +77,7 @@ public class ListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType The actor type.
-     * @param entryType The elements type.
+     * @param entryType The entry type.
      */
     public ListJidFactory(String actorType, String entryType) {
         this(actorType, entryType, 10);

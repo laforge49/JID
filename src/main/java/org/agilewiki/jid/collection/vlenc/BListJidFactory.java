@@ -42,7 +42,7 @@ public class BListJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType       The actor type.
+     * @param actorType    The actor type.
      * @param entryFactory The entry factory.
      */
     public BListJidFactory(String actorType, ActorFactory entryFactory) {
@@ -53,9 +53,9 @@ public class BListJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType       The actor type.
+     * @param actorType    The actor type.
      * @param entryFactory The entry factory.
-     * @param nodeCapacity    The size of the nodes.
+     * @param nodeCapacity The size of the nodes.
      */
     public BListJidFactory(String actorType, ActorFactory entryFactory,
                            int nodeCapacity, boolean isRoot, boolean auto) {
@@ -69,7 +69,7 @@ public class BListJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType    The actor type.
+     * @param actorType The actor type.
      * @param entryType The entry type.
      */
     public BListJidFactory(String actorType, String entryType) {
@@ -81,7 +81,7 @@ public class BListJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType    The actor type.
-     * @param entryType The entry type.
+     * @param entryType    The entry type.
      * @param nodeCapacity The size of the nodes.
      */
     public BListJidFactory(String actorType, String entryType,

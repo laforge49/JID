@@ -35,11 +35,25 @@ import org.agilewiki.jactor.lpc.JLPCActor;
 public class IntegerMapJidFactory extends ActorFactory {
     private ActorFactory valueFactory;
     private String valueType;
+    private int initialCapacity = 10;
 
     /**
      * Create an ActorFactory.
      *
-     * @param actorType The actor type.
+     * @param actorType    The actor type.
+     * @param valueFactory The value factory.
+     */
+    public IntegerMapJidFactory(String actorType, ActorFactory valueFactory, int initialCapacity) {
+        super(actorType);
+        this.valueFactory = valueFactory;
+        this.initialCapacity = initialCapacity;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType    The actor type.
+     * @param valueFactory The value factory.
      */
     public IntegerMapJidFactory(String actorType, ActorFactory valueFactory) {
         super(actorType);
@@ -50,6 +64,19 @@ public class IntegerMapJidFactory extends ActorFactory {
      * Create an ActorFactory.
      *
      * @param actorType The actor type.
+     * @param valueType The value type.
+     */
+    public IntegerMapJidFactory(String actorType, String valueType, int initialCapacity) {
+        super(actorType);
+        this.valueType = valueType;
+        this.initialCapacity = initialCapacity;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType The actor type.
+     * @param valueType The value type.
      */
     public IntegerMapJidFactory(String actorType, String valueType) {
         super(actorType);
@@ -82,6 +109,7 @@ public class IntegerMapJidFactory extends ActorFactory {
             valueFactory = f.getActorFactory(valueType);
         }
         imj.valueFactory = valueFactory;
+        imj.initialCapacity = initialCapacity;
         return imj;
     }
 }

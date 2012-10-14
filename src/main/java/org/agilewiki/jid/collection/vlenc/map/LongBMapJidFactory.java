@@ -58,7 +58,7 @@ public class LongBMapJidFactory extends ActorFactory {
      * @param nodeCapacity The size of the nodes.
      */
     public LongBMapJidFactory(String actorType, ActorFactory valueFactory,
-                                 int nodeCapacity, boolean isRoot, boolean auto) {
+                              int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
         this.valueFactory = valueFactory;
         this.nodeCapacity = nodeCapacity;
@@ -85,7 +85,7 @@ public class LongBMapJidFactory extends ActorFactory {
      * @param nodeCapacity The size of the nodes.
      */
     public LongBMapJidFactory(String actorType, String valueType,
-                                 int nodeCapacity, boolean isRoot, boolean auto) {
+                              int nodeCapacity, boolean isRoot, boolean auto) {
         super(actorType);
         this.valueType = valueType;
         this.nodeCapacity = nodeCapacity;

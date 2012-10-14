@@ -25,9 +25,7 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.collection.vlenc.ListJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
-import org.agilewiki.jid.scalar.vlens.string.StringJidFactory;
 
 /**
  * A balanced tree that holds a map with String keys.

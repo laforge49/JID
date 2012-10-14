@@ -25,8 +25,6 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.Jid;
-import org.agilewiki.jid.collection.vlenc.ListJidFactory;
-import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 import org.agilewiki.jid.scalar.vlens.actor.UnionJidFactory;
 
 /**
