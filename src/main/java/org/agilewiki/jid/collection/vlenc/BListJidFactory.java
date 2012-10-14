@@ -56,6 +56,8 @@ public class BListJidFactory extends ActorFactory {
      * @param actorType    The actor type.
      * @param entryFactory The entry factory.
      * @param nodeCapacity The size of the nodes.
+     * @param isRoot       Create a root node when true.
+     * @param auto         Define the node as a leaf when true.
      */
     public BListJidFactory(String actorType, ActorFactory entryFactory,
                            int nodeCapacity, boolean isRoot, boolean auto) {
@@ -83,6 +85,8 @@ public class BListJidFactory extends ActorFactory {
      * @param actorType    The actor type.
      * @param entryType    The entry type.
      * @param nodeCapacity The size of the nodes.
+     * @param isRoot       Create a root node when true.
+     * @param auto         Define the node as a leaf when true.
      */
     public BListJidFactory(String actorType, String entryType,
                            int nodeCapacity, boolean isRoot, boolean auto) {

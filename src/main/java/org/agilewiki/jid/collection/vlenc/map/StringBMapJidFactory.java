@@ -56,6 +56,8 @@ public class StringBMapJidFactory extends ActorFactory {
      * @param actorType    The actor type.
      * @param valueFactory The value factory.
      * @param nodeCapacity The size of the nodes.
+     * @param isRoot       Create a root node when true.
+     * @param auto         Define the node as a leaf when true.
      */
     public StringBMapJidFactory(String actorType, ActorFactory valueFactory,
                                 int nodeCapacity, boolean isRoot, boolean auto) {
@@ -83,6 +85,8 @@ public class StringBMapJidFactory extends ActorFactory {
      * @param actorType    The actor type.
      * @param valueType    The value type.
      * @param nodeCapacity The size of the nodes.
+     * @param isRoot       Create a root node when true.
+     * @param auto         Define the node as a leaf when true.
      */
     public StringBMapJidFactory(String actorType, String valueType,
                                 int nodeCapacity, boolean isRoot, boolean auto) {
