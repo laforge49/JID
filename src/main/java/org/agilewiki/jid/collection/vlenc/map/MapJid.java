@@ -84,7 +84,7 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
      */
     final public int search(KEY_TYPE key)
             throws Exception {
-        initialize();
+        initializeList();
         int low = 0;
         int high = size() - 1;
         while (low <= high) {

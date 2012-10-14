@@ -54,7 +54,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public int size()
             throws Exception {
-        initialize();
+        initializeList();
         return list.size();
     }
 
@@ -69,7 +69,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public ENTRY_TYPE iGet(int i)
             throws Exception {
-        initialize();
+        initializeList();
         if (i < 0)
             i += list.size();
         if (i < 0 || i >= list.size())
@@ -118,7 +118,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
      *
      * @throws Exception Any exceptions thrown during initialization.
      */
-    protected void initialize()
+    protected void initializeList()
             throws Exception {
         if (list != null)
             return;
@@ -166,7 +166,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public _Jid resolvePathname(String pathname)
             throws Exception {
-        initialize();
+        initializeList();
         return super.resolvePathname(pathname);
     }
 
@@ -180,7 +180,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
-        initialize();
+        initializeList();
         if (i < 0)
             i += list.size();
         if (i < 0 || i >= list.size())
@@ -195,7 +195,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public void iAddBytes(int i, byte[] bytes)
             throws Exception {
-        initialize();
+        initializeList();
         if (i < 0)
             i = size() + 1 + i;
         ENTRY_TYPE jid = (ENTRY_TYPE) createSubordinate(entryFactory, this, bytes);
@@ -207,7 +207,7 @@ public class ListJid<ENTRY_TYPE extends Jid>
     @Override
     public void iAdd(int i)
             throws Exception {
-        initialize();
+        initializeList();
         if (i < 0)
             i = size() + 1 + i;
         ENTRY_TYPE jid = (ENTRY_TYPE) createSubordinate(entryFactory, this);

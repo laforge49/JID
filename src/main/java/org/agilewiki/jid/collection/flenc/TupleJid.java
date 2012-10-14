@@ -48,7 +48,7 @@ public class TupleJid
      *
      * @throws Exception Any exceptions thrown during initialization.
      */
-    private void initialize()
+    private void initializeTuple()
             throws Exception {
         if (tuple != null)
             return;
@@ -91,7 +91,7 @@ public class TupleJid
     @Override
     public void iSetBytes(int i, byte[] bytes)
             throws Exception {
-        initialize();
+        initializeTuple();
         Jid elementJid = createSubordinate(tupleFactories[i], bytes);
         _Jid oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);
@@ -107,7 +107,7 @@ public class TupleJid
     @Override
     public int getSerializedLength()
             throws Exception {
-        initialize();
+        initializeTuple();
         return Util.INT_LENGTH + len;
     }
 
@@ -130,7 +130,7 @@ public class TupleJid
      */
     @Override
     public Jid iGet(int i) throws Exception {
-        initialize();
+        initializeTuple();
         if (i < 0)
             i += size();
         if (i < 0 || i >= size())

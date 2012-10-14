@@ -10,7 +10,7 @@ import java.util.Iterator;
 public class Sum extends ListJid implements Main {
     @Override
     public void processRequest(Proc request, RP rp) throws Exception {
-        initialize();
+        initializeList();
         int sum = 0;
         Iterator<_Jid> it = list.iterator();
         while (it.hasNext()) {
