@@ -36,10 +36,12 @@ public class IntegerBMapJid<VALUE_TYPE extends Jid> extends BMapJid<Integer, VAL
         return new UnionJidFactory(null,
                 new IntegerMapJidFactory(
                         "leaf",
-                        valueFactory),
+                        valueFactory,
+                        nodeCapacity),
                 new IntegerMapJidFactory(
                         "inode",
-                        new IntegerBMapJidFactory(null, valueFactory, nodeCapacity, false, false)));
+                        new IntegerBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
+                        nodeCapacity));
     }
 
     /**

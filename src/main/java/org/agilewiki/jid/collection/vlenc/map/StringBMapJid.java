@@ -36,10 +36,12 @@ public class StringBMapJid<VALUE_TYPE extends Jid> extends BMapJid<String, VALUE
         return new UnionJidFactory(null,
                 new StringMapJidFactory(
                         "leaf",
-                        valueFactory),
+                        valueFactory,
+                        nodeCapacity),
                 new StringMapJidFactory(
                         "inode",
-                        new StringBMapJidFactory(null, valueFactory, nodeCapacity, false, false)));
+                        new StringBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
+                        nodeCapacity));
     }
 
     /**

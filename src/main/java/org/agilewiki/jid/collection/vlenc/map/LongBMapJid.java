@@ -36,10 +36,12 @@ public class LongBMapJid<VALUE_TYPE extends Jid> extends BMapJid<Long, VALUE_TYP
         return new UnionJidFactory(null,
                 new LongMapJidFactory(
                         "leaf",
-                        valueFactory),
+                        valueFactory,
+                        nodeCapacity),
                 new LongMapJidFactory(
                         "inode",
-                        new LongBMapJidFactory(null, valueFactory, nodeCapacity, false, false)));
+                        new LongBMapJidFactory(null, valueFactory, nodeCapacity, false, false),
+                        nodeCapacity));
     }
 
     /**
