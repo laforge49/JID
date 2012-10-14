@@ -37,4 +37,108 @@ public class IntIntBMapJidTest extends TestCase {
             mailboxFactory.close();
         }
     }
+
+    public void test2() throws Exception {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BMapJid<Integer, IntegerJid> m = (BMapJid) factory.newActor(JidFactories.INTEGER_INTEGER_BMAP_JID_TYPE);
+            int i = 0;
+            while (i < 28) {
+                m.kMake(i);
+                IntegerJid ij0 = m.kGet(i);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 28) {
+                IntegerJid ij = m.kGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test3() throws Exception {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BMapJid<Integer, IntegerJid> m = (BMapJid) factory.newActor(JidFactories.INTEGER_INTEGER_BMAP_JID_TYPE);
+            int i = 0;
+            while (i < 41) {
+                m.kMake(i);
+                IntegerJid ij0 = m.kGet(i);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 41) {
+                IntegerJid ij = m.kGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test4() throws Exception {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BMapJid<Integer, IntegerJid> m = (BMapJid) factory.newActor(JidFactories.INTEGER_INTEGER_BMAP_JID_TYPE);
+            int i = 0;
+            while (i < 391) {
+                m.kMake(i);
+                IntegerJid ij0 = m.kGet(i);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 391) {
+                IntegerJid ij = m.kGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
+        } finally {
+            mailboxFactory.close();
+        }
+    }
+
+    public void test5() throws Exception {
+        MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
+        try {
+            Mailbox mailbox = mailboxFactory.createMailbox();
+            JAFactory factory = new JAFactory();
+            factory.initialize(mailbox);
+            (new JidFactories()).initialize(mailbox, factory);
+            BMapJid<Integer, IntegerJid> m = (BMapJid) factory.newActor(JidFactories.INTEGER_INTEGER_BMAP_JID_TYPE);
+            int i = 0;
+            while (i < 10000) {
+                m.kMake(i);
+                IntegerJid ij0 = m.kGet(i);
+                ij0.setValue(i);
+                i += 1;
+            }
+            i = 0;
+            while (i < 10000) {
+                IntegerJid ij = m.kGet(i);
+                assertEquals(i, (int) ij.getValue());
+                i += 1;
+            }
+        } finally {
+            mailboxFactory.close();
+        }
+    }
 }
