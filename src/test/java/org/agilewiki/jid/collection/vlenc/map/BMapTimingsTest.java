@@ -14,6 +14,11 @@ public class BMapTimingsTest extends TestCase {
         int s = 1000;
         int r = 1000;
 
+        //map size = 10000
+        //repetitions = 10000
+        //total run time (milliseconds) = 567
+        //time per update (microseconds) = 56
+
         //map size = 100000
         //repetitions = 10000
         //total run time (milliseconds) = 4775

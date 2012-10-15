@@ -12,12 +12,23 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 public class BListTimingsTest extends TestCase {
     public void test() {
 
-        int s = 1000;
+        int s = 1000000;
         int r = 1000;
-        // list size = 100,000
-        // repetitions = 10,000
-        // total run time (milliseconds) = 2394
-        // time per update (microseconds) = 239
+
+        //list size = 10,000
+        //repetitions = 10,000
+        //total run time (milliseconds) = 359
+        //time per update (microseconds) = 35
+
+        //list size = 100,000
+        //repetitions = 10,000
+        //total run time (milliseconds) = 2394
+        //time per update (microseconds) = 239
+
+        //list size = 1,000,000
+        //repetitions = 1,000
+        //total run time (milliseconds) = 2927
+        //time per update (microseconds) = 2927
 
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
