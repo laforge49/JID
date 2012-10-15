@@ -49,7 +49,7 @@ public class MapEntry<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE>
         return (KEY_TYPE) ((ScalarJid) _iGet(TUPLE_KEY)).getValue();
     }
 
-    public void setKey(KEY_TYPE key)
+    protected void setKey(KEY_TYPE key)
             throws Exception {
         ((ScalarJid) _iGet(TUPLE_KEY)).setValue(key);
     }
