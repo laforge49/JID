@@ -166,27 +166,7 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     @Override
     public void iSetBytes(int ndx, byte[] bytes)
             throws Exception {
-        MapJid<KEY_TYPE, Jid> node = getNode();
-        if (isLeaf()) {
-            node.iSetBytes(ndx, bytes);
-            return;
-        }
-        if (ndx < 0)
-            ndx += size();
-        if (ndx < 0 || ndx >= size())
-            throw new IllegalArgumentException();
-        int i = 0;
-        while (i < node.size()) {
-            BMapJid<KEY_TYPE, VALUE_TYPE> bnode = (BMapJid) node.iGet(i).getValue();
-            int bns = bnode.size();
-            if (ndx < bns) {
-                bnode.iSetBytes(ndx, bytes);
-                return;
-            }
-            ndx -= bns;
-            i += 1;
-        }
-        throw new IllegalArgumentException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
