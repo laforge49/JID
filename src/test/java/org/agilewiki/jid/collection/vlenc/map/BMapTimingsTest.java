@@ -11,13 +11,18 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJid;
 public class BMapTimingsTest extends TestCase {
     public void test1() throws Exception {
 
-        int s = 100000;
-        int r = 10000;
+        int s = 1000;
+        int r = 1000;
 
         //map size = 100000
         //repetitions = 10000
         //total run time (milliseconds) = 4775
         //time per update (microseconds) = 477
+
+        //map size = 1000000
+        //repetitions = 1000
+        //total run time (milliseconds) = 6854
+        //time per update (microseconds) = 6854
 
         MailboxFactory mailboxFactory = JAMailboxFactory.newMailboxFactory(1);
         try {
