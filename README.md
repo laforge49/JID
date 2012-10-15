@@ -44,7 +44,7 @@ so you just need to add this to your POM file:
 | [Issues](https://github.com/laforge49/JID/issues/) |
 | [free(code)](http://freecode.com/projects/jid/) |
 | Google group: [agilewikidevelopers](http://groups.google.com/group/agilewikidevelopers/) |
-```
+
 ## Documentation
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
 1.  [Jid Factories](https://github.com/laforge49/JID/wiki/JidFactories)
