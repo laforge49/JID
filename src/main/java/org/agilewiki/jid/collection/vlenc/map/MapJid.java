@@ -168,6 +168,21 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
         return true;
     }
 
+    /**
+     * Add a tuple to the map unless there is a tuple with a matching first element.
+     *
+     * @param key Used to match the first element of the tuples.
+     * @param bytes The serialized form of a JID of the appropriate type.
+     * @return True if a new tuple was created; otherwise the old value is unaltered.
+     */
+    public Boolean kMakeBytes(KEY_TYPE key, byte[] bytes)
+            throws Exception {
+        if (!kMake(key))
+            return false;
+        kSetBytes(key, bytes);
+        return true;
+    }
+
     final public MapEntry<KEY_TYPE, VALUE_TYPE> kGetEntry(KEY_TYPE key)
             throws Exception {
         int i = search(key);

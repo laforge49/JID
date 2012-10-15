@@ -50,6 +50,16 @@ public interface JAMap<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends
             throws Exception;
 
     /**
+     * Add a tuple to the map unless there is a tuple with a matching first element.
+     *
+     * @param key Used to match the first element of the tuples.
+     * @param bytes The serialized form of a JID of the appropriate type.
+     * @return True if a new tuple was created; otherwise the old value is unaltered.
+     */
+    public Boolean kMakeBytes(KEY_TYPE key, byte[] bytes)
+            throws Exception;
+
+    /**
      * Returns the Actor value associated with the key.
      *
      * @param key The key.
