@@ -90,4 +90,7 @@ public interface JAMap<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE extends
 
     public MapEntry<KEY_TYPE, VALUE_TYPE> getLast()
             throws Exception;
+
+    public void kSetBytes(KEY_TYPE key, byte[] bytes)
+            throws Exception;
 }

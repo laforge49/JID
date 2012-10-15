@@ -189,7 +189,8 @@ public class ListJid<ENTRY_TYPE extends Jid>
         ENTRY_TYPE oldElementJid = iGet(i);
         oldElementJid.setContainerJid(null);
         list.set(i, elementJid);
-        change(elementJid.getSerializedLength() - oldElementJid.getSerializedLength());
+        change(elementJid.getSerializedLength() -
+                oldElementJid.getSerializedLength());
     }
 
     @Override

@@ -470,6 +470,22 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
         incSize(eSize);
     }
 
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> kGetEntry(KEY_TYPE key)
+            throws Exception {
+        MapJid<KEY_TYPE, Jid> node = getNode();
+        if (isLeaf()) {
+            int i = node.search(key);
+            if (i < 0)
+                return null;
+            return iGet(i);
+        }
+        int i = node.match(key);
+        if (i == size())
+            return null;
+        BMapJid<KEY_TYPE, VALUE_TYPE> bnode = (BMapJid) node.iGet(i).getValue();
+        return bnode.kGetEntry(key);
+    }
+
     /**
      * Returns the JID value associated with the key.
      *
@@ -479,19 +495,10 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
     @Override
     final public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception {
-        MapJid<KEY_TYPE, Jid> node = getNode();
-        if (isLeaf()) {
-            int i = node.search(key);
-            if (i < 0)
-                return null;
-            MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
-            return t.getValue();
-        }
-        int i = node.match(key);
-        if (i == size())
+        MapEntry<KEY_TYPE, VALUE_TYPE> entry = kGetEntry(key);
+        if (entry == null)
             return null;
-        BMapJid<KEY_TYPE, VALUE_TYPE> bnode = (BMapJid) node.iGet(i).getValue();
-        return bnode.kGet(key);
+        return entry.getValue();
     }
 
     /**
@@ -575,5 +582,14 @@ abstract public class BMapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE 
             throws Exception {
         MapJid<KEY_TYPE, Jid> node = getNode();
         return node.getLastKey();
+    }
+
+    @Override
+    public void kSetBytes(KEY_TYPE key, byte[] bytes)
+            throws Exception {
+        MapEntry<KEY_TYPE, VALUE_TYPE> entry = kGetEntry(key);
+        if (entry == null)
+            throw new IllegalArgumentException("not present: " + key);
+        entry.setValueBytes(bytes);
     }
 }

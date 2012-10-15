@@ -168,6 +168,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
         return true;
     }
 
+    final public MapEntry<KEY_TYPE, VALUE_TYPE> kGetEntry(KEY_TYPE key)
+            throws Exception {
+        int i = search(key);
+        if (i < 0)
+            return null;
+        return iGet(i);
+    }
+
     /**
      * Returns the JID value associated with the key.
      *
@@ -177,11 +185,10 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     @Override
     final public VALUE_TYPE kGet(KEY_TYPE key)
             throws Exception {
-        int i = search(key);
-        if (i < 0)
+        MapEntry<KEY_TYPE, VALUE_TYPE> entry = kGetEntry(key);
+        if (entry == null)
             return null;
-        MapEntry<KEY_TYPE, VALUE_TYPE> t = iGet(i);
-        return t.getValue();
+        return entry.getValue();
     }
 
     /**
@@ -270,5 +277,14 @@ abstract public class MapJid<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE e
     public KEY_TYPE getLastKey()
             throws Exception {
         return getLast().getKey();
+    }
+
+    @Override
+    public void kSetBytes(KEY_TYPE key, byte[] bytes)
+            throws Exception {
+        MapEntry<KEY_TYPE, VALUE_TYPE> entry = kGetEntry(key);
+        if (entry == null)
+            throw new IllegalArgumentException("not present: " + key);
+        entry.setValueBytes(bytes);
     }
 }

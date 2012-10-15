@@ -25,6 +25,8 @@ package org.agilewiki.jid.collection.vlenc.map;
 
 import org.agilewiki.jactor.factory.ActorFactory;
 import org.agilewiki.jid.ComparableKey;
+import org.agilewiki.jid.Jid;
+import org.agilewiki.jid._Jid;
 import org.agilewiki.jid.collection.flenc.AppJid;
 import org.agilewiki.jid.scalar.ScalarJid;
 
@@ -57,6 +59,14 @@ public class MapEntry<KEY_TYPE extends Comparable<KEY_TYPE>, VALUE_TYPE>
     public VALUE_TYPE getValue()
             throws Exception {
         return (VALUE_TYPE) _iGet(TUPLE_VALUE);
+    }
+
+    public void setValueBytes(byte[] bytes) throws Exception {
+        Jid old = (Jid) getValue();
+        old.setContainerJid(null);
+        Jid elementJid = createSubordinate(tupleFactories[TUPLE_VALUE], this, bytes);
+        tuple[TUPLE_VALUE] = elementJid;
+        change(elementJid.getSerializedLength() - old.getSerializedLength());
     }
 
     /**
