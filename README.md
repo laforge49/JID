@@ -8,6 +8,17 @@ Application are built by subclassing existing JID actors and then composing more
 complex structures from them. The JID project includes a number of actors which
 support different types of persistent data.
 
+| Entries | Balanced List Jid | Balanced Map Jid |
+| ------- | ----------------- | ---------------- |
+| 1,000 | .014 ms | .027 ms |
+| 10,000 | .035 ms | .056 ms |
+| 100,000 | .24 ms | .48 ms |
+| 1,000,000 | 2.9 ms | 6.9 ms |
+
+Times given above were for updating a byte array containing a serialized list or table,
+i.e. the time to deserialize, insert a new value (in the case of a list) and reserialize.
+(Tests performed on an i7-3770 @ 3.40 GHz)
+
 License: [LGPL](http://www.gnu.org/licenses/lgpl-2.1.txt)
 
 Dependencies: Java 6, Maven 2, [JActor](https://github.com/laforge49/JActor)

@@ -12,7 +12,7 @@ import org.agilewiki.jid.scalar.flens.integer.IntegerJidFactory;
 public class BListTimingsTest extends TestCase {
     public void test() {
 
-        int s = 1000000;
+        int s = 1000;
         int r = 1000;
 
         //list size = 10,000
