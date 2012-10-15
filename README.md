@@ -44,20 +44,6 @@ so you just need to add this to your POM file:
 | [Issues](https://github.com/laforge49/JID/issues/) |
 | [free(code)](http://freecode.com/projects/jid/) |
 | Google group: [agilewikidevelopers](http://groups.google.com/group/agilewikidevelopers/) |
-
-## Deserialization / Update / Reserialization
-
-JID can deserialize/update/reserialize a map of 10,000 entries in .9 milliseconds,
-where deserialization/reserialization timings are largely independent of the size
-and complexity of the table entries. That's 90 nanoseconds per table entry, where
-the entries are actor key / actor value pairs.
-
-### Test Environment
-```
-i7-3770 @ 3.40 GHz
-ASUS P8Z77-M Motherboard
-16 GB Corsair DDR3 1600 MHz RAM
-Vertex 3 SATA III SSD
 ```
 ## Documentation
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
