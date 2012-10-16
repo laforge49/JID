@@ -64,11 +64,11 @@ public class IGet extends Request<Actor, Collection> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof CollectionJid;
+        return targetActor instanceof Collection;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        rp.processResponse(((CollectionJid) targetActor).iGet(i));
+        rp.processResponse(((Collection) targetActor).iGet(i));
     }
 }

@@ -78,12 +78,12 @@ public class ISetBytes extends Request<Object, Collection> {
      * @return True when targetActor is an instanceof TARGET_TYPE.
      */
     public boolean isTargetType(Actor targetActor) {
-        return targetActor instanceof CollectionJid;
+        return targetActor instanceof Collection;
     }
 
     @Override
     public void processRequest(JLPCActor targetActor, RP rp) throws Exception {
-        ((CollectionJid) targetActor).iSetBytes(i, bytes);
+        ((Collection) targetActor).iSetBytes(i, bytes);
         rp.processResponse(null);
     }
 }
