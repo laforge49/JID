@@ -56,6 +56,20 @@ public class BListJidFactory extends ActorFactory {
      * @param actorType    The actor type.
      * @param entryFactory The entry factory.
      * @param nodeCapacity The size of the nodes.
+     */
+    public BListJidFactory(String actorType, ActorFactory entryFactory,
+                           int nodeCapacity) {
+        super(actorType);
+        this.entryFactory = entryFactory;
+        this.nodeCapacity = nodeCapacity;
+    }
+
+    /**
+     * Create an ActorFactory.
+     *
+     * @param actorType    The actor type.
+     * @param entryFactory The entry factory.
+     * @param nodeCapacity The size of the nodes.
      * @param isRoot       Create a root node when true.
      * @param auto         Define the node as a leaf when true.
      */
