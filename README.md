@@ -46,6 +46,18 @@ so you just need to add this to your POM file:
 | Google group: [agilewikidevelopers](http://groups.google.com/group/agilewikidevelopers/) |
 
 ## Documentation
+1. [The problem with Java Serialization](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/the_problem_with_java_serialization53?lang=en)
+
+    There are a number of problems with Java serialization and numerous alternatives have been developed.
+    But my focus here is on a particular use case, databases, and a single issue, performance...
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/the_problem_with_java_serialization53?lang=en)
+
+1. [Introducing JID](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/introducing_jid14?lang=en)
+
+    Java Incremental Deserialization/reserialization (JID) provides a near-ideal solution for updating serialized data structures...
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/introducing_jid14?lang=en)
+
+## Wiki
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
 1.  [Jid Factories](https://github.com/laforge49/JID/wiki/JidFactories)
 1.  [Applications](https://github.com/laforge49/JID/wiki/Applications)
