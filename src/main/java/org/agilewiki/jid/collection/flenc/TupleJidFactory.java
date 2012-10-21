@@ -59,15 +59,6 @@ public class TupleJidFactory extends ActorFactory {
     }
 
     /**
-     * Initialize a new tuple with its element factories.
-     *
-     * @param tj The new tuple.
-     */
-    public void assignElementFactories(TupleJid tj) {
-        tj.tupleFactories = tupleFactories;
-    }
-
-    /**
      * Create a JLPCActor.
      *
      * @return The new actor.
@@ -98,7 +89,7 @@ public class TupleJidFactory extends ActorFactory {
             }
             tupleFactories = afs;
         }
-        assignElementFactories(tj);
+        tj.tupleFactories = tupleFactories;
         return tj;
     }
 }

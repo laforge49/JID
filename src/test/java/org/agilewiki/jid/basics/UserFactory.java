@@ -12,7 +12,6 @@ public class UserFactory extends TupleJidFactory {
     @Override
     protected User instantiateActor() throws Exception {
         User user = new User();
-        assignElementFactories(user);
         return user;
     }
 }

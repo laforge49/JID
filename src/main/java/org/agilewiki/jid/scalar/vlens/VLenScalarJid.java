@@ -129,9 +129,9 @@ abstract public class VLenScalarJid<SET_TYPE, RESPONSE_TYPE>
     }
 
     /**
-     * Load the serialized data into the JID.
+     * Assigns the serialized data to the JID.
      *
-     * @param readableBytes Holds the serialized data.
+     * @param readableBytes Holds the immutable serialized data.
      */
     @Override
     public void load(ReadableBytes readableBytes)

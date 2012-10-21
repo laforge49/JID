@@ -35,9 +35,37 @@ import org.agilewiki.jid._Jid;
  */
 public class RootJid extends ActorJid {
     /**
-     * Load the serialized data into the JID.
+     * Save the serialized data into a byte array.
      *
-     * @param bytes Holds the serialized data.
+     * @param bytes Where the serialized data is to be saved.
+     * @param offset Location of the serialized data.
+     * @return Updated offset.
+     */
+    public int save(byte[] bytes, int offset) throws Exception {
+        AppendableBytes appendableBytes = new AppendableBytes(bytes, offset);
+        save(appendableBytes);
+        return appendableBytes.getOffset();
+    }
+
+    /**
+     *  Load the serialized data into the RootJid.
+     *
+     * @param bytes     A mutable array holding the serialized data.
+     * @param offset    Position of the serialized data.
+     * @param length    Length of the serialized data
+     * @return          The updated offset.
+     */
+    public int load(byte[] bytes, int offset, int length) throws Exception {
+        byte[] bs = new byte[length];
+        System.arraycopy(bytes, offset, bs, 0, length);
+        load(bs);
+        return offset + length;
+    }
+
+    /**
+     * Assigns the serialized data to the RootJid.
+     *
+     * @param bytes Holds the immutable serialized data.
      *              (And nothing else.)
      */
     public void load(byte[] bytes)
