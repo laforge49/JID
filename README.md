@@ -29,7 +29,7 @@ so you just need to add this to your POM file:
 <dependency>
       <groupId>org.agilewiki.jid</groupId>
       <artifactId>jid</artifactId>
-      <version>2.0.0-RC3</version>
+      <version>2.0.0-RC4</version>
 </dependency>
 ```
 (Be sure to update the version number appropriately, of course.)
