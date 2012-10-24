@@ -56,6 +56,11 @@ so you just need to add this to your POM file:
     Java Incremental Deserialization/reserialization (JID) provides a near-ideal solution for updating serialized data structures...
     [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/introducing_jid14?lang=en)
 
+1. [Getting Started with JID](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/getting_started_with_jid12?lang=en)
+
+    How to set up a test environment for working with JID and the RootJid API...
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/getting_started_with_jid12?lang=en)
+
 ## Wiki
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
 1.  [Jid Factories](https://github.com/laforge49/JID/wiki/JidFactories)
