@@ -61,6 +61,11 @@ so you just need to add this to your POM file:
     How to set up a test environment for working with JID and the RootJid API...
     [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/getting_started_with_jid12?lang=en)
 
+1. [Custom Jid Classes](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/custom_jid_classes34?lang=en)
+
+    How to create application classes that are serializable with JID.
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/custom_jid_classes34?lang=en)
+
 ## Wiki
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
 1.  [Jid Factories](https://github.com/laforge49/JID/wiki/JidFactories)
