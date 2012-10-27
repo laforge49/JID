@@ -63,8 +63,14 @@ so you just need to add this to your POM file:
 
 1. [Custom Jid Classes](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/custom_jid_classes34?lang=en)
 
-    How to create application classes that are serializable with JID.
+    How to create application classes that are serializable with JID...
     [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/custom_jid_classes34?lang=en)
+
+1. [BListJid, ActorJid and UnionJid](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/blistjid5?lang=en)
+
+    For high-performance, array-backed data structures are generally recommended. On the other hand, inserting into a large
+    array isn't the fastest thing. BListJid uses small arrays...
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/blistjid5?lang=en)
 
 ## Wiki
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
