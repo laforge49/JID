@@ -38,7 +38,7 @@ so you just need to add this to your POM file:
 | --------------- |
 | [Releases](https://freecode.com/projects/jid/releases) |
 | [Announcements](https://freecode.com/projects/jid/announcements) |
-| [Downloads](http://jactor.sourceforge.net/) |
+| [Downloads](http://jactorconsulting.com/downloads-2/) |
 | VCS: [Files](https://github.com/laforge49/JID/), [Commits](https://github.com/laforge49/JID/commits/master) |
 | [Issues](https://github.com/laforge49/JID/issues/) |
 | [free(code)](http://freecode.com/projects/jid/) |
