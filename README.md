@@ -72,6 +72,12 @@ so you just need to add this to your POM file:
     array isn't the fastest thing. BListJid uses small arrays...
     [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/blistjid5?lang=en)
 
+1. [BMapJid](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/bmapjid26?lang=en)
+
+    BMapJid is the base class for balanced tree maps which, like bListJid,
+    provide for super-fast incremental deserialization and reserialization...
+    [more](https://www.ibm.com/developerworks/mydeveloperworks/blogs/jactor/entry/bmapjid26?lang=en)
+
 ## Wiki
 1.  [Jid Trees](https://github.com/laforge49/JID/wiki/Jid-Trees)
 1.  [Jid Factories](https://github.com/laforge49/JID/wiki/JidFactories)
