@@ -36,6 +36,10 @@ public class TupleJidFactory extends ActorFactory {
     private ActorFactory[] tupleFactories;
     private String[] actorTypes;
 
+    public TupleJidFactory(String subActorType) {
+        super(subActorType);
+    }
+
     /**
      * Create a JLPCActorFactory.
      *

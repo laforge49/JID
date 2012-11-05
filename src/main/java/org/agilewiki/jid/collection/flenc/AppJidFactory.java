@@ -13,6 +13,10 @@ abstract public class AppJidFactory extends ActorFactory {
     private ActorFactory[] tupleFactories;
     private String[] actorTypes;
 
+    public AppJidFactory(String subActorType) {
+        super(subActorType);
+    }
+
     /**
      * Create a JLPCActorFactory.
      *
