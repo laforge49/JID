@@ -38,6 +38,7 @@ public class TupleJidFactory extends ActorFactory {
 
     public TupleJidFactory(String subActorType) {
         super(subActorType);
+        this.tupleFactories = new ActorFactory[0];
     }
 
     /**

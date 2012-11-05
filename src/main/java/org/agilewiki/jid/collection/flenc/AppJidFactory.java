@@ -15,6 +15,7 @@ abstract public class AppJidFactory extends ActorFactory {
 
     public AppJidFactory(String subActorType) {
         super(subActorType);
+        this.tupleFactories = new ActorFactory[0];
     }
 
     /**
