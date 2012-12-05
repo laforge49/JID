@@ -40,8 +40,8 @@ public class LongMapJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType    The actor type.
-     * @param valueFactory The value factory.
+     * @param actorType       The actor type.
+     * @param valueFactory    The value factory.
      * @param initialCapacity The initial capacity.
      */
     public LongMapJidFactory(String actorType, ActorFactory valueFactory, int initialCapacity) {
@@ -64,8 +64,8 @@ public class LongMapJidFactory extends ActorFactory {
     /**
      * Create an ActorFactory.
      *
-     * @param actorType The actor type.
-     * @param valueType The value type.
+     * @param actorType       The actor type.
+     * @param valueType       The value type.
      * @param initialCapacity The initial capacity.
      */
     public LongMapJidFactory(String actorType, String valueType, int initialCapacity) {

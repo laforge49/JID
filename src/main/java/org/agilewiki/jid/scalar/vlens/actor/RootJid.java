@@ -37,7 +37,7 @@ public class RootJid extends ActorJid {
     /**
      * Save the serialized data into a byte array.
      *
-     * @param bytes Where the serialized data is to be saved.
+     * @param bytes  Where the serialized data is to be saved.
      * @param offset Location of the serialized data.
      * @return Updated offset.
      */
@@ -48,12 +48,12 @@ public class RootJid extends ActorJid {
     }
 
     /**
-     *  Load the serialized data into the RootJid.
+     * Load the serialized data into the RootJid.
      *
-     * @param bytes     A mutable array holding the serialized data.
-     * @param offset    Position of the serialized data.
-     * @param length    Length of the serialized data
-     * @return          The updated offset.
+     * @param bytes  A mutable array holding the serialized data.
+     * @param offset Position of the serialized data.
+     * @param length Length of the serialized data
+     * @return The updated offset.
      */
     public int load(byte[] bytes, int offset, int length) throws Exception {
         byte[] bs = new byte[length];

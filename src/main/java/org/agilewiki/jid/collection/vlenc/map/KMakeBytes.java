@@ -27,7 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jid.collection.vlenc.ListJid;
 
 /**
  * Create a keyed entry.
@@ -46,7 +45,7 @@ public class KMakeBytes<KEY_TYPE extends Comparable<KEY_TYPE>> extends Request<B
     /**
      * Create the request.
      *
-     * @param key     The key of the new element.
+     * @param key   The key of the new element.
      * @param bytes Holds the serialized data.
      */
     public KMakeBytes(KEY_TYPE key, byte[] bytes) {

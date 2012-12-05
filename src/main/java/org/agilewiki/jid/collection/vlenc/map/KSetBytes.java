@@ -27,8 +27,6 @@ import org.agilewiki.jactor.Actor;
 import org.agilewiki.jactor.RP;
 import org.agilewiki.jactor.lpc.JLPCActor;
 import org.agilewiki.jactor.lpc.Request;
-import org.agilewiki.jid.collection.Collection;
-import org.agilewiki.jid.collection.CollectionJid;
 
 /**
  * Replace the assigned value.
@@ -47,7 +45,7 @@ public class KSetBytes<KEY_TYPE extends Comparable<KEY_TYPE>> extends Request<Ob
     /**
      * Create the request
      *
-     * @param key     The key of the desired element.
+     * @param key   The key of the desired element.
      * @param bytes Holds the serialized data.
      */
     public KSetBytes(KEY_TYPE key, byte[] bytes) {
